@@ -1,0 +1,310 @@
+﻿<Page
+    x:Class="BaoZouRiBao.Views.UserInfoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BaoZouRiBao.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:BaoZouRiBao.Core.ViewModel"
+    xmlns:model="using:BaoZouRiBao.Core.Model"
+    xmlns:converter="using:BaoZouRiBao.Converter"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:action="using:BaoZouRiBao.BaoZouAction"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:UserInfoViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <converter:TaskIdToUriConverter x:Key="TaskIdToUriConverter"/>
+        <converter:DoneToStringConverter x:Key="DoneToStringConverter"/>
+        <converter:BoolToColorConverter x:Key="BoolToColorConverter"/>
+        <Style x:Key="LightMenuFlyoutItemStyle" TargetType="MenuFlyoutItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+            <Setter Property="Padding" Value="{ThemeResource MenuFlyoutItemThemePadding}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuFlyoutItem">
+                        <Grid x:Name="LayoutRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="TextBlock"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="LayoutRoot">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="TextBlock">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="TextBlock"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="LayoutRoot">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListMediumBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="TextBlock">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="TextBlock"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="TextBlock">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckPlaceholderStates">
+                                    <VisualState x:Name="NoPlaceholder"/>
+                                    <VisualState x:Name="CheckPlaceholder">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TextBlock">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="PaddingSizeStates">
+                                    <VisualState x:Name="DefaultPadding"/>
+                                    <VisualState x:Name="NarrowPadding">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Padding" Storyboard.TargetName="LayoutRoot">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MenuFlyoutItemThemePaddingNarrow}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <TextBlock x:Name="TextBlock" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Text="{TemplateBinding Text}" TextTrimming="Clip" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </Page.Resources>
+ 
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{ThemeResource BackButtonStyle}">
+                    <Button.Content>
+                        <Image Source="{StaticResource BackImage}"/>
+                    </Button.Content>
+                </Button>
+                <TextBlock Text="个人" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+            </StackPanel>
+
+            <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right">
+                <Button.Content>
+                    <BitmapIcon UriSource="ms-appx:///Assets/Images/home_more.png"/>
+                </Button.Content>
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyout.Items>
+                            <MenuFlyoutItem Text="刷新"/>
+                            <MenuFlyoutItem Text="夜间模式" Style="{StaticResource LightMenuFlyoutItemStyle}"/>
+                            <MenuFlyoutItem Text="设置"/>
+                        </MenuFlyout.Items>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="{ThemeResource ListViewBackgroundBrush}">
+            <ScrollViewer>
+                <StackPanel Padding="0,24,0,0">
+                    <StackPanel.Resources>
+                        <BitmapImage x:Key="DefaultAvatar" UriSource="ms-appx:///Assets/Images/avatar_m.png"/>
+                    </StackPanel.Resources>
+                    <Grid>
+                        <Ellipse Height="100" Width="100">
+                            <Ellipse.Fill>
+                                <ImageBrush>
+                                    <ImageBrush.ImageSource>
+                                        <BitmapImage UriSource="{x:Bind ViewModel.User.Avatar,Mode=OneWay,TargetNullValue={StaticResource DefaultAvatar}}"/>
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <Grid VerticalAlignment="Top" HorizontalAlignment="Right" Margin="12,0">
+                            <Image Width="100" Tapped="{x:Bind CoinRank}">
+                                <Image.Source>
+                                    <BitmapImage UriSource="ms-appx:///Assets/Images/profile_getcoin_nor.9.png"/>
+                                </Image.Source>
+                            </Image>
+
+                            <TextBlock Margin="30,0,0,0" 
+                           Foreground="#FFE49609"
+                           HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Run Text="{Binding Balance}" />
+                            <Run Text="金币" />
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
+
+                    <TextBlock Text="{x:Bind ViewModel.User.Name}" 
+                           Margin="0,12"
+                           HorizontalAlignment="Center"/>
+
+                    <Grid Margin="0,4">
+                        <Grid.Resources>
+                            <Style x:Key="NumTextBlock" TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundColorBrush}"/>
+                            </Style>
+
+                            <Style x:Key="TitleTextBlock" TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="20"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Foreground" Value="Gray"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" HorizontalAlignment="Stretch" Style="{ThemeResource ImageButtonStyle}">
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.MyFavoritePage"/>
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="{Binding TaskInfo.FavoriteCount}" Style="{ThemeResource NumTextBlock}"/>
+                                <TextBlock Text="收藏" Style="{ThemeResource TitleTextBlock}"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Column="1" HorizontalAlignment="Stretch" Style="{ThemeResource ImageButtonStyle}">
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.MyCommentPage"/>
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding TaskInfo.CommentCount}" Style="{ThemeResource NumTextBlock}"/>
+                                <TextBlock Text="评论" Style="{ThemeResource TitleTextBlock}"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Column="2" HorizontalAlignment="Stretch" Style="{ThemeResource ImageButtonStyle}">
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.MyReadHistoryPage"/>
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="{Binding TaskInfo.ArticleReadCount}" Style="{ThemeResource NumTextBlock}"/>
+                                <TextBlock Text="阅读" Style="{ThemeResource TitleTextBlock}"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Column="3" HorizontalAlignment="Stretch" Style="{ThemeResource ImageButtonStyle}">
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.MyContributePage"/>
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel Grid.Column="3">
+                                <TextBlock Text="{Binding TaskInfo.ContributeCount}" Style="{ThemeResource NumTextBlock}"/>
+                                <TextBlock Text="投稿" Style="{ThemeResource TitleTextBlock}"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid x:Name="listViewHeader" Background="{ThemeResource ListViewHeaderBrush}" Padding="16,8" >
+                        <TextBlock Text="每日任务" Foreground="#FF6D6D6D"/>
+                        <TextBlock Text="任务介绍>" Tapped="{x:Bind TaskInfo}" HorizontalAlignment="Right" 
+                                   Foreground="#FFBCBCBC"/>
+                    </Grid>
+
+                    <ItemsControl Background="{ThemeResource PageBackgroundBrush}" 
+                      DataContext="{Binding TaskInfo}" ItemsSource="{Binding DailyTasks}"
+                              ScrollViewer.VerticalScrollMode="Enabled">
+                        <ItemsControl.Resources>
+                            <BitmapImage x:Key="CoinBitmapImage" UriSource="ms-appx:///Assets/Images/self_coin_detail.png"/>
+                        </ItemsControl.Resources>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="model:TaskItem">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition  Width="*"/>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Grid.Column="0" Height="24" Width="24" >
+                                        <Image.Source>
+                                            <BitmapImage UriSource="{x:Bind TaskId,Converter={StaticResource TaskIdToUriConverter}}"/>
+                                        </Image.Source>
+                                    </Image>
+
+                                    <StackPanel Grid.Column="1" Margin="12,0">
+                                        <TextBlock Text="{x:Bind Name}" Margin="0,0,0,4"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="{StaticResource CoinBitmapImage}" Height="16"
+                                           VerticalAlignment="Center"/>
+                                            <TextBlock Margin="4,0">
+                                            <Run Text="+"/>
+                                            <Run Text="{x:Bind Amount}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <TextBlock Grid.Column="2" VerticalAlignment="Center"
+                                       Foreground="{Binding Done,Converter={StaticResource BoolToColorConverter}}"
+                                       Text="{Binding Done,Converter={StaticResource DoneToStringConverter}}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                        <ItemsControl.ItemContainerStyle>
+                            <Style TargetType="ContentPresenter">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Setter Property="Background" Value="{ThemeResource ListViewBackgroundBrush}"/>
+                                <Setter Property="BorderThickness" Value="0,0,0,0.5"/>
+                                <Setter Property="Padding" Value="0,16"/>
+                                <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
+                                <Setter Property="MinHeight" Value="40"/>
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                    </ItemsControl>
+
+                    <Grid Padding="16,0" Margin="0,20,0,0" MinHeight="60" Background="{ThemeResource ListViewBackgroundBrush}">
+                        <TextBlock VerticalAlignment="Center" Text="任务完成提示" HorizontalAlignment="Left" />
+                        <ToggleSwitch MinWidth="0" HorizontalAlignment="Right"/>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+           
+        </Grid>
+    </Grid>
+</Page>

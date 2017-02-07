@@ -1,0 +1,183 @@
+﻿<Page
+    x:Class="BaoZouRiBao.Views.VideoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BaoZouRiBao.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:BaoZouRiBao.Converter"
+    xmlns:vm="using:BaoZouRiBao.Core.ViewModel"
+    xmlns:m="using:BaoZouRiBao.Core.Model"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:VideoPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
+    <Page.Resources>
+        <converter:BoolToUriConverter x:Key="BoolToUriConverter"/>
+        <converter:SecondsToDateTimeConverter x:Key="SecondsToDateTimeConverter"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--#region Page title-->
+        <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}"
+              DataContext="{Binding DocumentExtra}">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{ThemeResource BackButtonStyle}">
+                    <BitmapIcon UriSource="ms-appx:///Assets/Images/back.png"/>
+                </Button>
+                <TextBlock x:Name="titleTextBlock" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Style="{ThemeResource BackButtonStyle}" Width="Auto">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>
+                        <TextBlock Text="{Binding VoteCount}" VerticalAlignment="Center" Margin="4,0"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{ThemeResource BackButtonStyle}" Width="Auto">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <BitmapIcon UriSource="/Assets/Images/actionbar_comment_nor.png"/>
+                        <TextBlock Text="{Binding CommentCount}" VerticalAlignment="Center" Margin="4,0"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{ThemeResource BackButtonStyle}" x:Name="favoriteBtn"
+                        >
+                    <Image>
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding Favorited,Converter={StaticResource BoolToUriConverter}}"/>
+                            <!--<BitmapImage UriSource="/Assets/Images/sidebar_favourite.png"/>-->
+                        </Image.Source>
+                    </Image>
+                    <!--<BitmapImage UriSource="{Binding Favorited,Converter={StaticResource BoolToUriConverter}}"/>-->
+                </Button>
+
+                <Button Style="{ThemeResource BackButtonStyle}">
+                    <BitmapIcon UriSource="/Assets/Images/home_more.png"/>
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="刷新"/>
+                            <MenuFlyoutItem Text="夜间模式"/>
+                            <MenuFlyoutItem Text="设置"/>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <!--#endregion-->
+
+        <Grid Grid.Row="1"> 
+            <ListView Grid.Row="1" ItemsSource="{Binding LatestComments}">
+                <ListView.Header>
+                    <Grid Grid.Row="0">
+                        <StackPanel>
+                            <Grid>
+                                <MediaElement Source="{Binding Video.FileUrl}" 
+                                            Height="250"
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Stretch"
+                                            AreTransportControlsEnabled="True"/>
+                                <Button HorizontalAlignment="Center"
+                                    Style="{ThemeResource ImageButtonStyle}"
+                                    VerticalAlignment="Center" Foreground="White" 
+                                    Grid.Row="0" Width="64" Height="64">    
+                                    <Image Source="/Assets/Images/btn_video_play.png"/>
+                                </Button>
+                                <Border Background="Black" Opacity="0.9"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Padding="4">
+                                    <TextBlock FontSize="12" Text="{Binding Video.PlayTime,Converter={StaticResource SecondsToDateTimeConverter}}"  
+                                               Foreground="White"/>
+                                </Border>
+                            </Grid>
+                            <StackPanel Background="{ThemeResource ListViewHeaderBrush}" 
+                                Orientation="Horizontal">
+                                <Image Source="ms-appx:///Assets/Images/icon_article_newcomment.png"
+                               Height="30" Width="30" Margin="8"/>
+                                <TextBlock Text="最新评论" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="m:Comment">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{x:Bind User.RealAvatarUrl,Mode=OneWay}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Grid Grid.Column="1" Margin="8,0">
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind User.Name,Mode=OneWay}"/>
+                                    <TextBlock Text="{x:Bind Content,Mode=OneWay}" TextWrapping="Wrap" Margin="0,16,0,0"/>
+                                    <TextBlock Text="{x:Bind Time}" Margin="0,8"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" 
+                                            HorizontalAlignment="Right" VerticalAlignment="Bottom">
+
+                                    <Button  Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}"
+                                             Margin="0,0,8,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>
+                                            <TextBlock Text="回复" Style="{ThemeResource DescTextBlockStyle}"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button Height="24" Width="48" Style="{ThemeResource ImageButtonStyle}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="ms-appx:///Assets/Images/btn_video_like_nor.png"/>
+                                            <TextBlock Text="{x:Bind Likes,Mode=OneWay}" Style="{ThemeResource DescTextBlockStyle}"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Background" Value="{ThemeResource ListViewBackgroundBrush}"/>
+                        <Setter Property="Padding" Value="8"/>
+
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+
+        </Grid>
+
+        <Popup Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom"
+               Height="48" x:Name="topPop" Width="48" Margin="16,32" >
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition />
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <Popup.Child>
+                <Button Width="48" Height="48"
+                        Style="{ThemeResource RoundButtonStyle}">
+                    <SymbolIcon Symbol="Up" Foreground="White" />
+                </Button>
+            </Popup.Child>
+        </Popup>
+    </Grid>
+</Page>

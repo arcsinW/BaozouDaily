@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="BaoZouRiBao.Views.BaozouLoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BaoZouRiBao.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:BaoZouRiBao.Core.ViewModel"
+    mc:Ignorable="d"
+    >
+
+    <Page.DataContext>
+        <vm:BaozouLoginViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--#region Page title-->
+        <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{ThemeResource BackButtonStyle}">
+                    <Button.Content>
+                        <Image Source="{StaticResource BackImage}"/>
+                    </Button.Content>
+                </Button>
+                <TextBlock Style="{ThemeResource PageTitleTextBlockStyle}" Text="暴走漫画"/>
+            </StackPanel>
+        </Grid>
+        <!--#endregion-->
+
+        <StackPanel Grid.Row="1" Margin="12">
+            <TextBox PlaceholderText="暴走漫画账号" 
+                     Margin="0,0,0,16" 
+                     Text="{Binding Path=Input.Account,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource LightTextBoxStyle}"/>
+            <PasswordBox PlaceholderText="密码" Margin="0,0,0,16"
+                         Password="{Binding Path=Input.Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource LightPasswordBoxStyle}" />
+            <Button Content="登录" Margin="24"
+                Width="200" Height="48"
+                HorizontalAlignment="Center"
+                Command="{Binding LoginCommand}"
+                CommandParameter="{Binding Input}"
+                IsEnabled="{Binding Path=Input.IsValid}"
+                Style="{ThemeResource RoundButtonStyle}"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

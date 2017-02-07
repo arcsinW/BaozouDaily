@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BaoZouRiBao.Core.Enums
+{
+    public enum BaoZouTaskEnum
+    {
+        DailySign, //1  每日签到
+        ReadDocument, //2  阅读文章
+        ShareDocument, //3 分享文章 
+        Vote, //4 //点赞文章
+        LikeComment, //5 点赞评论
+        CommentDocument, //6 评论文章
+    }
+}

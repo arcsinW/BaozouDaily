@@ -1,0 +1,78 @@
+﻿<Page
+    x:Class="BaoZouRiBao.Views.MyRecommendPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BaoZouRiBao.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{ThemeResource BackButtonStyle}">
+                    <Button.Content>
+                        <Image Source="{StaticResource BackImage}"/>
+                    </Button.Content>
+                </Button>
+                <TextBlock Text="我的推荐" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+            </StackPanel>
+
+            <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right">
+                <Button.Content>
+                    <BitmapIcon UriSource="ms-appx:///Assets/Images/home_more.png"/>
+                </Button.Content>
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyout.MenuFlyoutPresenterStyle>
+                            <Style TargetType="MenuFlyoutItem">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </MenuFlyout.MenuFlyoutPresenterStyle>
+                        <MenuFlyout.Items>
+                            <MenuFlyoutItem Text="刷新"/>
+                            <MenuFlyoutItem Text="夜间模式"/>
+                            <MenuFlyoutItem Text="设置"/>
+                        </MenuFlyout.Items>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" VerticalAlignment="Top">
+            <StackPanel Orientation="Vertical">
+                <Grid Background="{ThemeResource ListViewBackgroundBrush}"
+                  Padding="12">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="30" >
+                            <Image.Source>
+                                <BitmapImage UriSource="ms-appx:///Assets/Images/icon_publish_link.png"/>
+                            </Image.Source>
+                        </Image>
+                        <TextBlock VerticalAlignment="Center" 
+                               Margin="16,0"
+                               Text="{x:Bind ShareUri,Mode=OneWay}"/>
+                    </StackPanel>
+                    <Button x:Name="faqBtn" Click="faqBtn_Click" 
+                            Content="如何复制" Padding="4"
+                        HorizontalAlignment="Right"
+                        Style="{ThemeResource RoundButtonStyle}"/>
+                </Grid>
+
+                <Grid Background="{ThemeResource ListViewBackgroundBrush}"
+                      Padding="12" Margin="0,12" MinHeight="100">
+                    <TextBlock Text="链接标题"/>
+                </Grid>
+
+                <Button Content="提交" HorizontalAlignment="Center" 
+                        Width="200" Height="48"
+                        Style="{ThemeResource RoundButtonStyle}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="BaoZouRiBao.Views.MyReadHistoryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BaoZouRiBao.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:control="using:BaoZouRiBao.UserControls"
+    xmlns:m="using:BaoZouRiBao.Core.Model"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{ThemeResource BackButtonStyle}">
+                    <Image Source="{StaticResource BackImage}"/>
+                </Button>
+                <TextBlock Text="阅读记录" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Style="{ThemeResource BackButtonStyle}">
+                    <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_delete.png"/>
+                </Button>
+                <Button Style="{ThemeResource BackButtonStyle}" >
+                    <BitmapIcon UriSource="ms-appx:///Assets/Images/home_more.png"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBlock Text="加载失败，点击重试" 
+                       Foreground="{ThemeResource PhoneForegroundColorBrush}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+            <control:RefreshableListView>
+                <control:RefreshableListView.ItemTemplate>
+                    <DataTemplate x:DataType="m:Document">
+                        <TextBlock Text=""/>
+                    </DataTemplate>
+                </control:RefreshableListView.ItemTemplate>
+            </control:RefreshableListView>
+        </Grid>
+    </Grid>
+</Page>

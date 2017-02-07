@@ -1,0 +1,68 @@
+﻿<Application
+    x:Class="BaoZouRiBao.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BaoZouRiBao"
+    RequestedTheme="Light">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <Color x:Key="LightThemeColor">#FFFB3D4F</Color>
+
+                    <Color x:Key="StatusBarBackgroundColor">#FF97252F</Color>
+
+                    <SolidColorBrush x:Key="ThemeColorBrush" Color="{StaticResource LightThemeColor}"/>
+
+                    <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FFEEEEEE"/>
+
+                    <SolidColorBrush x:Key="AdjustColorBrush" Color="White"/>
+
+                    <SolidColorBrush x:Key="PhoneForegroundColorBrush" Color="Black"/>
+
+                    <SolidColorBrush x:Key="ListViewBackgroundBrush" Color="White"/>
+
+                    <SolidColorBrush x:Key="ListViewHeaderBrush" Color="#FFEEEEEE"/>
+
+                    <SolidColorBrush x:Key="AndroidPopupButtonBackgroundColorBrush" Color="#FFFEC64F"/>
+
+                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FFF2F2F2"/>
+
+                    <SolidColorBrush x:Key="FlyoutForegroundBrush" Color="#FF7F7F7F"/>
+
+                    <SolidColorBrush x:Key="SplitViewSpanBackground" Color="#FFEEEEEE"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <Color x:Key="DarkThemeColor">#FF343434</Color>
+
+                    <Color x:Key="StatusBarBackgroundColor">#FF1F1F1F</Color>
+
+                    <SolidColorBrush x:Key="ThemeColorBrush" Color="{StaticResource DarkThemeColor}"/>
+
+                    <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FF2D2D2D"/>
+
+                    <SolidColorBrush x:Key="AdjustColorBrush" Color="Black"/>
+
+                    <SolidColorBrush x:Key="PhoneForegroundColorBrush" Color="#FFB5B5B5"/>
+
+                    <SolidColorBrush x:Key="ListViewBackgroundBrush" Color="#FF343434"/>
+
+                    <SolidColorBrush x:Key="ListViewHeaderBrush" Color="#FF2D2D2D"/>
+
+                    <SolidColorBrush x:Key="AndroidPopupButtonBackgroundColorBrush" Color="#FFFEC64F"/>
+
+                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FF404040"/>
+
+                    <SolidColorBrush x:Key="FlyoutForegroundBrush" Color="#FFFEFEFE"/>
+
+                    <SolidColorBrush x:Key="SplitViewSpanBackground" Color="#FF3E3E42"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/ThemeDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+    
+</Application>

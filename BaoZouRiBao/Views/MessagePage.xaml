@@ -1,0 +1,64 @@
+﻿<Page
+    x:Class="BaoZouRiBao.Views.MessagePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BaoZouRiBao.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:BaoZouRiBao.UserControls"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{ThemeResource BackButtonStyle}">
+                    <Button.Content>
+                        <Image Source="{StaticResource BackImage}"/>
+                    </Button.Content>
+                </Button>
+                <TextBlock Text="通知" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+            </StackPanel>
+
+            <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right">
+                <Button.Content>
+                    <BitmapIcon UriSource="ms-appx:///Assets/Images/home_more.png"/>
+                </Button.Content>
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyout.Items>
+                            <MenuFlyoutItem Text="刷新"/>
+                            <MenuFlyoutItem Text="夜间模式" />
+                            <MenuFlyoutItem Text="设置"/>
+                        </MenuFlyout.Items>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <controls:AndroidPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" IndicatorLineStokeThickness="2" >
+                <Pivot.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding }" FontSize="20" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
+                    </DataTemplate>
+                </Pivot.HeaderTemplate>
+                <PivotItem Header="评论">
+
+                </PivotItem>
+
+                <PivotItem Header="赞">
+
+                </PivotItem>
+
+                <PivotItem Header="通知">
+                    '
+                </PivotItem>
+            </controls:AndroidPivot>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,629 @@
+﻿<Page
+    x:Class="BaoZouRiBao.Views.MasterDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BaoZouRiBao.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:control="using:BaoZouRiBao.UserControls"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core" 
+    xmlns:action="using:BaoZouRiBao.BaoZouAction"
+    RequestedTheme="{x:Bind AppTheme,Mode=OneWay}"
+    NavigationCacheMode="Required"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+         
+        <Style x:Key="NavMenuItemContainerStyle" TargetType="ListViewItem">
+            <Setter Property="MinWidth" Value="{StaticResource SplitViewCompactPaneThemeLength}"/>
+            <Setter Property="MinHeight" Value="48"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="UseSystemFocusVisuals" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Grid x:Name="ContentBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="BorderBackground"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0"
+                                                         To="1"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="BorderBackground"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0"
+                                                         To="1"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListMediumBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation TargetName="ContentPresenter" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="BorderBackground"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0"
+                                                         To="1"/>
+                                            <DoubleAnimation Storyboard.TargetName="SelectedPipe"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0"
+                                                         To="1"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Stroke">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOverSelected">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="BorderBackground"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0"
+                                                         To="1"/>
+                                            <DoubleAnimation Storyboard.TargetName="SelectedPipe"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0"
+                                                         To="1"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Stroke">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PressedSelected">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="BorderBackground"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0"
+                                                         To="1"/>
+                                            <DoubleAnimation Storyboard.TargetName="SelectedPipe"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0"
+                                                         To="1"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListMediumBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Stroke">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation TargetName="ContentPresenter" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="DisabledStates">
+                                    <VisualState x:Name="Enabled"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="ContentBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0"
+                                                         To="{ThemeResource ListViewItemDisabledThemeOpacity}"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Unfocused"/>
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FocusBackground" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Rectangle x:Name="BorderBackground"
+                                   IsHitTestVisible="False"
+                                   StrokeThickness="0"
+                                   Opacity="0"
+                                   Control.IsTemplateFocusTarget="True"/>
+                            <Rectangle x:Name="FocusBackground"
+                                   IsHitTestVisible="False"
+                                   Fill="Transparent"
+                                   Opacity="1"
+                                   Control.IsTemplateFocusTarget="True"/>
+                            <Rectangle x:Name="SelectedPipe"
+                                   Opacity="0"
+                                   Width="4"
+                                   Height="24"
+                                   Fill="{ThemeResource ThemeColorBrush}"
+                                   Margin="{TemplateBinding Padding}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"/>
+                            <ContentPresenter x:Name="ContentPresenter"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="AndroidPopupButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource AndroidPopupButtonBackgroundColorBrush}"/>
+            <Setter Property="Foreground" Value="{ThemeResource AdjustColorBrush}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="8,4,8,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" CornerRadius="0,0,18,18" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>-->
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledTransparentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <BitmapImage x:Key="DefaultAvatar" UriSource="/Assets/Images/avatar_m.png"/>
+
+        <x:String x:Key="LoginString">登录</x:String>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualState" CurrentStateChanged="AdaptiveVisualState_CurrentStateChanged">
+                <VisualState x:Name="Wide">
+                    <VisualState.Setters> 
+                        <Setter Target="PaneColumn.Width" Value="48"/>
+                        <Setter Target="DetailFrame.BorderThickness" Value="1,0,0,0"/>
+                        <Setter Target="drawer.CanOpen" Value="False"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+
+                <VisualState x:Name="Narrow">
+                    <VisualState.Setters>
+                        <Setter Target="DetailFrame.(Grid.Column)" Value="1"/>
+                        <Setter Target="DetailColumn.Width" Value="0"/>
+                        <Setter Target="PaneColumn.Width" Value="0"/>
+                        <Setter Target="MasterColumn.Width" Value="*"/>
+                        <Setter Target="DetailFrame.BorderThickness" Value="0"/>
+                        <Setter Target="drawer.CanOpen" Value="True"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="PaneColumn" Width="48"/>
+            <ColumnDefinition x:Name="MasterColumn" Width="500"/>
+            <ColumnDefinition x:Name="DetailColumn"  Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        
+        <control:Drawer x:Name="drawer" DrawerOpenLength="250" 
+                         Grid.Column="1" x:FieldModifier="Public">
+            <control:Drawer.DrawerMaskerBrush>
+                <SolidColorBrush Color="Black" Opacity="0.7"/>
+            </control:Drawer.DrawerMaskerBrush>
+            <control:Drawer.DrawerContent>
+                <Grid Background="{ThemeResource PageBackgroundBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="180"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" VerticalAlignment="Center" 
+                                Orientation="Horizontal" Margin="20,0">
+                            <Button Style="{ThemeResource ImageButtonStyle}" Click="{x:Bind LoginPage}">
+                                <Grid> 
+                                    <Ellipse Height="80" Width="80" >
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{StaticResource DefaultAvatar}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    <Ellipse Height="80" Width="80" >
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{x:Bind User.Avatar,Mode=OneWay,TargetNullValue={StaticResource DefaultAvatar}}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </Grid>
+                            </Button>
+                            <TextBlock Text="{x:Bind User.Name,Mode=OneWay,TargetNullValue={StaticResource LoginString}}" VerticalAlignment="Center" Margin="24,0" Foreground="White" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="16,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="Margin" Value="8,0"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Style>
+                                <Style TargetType="BitmapIcon">
+                                    <Setter Property="Height" Value="24"/>
+                                    <Setter Property="Width" Value="24"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Button Style="{ThemeResource ImageButtonStyle}">
+                                <i:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="Tapped">
+                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.MyFavoritePage" NavigationType="Master"/>
+                                    </core:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                                <StackPanel Orientation="Horizontal">
+                                    <BitmapIcon UriSource="/Assets/Images/icon_sidebar_favourite.png" />
+                                    <TextBlock Text="收藏"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Style="{ThemeResource ImageButtonStyle}">
+                                <i:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="Tapped">
+                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.MyCommentPage" NavigationType="Master"/>
+                                    </core:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                                <StackPanel Orientation="Horizontal">
+                                    <BitmapIcon UriSource="/Assets/Images/icon_sidebar_comment.png"/>
+                                    <TextBlock Text="评论"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Style="{ThemeResource ImageButtonStyle}">
+                                <i:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="Tapped">
+                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.ReadHistoryPage" NavigationType="Master"/>
+                                    </core:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                                <StackPanel Orientation="Horizontal">
+                                    <BitmapIcon UriSource="/Assets/Images/icon_sidebar_history.png"/>
+                                    <TextBlock Text="阅读"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <ListView Grid.Row="1" Background="{ThemeResource SplitViewSpanBackground}" SelectionMode="Single">
+                        <ListView.Resources>
+                            <Style TargetType="BitmapIcon">
+                                <Setter Property="Foreground" Value="Gray"/>
+                                <Setter Property="Height" Value="20"/>
+                                <Setter Property="Width" Value="20"/>
+                                <Setter Property="Margin" Value="8,0,24,0"/>
+                            </Style>
+                        </ListView.Resources>
+                        <ListViewItem>
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.MainPage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon UriSource="/Assets/Images/icon_sidebar_home.png"/>
+                                <TextBlock Text="首页"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <ListViewItem>
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.RankPage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon UriSource="/Assets/Images/icon_sidebar_rank.png"/>
+                                <TextBlock Text="排行榜"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <ListViewItem>
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.ChannelPage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon UriSource="/Assets/Images/icon_sidebar_column.png"/>
+                                <TextBlock Text="频道"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <ListViewItem>
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.SearchPage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon UriSource="/Assets/Images/icon_sidebar_search.png"/>
+                                <TextBlock Text="搜索"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <ListViewItem>
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.SettingPage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon UriSource="/Assets/Images/icon_sidebar_setting.png"/>
+                                <TextBlock Text="设置"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <ListViewItem>
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.DownloadOfflinePage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon UriSource="/Assets/Images/icon_setting_offline.png"/>
+                                <TextBlock Text="离线下载"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <ListViewItem Tapped="{x:Bind DayNightMode}"> 
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon UriSource="/Assets/Images/icon_sidebar_night.png"/>
+                                <TextBlock Text="夜间模式"/>
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
+                </Grid>
+            </control:Drawer.DrawerContent>
+            <control:Drawer.Content>
+                <Frame x:Name="MasterFrame" x:FieldModifier="Public" Navigated="MasterFrame_Navigated">
+                    <Frame.ContentTransitions>
+                        <TransitionCollection>
+                            <NavigationThemeTransition>
+                                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                    <EntranceNavigationTransitionInfo />
+                                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                            </NavigationThemeTransition>
+                        </TransitionCollection>
+                    </Frame.ContentTransitions>
+                </Frame>
+            </control:Drawer.Content>
+        </control:Drawer>
+
+        <!--#region Pane-->
+        <Grid Grid.Column="0" BorderBrush="{ThemeResource ThemeColorBrush}" BorderThickness="0,0,1,0">
+            <ListView ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
+                      Background="{ThemeResource PageBackgroundBrush}" SelectionMode="Single">
+                <ListView.Resources>
+                    <Style TargetType="BitmapIcon">
+                        <Setter Property="Height" Value="24"/>
+                        <Setter Property="Height" Value="24"/>
+                        <Setter Property="Foreground" Value="Gray"/>
+                    </Style>
+                </ListView.Resources>
+                <ListView.Header>
+                    <Grid >
+                        <Image Tapped="{x:Bind LoginPage}" Source="{StaticResource DefaultAvatar}" Height="36" Width="36"/>
+
+                        <Button Style="{ThemeResource ImageButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind LoginPage}">
+                            <Ellipse Height="36" Width="36" >
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{x:Bind User.Avatar,Mode=OneWay}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Button>
+
+                        <!--<Image Tapped="{x:Bind LoginPage}" Height="48" Width="48" Margin="4">
+                            <Image.Source>
+                                <BitmapImage UriSource="{x:Bind User.Avatar,Mode=OneWay}"/>
+                            </Image.Source>
+                        </Image>-->
+                    </Grid>
+                </ListView.Header>
+                <ListView.Items>
+                    <ListViewItem>
+                        <i:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <action:NavigationAction SourcePage="BaoZouRiBao.Views.MainPage" NavigationType="Master"/>
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                        <BitmapIcon UriSource="/Assets/Images/icon_sidebar_home.png"/>
+                    </ListViewItem>
+
+                    <ListViewItem>
+                        <i:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <action:NavigationAction SourcePage="BaoZouRiBao.Views.RankPage" NavigationType="Master"/>
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                        <BitmapIcon UriSource="/Assets/Images/icon_sidebar_rank.png"/>
+                    </ListViewItem>
+
+                    <ListViewItem>
+                        <i:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <action:NavigationAction SourcePage="BaoZouRiBao.Views.ChannelPage" NavigationType="Master"/>
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                        <BitmapIcon UriSource="/Assets/Images/icon_sidebar_column.png"/>
+                    </ListViewItem>
+
+                    <ListViewItem>
+                        <i:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <action:NavigationAction SourcePage="BaoZouRiBao.Views.SearchPage" NavigationType="Master"/>
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                        <BitmapIcon UriSource="/Assets/Images/icon_sidebar_search.png"/>
+                    </ListViewItem>
+
+                    <ListViewItem>
+                        <i:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <action:NavigationAction SourcePage="BaoZouRiBao.Views.DownloadOfflinePage" NavigationType="Master"/>
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                        <BitmapIcon UriSource="/Assets/Images/icon_setting_offline.png"/>
+                    </ListViewItem>
+
+                    <ListViewItem Tapped="{x:Bind DayNightMode}">
+                        <BitmapIcon UriSource="/Assets/Images/icon_sidebar_night.png"/>
+                    </ListViewItem>
+                </ListView.Items>
+                <ListView.Footer>
+                    <Button Height="48" Width="48" Style="{ThemeResource ImageButtonStyle}"  VerticalAlignment="Bottom">
+                        <i:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <action:NavigationAction SourcePage="BaoZouRiBao.Views.SettingPage" NavigationType="Master"/>
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                        <BitmapIcon UriSource="/Assets/Images/icon_sidebar_setting.png"/>
+                    </Button>
+                </ListView.Footer>
+            </ListView>
+        </Grid>
+        <!--#endregion-->
+
+        <Frame x:Name="DetailFrame" Grid.Column="2"  
+               BorderThickness="1,0,0,0" x:FieldModifier="Public" 
+               BorderBrush="{ThemeResource ThemeColorBrush}"
+               Navigated="DetailFrame_Navigated"/>
+
+        <!--<control:AndroidPopup x:Name="androidPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666"
+                              HorizontalAlignment="Stretch" Visibility="Collapsed"
+                              VerticalAlignment="Stretch"
+                              HorizontalContentAlignment="Center" 
+                              VerticalContentAlignment="Center">
+            <control:AndroidPopup.Content>
+                <Grid  Background="{ThemeResource AdjustColorBrush}"
+                       Height="270" Width="250"
+                       CornerRadius="18">
+                    <Ellipse Fill="White" Height="150" Width="150" VerticalAlignment="Top" Margin="-40">
+
+                    </Ellipse>
+                    <StackPanel>
+                        <Image HorizontalAlignment="Center" VerticalAlignment="Center" 
+                           Height="150" Width="150" Margin="0,-40,0,8"
+                           Source="ms-appx:///Assets/Images/img_popout_box_comment.png"/>
+                        <TextBlock Text="获得奖励" HorizontalAlignment="Center" Foreground="#FFFC7C88"/>
+
+                        <StackPanel Orientation="Horizontal" 
+                                    Margin="0,8"
+                                    HorizontalAlignment="Center">
+                            <Image Source="ms-appx:///Assets/Images/img_coin_mini.png" 
+                                   Height="36" Width="36"/>
+                            <TextBlock Foreground="#FFFEC64F" Margin="4,0" VerticalAlignment="Center">
+                            <Run Text="+"/>
+                            <Run Text="12"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button Content="好的" Height="48" VerticalAlignment="Bottom"
+                            HorizontalAlignment="Stretch" 
+                            Style="{StaticResource AndroidPopupButtonStyle}"/>
+                </Grid>
+            </control:AndroidPopup.Content>
+        </control:AndroidPopup>-->
+ 
+        <control:BaoZouTaskPopup x:Name="taskPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666" 
+                                 BaoZouPopupType="DailySign" CoinCount="4" Title="获取奖励" Visibility="Collapsed"/>
+
+        <control:AndroidPopup x:Name="popup">
+            
+        </control:AndroidPopup>
+    </Grid>
+</Page>

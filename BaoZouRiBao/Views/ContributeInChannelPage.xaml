@@ -1,0 +1,78 @@
+﻿<Page
+    x:Class="BaoZouRiBao.Views.ContributeInChannelPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BaoZouRiBao.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:BaoZouRiBao.Core.ViewModel"
+    xmlns:m="using:BaoZouRiBao.Core.Model"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:ContributeInChannelViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{ThemeResource BackButtonStyle}">
+                    <Image Source="{StaticResource BackImage}"/>
+                </Button>
+                <TextBlock x:Name="titleTextBlock" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+            </StackPanel>
+            <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right">
+                <Button.Content>
+                    <BitmapIcon UriSource="ms-appx:///Assets/Images/home_more.png"/>
+                </Button.Content>
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyout.Items>
+                            <MenuFlyoutItem Text="刷新"/>
+                            <MenuFlyoutItem Text="夜间模式" />
+                            <MenuFlyoutItem Text="设置"/>
+                        </MenuFlyout.Items>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">
+            <ListView x:Name="contributeListView" ItemsSource="{Binding Contributes}"
+                      SelectionMode="None"
+                      IsItemClickEnabled="True"
+                      ItemClick="contributeListView_ItemClick"
+                      ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}" >
+                <ListView.Resources>
+                    <BitmapImage x:Key="DefaultAvatar" UriSource="ms-appx:///Assets/Images/image_small_default.jpg"/>
+                </ListView.Resources>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="m:Contribute">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" MaxHeight="80" MaxWidth="80">
+                                <Image Source="{Binding Thumbnail,TargetNullValue={StaticResource DefaultAvatar}}" 
+                                       Stretch="UniformToFill"/>
+                                <Image Source="{Binding OriginalTag}" Height="32" 
+                                       HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            </Grid>
+                            <StackPanel Grid.Column="1" Margin="12,0">
+                                <TextBlock Text="{x:Bind Title}" FontWeight="Bold" FontSize="16"  TextWrapping="Wrap"/>
+
+                                <TextBlock Margin="0,8" Text="{x:Bind AuthorName}" FontSize="14" Foreground="#FF767676"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate> 
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>
