@@ -5,8 +5,8 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:BaoZouRiBao.Core.ViewModel"
-    xmlns:m="using:BaoZouRiBao.Core.Model"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
+    xmlns:m="using:BaoZouRiBao.Model"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock x:Name="titleTextBlock" Style="{ThemeResource PageTitleTextBlockStyle}"/>

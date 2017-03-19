@@ -5,6 +5,7 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
     mc:Ignorable="d">
     <Page.Resources>
         <Style x:Key="LightToggleSwitch" TargetType="ToggleSwitch">
@@ -222,6 +223,10 @@
         </Style>
     </Page.Resources>
 
+    <Page.DataContext>
+        <vm:SettingPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+
     <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
@@ -230,8 +235,8 @@
 
         <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
-                    <Image Source="{StaticResource BackImage}"/>
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                 </Button>
             <TextBlock Style="{ThemeResource PageTitleTextBlockStyle}" Text="设置"/>
             </StackPanel>
@@ -267,12 +272,11 @@
                                 <ColumnDefinition Width="{StaticResource ColumnRightLength}"/>
                             </Grid.ColumnDefinitions>
 
-                            <BitmapIcon UriSource="/Assets/Images/icon_setting_automatic.png"/>
+                            <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_setting_automatic.png"/>
 
                             <StackPanel Grid.Column="1">
                                 <TextBlock Text="自动离线下载" Style="{ThemeResource TitleTextBlockStyle}"/>
-                                <TextBlock Text="在WI-FI下打开暴走日报，自动下载最新内容"
-                                           Style="{ThemeResource DescTextBlockStyle}"/>
+                                <TextBlock Text="在Wi-Fi下打开暴走日报，自动下载最新内容" Style="{ThemeResource DescTextBlockStyle}"/>
                             </StackPanel>
 
                             <ToggleSwitch Grid.Column="2" Style="{ThemeResource LightToggleSwitch}"/>
@@ -322,7 +326,6 @@
                             </Grid.ColumnDefinitions>
 
                             <BitmapIcon UriSource="/Assets/Images/icon_setting_pushmessage.png"/>
-
 
                             <TextBlock Text="新消息通知" Grid.Column="1" 
                                        VerticalAlignment="Center"

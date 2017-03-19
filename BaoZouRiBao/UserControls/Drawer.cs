@@ -20,7 +20,6 @@ namespace BaoZouRiBao.UserControls
 {
     public sealed class Drawer : ContentControl
     {
-
         #region Field
 
         private Border _touchBorder;
@@ -46,17 +45,17 @@ namespace BaoZouRiBao.UserControls
         public static readonly DependencyProperty DrawerContentProperty =
             DependencyProperty.Register(nameof(DrawerContent), typeof(object), typeof(Drawer), new PropertyMetadata(null));
 
-        public bool DrawerOpened
+        public bool IsDrawerOpened
         {
-            get { return (bool)GetValue(DrawerOpenedProperty); }
-            set { SetValue(DrawerOpenedProperty, value); }
+            get { return (bool)GetValue(IsDrawerOpenedProperty); }
+            set { SetValue(IsDrawerOpenedProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for DrawerOpened.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DrawerOpenedProperty =
-            DependencyProperty.Register("DrawerOpened", typeof(bool), typeof(Drawer), new PropertyMetadata(false, DrawerOpenedCallback));
+        // Using a DependencyProperty as the backing store for IsDrawerOpened.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsDrawerOpenedProperty =
+            DependencyProperty.Register("IsDrawerOpened", typeof(bool), typeof(Drawer), new PropertyMetadata(false, IsDrawerOpenedCallback));
 
-        private static void DrawerOpenedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void IsDrawerOpenedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var drawer = d as Drawer;
             drawer.ToggleDrawerAnimation((bool)e.NewValue);
@@ -126,7 +125,7 @@ namespace BaoZouRiBao.UserControls
 
         private void Drawer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!DrawerOpened)
+            if (!IsDrawerOpened)
             {
                 _drawerVisual.Offset = new Vector3(-(float)Window.Current.Bounds.Width, 0f, 0f);
             }
@@ -147,8 +146,14 @@ namespace BaoZouRiBao.UserControls
 
             _drawerMaskBorder.Tapped += _drawerMaskBorder_Tapped;
 
+            _drawerContentPresenter.Tapped += _drawerContentPresenter_Tapped;
             _drawerContentPresenter.ManipulationDelta += _drawerContentPresenter_ManipulationDelta;
             _drawerContentPresenter.ManipulationCompleted += _drawerContentPresenter_ManipulationCompleted;
+        }
+
+        private void _drawerContentPresenter_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            IsDrawerOpened = false;
         }
 
         private void InitializeComposition()
@@ -185,9 +190,9 @@ namespace BaoZouRiBao.UserControls
 
             if (e.Cumulative.Translation.X > 70)
             {
-                if (!DrawerOpened)
+                if (!IsDrawerOpened)
                 {
-                    DrawerOpened = true;
+                    IsDrawerOpened = true;
                 }
                 else
                 {
@@ -197,9 +202,9 @@ namespace BaoZouRiBao.UserControls
             }
             else
             {
-                if (DrawerOpened)
+                if (IsDrawerOpened)
                 {
-                    DrawerOpened = false;
+                    IsDrawerOpened = false;
                 }
                 else
                 {
@@ -216,7 +221,7 @@ namespace BaoZouRiBao.UserControls
 
         private void _drawerMaskBorder_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            DrawerOpened = false;
+            IsDrawerOpened = false;
         }
 
         #endregion
@@ -251,9 +256,9 @@ namespace BaoZouRiBao.UserControls
 
             if (e.Cumulative.Translation.X <= -30)
             {
-                if (DrawerOpened)
+                if (IsDrawerOpened)
                 {
-                    DrawerOpened = false;
+                    IsDrawerOpened = false;
                 }
                 else
                 {
@@ -263,9 +268,9 @@ namespace BaoZouRiBao.UserControls
             }
             else
             {
-                if (!DrawerOpened)
+                if (!IsDrawerOpened)
                 {
-                    DrawerOpened = true;
+                    IsDrawerOpened = true;
                 }
                 else
                 {

@@ -5,8 +5,13 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:MyRecommendViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
     <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
@@ -15,10 +20,8 @@
 
         <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
-                    <Button.Content>
-                        <Image Source="{StaticResource BackImage}"/>
-                    </Button.Content>
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
+                    <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="我的推荐" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>
@@ -54,12 +57,10 @@
                                 <BitmapImage UriSource="ms-appx:///Assets/Images/icon_publish_link.png"/>
                             </Image.Source>
                         </Image>
-                        <TextBlock VerticalAlignment="Center" 
-                               Margin="16,0"
-                               Text="{x:Bind ShareUri,Mode=OneWay}"/>
+                        <TextBlock VerticalAlignment="Center" Margin="16,0" Text="{Binding ShareUri}"/>
                     </StackPanel>
                     <Button x:Name="faqBtn" Click="faqBtn_Click" 
-                            Content="如何复制" Padding="4"
+                            Content="如何复制" Padding="6"
                         HorizontalAlignment="Right"
                         Style="{ThemeResource RoundButtonStyle}"/>
                 </Grid>

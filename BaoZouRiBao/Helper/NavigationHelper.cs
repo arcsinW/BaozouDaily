@@ -28,5 +28,20 @@ namespace BaoZouRiBao.Helper
         {
             MasterDetailPage.Current.DetailFrame.Navigate(sourcePage,parameter);
         }
+
+        /// <summary>
+        /// 返回
+        /// </summary>
+        public static void GoBack()
+        {
+            if (MasterDetailPage.Current.DetailFrame.CanGoBack)
+            {
+                MasterDetailPage.Current.DetailFrame.GoBack();
+            }
+            else if (MasterDetailPage.Current.MasterFrame.CanGoBack)
+            {
+                MasterDetailPage.Current.MasterFrame.GoBack();
+            }
+        }
     }
 }

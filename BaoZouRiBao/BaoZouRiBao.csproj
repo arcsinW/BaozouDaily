@@ -109,15 +109,93 @@
     </Compile>
     <Compile Include="BaoZouAction\NavigationAction.cs" />
     <Compile Include="BaoZouAction\StoryAction.cs" />
+    <Compile Include="Common\NavigationHelper.cs" />
+    <Compile Include="Common\ObservableDictionary.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Converter\BoolToColorConverter.cs" />
+    <Compile Include="Converter\BoolToObjectConverter.cs" />
     <Compile Include="Converter\BoolToUriConverter.cs" />
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converter\ConverterTools.cs" />
     <Compile Include="Converter\DoneToStringConverter.cs" />
     <Compile Include="Converter\SecondsToDateTimeConverter.cs" />
     <Compile Include="Converter\SelectedLegendItemToColorConverter.cs" />
     <Compile Include="Converter\TaskIdToUriConverter.cs" />
     <Compile Include="Converter\TimeStampToDateTimeConverter.cs" />
+    <Compile Include="Enums\BaoZouTaskEnum.cs" />
+    <Compile Include="Enums\CommentTypeEnum.cs" />
+    <Compile Include="Enums\RankTimeEnum.cs" />
+    <Compile Include="Enums\RankTypeEnum.cs" />
+    <Compile Include="Helper\AuthenticationHelper.cs" />
+    <Compile Include="Helper\BaoZouTaskManager.cs" />
+    <Compile Include="Helper\ClipBoardHelper.cs" />
+    <Compile Include="Helper\DateTimeHelper.cs" />
+    <Compile Include="Helper\DeviceInformationHelper.cs" />
+    <Compile Include="Helper\DownloadManager.cs" />
+    <Compile Include="Helper\ExceptionHandlingSynchronizationContext.cs" />
+    <Compile Include="Helper\ExtensionHelper.cs" />
+    <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\GlobalValue.cs" />
+    <Compile Include="Helper\JsonHelper.cs" />
+    <Compile Include="Helper\LogHelper.cs" />
+    <Compile Include="Helper\MD5Helper.cs" />
     <Compile Include="Helper\NavigationHelper.cs" />
+    <Compile Include="Helper\PersistenceFolders.cs" />
     <Compile Include="Helper\StatusBarHelper.cs" />
+    <Compile Include="Helper\VerifiableBase.cs" />
+    <Compile Include="Helper\VerifiableObjectErrors.cs" />
+    <Compile Include="Helper\WeChatHelper.cs" />
+    <Compile Include="Http\ApiBaseService.cs" />
+    <Compile Include="Http\ApiService.cs" />
+    <Compile Include="Http\HttpBaseService.cs" />
+    <Compile Include="Http\ServiceUri.cs" />
+    <Compile Include="IncrementalCollection\ChannelCollection.cs" />
+    <Compile Include="IncrementalCollection\CommentCollection.cs" />
+    <Compile Include="IncrementalCollection\ContributeCollection.cs" />
+    <Compile Include="IncrementalCollection\ContributeInChannelCollection.cs" />
+    <Compile Include="IncrementalCollection\DataSource\RankDataSource.cs" />
+    <Compile Include="IncrementalCollection\DocumentCollection.cs" />
+    <Compile Include="IncrementalCollection\IIncrementalSource.cs" />
+    <Compile Include="IncrementalCollection\IncrementalLoadingBase.cs" />
+    <Compile Include="IncrementalCollection\IncrementalLoadingCollection.cs" />
+    <Compile Include="IncrementalCollection\IncrementalLoadingList.cs" />
+    <Compile Include="IncrementalCollection\LatestCommentSource.cs" />
+    <Compile Include="IncrementalCollection\SearchResultCollection.cs" />
+    <Compile Include="IncrementalCollection\VideoCollection.cs" />
+    <Compile Include="Model\Article.cs" />
+    <Compile Include="Model\BaozouLoginInput.cs" />
+    <Compile Include="Model\Channel.cs" />
+    <Compile Include="Model\Comment.cs" />
+    <Compile Include="Model\CommentParent.cs" />
+    <Compile Include="Model\CommentUser.cs" />
+    <Compile Include="Model\Contribute.cs" />
+    <Compile Include="Model\Document.cs" />
+    <Compile Include="Model\DocumentComment.cs" />
+    <Compile Include="Model\DocumentExtra.cs" />
+    <Compile Include="Model\DocumentRelated.cs" />
+    <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\PostModel\LoginPost.cs" />
+    <Compile Include="Model\PostModel\SearchPost.cs" />
+    <Compile Include="Model\Recommender.cs" />
+    <Compile Include="Model\ResultModel\AccessTokenResult.cs" />
+    <Compile Include="Model\ResultModel\AuthenticationResult.cs" />
+    <Compile Include="Model\ResultModel\ChannelResult.cs" />
+    <Compile Include="Model\ResultModel\CommentResult.cs" />
+    <Compile Include="Model\ResultModel\ContributeInChannelResult.cs" />
+    <Compile Include="Model\ResultModel\FavoriteResult.cs" />
+    <Compile Include="Model\ResultModel\LatestContributeResult.cs" />
+    <Compile Include="Model\ResultModel\LatestDocumentResult.cs" />
+    <Compile Include="Model\ResultModel\LatestOrHotComment.cs" />
+    <Compile Include="Model\ResultModel\LatestVideoResult.cs" />
+    <Compile Include="Model\ResultModel\LoginResult.cs" />
+    <Compile Include="Model\ResultModel\OfflineDownloadResult.cs" />
+    <Compile Include="Model\ResultModel\RankResult.cs" />
+    <Compile Include="Model\ResultModel\SearchResult.cs" />
+    <Compile Include="Model\ResultModel\TaskDoneResult.cs" />
+    <Compile Include="Model\Settings.cs" />
+    <Compile Include="Model\TaskInfo.cs" />
+    <Compile Include="Model\WebViewParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserControls\AndroidPivot.cs" />
     <Compile Include="UserControls\AndroidPopup.cs" />
@@ -125,6 +203,26 @@
     <Compile Include="UserControls\Drawer.cs" />
     <Compile Include="UserControls\RefreshableListView.cs" />
     <Compile Include="UserControls\RoundButton.cs" />
+    <Compile Include="ViewModel\BaozouLoginViewModel.cs" />
+    <Compile Include="ViewModel\ChannelViewModel.cs" />
+    <Compile Include="ViewModel\CommentPageViewModel.cs" />
+    <Compile Include="ViewModel\ContributeInChannelViewModel.cs" />
+    <Compile Include="ViewModel\DownloadOfflinePageViewModel.cs" />
+    <Compile Include="ViewModel\MasterDetailPageViewModel.cs" />
+    <Compile Include="ViewModel\MessagePageViewModel.cs" />
+    <Compile Include="ViewModel\MyContributePageViewModel.cs" />
+    <Compile Include="ViewModel\MyFavoritePageViewModel.cs" />
+    <Compile Include="ViewModel\MainPageViewModel.cs" />
+    <Compile Include="ViewModel\MyCommentViewModel.cs" />
+    <Compile Include="ViewModel\MyReadHistoryPageViewModel.cs" />
+    <Compile Include="ViewModel\MyRecommendViewModel.cs" />
+    <Compile Include="ViewModel\RankPageViewModel.cs" />
+    <Compile Include="ViewModel\SearchPageViewModel.cs" />
+    <Compile Include="ViewModel\SettingPageViewModel.cs" />
+    <Compile Include="ViewModel\UserInfoViewModel.cs" />
+    <Compile Include="ViewModel\VideoPageViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\WebViewPageViewModel.cs" />
     <Compile Include="Views\BaozouLoginPage.xaml.cs">
       <DependentUpon>BaozouLoginPage.xaml</DependentUpon>
     </Compile>
@@ -175,9 +273,6 @@
     </Compile>
     <Compile Include="Views\RankPage.xaml.cs">
       <DependentUpon>RankPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ReadHistoryPage.xaml.cs">
-      <DependentUpon>ReadHistoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
@@ -400,10 +495,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ReadHistoryPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\SearchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -430,12 +521,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BaoZouRiBao.Core\BaoZouRiBao.Core.csproj">
-      <Project>{06C9D3CC-9E85-4373-BB55-CB7BD20B1657}</Project>
-      <Name>BaoZouRiBao.Core</Name>
+    <ProjectReference Include="..\BaoZouRiBao.Background\BaoZouRiBao.Background.csproj">
+      <Project>{cfa6ee3f-8f68-4304-a098-0736bb767e4f}</Project>
+      <Name>BaoZouRiBao.Background</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Detail\" />
+    <Folder Include="Views\Master\" />
+  </ItemGroup>
   <ItemGroup>
     <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
       <Name>Windows Mobile Extensions for the UWP</Name>

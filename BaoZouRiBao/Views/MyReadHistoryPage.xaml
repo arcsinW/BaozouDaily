@@ -6,9 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:control="using:BaoZouRiBao.UserControls"
-    xmlns:m="using:BaoZouRiBao.Core.Model"
+    xmlns:m="using:BaoZouRiBao.Model"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:MyReadHistoryPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
     <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
@@ -16,7 +21,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="阅读记录" Style="{ThemeResource PageTitleTextBlockStyle}"/>

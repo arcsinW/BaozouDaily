@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaoZouRiBao.Core", "BaoZouR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaoZouRiBao.Background", "BaoZouRiBao.Background\BaoZouRiBao.Background.csproj", "{CFA6EE3F-8F68-4304-A098-0736BB767E4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaoZouRiBao.Data", "BaoZouRiBao.Data\BaoZouRiBao.Data.csproj", "{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,42 +73,8 @@ Global
 		{CFA6EE3F-8F68-4304-A098-0736BB767E4F}.Release|x64.Build.0 = Release|x64
 		{CFA6EE3F-8F68-4304-A098-0736BB767E4F}.Release|x86.ActiveCfg = Release|x86
 		{CFA6EE3F-8F68-4304-A098-0736BB767E4F}.Release|x86.Build.0 = Release|x86
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Debug|ARM.ActiveCfg = Debug|ARM
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Debug|ARM.Build.0 = Debug|ARM
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Debug|x64.ActiveCfg = Debug|x64
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Debug|x64.Build.0 = Debug|x64
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Debug|x86.ActiveCfg = Debug|x86
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Debug|x86.Build.0 = Debug|x86
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Release|ARM.ActiveCfg = Release|ARM
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Release|ARM.Build.0 = Release|ARM
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Release|x64.ActiveCfg = Release|x64
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Release|x64.Build.0 = Release|x64
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Release|x86.ActiveCfg = Release|x86
-		{DEC4DCD3-BF2E-4B10-975D-4B8D734F2874}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://wangx86.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = BaoZouRiBao.Background\\BaoZouRiBao.Background.csproj
-		SccProjectName1 = BaoZouRiBao.Background
-		SccLocalPath1 = BaoZouRiBao.Background
-		SccProjectUniqueName2 = BaoZouRiBao.Data\\BaoZouRiBao.Data.csproj
-		SccProjectName2 = BaoZouRiBao.Data
-		SccLocalPath2 = BaoZouRiBao.Data
-		SccProjectUniqueName3 = BaoZouRiBao.Core\\BaoZouRiBao.Core.csproj
-		SccProjectName3 = BaoZouRiBao.Core
-		SccLocalPath3 = BaoZouRiBao.Core
-		SccProjectUniqueName4 = BaoZouRiBao\\BaoZouRiBao.csproj
-		SccProjectName4 = BaoZouRiBao
-		SccLocalPath4 = BaoZouRiBao
 	EndGlobalSection
 EndGlobal

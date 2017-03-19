@@ -26,5 +26,7 @@ namespace BaoZouRiBao.Views
         {
             this.InitializeComponent();
         }
+
+     
     }
 }

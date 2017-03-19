@@ -5,7 +5,12 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:DownloadOfflinePageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
 
     <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
@@ -15,8 +20,8 @@
 
         <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
-                    <Image Source="{StaticResource BackImage}"/>
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                 </Button>
                 <TextBlock Text="离线下载" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>

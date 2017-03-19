@@ -1,5 +1,5 @@
-﻿using BaoZouRiBao.Core.Helper;
-using BaoZouRiBao.Core.Http;
+﻿using BaoZouRiBao.Helper;
+using BaoZouRiBao.Http;
 using BaoZouRiBao.Helper;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
-﻿using BaoZouRiBao.Core.Helper;
-using BaoZouRiBao.Core.Model;
-using BaoZouRiBao.Core.Model.ResultModel;
+﻿using BaoZouRiBao.Helper;
+using BaoZouRiBao.Model;
+using BaoZouRiBao.Model.ResultModel;
 using BaoZouRiBao.Helper;
 using BaoZouRiBao.UserControls;
 using System;
@@ -83,7 +83,7 @@ namespace BaoZouRiBao.Views
         private void splitViewBtn_Click(object sender, RoutedEventArgs e)
         {
             //splitView.IsPaneOpen = !splitView.IsPaneOpen;
-            MasterDetailPage.Current.drawer.DrawerOpened = !MasterDetailPage.Current.drawer.DrawerOpened;
+            MasterDetailPage.Current.drawer.IsDrawerOpened = !MasterDetailPage.Current.drawer.IsDrawerOpened;
         }
 
         #region SplitView' Pane Method
@@ -100,7 +100,7 @@ namespace BaoZouRiBao.Views
 
         public void ReadHistoryPage()
         {
-            NavigationHelper.MasterFrameNavigate(typeof(ReadHistoryPage));
+            NavigationHelper.MasterFrameNavigate(typeof(MyReadHistoryPage));
         }
 
         public void LoginPage()

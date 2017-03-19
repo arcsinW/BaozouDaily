@@ -5,8 +5,8 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:m="using:BaoZouRiBao.Core.Model"
-    xmlns:vm="using:BaoZouRiBao.Core.ViewModel"
+    xmlns:m="using:BaoZouRiBao.Model"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     NavigationCacheMode="Required"
@@ -25,8 +25,8 @@
 
             <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
                 <StackPanel Orientation="Horizontal">
-                    <Button Style="{ThemeResource BackButtonStyle}">
-                        <Image Source="{StaticResource BackImage}"/>
+                    <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                     </Button>
                     <TextBlock Text="频道" Style="{ThemeResource PageTitleTextBlockStyle}"/>
                 </StackPanel>

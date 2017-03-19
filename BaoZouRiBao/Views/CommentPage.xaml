@@ -5,8 +5,8 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:BaoZouRiBao.Core.ViewModel"
-    xmlns:m="using:BaoZouRiBao.Core.Model"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
+    xmlns:m="using:BaoZouRiBao.Model"
     xmlns:controls="using:BaoZouRiBao.UserControls"
     xmlns:converter="using:BaoZouRiBao.Converter"
     mc:Ignorable="d">

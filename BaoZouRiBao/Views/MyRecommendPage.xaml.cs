@@ -1,4 +1,4 @@
-﻿using BaoZouRiBao.Core.Model;
+﻿using BaoZouRiBao.Model;
 using BaoZouRiBao.Helper;
 using System;
 using System.ComponentModel;
@@ -62,18 +62,6 @@ namespace BaoZouRiBao.Views
 
         #endregion
 
-        private string shareUri = "请先复制你想推荐的链接";
-        public string ShareUri
-        {
-            get
-            {
-                return shareUri;
-            }
-            set
-            {
-                shareUri = value;
-                OnPropertyChanged();
-            }
-        }
+        
     }
 }

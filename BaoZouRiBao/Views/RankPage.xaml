@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:BaoZouRiBao.UserControls"
-    xmlns:vm="using:BaoZouRiBao.Core.ViewModel"
-    xmlns:m="using:BaoZouRiBao.Core.Model"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
+    xmlns:m="using:BaoZouRiBao.Model"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
     <Page.Resources>
@@ -198,7 +198,7 @@
                         </Ellipse>
                         <TextBlock Margin="0,8">
                                                     <Run Text="{x:Bind AuthorName}" FontSize="14" Foreground="#FF767676"/>
-                                                    <Run Text="{x:Bind SectionName,TargetNullValue={StaticResource RecommendString}}"
+                                                    <Run Text="{x:Bind SectionName}"
                                                         FontSize="12" Foreground="#FF8D8D8D" />
                         </TextBlock>
                     </StackPanel>
@@ -221,40 +221,31 @@
         <!--#region Page title-->
         <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
-                    <BitmapIcon UriSource="ms-appx:///Assets/Images/back.png"/>
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                 </Button>
                 <TextBlock Text="排行榜" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>
 
             <ComboBox x:Name="comboBox" HorizontalAlignment="Right" VerticalAlignment="Center" BorderThickness="0" 
-                      Style="{StaticResource LightComboBoxStyle}"
+                      Style="{StaticResource LightComboBoxStyle}" 
                       SelectionChanged="ComboBox_SelectionChanged">
                 <ComboBox.Items>
                     <ComboBoxItem Content="今天" IsSelected="True"/>
-                    <ComboBoxItem Content="7天"/>
+                    <ComboBoxItem Content="7天" />
                     <ComboBoxItem Content="30天"/>
                 </ComboBox.Items>
             </ComboBox>
-
-            <!--<Button Style="{ThemeResource BackButtonStyle}" Width="Auto" HorizontalAlignment="Right">
-                <TextBlock Text="今天"/>
-                <Button.Flyout>
-                    <MenuFlyout>
-                        <MenuFlyout.MenuFlyoutPresenterStyle>
-                            <Style TargetType="MenuFlyoutPresenter">
-                                <Setter Property="Padding" Value="0"/>
-                            </Style>
-                        </MenuFlyout.MenuFlyoutPresenterStyle>
-                        <MenuFlyoutItem Text="今天"/>
-                        <MenuFlyoutItem Text="7天"/>
-                        <MenuFlyoutItem Text="30天"/>
-                    </MenuFlyout>
-                </Button.Flyout>
-            </Button>-->
         </Grid>
 
-        <controls:AndroidPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" IndicatorLineStokeThickness="2" >
+        <controls:AndroidPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" 
+                               IndicatorLineStokeThickness="2" 
+                               SelectionChanged="pivot_SelectionChanged">
+            <Pivot.ItemContainerStyle>
+                <Style TargetType="PivotItem">
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </Pivot.ItemContainerStyle>
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding }" FontSize="20" Foreground="{ThemeResource PhoneForegroundColorBrush}"  
@@ -263,37 +254,33 @@
             </Pivot.HeaderTemplate>
 
             <PivotItem Header="阅读">
-                <toolkit:PullToRefreshListView x:Name="readListView" 
+                <controls:RefreshableListView
                               ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                               ItemsSource="{Binding ReadCollection}"
                               ItemTemplate="{StaticResource DocumentDataTemplate}"
-                              IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
-                              ItemClick="listView_ItemClick"
-                              RefreshCommand="{Binding RefreshReadCollectionCommand}"
-                              >
-
-                </toolkit:PullToRefreshListView>
+                              IsItemClickEnabled="True" 
+                              ItemClick="{x:Bind ViewModel.listView_ItemClick}"
+                              RefreshCommand="{Binding RefreshReadCollectionCommand}">
+                </controls:RefreshableListView>
             </PivotItem>
             <PivotItem Header="赞">
-                <toolkit:PullToRefreshListView x:Name="voteListView" 
+                <toolkit:PullToRefreshListView 
                               ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                               ItemsSource="{Binding VoteCollection}"
                               ItemTemplate="{StaticResource DocumentDataTemplate}"
                               IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
-                              ItemClick="listView_ItemClick"
+                              ItemClick="{x:Bind ViewModel.listView_ItemClick}"
                               RefreshCommand="{Binding RefreshVoteCollectionCommand}">
-
                 </toolkit:PullToRefreshListView>
             </PivotItem>
             <PivotItem Header="评论">
-                <toolkit:PullToRefreshListView x:Name="commentListView" 
+                <toolkit:PullToRefreshListView 
                               ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                               ItemsSource="{Binding CommentCollection}"
                               ItemTemplate="{StaticResource DocumentDataTemplate}"
                               IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
-                              ItemClick="listView_ItemClick"
+                              ItemClick="{x:Bind ViewModel.listView_ItemClick}"
                               RefreshCommand="{Binding RefreshCommentCollectionCommand}">
-
                 </toolkit:PullToRefreshListView>
             </PivotItem>
         </controls:AndroidPivot>

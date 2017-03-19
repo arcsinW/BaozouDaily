@@ -1,5 +1,5 @@
-﻿using BaoZouRiBao.Core.Helper;
-using BaoZouRiBao.Core.Model.ResultModel;
+﻿using BaoZouRiBao.Helper;
+using BaoZouRiBao.Model.ResultModel;
 using BaoZouRiBao.Helper;
 using System;
 using System.Collections.Generic;
@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -19,13 +20,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
-
 namespace BaoZouRiBao.Views
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
     public sealed partial class MasterDetailPage : Page , INotifyPropertyChanged
     {
         public static MasterDetailPage Current;
@@ -40,9 +36,15 @@ namespace BaoZouRiBao.Views
             GlobalValue.Current.DataChanged += Current_DataChanged;
             StatusBarHelper.ShowStatusBar();
             SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            //if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            //{
+            //    Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            //}
+
+            if(DesignMode.DesignModeEnabled)
             {
-                Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+                MasterFrame.Navigate(typeof(MainPage));
+                DetailFrame.Navigate(typeof(DefaultPage));
             }
         }
 
@@ -80,8 +82,8 @@ namespace BaoZouRiBao.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            MasterFrame.Navigate(typeof(MainPage));
             DetailFrame.Navigate(typeof(DefaultPage));
+            MasterFrame.Navigate(typeof(MainPage));
         }
 
         private void MasterFrame_Navigated(object sender, NavigationEventArgs e)
@@ -98,7 +100,7 @@ namespace BaoZouRiBao.Views
         {
             if(AdaptiveVisualState.CurrentState == Narrow)
             {
-                DetailFrame.Visibility = DetailFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
+                DetailFrame.Visibility = (DetailFrame.CanGoBack && (DetailFrame.SourcePageType == typeof(DefaultPage))) ? Visibility.Visible : Visibility.Collapsed;
             }
             else
             {

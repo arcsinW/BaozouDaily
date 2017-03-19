@@ -1,4 +1,4 @@
-﻿using BaoZouRiBao.Core.Helper;
+﻿using BaoZouRiBao.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;

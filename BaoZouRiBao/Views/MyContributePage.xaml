@@ -5,8 +5,13 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:MyContributePageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
     <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
@@ -14,7 +19,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="我的投稿" Style="{ThemeResource PageTitleTextBlockStyle}"/>

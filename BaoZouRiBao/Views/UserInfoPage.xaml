@@ -5,8 +5,8 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:BaoZouRiBao.Core.ViewModel"
-    xmlns:model="using:BaoZouRiBao.Core.Model"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
+    xmlns:model="using:BaoZouRiBao.Model"
     xmlns:converter="using:BaoZouRiBao.Converter"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
@@ -108,10 +108,8 @@
 
         <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
-                    <Button.Content>
-                        <Image Source="{StaticResource BackImage}"/>
-                    </Button.Content>
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
+                    <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="个人" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>

@@ -1,5 +1,4 @@
-﻿using BaoZouRiBao.Views;
-using Microsoft.HockeyApp;
+﻿using BaoZouRiBao.Views; 
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -22,7 +21,7 @@ namespace BaoZouRiBao
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            HockeyClient.Current.Configure("ea627d35afcc4f81b8eb033f9b2e79df");
+            //HockeyClient.Current.Configure("ea627d35afcc4f81b8eb033f9b2e79df");
         }
 
         /// <summary>

@@ -6,8 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:BaoZouRiBao.UserControls"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:MessagePageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
     <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
@@ -16,10 +21,8 @@
 
         <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
-                    <Button.Content>
-                        <Image Source="{StaticResource BackImage}"/>
-                    </Button.Content>
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
+                    <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="通知" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>
@@ -30,6 +33,11 @@
                 </Button.Content>
                 <Button.Flyout>
                     <MenuFlyout>
+                        <MenuFlyout.MenuFlyoutPresenterStyle>
+                            <Style TargetType="MenuFlyoutPresenter">
+                                <Setter Property="BorderBrush" Value="{ThemeResource ThemeColorBrush}"/>
+                            </Style>
+                        </MenuFlyout.MenuFlyoutPresenterStyle>
                         <MenuFlyout.Items>
                             <MenuFlyoutItem Text="刷新"/>
                             <MenuFlyoutItem Text="夜间模式" />

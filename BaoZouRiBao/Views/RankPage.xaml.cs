@@ -1,6 +1,7 @@
-﻿using BaoZouRiBao.Core.Model;
+﻿using BaoZouRiBao.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -28,28 +29,59 @@ namespace BaoZouRiBao.Views
             this.InitializeComponent();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private bool isRankTimeChanged = false;
+
+        private bool isReadLoaded = false;
+        private bool isVoteLoaded = false;
+        private bool isCommentLoaded = false;
+
+
+        private async void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (pivot == null) return;
-            switch(pivot.SelectedIndex)
+            isRankTimeChanged = true;
+            switch (pivot.SelectedIndex)
             {
                 case 0:
-                    ViewModel.ReloadCommentCollection(comboBox.SelectedIndex);
+                    await ViewModel.RefreshReadCollectionAsync(comboBox.SelectedIndex);
                     break;
                 case 1:
+                    await ViewModel.RefreshVoteCollectionAsync(comboBox.SelectedIndex);
                     break;
                 case 2:
+                    await ViewModel.RefreshCommentCollectionAsync(comboBox.SelectedIndex);
                     break;
             }
         }
 
-        private void listView_ItemClick(object sender, ItemClickEventArgs e)
+        private async void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var story = e.ClickedItem as Document;
-            if (story != null)
+            switch (pivot.SelectedIndex)
             {
-                WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
-                MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
+                case 0:
+                    if (!isReadLoaded || isRankTimeChanged)
+                    {
+                        Debug.WriteLine($"isReadLoade : {isReadLoaded} {comboBox.SelectedIndex}");
+                        await ViewModel.RefreshReadCollectionAsync(comboBox.SelectedIndex);
+                        isReadLoaded = true;
+                    }
+                    break;
+                case 1:
+                    if(!isVoteLoaded || isRankTimeChanged)
+                    {
+                        Debug.WriteLine($"isVoteLoaded : {isVoteLoaded} {comboBox.SelectedIndex}");
+                        await ViewModel.RefreshVoteCollectionAsync((comboBox.SelectedIndex));
+                        isVoteLoaded = true;
+                    }
+                    break;
+                case 2:
+                    if(!isCommentLoaded || isRankTimeChanged)
+                    {
+                        Debug.WriteLine($"isCommentLoaded : {isCommentLoaded} {comboBox.SelectedIndex}");
+                        await ViewModel.RefreshCommentCollectionAsync((comboBox.SelectedIndex));
+                        isCommentLoaded = true;
+                    }
+                    break;
             }
         }
     }

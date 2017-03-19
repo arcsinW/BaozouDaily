@@ -5,8 +5,8 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:BaoZouRiBao.Core.ViewModel"
-    xmlns:hp="using:BaoZouRiBao.Core.Helper"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
+    xmlns:hp="using:BaoZouRiBao.Helper"
     xmlns:converter="using:BaoZouRiBao.Converter"
     xmlns:controls="using:BaoZouRiBao.UserControls"
     mc:Ignorable="d">
@@ -29,8 +29,8 @@
         <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}"
               DataContext="{Binding DocumentExtra}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
-                    <BitmapIcon UriSource="ms-appx:///Assets/Images/back.png"/>
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
+                    <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock x:Name="titleTextBlock" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>

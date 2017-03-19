@@ -292,7 +292,7 @@
 
         
         <control:Drawer x:Name="drawer" DrawerOpenLength="250" 
-                         Grid.Column="1" x:FieldModifier="Public">
+                         Grid.Column="1" x:FieldModifier="Public" IsDrawerOpened="False">
             <control:Drawer.DrawerMaskerBrush>
                 <SolidColorBrush Color="Black" Opacity="0.7"/>
             </control:Drawer.DrawerMaskerBrush>
@@ -302,13 +302,12 @@
                         <RowDefinition Height="180"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-
                     <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
+                        <!--#region Header-->
                         <StackPanel Grid.Row="0" VerticalAlignment="Center" 
                                 Orientation="Horizontal" Margin="20,0">
                             <Button Style="{ThemeResource ImageButtonStyle}" Click="{x:Bind LoginPage}">
@@ -325,9 +324,9 @@
                                     </Ellipse>
                                 </Grid>
                             </Button>
-                            <TextBlock Text="{x:Bind User.Name,Mode=OneWay,TargetNullValue={StaticResource LoginString}}" VerticalAlignment="Center" Margin="24,0" Foreground="White" />
+                            <TextBlock Text="{x:Bind User.Name,Mode=OneWay}" VerticalAlignment="Center" Margin="24,0" Foreground="White" />
                         </StackPanel>
-
+                        <!--#endregion-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="16,0">
                             <StackPanel.Resources>
                                 <Style TargetType="TextBlock">
@@ -368,7 +367,7 @@
                             <Button Style="{ThemeResource ImageButtonStyle}">
                                 <i:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Tapped">
-                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.ReadHistoryPage" NavigationType="Master"/>
+                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.MyReadHistoryPage" NavigationType="Master"/>
                                     </core:EventTriggerBehavior>
                                 </i:Interaction.Behaviors>
                                 <StackPanel Orientation="Horizontal">
@@ -496,11 +495,11 @@
                     </Style>
                 </ListView.Resources>
                 <ListView.Header>
-                    <Grid >
+                    <Grid Height="48" Width="48">
                         <Image Tapped="{x:Bind LoginPage}" Source="{StaticResource DefaultAvatar}" Height="36" Width="36"/>
 
                         <Button Style="{ThemeResource ImageButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind LoginPage}">
-                            <Ellipse Height="36" Width="36" >
+                            <Ellipse Height="36" Width="36" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="{x:Bind User.Avatar,Mode=OneWay}"/>
                                 </Ellipse.Fill>
@@ -581,7 +580,8 @@
         <Frame x:Name="DetailFrame" Grid.Column="2"  
                BorderThickness="1,0,0,0" x:FieldModifier="Public" 
                BorderBrush="{ThemeResource ThemeColorBrush}"
-               Navigated="DetailFrame_Navigated"/>
+               Navigated="DetailFrame_Navigated">
+        </Frame>
 
         <!--<control:AndroidPopup x:Name="androidPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666"
                               HorizontalAlignment="Stretch" Visibility="Collapsed"
@@ -620,7 +620,7 @@
         </control:AndroidPopup>-->
  
         <control:BaoZouTaskPopup x:Name="taskPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666" 
-                                 BaoZouPopupType="DailySign" CoinCount="4" Title="获取奖励" Visibility="Collapsed"/>
+                                 BaoZouPopupType="DailySign"  CoinCount="4" Title="获取奖励" Visibility="Collapsed"/>
 
         <control:AndroidPopup x:Name="popup">
             

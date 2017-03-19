@@ -5,8 +5,8 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:BaoZouRiBao.Core.ViewModel"
-    xmlns:m="using:BaoZouRiBao.Core.Model"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
+    xmlns:m="using:BaoZouRiBao.Model"
     xmlns:control="using:BaoZouRiBao.UserControls"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:p="using:PullToRefresh.UWP"
@@ -18,7 +18,6 @@
     mc:Ignorable="d"
     RequestedTheme="{x:Bind AppTheme,Mode=OneWay}">
     <Page.Resources>
-
         <Style x:Key="LightPivotStyle" TargetType="Pivot">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0"/>
@@ -240,8 +239,10 @@
         </Storyboard>
 
         <x:String x:Key="LoginString">登录</x:String>
-
+        <x:String x:Key="RecommendString">推荐</x:String>
+        
         <convert:SelectedLegendItemToColorConverter x:Key="SelectedLegendItemToColorConverter" />
+        <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <Style x:Key="LegendItemContainerStyle" TargetType="GridViewItem">
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
             <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
@@ -284,7 +285,8 @@
 
         <Grid HorizontalAlignment="Stretch" Background="{ThemeResource ThemeColorBrush}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Button Style="{ThemeResource BackButtonStyle}" x:Name="splitViewBtn" Click="splitViewBtn_Click" >
+                <Button Style="{ThemeResource BackButtonStyle}" 
+                        Click="{x:Bind ViewModel.OpenDrawer}" >
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                 </Button>
                 <TextBlock x:Name="pageTitleTextBlock" Text="暴走日报" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -432,15 +434,16 @@
                     <controls:PullToRefreshListView x:Name="documentListVIew" 
                                                     ItemsSource="{Binding Documents}"
                                                     SelectionMode="None" IsItemClickEnabled="True"
+                                                    IsPullToRefreshWithMouseEnabled="True"
                                                     ItemClick="documentListView_ItemClick" 
                                                     ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                                                     RefreshRequested="{x:Bind ViewModel.RefreshDocument}">
-                        <controls:PullToRefreshListView.RefreshIndicatorContent>
+                        <!--<controls:PullToRefreshListView.RefreshIndicatorContent>
                             <ProgressRing/>
                         </controls:PullToRefreshListView.RefreshIndicatorContent>
                         <controls:PullToRefreshListView.ReleaseToRefreshContent>
                             <TextBlock Text="Release to refresh"/>
-                        </controls:PullToRefreshListView.ReleaseToRefreshContent>
+                        </controls:PullToRefreshListView.ReleaseToRefreshContent>-->
                         <ListView.Header>
                             <Grid Height="220">
                                 <FlipView x:Name="headerFlipView" ItemsSource="{Binding Documents.TopStories}" 
@@ -449,7 +452,7 @@
                                         <DataTemplate x:DataType="m:Document">
                                             <Grid>
                                                 <Image Source="{x:Bind Image}" VerticalAlignment="Center" 
-                                                           Stretch="UniformToFill"/>
+                                                           Stretch="Fill"/>
                                                 <Border>
                                                     <Border.Background>
                                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.2">

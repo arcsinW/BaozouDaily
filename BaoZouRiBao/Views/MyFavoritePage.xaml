@@ -6,12 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:control="using:BaoZouRiBao.UserControls"
-    xmlns:m="using:BaoZouRiBao.Core.Model"
-    xmlns:vm="using:BaoZouRiBao.Core.ViewModel"
+    xmlns:m="using:BaoZouRiBao.Model"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <vm:FavoritePageViewModel x:Name="ViewModel"/>
+        <vm:MyFavoritePageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
     
     <Page.Resources>
@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="收藏" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -44,6 +44,7 @@
             <control:RefreshableListView x:Name="documentListView" ItemsSource="{Binding Favorites}"
                                   SelectionMode="None"
                                   IsItemClickEnabled="True"
+                                  ItemClick="{x:Bind ViewModel.documentListView_ItemClick}"
                                   IncrementalLoadingTrigger="Edge"
                                   ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                                   RefreshRequested="{x:Bind ViewModel.RefreshFavorites}">
