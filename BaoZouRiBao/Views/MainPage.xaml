@@ -390,8 +390,6 @@
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             <Pivot.Resources>
-                
-
                 <Style x:Key="TitleTextBlockStyle" TargetType="TextBlock">
                     <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundColorBrush}"/>
                     <Setter Property="FontSize" Value="16"/>
@@ -408,7 +406,7 @@
             </Pivot.Resources>
             <Pivot.Items>
                 <PivotItem Header="首页">
-                    <!--<control:RefreshableListView x:Name="documentListView" ItemsSource="{Binding Documents}"
+                    <control:RefreshableListView x:Name="documentListView" ItemsSource="{Binding Documents}"
                                   SelectionMode="None"
                                   IsItemClickEnabled="True"
                                   ItemClick="documentListView_ItemClick"
@@ -430,14 +428,14 @@
                                     </FontIcon.RenderTransform>
                                 </FontIcon>
                             </Grid>
-                        </control:RefreshableListView.RefreshIndicatorContent>-->
-                    <controls:PullToRefreshListView x:Name="documentListVIew" 
+                        </control:RefreshableListView.RefreshIndicatorContent>
+                    <!--<controls:PullToRefreshListView x:Name="documentListVIew" 
                                                     ItemsSource="{Binding Documents}"
                                                     SelectionMode="None" IsItemClickEnabled="True"
                                                     IsPullToRefreshWithMouseEnabled="True"
                                                     ItemClick="documentListView_ItemClick" 
                                                     ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
-                                                    RefreshRequested="{x:Bind ViewModel.RefreshDocument}">
+                                                    RefreshRequested="{x:Bind ViewModel.RefreshDocument}">-->
                         <!--<controls:PullToRefreshListView.RefreshIndicatorContent>
                             <ProgressRing/>
                         </controls:PullToRefreshListView.RefreshIndicatorContent>
@@ -509,8 +507,8 @@
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                    </controls:PullToRefreshListView>
-                    <!--</control:RefreshableListView>-->
+                    <!--</controls:PullToRefreshListView>-->
+                    </control:RefreshableListView>
                 </PivotItem>
 
                 <PivotItem Header="用户投稿">

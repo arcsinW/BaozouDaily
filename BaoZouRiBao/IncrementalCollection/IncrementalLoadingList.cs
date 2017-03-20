@@ -23,23 +23,42 @@ namespace BaoZouRiBao.IncrementalCollection
         public int Page { private set; get; }
         private Func<uint, int, Task<IEnumerable<T>>> pageFunc;
         private Func<uint, string, Task<IEnumerable<T>>> timeStampFunc;
+
+
+        private Action onDataLoadedAction;
+        private Action onDataLoadingAction;
+
         public bool HasMoreItems
         {
             get; private set;
         }
 
-        public IncrementalLoadingList(Func<uint, int, Task<IEnumerable<T>>> func)
+        /// <summary>
+        /// 通过页码增量加载
+        /// </summary>
+        /// <param name="func"></param>
+        public IncrementalLoadingList(Func<uint, int, Task<IEnumerable<T>>> func, Action onDataLoadedAction = null, Action onDataLoadingAction = null)
         {
             Page = 0;
             this.pageFunc = func;
             this.HasMoreItems = true;
+
+            this.onDataLoadedAction = onDataLoadedAction;
+            this.onDataLoadingAction = onDataLoadingAction;
         }
 
-        public IncrementalLoadingList(Func<uint,string,Task<IEnumerable<T>>> func)
+        /// <summary>
+        /// 通过时间戳增量加载
+        /// </summary>
+        /// <param name="func"></param>
+        public IncrementalLoadingList(Func<uint,string,Task<IEnumerable<T>>> func, Action onDataLoadedAction = null, Action onDataLoadingAction = null)
         {
             TimeStamp = string.Empty;
             this.timeStampFunc = func;
             this.HasMoreItems = true;
+
+            this.onDataLoadingAction = onDataLoadingAction;
+            this.onDataLoadedAction = onDataLoadedAction;
         }
 
         public async Task ClearAndReload()
@@ -62,6 +81,7 @@ namespace BaoZouRiBao.IncrementalCollection
       
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
+            onDataLoadingAction?.Invoke();
             return AsyncInfo.Run(async token =>
             {
                 try
@@ -92,6 +112,10 @@ namespace BaoZouRiBao.IncrementalCollection
                 catch(Exception e)
                 {
                     LogHelper.WriteLine(e);
+                }
+                finally
+                {
+                    onDataLoadedAction?.Invoke();
                 }
 
                 return new LoadMoreItemsResult { Count = (uint)this.Count };

@@ -59,20 +59,7 @@ namespace BaoZouRiBao.ViewModel
 
         public void Search()
         {
-            //ResultCollection = new SearchResultCollection(Keyword);
-
-            //OnPropertyChanged("ResultCollection");
-
             ResultCollection.SetKeyword(Keyword);
-            //var searchResult = await ApiService.Instance.Search(Keyword, 1);
-            //if(searchResult!=null && searchResult.Documents?.Length >0)
-            //{
-            //    ResultCollection.Clear();
-            //    foreach (var item in searchResult.Documents)
-            //    {
-            //        ResultCollection.Add(item);
-            //    }
-            //}
         }
 
         private void ResultCollection_OnDataLoadingEvent()

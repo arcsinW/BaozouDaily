@@ -37,7 +37,7 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <TextBlock Text="加载失败，点击重试" 
+            <TextBlock Text="加载失败，点击重试" Visibility="{Binding IsEmpty}"
                        Foreground="{ThemeResource PhoneForegroundColorBrush}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"/>

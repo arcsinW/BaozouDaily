@@ -100,7 +100,7 @@ namespace BaoZouRiBao.Views
         {
             if(AdaptiveVisualState.CurrentState == Narrow)
             {
-                DetailFrame.Visibility = (DetailFrame.CanGoBack && (DetailFrame.SourcePageType == typeof(DefaultPage))) ? Visibility.Visible : Visibility.Collapsed;
+                DetailFrame.Visibility = DetailFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
             }
             else
             {
