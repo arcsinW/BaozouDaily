@@ -89,6 +89,17 @@ namespace BaoZouRiBao.UserControls
         // Using a DependencyProperty as the backing store for ForegroundLineStroke.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IndicatorLineStrokeProperty =
             DependencyProperty.Register(nameof(IndicatorLineStroke), typeof(Brush), typeof(AndroidPivot), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
+        
+
+        public Brush HeaderBrush
+        {
+            get { return (Brush)GetValue(HeaderBrushProperty); }
+            set { SetValue(HeaderBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderBrushProperty =
+            DependencyProperty.Register("HeaderBrush", typeof(Brush), typeof(AndroidPivot), new PropertyMetadata(new SolidColorBrush(Colors.White)));
 
 
         #endregion

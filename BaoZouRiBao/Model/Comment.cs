@@ -51,6 +51,4 @@ namespace BaoZouRiBao.Model
         [JsonProperty(PropertyName = "user")]
         public CommentUser User { get; set; }
     }
-
-   
 }

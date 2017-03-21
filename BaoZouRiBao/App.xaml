@@ -4,21 +4,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BaoZouRiBao"
     xmlns:converter="using:BaoZouRiBao.Converter"
-    RequestedTheme="Light">
-
-
-
+    RequestedTheme="Light"> 
+    
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
-                    <Color x:Key="LightThemeColor">#FFFB3D4F</Color>
+                    <Color x:Key="LightThemeColor">#FB3D4F</Color>
 
                     <Color x:Key="StatusBarBackgroundColor">#FF97252F</Color>
 
+                    <SolidColorBrush x:Key="PivotHeaderColorBrush">#FFFFFF</SolidColorBrush>
+                    
+                    <!--分隔线的颜色-->
+                    <SolidColorBrush x:Key="SplitLineColorBrush">#FB3D4F</SolidColorBrush>
+                    
+                    <!--MasterDetailPage Pane背景色-->
+                    <SolidColorBrush x:Key="PaneBackgroundColor">#FFFFFF</SolidColorBrush>
+                    
                     <SolidColorBrush x:Key="ThemeColorBrush" Color="{StaticResource LightThemeColor}"/>
 
-                    <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FFEEEEEE"/>
+                    <!--页面背景色-->
+                    <SolidColorBrush x:Key="PageBackgroundBrush" Color="#EEEEEE"/>
 
                     <SolidColorBrush x:Key="AdjustColorBrush" Color="White"/>
 
@@ -35,14 +42,26 @@
                     <SolidColorBrush x:Key="FlyoutForegroundBrush" Color="#FF7F7F7F"/>
 
                     <SolidColorBrush x:Key="SplitViewSpanBackground" Color="#FFEEEEEE"/>
+
+                    <!--MyCommentPage 评论内文章标题背景色-->
+                    <SolidColorBrush x:Key="InnerDocumentBackgroundThemeBrush">#FF393939</SolidColorBrush>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Dark">
                     <Color x:Key="DarkThemeColor">#FF343434</Color>
 
                     <Color x:Key="StatusBarBackgroundColor">#FF1F1F1F</Color>
 
+                    <SolidColorBrush x:Key="PivotHeaderColorBrush">#343434</SolidColorBrush>
+
+                    <!--分隔线的颜色-->
+                    <SolidColorBrush x:Key="SplitLineColorBrush">#FFFFFF</SolidColorBrush>
+
+                    <!--MasterDetailPage Pane背景色-->
+                    <SolidColorBrush x:Key="PaneBackgroundColor">#343434</SolidColorBrush>
+                    
                     <SolidColorBrush x:Key="ThemeColorBrush" Color="{StaticResource DarkThemeColor}"/>
 
+                    <!--页面背景色-->
                     <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FF2D2D2D"/>
 
                     <SolidColorBrush x:Key="AdjustColorBrush" Color="Black"/>
@@ -60,6 +79,9 @@
                     <SolidColorBrush x:Key="FlyoutForegroundBrush" Color="#FFFEFEFE"/>
 
                     <SolidColorBrush x:Key="SplitViewSpanBackground" Color="#FF3E3E42"/>
+
+                    <!--MyCommentPage 评论内文章标题背景色-->
+                    <SolidColorBrush x:Key="InnerDocumentBackgroundThemeBrush">#FF393939</SolidColorBrush>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
             <ResourceDictionary.MergedDictionaries>

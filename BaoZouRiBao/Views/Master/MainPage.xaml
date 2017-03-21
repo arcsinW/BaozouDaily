@@ -15,8 +15,8 @@
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
     xmlns:action="using:BaoZouRiBao.BaoZouAction"
     xmlns:convert="using:BaoZouRiBao.Converter"
-    mc:Ignorable="d"
-    RequestedTheme="{x:Bind AppTheme,Mode=OneWay}">
+    mc:Ignorable="d">
+    <!--RequestedTheme="{x:Bind AppTheme,Mode=OneWay}">-->
     <Page.Resources>
         <Style x:Key="LightPivotStyle" TargetType="Pivot">
             <Setter Property="Margin" Value="0"/>
@@ -289,7 +289,7 @@
                         Click="{x:Bind ViewModel.OpenDrawer}" >
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                 </Button>
-                <TextBlock x:Name="pageTitleTextBlock" Text="暴走日报" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+                <TextBlock x:Name="pageTitleTextBlock" Text="首页" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -383,7 +383,9 @@
             </StackPanel>
         </Grid>
 
-        <control:AndroidPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" IndicatorLineStokeThickness="2" >
+        <control:AndroidPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" 
+                              IndicatorLineStokeThickness="2" 
+                              HeaderBrush="{ThemeResource PivotHeaderColorBrush}">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding }" FontSize="20" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
@@ -415,8 +417,7 @@
                                   RefreshRequested="{x:Bind ViewModel.RefreshDocument}">
                         <control:RefreshableListView.RefreshIndicatorContent>
                             <Grid Height="100" Background="Transparent">
-                                <FontIcon
-                                                Margin="0,0,0,30"
+                                <FontIcon Margin="0,0,0,30"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Bottom"
                                                 FontFamily="Segoe MDL2 Assets"
@@ -449,8 +450,7 @@
                                     <FlipView.ItemTemplate>
                                         <DataTemplate x:DataType="m:Document">
                                             <Grid>
-                                                <Image Source="{x:Bind Image}" VerticalAlignment="Center" 
-                                                           Stretch="Fill"/>
+                                                <Image Source="{x:Bind Image}" VerticalAlignment="Center" Stretch="Fill"/>
                                                 <Border>
                                                     <Border.Background>
                                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.2">
@@ -459,9 +459,8 @@
                                                         </LinearGradientBrush>
                                                     </Border.Background>
                                                     <TextBlock Text="{x:Bind Title}" VerticalAlignment="Bottom" Foreground="White"
-                                                                FontSize="20" TextWrapping="Wrap" Margin="12,20"/>
+                                                                FontSize="20" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="12,28"/>
                                                 </Border>
-
                                             </Grid>
                                         </DataTemplate>
                                     </FlipView.ItemTemplate>
@@ -469,7 +468,6 @@
 
                                 <GridView VerticalAlignment="Bottom" HorizontalAlignment="Center" 
                                                      SelectedIndex="{Binding ElementName=headerFlipView,Path=SelectedIndex}"
-                                              
                                                         ItemsSource="{Binding Documents.TopStories}" 
                                                         ItemContainerStyle="{StaticResource LegendItemContainerStyle}" />
                             </Grid>

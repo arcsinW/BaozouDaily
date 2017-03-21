@@ -9,10 +9,15 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core" 
     xmlns:action="using:BaoZouRiBao.BaoZouAction"
-    RequestedTheme="{x:Bind AppTheme,Mode=OneWay}"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
+    RequestedTheme="{Binding AppTheme}"
     NavigationCacheMode="Required"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:MasterDetailPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
     <Page.Resources>
          
         <Style x:Key="NavMenuItemContainerStyle" TargetType="ListViewItem">
@@ -289,10 +294,8 @@
             <ColumnDefinition x:Name="MasterColumn" Width="500"/>
             <ColumnDefinition x:Name="DetailColumn"  Width="*"/>
         </Grid.ColumnDefinitions>
-
-        
-        <control:Drawer x:Name="drawer" DrawerOpenLength="250" 
-                         Grid.Column="1" x:FieldModifier="Public" IsDrawerOpened="False">
+ 
+        <control:Drawer x:Name="drawer" Grid.Column="1" DrawerOpenLength="250"  x:FieldModifier="Public">
             <control:Drawer.DrawerMaskerBrush>
                 <SolidColorBrush Color="Black" Opacity="0.7"/>
             </control:Drawer.DrawerMaskerBrush>
@@ -310,7 +313,7 @@
                         <!--#region Header-->
                         <StackPanel Grid.Row="0" VerticalAlignment="Center" 
                                 Orientation="Horizontal" Margin="20,0">
-                            <Button Style="{ThemeResource ImageButtonStyle}" Click="{x:Bind LoginPage}">
+                            <Button Style="{ThemeResource ImageButtonStyle}" Click="{x:Bind ViewModel.LoginPage}">
                                 <Grid> 
                                     <Ellipse Height="80" Width="80" >
                                         <Ellipse.Fill>
@@ -319,12 +322,12 @@
                                     </Ellipse>
                                     <Ellipse Height="80" Width="80" >
                                         <Ellipse.Fill>
-                                            <ImageBrush ImageSource="{x:Bind User.Avatar,Mode=OneWay,TargetNullValue={StaticResource DefaultAvatar}}"/>
+                                            <ImageBrush ImageSource="{Binding User.Avatar,TargetNullValue={StaticResource DefaultAvatar}}"/>
                                         </Ellipse.Fill>
                                     </Ellipse>
                                 </Grid>
                             </Button>
-                            <TextBlock Text="{x:Bind User.Name,Mode=OneWay}" VerticalAlignment="Center" Margin="24,0" Foreground="White" />
+                            <TextBlock Text="{Binding User.Name,Mode=OneWay}" VerticalAlignment="Center" Margin="24,0" Foreground="White" />
                         </StackPanel>
                         <!--#endregion-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="16,0">
@@ -459,7 +462,7 @@
                             </StackPanel>
                         </ListViewItem>
 
-                        <ListViewItem Tapped="{x:Bind DayNightMode}"> 
+                        <ListViewItem Tapped="{x:Bind ViewModel.DayNightMode}"> 
                             <StackPanel Orientation="Horizontal">
                                 <BitmapIcon UriSource="/Assets/Images/icon_sidebar_night.png"/>
                                 <TextBlock Text="夜间模式"/>
@@ -486,7 +489,7 @@
         <!--#region Pane-->
         <Grid Grid.Column="0" BorderBrush="{ThemeResource ThemeColorBrush}" BorderThickness="0,0,1,0">
             <ListView ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
-                      Background="{ThemeResource PageBackgroundBrush}" SelectionMode="Single">
+                      Background="{ThemeResource PaneBackgroundColor}" SelectionMode="Single">
                 <ListView.Resources>
                     <Style TargetType="BitmapIcon">
                         <Setter Property="Height" Value="24"/>
@@ -496,70 +499,75 @@
                 </ListView.Resources>
                 <ListView.Header>
                     <Grid Height="48" Width="48">
-                        <Image Tapped="{x:Bind LoginPage}" Source="{StaticResource DefaultAvatar}" Height="36" Width="36"/>
+                        <Image Tapped="{x:Bind ViewModel.LoginPage}" Source="{StaticResource DefaultAvatar}" Height="36" Width="36"/>
 
-                        <Button Style="{ThemeResource ImageButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind LoginPage}">
+                        <Button Style="{ThemeResource ImageButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Click="{x:Bind ViewModel.LoginPage}" ToolTipService.ToolTip="{Binding User.Name}">
                             <Ellipse Height="36" Width="36" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{x:Bind User.Avatar,Mode=OneWay}"/>
+                                    <ImageBrush ImageSource="{Binding User.Avatar}"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                        </Button>
-
-                        <!--<Image Tapped="{x:Bind LoginPage}" Height="48" Width="48" Margin="4">
-                            <Image.Source>
-                                <BitmapImage UriSource="{x:Bind User.Avatar,Mode=OneWay}"/>
-                            </Image.Source>
-                        </Image>-->
+                        </Button> 
                     </Grid>
                 </ListView.Header>
                 <ListView.Items>
                     <ListViewItem>
                         <i:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
-                                <action:NavigationAction SourcePage="BaoZouRiBao.Views.MainPage" NavigationType="Master"/>
+                                <core:EventTriggerBehavior.Actions>
+                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.MainPage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior.Actions>
                             </core:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
-                        <BitmapIcon UriSource="/Assets/Images/icon_sidebar_home.png"/>
+                        <BitmapIcon ToolTipService.ToolTip="首页" UriSource="/Assets/Images/icon_sidebar_home.png"/>
                     </ListViewItem>
 
                     <ListViewItem>
                         <i:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
-                                <action:NavigationAction SourcePage="BaoZouRiBao.Views.RankPage" NavigationType="Master"/>
+                                <core:EventTriggerBehavior.Actions>
+                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.RankPage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior.Actions>
                             </core:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
-                        <BitmapIcon UriSource="/Assets/Images/icon_sidebar_rank.png"/>
+                        <BitmapIcon ToolTipService.ToolTip="排行榜" UriSource="/Assets/Images/icon_sidebar_rank.png"/>
                     </ListViewItem>
 
                     <ListViewItem>
                         <i:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
-                                <action:NavigationAction SourcePage="BaoZouRiBao.Views.ChannelPage" NavigationType="Master"/>
+                                <core:EventTriggerBehavior.Actions>
+                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.ChannelPage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior.Actions>
                             </core:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
-                        <BitmapIcon UriSource="/Assets/Images/icon_sidebar_column.png"/>
+                        <BitmapIcon ToolTipService.ToolTip="频道" UriSource="/Assets/Images/icon_sidebar_column.png"/>
                     </ListViewItem>
 
                     <ListViewItem>
                         <i:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
-                                <action:NavigationAction SourcePage="BaoZouRiBao.Views.SearchPage" NavigationType="Master"/>
+                                <core:EventTriggerBehavior.Actions>
+                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.SearchPage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior.Actions>
                             </core:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
-                        <BitmapIcon UriSource="/Assets/Images/icon_sidebar_search.png"/>
+                        <BitmapIcon ToolTipService.ToolTip="搜索" UriSource="/Assets/Images/icon_sidebar_search.png"/>
                     </ListViewItem>
 
                     <ListViewItem>
                         <i:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
-                                <action:NavigationAction SourcePage="BaoZouRiBao.Views.DownloadOfflinePage" NavigationType="Master"/>
+                                <core:EventTriggerBehavior.Actions>
+                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.DownloadOfflinePage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior.Actions>
                             </core:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
-                        <BitmapIcon UriSource="/Assets/Images/icon_setting_offline.png"/>
+                        <BitmapIcon ToolTipService.ToolTip="离线下载" UriSource="/Assets/Images/icon_setting_offline.png"/>
                     </ListViewItem>
 
-                    <ListViewItem Tapped="{x:Bind DayNightMode}">
+                    <ListViewItem Tapped="{x:Bind ViewModel.DayNightMode}">
                         <BitmapIcon UriSource="/Assets/Images/icon_sidebar_night.png"/>
                     </ListViewItem>
                 </ListView.Items>
@@ -579,7 +587,7 @@
 
         <Frame x:Name="DetailFrame" Grid.Column="2"  
                BorderThickness="1,0,0,0" x:FieldModifier="Public" 
-               BorderBrush="{ThemeResource ThemeColorBrush}"
+               BorderBrush="{ThemeResource SplitLineColorBrush}"
                Navigated="DetailFrame_Navigated">
         </Frame>
 
@@ -619,9 +627,10 @@
             </control:AndroidPopup.Content>
         </control:AndroidPopup>-->
  
+        <!--#region 任务Popup-->
         <control:BaoZouTaskPopup x:Name="taskPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666" 
                                  BaoZouPopupType="DailySign"  CoinCount="4" Title="获取奖励" Visibility="Collapsed"/>
-
+        <!--#endregion-->
         <control:AndroidPopup x:Name="popup">
             
         </control:AndroidPopup>

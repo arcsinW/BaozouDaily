@@ -17,57 +17,23 @@ namespace BaoZouRiBao.Helper
         public const string SECRET_KEY = "18a75cf12dff8cf6e17550e25c860839";
 
         #region Properties
-        private User user;
-        public User User
-        {
-            get
-            {
-                return user;
-            } 
-            private set
-            {
-                user = value;
-            }
-        }
+        
+        public User User { get; set; }
+         
+        public string AccessToken { get; set; }
+       
+        public ElementTheme AppTheme { get; set; }
 
-        private string accessToken;
-        public string AccessToken
-        {
-            get
-            {
-                return accessToken;
-            } 
-            private set
-            {
-                accessToken = value;
-            }
-        }
 
-        private ElementTheme appTheme = ElementTheme.Light;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            } 
-            private set
-            {
-                appTheme = value;
-            }
-        }
         #endregion
 
         #region Singleton
 
-        private static GlobalValue current;
+        private static GlobalValue current = new GlobalValue();
         public static GlobalValue Current
         {
             get
             {
-                if(current==null)
-                {
-                    return current = new GlobalValue();
-                }
                 return current;
             }
         }

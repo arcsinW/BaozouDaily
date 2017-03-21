@@ -258,7 +258,7 @@
                               ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                               ItemsSource="{Binding ReadCollection}"
                               ItemTemplate="{StaticResource DocumentDataTemplate}"
-                              IsItemClickEnabled="True" 
+                              IsItemClickEnabled="True" SelectionMode="None"
                               ItemClick="{x:Bind ViewModel.listView_ItemClick}"
                               RefreshCommand="{Binding RefreshReadCollectionCommand}">
                 </controls:RefreshableListView>

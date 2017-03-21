@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaoZouRiBao.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,18 +14,24 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
-
 namespace BaoZouRiBao.Views
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
     public sealed partial class MyCommentPage : Page
     {
         public MyCommentPage()
         {
             this.InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Comment comment = (e.OriginalSource as Button)?.DataContext as Comment;
+       
+            if (comment != null)
+            {
+                WebViewParameter parameter = new WebViewParameter() { Title = "", DocumentId = comment.Article.DocumentId, DisplayType = "1"};
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
+            }
         }
     }
 }

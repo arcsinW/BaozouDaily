@@ -50,8 +50,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Style="{ThemeResource BackButtonStyle}" x:Name="favoriteBtn"
-                        >
+                <Button Style="{ThemeResource BackButtonStyle}" x:Name="favoriteBtn">
                     <Image>
                         <Image.Source>
                             <BitmapImage UriSource="{Binding Favorited,Converter={StaticResource BoolToUriConverter}}"/>
@@ -86,8 +85,7 @@
                                             VerticalAlignment="Center" 
                                             HorizontalAlignment="Stretch"
                                             AreTransportControlsEnabled="True"/>
-                                <Button HorizontalAlignment="Center"
-                                    Style="{ThemeResource ImageButtonStyle}"
+                                <Button HorizontalAlignment="Center" Style="{ThemeResource ImageButtonStyle}"
                                     VerticalAlignment="Center" Foreground="White" 
                                     Grid.Row="0" Width="64" Height="64">    
                                     <Image Source="/Assets/Images/btn_video_play.png"/>

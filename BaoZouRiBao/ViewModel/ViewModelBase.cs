@@ -1,4 +1,5 @@
 ﻿using BaoZouRiBao.Helper;
+using BaoZouRiBao.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,7 +33,7 @@ namespace BaoZouRiBao.ViewModel
 
         #endregion
 
-
+        
         public bool IsDesignMode
         {
             get
@@ -42,16 +43,23 @@ namespace BaoZouRiBao.ViewModel
         }
 
         public bool IsMobile => DeviceInformationHelper.IsMobile();
+
+        //private ElementTheme appTheme = ElementTheme.Light;
+        ///// <summary>
+        ///// 当前主题
+        ///// </summary>
+        //public ElementTheme AppTheme
+        //{
+        //    get { return appTheme; }
+        //    set { appTheme = value; OnPropertyChanged(); }
+        //}
+
+
+        public void GoBack() => NavigationHelper.GoBack();
         
-
-        public void GoBack()
-        {
-            NavigationHelper.GoBack();
-        }
-
         public void OpenDrawer()
         {
-            Views.MasterDetailPage.Current.drawer.IsDrawerOpened = true;
+            MasterDetailPage.Current.drawer.IsDrawerOpened = true;
         }
     }
 }

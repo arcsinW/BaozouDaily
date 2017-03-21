@@ -1,0 +1,33 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BaoZouRiBao.Themes">
+
+
+    <Color x:Key="LightThemeColor">#FFFB3D4F</Color>
+
+    <Color x:Key="StatusBarBackgroundColor">#FF97252F</Color>
+
+    <SolidColorBrush x:Key="ThemeColorBrush" Color="{StaticResource LightThemeColor}"/>
+
+    <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FFEEEEEE"/>
+
+    <SolidColorBrush x:Key="AdjustColorBrush" Color="White"/>
+
+    <SolidColorBrush x:Key="PhoneForegroundColorBrush" Color="Black"/>
+
+    <SolidColorBrush x:Key="ListViewBackgroundBrush" Color="White"/>
+
+    <SolidColorBrush x:Key="ListViewHeaderBrush" Color="#FFEEEEEE"/>
+
+    <SolidColorBrush x:Key="AndroidPopupButtonBackgroundColorBrush" Color="#FFFEC64F"/>
+
+    <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FFF2F2F2"/>
+
+    <SolidColorBrush x:Key="FlyoutForegroundBrush" Color="#FF7F7F7F"/>
+
+    <SolidColorBrush x:Key="SplitViewSpanBackground" Color="#FFEEEEEE"/>
+
+    <!--MyCommentPage 评论内文章标题背景色-->
+    <Color x:Key="InnerDocumentBackgroundThemeBrush">#FF393939</Color>
+</ResourceDictionary>

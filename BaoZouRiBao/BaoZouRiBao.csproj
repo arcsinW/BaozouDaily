@@ -127,6 +127,7 @@
     <Compile Include="Enums\CommentTypeEnum.cs" />
     <Compile Include="Enums\RankTimeEnum.cs" />
     <Compile Include="Enums\RankTypeEnum.cs" />
+    <Compile Include="Extension\WebViewExtension.cs" />
     <Compile Include="Helper\AuthenticationHelper.cs" />
     <Compile Include="Helper\BaoZouTaskManager.cs" />
     <Compile Include="Helper\ClipBoardHelper.cs" />
@@ -134,7 +135,6 @@
     <Compile Include="Helper\DeviceInformationHelper.cs" />
     <Compile Include="Helper\DownloadManager.cs" />
     <Compile Include="Helper\ExceptionHandlingSynchronizationContext.cs" />
-    <Compile Include="Helper\ExtensionHelper.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\GlobalValue.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
@@ -223,73 +223,73 @@
     <Compile Include="ViewModel\VideoPageViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WebViewPageViewModel.cs" />
-    <Compile Include="Views\BaozouLoginPage.xaml.cs">
+    <Compile Include="Views\Detail\BaozouLoginPage.xaml.cs">
       <DependentUpon>BaozouLoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ChannelPage.xaml.cs">
+    <Compile Include="Views\Master\ChannelPage.xaml.cs">
       <DependentUpon>ChannelPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CommentPage.xaml.cs">
+    <Compile Include="Views\Detail\CommentPage.xaml.cs">
       <DependentUpon>CommentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ContributeArticlePage.xaml.cs">
+    <Compile Include="Views\Detail\ContributeArticlePage.xaml.cs">
       <DependentUpon>ContributeArticlePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ContributeInChannelPage.xaml.cs">
+    <Compile Include="Views\Detail\ContributeInChannelPage.xaml.cs">
       <DependentUpon>ContributeInChannelPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DefaultPage.xaml.cs">
+    <Compile Include="Views\Detail\DefaultPage.xaml.cs">
       <DependentUpon>DefaultPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DownloadOfflinePage.xaml.cs">
+    <Compile Include="Views\Master\DownloadOfflinePage.xaml.cs">
       <DependentUpon>DownloadOfflinePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MyFavoritePage.xaml.cs">
+    <Compile Include="Views\Detail\MyFavoritePage.xaml.cs">
       <DependentUpon>MyFavoritePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginPage.xaml.cs">
+    <Compile Include="Views\Master\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainPage.xaml.cs">
+    <Compile Include="Views\Master\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MasterDetailPage.xaml.cs">
       <DependentUpon>MasterDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MessagePage.xaml.cs">
+    <Compile Include="Views\Detail\MessagePage.xaml.cs">
       <DependentUpon>MessagePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MyCommentPage.xaml.cs">
+    <Compile Include="Views\Detail\MyCommentPage.xaml.cs">
       <DependentUpon>MyCommentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MyContributePage.xaml.cs">
+    <Compile Include="Views\Detail\MyContributePage.xaml.cs">
       <DependentUpon>MyContributePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MyReadHistoryPage.xaml.cs">
+    <Compile Include="Views\Detail\MyReadHistoryPage.xaml.cs">
       <DependentUpon>MyReadHistoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MyRecommendPage.xaml.cs">
+    <Compile Include="Views\Detail\MyRecommendPage.xaml.cs">
       <DependentUpon>MyRecommendPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RankPage.xaml.cs">
+    <Compile Include="Views\Master\RankPage.xaml.cs">
       <DependentUpon>RankPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SearchPage.xaml.cs">
+    <Compile Include="Views\Master\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingPage.xaml.cs">
+    <Compile Include="Views\Master\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SplashScreenPage.xaml.cs">
       <DependentUpon>SplashScreenPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserInfoPage.xaml.cs">
+    <Compile Include="Views\Master\UserInfoPage.xaml.cs">
       <DependentUpon>UserInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\VideoPage.xaml.cs">
+    <Compile Include="Views\Detail\VideoPage.xaml.cs">
       <DependentUpon>VideoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WebViewPage.xaml.cs">
+    <Compile Include="Views\Detail\WebViewPage.xaml.cs">
       <DependentUpon>WebViewPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -418,52 +418,72 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Strings\en-US\Resource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Strings\zh-CN\Resource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\DarkDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\LightDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Themes\ThemeDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\BaozouLoginPage.xaml">
+    <Page Include="Views\Detail\BaozouLoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ChannelPage.xaml">
+    <Page Include="Views\Master\ChannelPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CommentPage.xaml">
+    <Page Include="Views\Detail\CommentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ContributeArticlePage.xaml">
+    <Page Include="Views\Detail\ContributeArticlePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ContributeInChannelPage.xaml">
+    <Page Include="Views\Detail\ContributeInChannelPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DefaultPage.xaml">
+    <Page Include="Views\Detail\DefaultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DownloadOfflinePage.xaml">
+    <Page Include="Views\Master\DownloadOfflinePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MyFavoritePage.xaml">
+    <Page Include="Views\Detail\MyFavoritePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LoginPage.xaml">
+    <Page Include="Views\Master\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainPage.xaml">
+    <Page Include="Views\Master\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -471,35 +491,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MessagePage.xaml">
+    <Page Include="Views\Detail\MessagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MyCommentPage.xaml">
+    <Page Include="Views\Detail\MyCommentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MyContributePage.xaml">
+    <Page Include="Views\Detail\MyContributePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MyReadHistoryPage.xaml">
+    <Page Include="Views\Detail\MyReadHistoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MyRecommendPage.xaml">
+    <Page Include="Views\Detail\MyRecommendPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RankPage.xaml">
+    <Page Include="Views\Master\RankPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SearchPage.xaml">
+    <Page Include="Views\Master\SearchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SettingPage.xaml">
+    <Page Include="Views\Master\SettingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -507,15 +527,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserInfoPage.xaml">
+    <Page Include="Views\Master\UserInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\VideoPage.xaml">
+    <Page Include="Views\Detail\VideoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WebViewPage.xaml">
+    <Page Include="Views\Detail\WebViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -526,10 +546,7 @@
       <Name>BaoZouRiBao.Background</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Detail\" />
-    <Folder Include="Views\Master\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
       <Name>Windows Mobile Extensions for the UWP</Name>

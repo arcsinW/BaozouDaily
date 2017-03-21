@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
-    xmlns:hp="using:BaoZouRiBao.Helper"
+    xmlns:ex="using:BaoZouRiBao.Extension"
     xmlns:converter="using:BaoZouRiBao.Converter"
     xmlns:controls="using:BaoZouRiBao.UserControls"
     mc:Ignorable="d">
@@ -39,16 +39,15 @@
                 <Button Style="{ThemeResource BackButtonStyle}" Width="Auto">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>
-                        <TextBlock Text="{Binding VoteCount}" VerticalAlignment="Center" Margin="4,0"/>
+                        <TextBlock Text="{Binding VoteCount}" VerticalAlignment="Center" Margin="2,0"/>
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="commentBtn" 
-                        Style="{ThemeResource BackButtonStyle}" Width="Auto"
+                <Button x:Name="commentBtn" Style="{ThemeResource BackButtonStyle}" Width="Auto"
                         Click="commentBtn_Click">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <BitmapIcon UriSource="/Assets/Images/actionbar_comment_nor.png"/>
-                        <TextBlock Text="{Binding CommentCount}" VerticalAlignment="Center" Margin="4,0"/>
+                        <TextBlock Text="{Binding CommentCount}" VerticalAlignment="Center" Margin="2,0"/>
                     </StackPanel>
                 </Button>
 
@@ -77,12 +76,9 @@
         </Grid>
         <!--#endregion-->
 
-        <WebView x:Name="webView"  Grid.Row="1"
-                       hp:ExtensionHelper.HtmlString="{Binding HtmlString}">
-        </WebView>
- 
-        <ProgressRing Grid.Row="0" Grid.RowSpan="2" 
-                      Style="{ThemeResource LightProgressRingStyle}"
+        <WebView x:Name="webView"  Grid.Row="1" ex:WebViewExtension.HtmlString="{Binding HtmlString}"/>
+
+        <ProgressRing Grid.Row="0" Grid.RowSpan="2" Style="{ThemeResource LightProgressRingStyle}"
                       IsActive="{Binding IsActive}"
                       HorizontalAlignment="Center" VerticalAlignment="Center">
         </ProgressRing>
@@ -95,10 +91,9 @@
                 </TransitionCollection>
             </Popup.ChildTransitions>
             <Popup.Child> 
-                <controls:RoundButton Width="48" Height="48" CornerRadius="48" >
+                <Button Width="48" Height="48" Style="{ThemeResource ImageButtonStyle}">
                     <Image Source="ms-appx:///Assets/Images/article_share.png"/>
-                    <!--<SymbolIcon Symbol="Up" Foreground="White" />-->
-                </controls:RoundButton>
+                </Button>
             </Popup.Child>
         </Popup>
     </Grid>

@@ -26,7 +26,8 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
+                <Button Style="{ThemeResource BackButtonStyle}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}" 
+                        Click="{x:Bind ViewModel.GoBack}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="我的评论" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -82,13 +83,13 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <!--#region Avatar-->
-                                <Ellipse Grid.Column="0" Grid.Row="0" Height="48" Width="48" HorizontalAlignment="Left">
+                                <Ellipse Grid.Column="0" Grid.Row="0" MinHeight="48" MinWidth="48" HorizontalAlignment="Left">
                                     <Ellipse.Fill>
                                         <ImageBrush ImageSource="{StaticResource DefaultAvatar}"/>
                                     </Ellipse.Fill>
                                 </Ellipse>
 
-                                <Ellipse Grid.Column="0" Grid.Row="0" Height="48" Width="48" HorizontalAlignment="Left">
+                                <Ellipse Grid.Column="0" Grid.Row="0" MinHeight="48" MinWidth="48" HorizontalAlignment="Left">
                                     <Ellipse.Fill>
                                         <ImageBrush ImageSource="{x:Bind User.RealAvatarUrl}"/>
                                     </Ellipse.Fill>
@@ -107,12 +108,14 @@
                                 </Grid>
                             </Grid>
                             
+                            <!--#region 文章标题和图片-->
                             <Button Margin="0,12" Grid.Row="1" Height="64" 
                                     Style="{ThemeResource ImageButtonStyle}"
                                     HorizontalAlignment="Stretch" BorderThickness="0,0,0,1"
-                                    BorderBrush="#FF2C2C2C" 
+                                    Background="{ThemeResource InnerDocumentBackgroundThemeBrush}"
+                                   Click="Button_Click"
                                     HorizontalContentAlignment="Stretch">
-                                <Grid Background="#FF393939">
+                                <Grid Background="Gray">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="64"/>
                                         <ColumnDefinition/>
@@ -122,6 +125,7 @@
                                            TextWrapping="Wrap" VerticalAlignment="Center"/>
                                 </Grid>
                             </Button>
+                            <!--#endregion-->
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
