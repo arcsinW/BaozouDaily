@@ -55,6 +55,14 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
+        private bool isActive;
+
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; OnPropertyChanged(); }
+        }
+
         #endregion
 
         private void LoadDesignData()

@@ -67,6 +67,6 @@ namespace BaoZouRiBao.Views
         private void commentBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationHelper.DetailFrameNavigate(typeof(CommentPage), documentId.ToString());
-        }
+        } 
     }
 }

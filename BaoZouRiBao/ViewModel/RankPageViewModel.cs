@@ -27,6 +27,15 @@ namespace BaoZouRiBao.ViewModel
 
         public ObservableCollection<Document> CommentCollection { get; set; } = new ObservableCollection<Document>();
 
+        private bool isActive;
+
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; OnPropertyChanged(); }
+        }
+
+
         /// <summary>
         /// 当前选择的排序日期index
         /// 0 day 1 week 2 month

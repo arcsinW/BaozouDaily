@@ -259,7 +259,7 @@
             <RowDefinition Height="48"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
+        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="48"/>
                 <ColumnDefinition/>

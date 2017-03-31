@@ -15,12 +15,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Height="48" Grid.Row="0" HorizontalAlignment="Stretch" Background="{ThemeResource ThemeColorBrush}">
+        <Grid Height="48" Grid.Row="0" HorizontalAlignment="Stretch" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                 <Button Style="{ThemeResource BackButtonStyle}">
-                    <Button.Content>
-                        <Image Source="{StaticResource BackImage}"/>
-                    </Button.Content>
+                    <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="登录" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>

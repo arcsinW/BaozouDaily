@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BaoZouRiBao.Http;
 using BaoZouRiBao.Model;
 using BaoZouRiBao.Model.ResultModel;
+using Windows.UI.Xaml.Controls;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -19,8 +20,8 @@ namespace BaoZouRiBao.ViewModel
             DocumentComment = new DocumentComment();
             HtmlString = new StringBuilder();
         }
-        
-        #region Properties
+
+        #region Properties 
         private Document document;
         public Document Document
         {
@@ -77,7 +78,6 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-
         public StringBuilder HtmlString { get; set; }
 
         private bool isActive;
@@ -95,6 +95,16 @@ namespace BaoZouRiBao.ViewModel
         }
 
         #endregion
+
+        public void webView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        {
+            IsActive = true;
+        }
+
+        public void webView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args) 
+        {
+            IsActive = false;
+        }
 
         public async void LoadDocument(string documentId,string displayType)
         {

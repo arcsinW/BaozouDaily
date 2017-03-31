@@ -24,7 +24,7 @@
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
+        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal">
                 <Button Style="{ThemeResource BackButtonStyle}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}" 
                         Click="{x:Bind ViewModel.GoBack}">
@@ -131,5 +131,7 @@
                 </ListView.ItemTemplate>
             </control:RefreshableListView>
         </Grid>
+
+        <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
     </Grid>
 </Page>

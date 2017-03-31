@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BaoZouRiBao.ViewModel
 {
-    public class MyContributePageViewModel : ViewModelBase
+    public class ContributeArticleViewModel : ViewModelBase
     {
         private bool isActive;
 
@@ -14,7 +14,6 @@ namespace BaoZouRiBao.ViewModel
         {
             get { return isActive; }
             set { isActive = value; OnPropertyChanged(); }
-        }
-
+        } 
     }
 }

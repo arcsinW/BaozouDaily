@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
 
         <!--#region Page title-->
-        <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}"
+        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}"
               DataContext="{Binding DocumentExtra}">
             <StackPanel Orientation="Horizontal">
                 <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
@@ -76,7 +76,9 @@
         </Grid>
         <!--#endregion-->
 
-        <WebView x:Name="webView"  Grid.Row="1" ex:WebViewExtension.HtmlString="{Binding HtmlString}"/>
+        <WebView x:Name="webView"  Grid.Row="1" ex:WebViewExtension.HtmlString="{Binding HtmlString}"
+                 NavigationStarting="{x:Bind ViewModel.webView_NavigationStarting}"
+                 NavigationCompleted="{x:Bind ViewModel.webView_NavigationCompleted}"/>
 
         <ProgressRing Grid.Row="0" Grid.RowSpan="2" Style="{ThemeResource LightProgressRingStyle}"
                       IsActive="{Binding IsActive}"
@@ -96,5 +98,7 @@
                 </Button>
             </Popup.Child>
         </Popup>
+
+        <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
     </Grid>
 </Page>

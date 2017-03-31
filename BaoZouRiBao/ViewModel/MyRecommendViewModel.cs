@@ -8,6 +8,15 @@ namespace BaoZouRiBao.ViewModel
 {
     public class MyRecommendViewModel : ViewModelBase
     {
+        private bool isActive;
+
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; }
+        }
+
+
         private string shareUri = "请先复制你想推荐的链接";
         public string ShareUri
         {

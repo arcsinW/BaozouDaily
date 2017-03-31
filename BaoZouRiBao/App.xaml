@@ -21,6 +21,9 @@
                     
                     <!--MasterDetailPage Pane背景色-->
                     <SolidColorBrush x:Key="PaneBackgroundColor">#FFFFFF</SolidColorBrush>
+
+                    <!--页面标题背景色-->
+                    <SolidColorBrush x:Key="PageTitleBackground">#FB3D4F</SolidColorBrush>
                     
                     <SolidColorBrush x:Key="ThemeColorBrush" Color="{StaticResource LightThemeColor}"/>
 
@@ -58,7 +61,10 @@
 
                     <!--MasterDetailPage Pane背景色-->
                     <SolidColorBrush x:Key="PaneBackgroundColor">#343434</SolidColorBrush>
-                    
+
+                    <!--页面标题背景色-->
+                    <SolidColorBrush x:Key="PageTitleBackground">#343434</SolidColorBrush>
+
                     <SolidColorBrush x:Key="ThemeColorBrush" Color="{StaticResource DarkThemeColor}"/>
 
                     <!--页面背景色-->

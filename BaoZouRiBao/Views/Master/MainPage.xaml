@@ -283,7 +283,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid HorizontalAlignment="Stretch" Background="{ThemeResource ThemeColorBrush}">
+        <Grid HorizontalAlignment="Stretch" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                 <Button Style="{ThemeResource BackButtonStyle}" 
                         Click="{x:Bind ViewModel.OpenDrawer}" >

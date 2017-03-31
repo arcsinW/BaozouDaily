@@ -106,7 +106,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="{ThemeResource ThemeColorBrush}">
+        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal">
                 <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
                     <Image Source="{StaticResource BackImage}"/>

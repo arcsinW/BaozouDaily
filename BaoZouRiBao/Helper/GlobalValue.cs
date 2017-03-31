@@ -24,7 +24,10 @@ namespace BaoZouRiBao.Helper
        
         public ElementTheme AppTheme { get; set; }
 
-
+        /// <summary>
+        /// 是否当日首次打开 用于完成每日签到任务
+        /// </summary>
+        public bool IsToDayFirstStart { get; set; }
         #endregion
 
         #region Singleton
@@ -49,6 +52,14 @@ namespace BaoZouRiBao.Helper
         /// </summary>
 
         private void LoadData()
+        {
+
+        }
+
+        /// <summary>
+        /// 本地化保存
+        /// </summary>
+        private void SaveData()
         {
 
         }

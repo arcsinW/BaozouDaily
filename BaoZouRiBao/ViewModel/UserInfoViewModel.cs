@@ -76,6 +76,15 @@ namespace BaoZouRiBao.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private bool isActive;
+
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; }
+        }
+
         #endregion
 
         private async void LoadTaskInfo()

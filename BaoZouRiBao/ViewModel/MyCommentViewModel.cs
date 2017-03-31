@@ -15,6 +15,15 @@ namespace BaoZouRiBao.ViewModel
     {
         public IncrementalLoadingList<Comment> Comments { get; set; }
 
+        private bool isActive;
+
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; OnPropertyChanged(); }
+        }
+
+
         public MyCommentViewModel()
         {
             Comments = new IncrementalLoadingList<Comment>(GetComments);
@@ -58,10 +67,6 @@ namespace BaoZouRiBao.ViewModel
         {
             await Comments.ClearAndReload();
         }
-
-        public void documentBtn_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
+         
     }
 }

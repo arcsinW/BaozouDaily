@@ -102,6 +102,8 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="BaoZouRiBao_StoreKey.pfx" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\zh-CN\Resources.resw" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -206,6 +208,7 @@
     <Compile Include="ViewModel\BaozouLoginViewModel.cs" />
     <Compile Include="ViewModel\ChannelViewModel.cs" />
     <Compile Include="ViewModel\CommentPageViewModel.cs" />
+    <Compile Include="ViewModel\ContributeArticleViewModel.cs" />
     <Compile Include="ViewModel\ContributeInChannelViewModel.cs" />
     <Compile Include="ViewModel\DownloadOfflinePageViewModel.cs" />
     <Compile Include="ViewModel\MasterDetailPageViewModel.cs" />
@@ -418,16 +421,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Strings\en-US\Resource.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Strings\zh-CN\Resource.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
     <Page Include="Themes\DarkDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -12,6 +12,15 @@ namespace BaoZouRiBao.ViewModel
     {
         public ContributeInChannelCollection Contributes { get; set; }
 
+        private bool isActive ;
+
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; OnPropertyChanged(); }
+        }
+
+
         public ContributeInChannelViewModel()
         {
             if(IsDesignMode)
