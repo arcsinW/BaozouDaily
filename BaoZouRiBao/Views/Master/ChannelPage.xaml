@@ -30,6 +30,19 @@
                     </Button>
                     <TextBlock Text="频道" Style="{ThemeResource PageTitleTextBlockStyle}"/>
                 </StackPanel>
+                
+                <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right">
+                    <BitmapIcon UriSource="/Assets/Images/home_more.png"/>
+                    <Button.Flyout>
+                        <MenuFlyout> 
+                            <MenuFlyout.Items>
+                                <MenuFlyoutItem Text="刷新"/>
+                                <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
+                                <MenuFlyoutItem Text="设置"/>
+                            </MenuFlyout.Items>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
             </Grid>
 
             <ListView x:Name="channelListView" Grid.Row="1" ItemsSource="{Binding Channels}"

@@ -63,10 +63,12 @@
                 <Button Style="{ThemeResource BackButtonStyle}">
                     <BitmapIcon UriSource="/Assets/Images/home_more.png"/>
                     <Button.Flyout>
-                        <MenuFlyout>
-                            <MenuFlyoutItem Text="刷新"/>
-                            <MenuFlyoutItem Text="夜间模式"/>
-                            <MenuFlyoutItem Text="设置"/>
+                        <MenuFlyout> 
+                            <MenuFlyout.Items>
+                                <MenuFlyoutItem Text="刷新"/>
+                                <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
+                                <MenuFlyoutItem Text="设置"/>
+                            </MenuFlyout.Items>
                         </MenuFlyout>
                     </Button.Flyout>
                 </Button>
@@ -80,10 +82,9 @@
                     <Grid Grid.Row="0">
                         <StackPanel>
                             <Grid>
-                                <MediaElement Source="{Binding Video.FileUrl}" 
-                                            Height="250"
-                                            VerticalAlignment="Center" 
-                                            HorizontalAlignment="Stretch"
+                                <MediaElement Source="{Binding Video.FileUrl}" MinHeight="200"
+                                            VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                                              Stretch="UniformToFill"
                                             AreTransportControlsEnabled="True"/>
                                 <Button HorizontalAlignment="Center" Style="{ThemeResource ImageButtonStyle}"
                                     VerticalAlignment="Center" Foreground="White" 
@@ -156,7 +157,6 @@
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="Background" Value="{ThemeResource ListViewBackgroundBrush}"/>
                         <Setter Property="Padding" Value="8"/>
-
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>

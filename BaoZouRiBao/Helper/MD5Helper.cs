@@ -126,7 +126,7 @@ namespace BaoZouRiBao.Helper
                 {
                     sb.Append(item.Key + "=" + item.Value);
                 }
-                sb.Append(GlobalValue.SECRET_KEY);
+                sb.Append(GlobalValue.AccessKey);
                 tmp = sb.ToString();
                 tmp = WebUtility.UrlEncode(tmp);
             }

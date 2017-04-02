@@ -31,21 +31,19 @@
         <!--#endregion-->
 
         <StackPanel Grid.Row="1" Margin="12">
-            <TextBox PlaceholderText="暴走漫画账号" 
-                     Margin="0,0,0,16" 
+            <TextBox PlaceholderText="暴走漫画账号" Margin="0,0,0,16" 
                      Text="{Binding Path=Input.Account,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource LightTextBoxStyle}"/>
             <PasswordBox PlaceholderText="密码" Margin="0,0,0,16"
                          Password="{Binding Path=Input.Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource LightPasswordBoxStyle}" />
             <Button Content="登录" Margin="24"
-                Width="200" Height="48"
-                HorizontalAlignment="Center"
-                Command="{Binding LoginCommand}"
-                CommandParameter="{Binding Input}"
-                IsEnabled="{Binding Path=Input.IsValid}"
-                Style="{ThemeResource RoundButtonStyle}"/>
+                        Width="200" Height="48"
+                        HorizontalAlignment="Center"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding Input}"
+                        IsEnabled="{Binding Path=Input.IsValid}"
+                        Style="{ThemeResource RoundButtonStyle}"/>
         </StackPanel>
-
     </Grid>
 </Page>

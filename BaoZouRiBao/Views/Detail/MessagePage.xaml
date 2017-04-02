@@ -32,15 +32,10 @@
                     <BitmapIcon UriSource="ms-appx:///Assets/Images/home_more.png"/>
                 </Button.Content>
                 <Button.Flyout>
-                    <MenuFlyout>
-                        <MenuFlyout.MenuFlyoutPresenterStyle>
-                            <Style TargetType="MenuFlyoutPresenter">
-                                <Setter Property="BorderBrush" Value="{ThemeResource ThemeColorBrush}"/>
-                            </Style>
-                        </MenuFlyout.MenuFlyoutPresenterStyle>
+                    <MenuFlyout> 
                         <MenuFlyout.Items>
                             <MenuFlyoutItem Text="刷新"/>
-                            <MenuFlyoutItem Text="夜间模式" />
+                            <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                             <MenuFlyoutItem Text="设置"/>
                         </MenuFlyout.Items>
                     </MenuFlyout>

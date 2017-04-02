@@ -92,6 +92,7 @@ namespace BaoZouRiBao.ViewModel
         /// <param name="rankTimeIndex"></param>
         public async Task RefreshReadCollectionAsync(int rankTimeIndex)
         {
+            IsActive = false;
             ReadCollection.Clear();
             var result = await LoadRankDataAsync(RankTypeEnum.read, (RankTimeEnum)rankTimeIndex);
             if (result == null) return;
@@ -99,6 +100,7 @@ namespace BaoZouRiBao.ViewModel
             {
                 ReadCollection.Add(item);
             }
+            IsActive = true;
         }
 
         /// <summary>
@@ -107,6 +109,7 @@ namespace BaoZouRiBao.ViewModel
         /// <param name="rankTimeIndex"></param>
         public async Task RefreshVoteCollectionAsync(int rankTimeIndex)
         {
+            IsActive = false;
             VoteCollection.Clear();
             var result = await LoadRankDataAsync(RankTypeEnum.vote, (RankTimeEnum)rankTimeIndex);
             if (result == null) return;
@@ -114,6 +117,7 @@ namespace BaoZouRiBao.ViewModel
             {
                 VoteCollection.Add(item);
             }
+            IsActive = true;
         }
 
         /// <summary>
@@ -122,6 +126,7 @@ namespace BaoZouRiBao.ViewModel
         /// <param name="rankTimeIndex"></param>
         public async Task RefreshCommentCollectionAsync(int rankTimeIndex)
         {
+            IsActive = false;
             CommentCollection.Clear();
             var result = await LoadRankDataAsync(RankTypeEnum.comment, (RankTimeEnum)rankTimeIndex);
             if (result == null) return;
@@ -129,6 +134,7 @@ namespace BaoZouRiBao.ViewModel
             {
                 CommentCollection.Add(item);
             }
+            IsActive = true;
         }
 
         private async Task<List<Document>> LoadRankDataAsync(RankTypeEnum type, RankTimeEnum time)
@@ -145,8 +151,6 @@ namespace BaoZouRiBao.ViewModel
                 WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
                 MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
             }
-        }
-        
-          
+        }     
     }
 }

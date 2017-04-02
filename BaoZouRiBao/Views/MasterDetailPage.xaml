@@ -10,6 +10,7 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core" 
     xmlns:action="using:BaoZouRiBao.BaoZouAction"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     RequestedTheme="{Binding AppTheme}"
     NavigationCacheMode="Required"
     mc:Ignorable="d">
@@ -295,7 +296,9 @@
             <ColumnDefinition x:Name="DetailColumn"  Width="*"/>
         </Grid.ColumnDefinitions>
  
-        <control:Drawer x:Name="drawer" Grid.Column="1" DrawerOpenLength="250"  x:FieldModifier="Public">
+        <control:Drawer x:Name="drawer" Grid.Column="1" 
+                        DrawerOpenLength="250"  x:FieldModifier="Public"
+                        MinWidth="300">
             <control:Drawer.DrawerMaskerBrush>
                 <SolidColorBrush Color="Black" Opacity="0.7"/>
             </control:Drawer.DrawerMaskerBrush>
@@ -591,6 +594,11 @@
                Navigated="DetailFrame_Navigated">
         </Frame>
 
+        <toolkit:GridSplitter Grid.Column="2" Width="12" ResizeBehavior="BasedOnAlignment"
+                              CursorBehavior="ChangeOnSplitterHover"
+                              GripperForeground="White"
+                              HorizontalAlignment="Left"/>
+
         <!--<control:AndroidPopup x:Name="androidPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666"
                               HorizontalAlignment="Stretch" Visibility="Collapsed"
                               VerticalAlignment="Stretch"
@@ -631,8 +639,9 @@
         <control:BaoZouTaskPopup x:Name="taskPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666" 
                                  BaoZouPopupType="DailySign"  CoinCount="4" Title="获取奖励" Visibility="Collapsed"/>
         <!--#endregion-->
-        <control:AndroidPopup x:Name="popup">
+        
+        <!--<control:AndroidPopup x:Name="popup">
             
-        </control:AndroidPopup>
+        </control:AndroidPopup>-->
     </Grid>
 </Page>

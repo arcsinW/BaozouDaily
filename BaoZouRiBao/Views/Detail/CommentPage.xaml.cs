@@ -1,4 +1,5 @@
-﻿using BaoZouRiBao.ViewModel;
+﻿using BaoZouRiBao.Helper;
+using BaoZouRiBao.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -54,6 +55,31 @@ namespace BaoZouRiBao.Views
                         isHotLoaded = true;
                     }
                     break;
+            }
+        }
+
+        private void refresh_Click(object sender, RoutedEventArgs e)
+        {
+            switch(pivot.SelectedIndex)
+            {
+                case 0:
+                    ViewModel.RefreshLatestComments();
+                    break;
+                case 1:
+                    ViewModel.RefreshHotComments();
+                    break;
+            }
+        }
+
+        private void DayNightMode()
+        {
+            if (this.RequestedTheme == ElementTheme.Dark)
+            {
+                GlobalValue.Current.UpdateAppTheme(ElementTheme.Light);
+            }
+            else
+            {
+                GlobalValue.Current.UpdateAppTheme(ElementTheme.Dark);
             }
         }
     }

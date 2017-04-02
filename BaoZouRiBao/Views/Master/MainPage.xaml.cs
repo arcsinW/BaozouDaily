@@ -27,62 +27,15 @@ namespace BaoZouRiBao.Views
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class MainPage : Page , INotifyPropertyChanged
+    public sealed partial class MainPage : Page 
     {
         public MainPage()
         {
-            this.InitializeComponent();
-            AppTheme = GlobalValue.Current.AppTheme;
-            GlobalValue.Current.DataChanged += Current_DataChanged;
+            this.InitializeComponent();  
         }
-
-        private void Current_DataChanged()
-        {
-            AppTheme = GlobalValue.Current.AppTheme;
-             
-        }
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName]string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        private void documentListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var story = e.ClickedItem as Document;
-            if (story != null)
-            {
-                WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
-                MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
-            }
-        }
-
-        private void headerFlipView_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            var story = headerFlipView.SelectedItem as Document;
-            if (story != null)
-            {
-                WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId,DisplayType = story.DisplayType };
-                MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
-            }
-        }
-
+          
         private void splitViewBtn_Click(object sender, RoutedEventArgs e)
         {
-            //splitView.IsPaneOpen = !splitView.IsPaneOpen;
             MasterDetailPage.Current.drawer.IsDrawerOpened = !MasterDetailPage.Current.drawer.IsDrawerOpened;
         }
 
@@ -158,20 +111,15 @@ namespace BaoZouRiBao.Views
         }
         #endregion
 
-        private void contributeListView_ItemClick(object sender, ItemClickEventArgs e)
+
+        private void headerFlipView_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var contribute = e.ClickedItem as Contribute;
-            if (contribute != null)
+            var story = headerFlipView.SelectedItem as Document;
+            if (story != null)
             {
-                WebViewParameter parameter = new WebViewParameter() { Title = contribute.Title, DocumentId = contribute.DocumentId, DisplayType = contribute.DisplayType, WebViewUri = contribute.Url };
+                WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
                 MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
             }
-        }
-         
-        private void videoListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var video = e.ClickedItem as Video;
-            NavigationHelper.DetailFrameNavigate(typeof(VideoPage),video);
         }
 
         public void Refresh()
@@ -214,6 +162,5 @@ namespace BaoZouRiBao.Views
             }
         }
 
-      
     }
 }

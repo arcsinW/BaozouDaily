@@ -14,10 +14,12 @@ namespace BaoZouRiBao.Helper
     /// </summary>
     public class GlobalValue
     {
-        public const string SECRET_KEY = "18a75cf12dff8cf6e17550e25c860839";
+        public const string AccessKey = "e132054cb486408fa2add8972b1c4cc3";
+        public const string SecretKey = "425de3dbe3874a038c2a07816af215de";
+
 
         #region Properties
-        
+
         public User User { get; set; }
          
         public string AccessToken { get; set; }
@@ -46,6 +48,21 @@ namespace BaoZouRiBao.Helper
             LoadData();
         }
         #endregion
+
+        /// <summary>
+        /// 切换日夜间模式
+        /// </summary>
+        public void SwitchElementTheme()
+        {
+            if (AppTheme == ElementTheme.Dark)
+            {
+                Current.UpdateAppTheme(ElementTheme.Light);
+            }
+            else
+            {
+                Current.UpdateAppTheme(ElementTheme.Dark);
+            }
+        }
 
         /// <summary>
         /// Load global value

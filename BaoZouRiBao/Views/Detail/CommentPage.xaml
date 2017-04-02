@@ -8,9 +8,10 @@
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:m="using:BaoZouRiBao.Model"
     xmlns:controls="using:BaoZouRiBao.UserControls"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:converter="using:BaoZouRiBao.Converter"
     mc:Ignorable="d">
-
+ 
     <Page.DataContext>
         <vm:CommentPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
@@ -25,6 +26,11 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
+                <!--<Border Height="40" Width="40" CornerRadius="20">
+                    <toolkit:ImageEx Grid.Column="0" Height="40" Width="40" PlaceholderSource="/Assets/Image/avatar_m.png" IsCacheEnabled="True" 
+                                 DecodePixelHeight="40" DecodePixelWidth="40" Source="{Binding User.RealAvatarUrl}"/>
+                </Border>-->
+                
                 <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="{x:Bind User.RealAvatarUrl,Mode=OneWay}"/>
@@ -34,31 +40,39 @@
                 <Grid Grid.Column="1" Margin="8,0">
                     <StackPanel>
                         <TextBlock Text="{x:Bind User.Name,Mode=OneWay}"/>
-                        <TextBlock Text="{x:Bind Content,Mode=OneWay}" Margin="0,16,0,0"/>
-                        <TextBlock Text="{x:Bind Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0,8"/>
-                    </StackPanel>
+                        <TextBlock Text="{x:Bind Content,Mode=OneWay}" TextWrapping="Wrap" Margin="0,16"/>
 
-                    <StackPanel Orientation="Horizontal" 
-                                            HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Grid>
+                            <TextBlock Text="{x:Bind Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0,0,12,0"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button  Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>
+                                        <TextBlock Text="回复" Style="{ThemeResource DescTextBlockStyle}"/>
+                                    </StackPanel>
+                                </Button>
 
-                        <Button  Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}"
-                                             Margin="0,0,8,0">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>
-                                <TextBlock Text="回复" Style="{ThemeResource DescTextBlockStyle}"/>
+                                <Button Height="24" Width="48" Style="{ThemeResource ImageButtonStyle}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="ms-appx:///Assets/Images/btn_video_like_nor.png" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{x:Bind Likes,Mode=OneWay}"   Style="{ThemeResource DescTextBlockStyle}"/>
+                                    </StackPanel>
+                                </Button>
                             </StackPanel>
-                        </Button>
-
-                        <Button Height="24" Width="48" Style="{ThemeResource ImageButtonStyle}">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="ms-appx:///Assets/Images/btn_video_like_nor.png"/>
-                                <TextBlock Text="{x:Bind Likes,Mode=OneWay}" Style="{ThemeResource DescTextBlockStyle}"/>
-                            </StackPanel>
-                        </Button>
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </Grid>
         </DataTemplate>
+
+        <Style x:Key="CommentItemContainerStyle" TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="BorderBrush" Value="WhiteSmoke"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
     </Page.Resources>
 
     <Grid Background="{ThemeResource PageBackgroundBrush}">
@@ -68,10 +82,9 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
-                    <Button.Content>
-                        <Image Source="{StaticResource BackImage}"/>
-                    </Button.Content>
+                <Button Style="{ThemeResource BackButtonStyle}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}" 
+                        Click="{x:Bind ViewModel.GoBack}">
+                    <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="评论" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>
@@ -81,15 +94,9 @@
                     <BitmapIcon UriSource="ms-appx:///Assets/Images/home_more.png" />
                 </Button.Content>
                 <Button.Flyout>
-                    <MenuFlyout>
-                        <MenuFlyout.MenuFlyoutPresenterStyle>
-                            <!-- Default style for Windows.UI.Xaml.Controls.MenuFlyoutPresenter -->
-                            <Style TargetType="MenuFlyoutItem">
-                                <Setter Property="BorderThickness" Value="1"/>
-                            </Style>
-                        </MenuFlyout.MenuFlyoutPresenterStyle>
-                        <MenuFlyoutItem Text="刷新" MinHeight="48"/>
-                        <MenuFlyoutItem Text="夜间模式"  MinHeight="48"/>
+                    <MenuFlyout> 
+                        <MenuFlyoutItem Text="刷新" x:Name="refresh" Click="refresh_Click" MinHeight="48"/>
+                        <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}" MinHeight="48"/>
                         <MenuFlyoutItem Text="设置" MinHeight="48"/>
                     </MenuFlyout>
                 </Button.Flyout>
@@ -106,16 +113,13 @@
             <PivotItem Header="最新">
                 <ListView ItemsSource="{Binding LatestComments}"
                           ItemTemplate="{StaticResource CommentDataTemplate}"
-                          ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
-                          DataFetchSize="10">
-                   
+                          ItemContainerStyle="{ThemeResource CommentItemContainerStyle}">
                 </ListView>
             </PivotItem>
             <PivotItem Header="热门">
                 <ListView ItemsSource="{Binding HotComments}"
                           ItemTemplate="{StaticResource CommentDataTemplate}"
-                          ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}">
-
+                          ItemContainerStyle="{ThemeResource CommentItemContainerStyle}">
                 </ListView>
             </PivotItem>
         </controls:AndroidPivot>

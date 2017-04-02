@@ -16,13 +16,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
-
 namespace BaoZouRiBao.Views
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
     public sealed partial class LoginPage : Page
     {
         public LoginPage()
@@ -44,6 +39,11 @@ namespace BaoZouRiBao.Views
         public async void QQLogin()
         {
             await ApiService.Instance.TecentLogin();
+        }
+
+        public void SwitchElementTheme()
+        {
+            GlobalValue.Current.SwitchElementTheme();
         }
     }
 }

@@ -115,14 +115,12 @@
             </StackPanel>
 
             <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right">
-                <Button.Content>
-                    <BitmapIcon UriSource="ms-appx:///Assets/Images/home_more.png"/>
-                </Button.Content>
+                <BitmapIcon UriSource="/Assets/Images/home_more.png"/>
                 <Button.Flyout>
-                    <MenuFlyout>
+                    <MenuFlyout>  
                         <MenuFlyout.Items>
                             <MenuFlyoutItem Text="刷新"/>
-                            <MenuFlyoutItem Text="夜间模式" Style="{StaticResource LightMenuFlyoutItemStyle}"/>
+                            <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                             <MenuFlyoutItem Text="设置"/>
                         </MenuFlyout.Items>
                     </MenuFlyout>

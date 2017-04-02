@@ -8,7 +8,7 @@
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:m="using:BaoZouRiBao.Model"
     xmlns:control="using:BaoZouRiBao.UserControls"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:p="using:PullToRefresh.UWP"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
@@ -16,7 +16,7 @@
     xmlns:action="using:BaoZouRiBao.BaoZouAction"
     xmlns:convert="using:BaoZouRiBao.Converter"
     mc:Ignorable="d">
-    <!--RequestedTheme="{x:Bind AppTheme,Mode=OneWay}">-->
+    
     <Page.Resources>
         <Style x:Key="LightPivotStyle" TargetType="Pivot">
             <Setter Property="Margin" Value="0"/>
@@ -354,28 +354,9 @@
                         <BitmapIcon UriSource="ms-appx:///Assets/Images/home_more.png" />
                     </Button.Content>
                     <Button.Flyout>
-                        <MenuFlyout>
-                            <MenuFlyout.MenuFlyoutPresenterStyle>
-                                <!-- Default style for Windows.UI.Xaml.Controls.MenuFlyoutPresenter -->
-                                <Style TargetType="MenuFlyoutPresenter">
-                                    <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" />
-                                    <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundChromeHighBrush}" />
-                                    <Setter Property="BorderThickness" Value="{ThemeResource FlyoutBorderThemeThickness}" />
-                                    <Setter Property="Padding" Value="{ThemeResource MenuFlyoutPresenterThemePadding}" />
-                                    <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
-                                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
-                                    <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
-                                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-                                    <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False" />
-                                    <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="False" />
-                                    <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
-                                    <Setter Property="MaxWidth" Value="{ThemeResource FlyoutThemeMaxWidth}" />
-                                    <Setter Property="MinHeight" Value="{ThemeResource MenuFlyoutThemeMinHeight}"/>
-
-                                </Style>
-                            </MenuFlyout.MenuFlyoutPresenterStyle>
+                        <MenuFlyout> 
                             <MenuFlyoutItem Text="刷新" Click="{x:Bind Refresh}" MinHeight="48"/>
-                            <MenuFlyoutItem Text="夜间模式" Click="{x:Bind DayNightMode}" MinHeight="48"/>
+                            <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}" MinHeight="48"/>
                             <MenuFlyoutItem Text="设置" Click="{x:Bind SettingPage}" MinHeight="48"/>
                         </MenuFlyout>
                     </Button.Flyout>
@@ -411,7 +392,7 @@
                     <control:RefreshableListView x:Name="documentListView" ItemsSource="{Binding Documents}"
                                   SelectionMode="None"
                                   IsItemClickEnabled="True"
-                                  ItemClick="documentListView_ItemClick"
+                                  ItemClick="{x:Bind ViewModel.documentListView_ItemClick}"
                                   IncrementalLoadingTrigger="Edge"
                                   ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                                   RefreshRequested="{x:Bind ViewModel.RefreshDocument}">
@@ -430,19 +411,19 @@
                                 </FontIcon>
                             </Grid>
                         </control:RefreshableListView.RefreshIndicatorContent>
-                    <!--<controls:PullToRefreshListView x:Name="documentListVIew" 
+                    <!--<toolkit:PullToRefreshListView x:Name="documentListVIew" 
                                                     ItemsSource="{Binding Documents}"
                                                     SelectionMode="None" IsItemClickEnabled="True"
                                                     IsPullToRefreshWithMouseEnabled="True"
                                                     ItemClick="documentListView_ItemClick" 
                                                     ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                                                     RefreshRequested="{x:Bind ViewModel.RefreshDocument}">-->
-                        <!--<controls:PullToRefreshListView.RefreshIndicatorContent>
+                        <!--<toolkit:PullToRefreshListView.RefreshIndicatorContent>
                             <ProgressRing/>
-                        </controls:PullToRefreshListView.RefreshIndicatorContent>
-                        <controls:PullToRefreshListView.ReleaseToRefreshContent>
+                        </toolkit:PullToRefreshListView.RefreshIndicatorContent>
+                        <toolkit:PullToRefreshListView.ReleaseToRefreshContent>
                             <TextBlock Text="Release to refresh"/>
-                        </controls:PullToRefreshListView.ReleaseToRefreshContent>-->
+                        </toolkit:PullToRefreshListView.ReleaseToRefreshContent>-->
                         <ListView.Header>
                             <Grid Height="220">
                                 <FlipView x:Name="headerFlipView" ItemsSource="{Binding Documents.TopStories}" 
@@ -450,7 +431,7 @@
                                     <FlipView.ItemTemplate>
                                         <DataTemplate x:DataType="m:Document">
                                             <Grid>
-                                                <Image Source="{x:Bind Image}" VerticalAlignment="Center" Stretch="Fill"/>
+                                                <Image Source="{x:Bind Image}" VerticalAlignment="Center" Stretch="UniformToFill"/>
                                                 <Border>
                                                     <Border.Background>
                                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.2">
@@ -505,7 +486,7 @@
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                    <!--</controls:PullToRefreshListView>-->
+                    <!--</toolkit:PullToRefreshListView>-->
                     </control:RefreshableListView>
                 </PivotItem>
 
@@ -515,7 +496,7 @@
                                       IncrementalLoadingTrigger="Edge"
                                       IsItemClickEnabled="True"
                                       SelectionMode="None"
-                                      ItemClick="contributeListView_ItemClick"
+                                      ItemClick="{x:Bind ViewModel.contributeListView_ItemClick}"
                                       ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                                       RefreshRequested="{x:Bind ViewModel.RefreshContribute}"
                                       PullProgressChanged="PullProgressChanged"
@@ -564,7 +545,7 @@
                                       SelectionMode="None"
                                       ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                                       IsItemClickEnabled="True"
-                                      ItemClick="videoListView_ItemClick"
+                                      ItemClick="{x:Bind ViewModel.videoListView_ItemClick}"
                                       RefreshRequested="{x:Bind ViewModel.RefreshVideo}"
                                       >
                         <control:RefreshableListView.RefreshIndicatorContent>
@@ -663,12 +644,7 @@
                         </ListView.ItemTemplate>
                     </control:RefreshableListView>
                 </PivotItem>
-            </Pivot.Items>
-            <Pivot.ItemContainerStyle>
-                <Style TargetType="PivotItem">
-                    <Setter Property="Margin" Value="0"/>
-                </Style>
-            </Pivot.ItemContainerStyle>
+            </Pivot.Items> 
         </control:AndroidPivot>
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>

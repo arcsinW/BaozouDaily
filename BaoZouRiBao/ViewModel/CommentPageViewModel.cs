@@ -42,6 +42,12 @@ namespace BaoZouRiBao.ViewModel
 
         public CommentPageViewModel()
         {
+            if(IsDesignMode)
+            {
+                SetDocumentId("44791");
+                GetLatestComments();
+                GetHotComments();
+            }
         } 
 
         private void OnDataLoadingEvent()

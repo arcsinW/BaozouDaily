@@ -147,6 +147,7 @@
     <Compile Include="Helper\StatusBarHelper.cs" />
     <Compile Include="Helper\VerifiableBase.cs" />
     <Compile Include="Helper\VerifiableObjectErrors.cs" />
+    <Compile Include="Helper\VoiceCommandHelper.cs" />
     <Compile Include="Helper\WeChatHelper.cs" />
     <Compile Include="Http\ApiBaseService.cs" />
     <Compile Include="Http\ApiService.cs" />
@@ -307,7 +308,6 @@
     <Content Include="Assets\BadgeLogo.scale-125.png" />
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
-    <Content Include="Assets\BadgeLogo.scale-400.png" />
     <Content Include="Assets\Images\avatar_m.png" />
     <Content Include="Assets\Images\back.png" />
     <Content Include="Assets\Images\actionbar_comment_nor.png" />
@@ -408,6 +408,9 @@
     <Content Include="Assets\StoreLogo.scale-400.png" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="BaozouVoiceCommand.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

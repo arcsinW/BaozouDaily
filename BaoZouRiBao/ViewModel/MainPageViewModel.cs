@@ -9,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaoZouRiBao.IncrementalCollection;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using BaoZouRiBao.Views;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -111,6 +114,33 @@ namespace BaoZouRiBao.ViewModel
             Videos.Clear();
             Videos.Reset();
             IsActive = false;
+        }
+
+
+        public void documentListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var story = e.ClickedItem as Document;
+            if (story != null)
+            {
+                WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
+                NavigationHelper.DetailFrameNavigate(typeof(WebViewPage), parameter);
+            }
+        }
+         
+        public void videoListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var video = e.ClickedItem as Video;
+            NavigationHelper.DetailFrameNavigate(typeof(VideoPage), video);
+        }
+
+        public void contributeListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var contribute = e.ClickedItem as Contribute;
+            if (contribute != null)
+            {
+                WebViewParameter parameter = new WebViewParameter() { Title = contribute.Title, DocumentId = contribute.DocumentId, DisplayType = contribute.DisplayType, WebViewUri = contribute.Url };
+                NavigationHelper.DetailFrameNavigate(typeof(WebViewPage), parameter);
+            }
         }
     }
 }

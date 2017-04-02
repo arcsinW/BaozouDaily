@@ -32,8 +32,7 @@ namespace BaoZouRiBao.ViewModel
            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         #endregion
-
-        
+         
         public bool IsDesignMode
         {
             get
@@ -60,6 +59,11 @@ namespace BaoZouRiBao.ViewModel
         public void OpenDrawer()
         {
             MasterDetailPage.Current.drawer.IsDrawerOpened = true;
+        }
+
+        public void SwitchElementTheme()
+        {
+            GlobalValue.Current.SwitchElementTheme();
         }
     }
 }

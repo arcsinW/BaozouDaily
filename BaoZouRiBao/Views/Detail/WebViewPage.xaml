@@ -65,10 +65,12 @@
                 <Button Style="{ThemeResource BackButtonStyle}">
                     <BitmapIcon UriSource="/Assets/Images/home_more.png"/>
                     <Button.Flyout>
-                        <MenuFlyout>
-                            <MenuFlyoutItem Text="刷新"/>
-                            <MenuFlyoutItem Text="夜间模式"/>
-                            <MenuFlyoutItem Text="设置"/>
+                        <MenuFlyout> 
+                            <MenuFlyout.Items>
+                                <MenuFlyoutItem Text="刷新"/>
+                                <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
+                                <MenuFlyoutItem Text="设置"/>
+                            </MenuFlyout.Items>
                         </MenuFlyout>
                     </Button.Flyout>
                 </Button>
