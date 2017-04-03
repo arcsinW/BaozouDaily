@@ -6,7 +6,6 @@
     "Microsoft.Toolkit.Uwp.UI.Animations": "1.4.0",
     "Microsoft.Toolkit.Uwp.UI.Controls": "1.4.0",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "2.0.0",
-    "PullToRefresh.UWP": "0.3.4",
     "WeChatSDK": "2.0.1"
   },
   "frameworks": {
