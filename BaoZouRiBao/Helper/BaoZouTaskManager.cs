@@ -1,11 +1,6 @@
 ﻿using BaoZouRiBao.Enums;
 using BaoZouRiBao.Http;
 using BaoZouRiBao.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BaoZouRiBao.Helper
 {
@@ -21,7 +16,11 @@ namespace BaoZouRiBao.Helper
         public static async void DailySign()
         {
             var result = await ApiService.Instance.TaskDone(BaoZouTaskEnum.DailySign.ToString());
-            if (result == null) return;
+            if (result == null)
+            {
+                return;
+            }
+
             MasterDetailPage.Current.ShowTaskPopup(result);
         }
 
@@ -31,7 +30,11 @@ namespace BaoZouRiBao.Helper
         public static async void ReadDocument()
         {
             var result = await ApiService.Instance.TaskDone(BaoZouTaskEnum.ReadDocument.ToString());
-            if (result == null) return;
+            if (result == null)
+            {
+                return;
+            }
+
             MasterDetailPage.Current.ShowTaskPopup(result);
         }
 
@@ -41,7 +44,11 @@ namespace BaoZouRiBao.Helper
         public static async void CommentDocument()
         {
             var result = await ApiService.Instance.TaskDone(BaoZouTaskEnum.CommentDocument.ToString());
-            if (result == null) return;
+            if (result == null)
+            {
+                return;
+            }
+
             MasterDetailPage.Current.ShowTaskPopup(result);
         }
 
@@ -51,7 +58,11 @@ namespace BaoZouRiBao.Helper
         public static async void VoteDocument()
         {
             var result = await ApiService.Instance.TaskDone(BaoZouTaskEnum.VoteDocument.ToString());
-            if (result == null) return;
+            if (result == null)
+            {
+                return;
+            }
+
             MasterDetailPage.Current.ShowTaskPopup(result);
         }
 
@@ -61,7 +72,11 @@ namespace BaoZouRiBao.Helper
         public static async void VoteComment()
         {
             var result = await ApiService.Instance.TaskDone(BaoZouTaskEnum.VoteComment.ToString());
-            if (result == null) return;
+            if (result == null)
+            {
+                return;
+            }
+
             MasterDetailPage.Current.ShowTaskPopup(result);
         }
 
@@ -71,7 +86,11 @@ namespace BaoZouRiBao.Helper
         public static async void ShareDocument()
         {
             var result = await ApiService.Instance.TaskDone(BaoZouTaskEnum.ShareDocument.ToString());
-            if (result == null) return;
+            if (result == null)
+            {
+                return;
+            }
+
             MasterDetailPage.Current.ShowTaskPopup(result);
         }
     }

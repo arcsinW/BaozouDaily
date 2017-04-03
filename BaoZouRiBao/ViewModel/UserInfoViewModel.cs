@@ -25,7 +25,7 @@ namespace BaoZouRiBao.ViewModel
                 LoadTaskInfo();
             }
             User = GlobalValue.Current.User;
-            GlobalValue.Current.DataChanged += Current_DataChanged;
+            GlobalValue.Current.DataChanged += Current_DataChanged; 
         }
 
         private void Current_DataChanged()
@@ -36,6 +36,7 @@ namespace BaoZouRiBao.ViewModel
         #region Properties
 
         private User user;
+
         public User User
         {
             get
@@ -50,6 +51,7 @@ namespace BaoZouRiBao.ViewModel
         }
 
         private TaskInfo taskInfo;
+
         public TaskInfo TaskInfo
         {
             get
@@ -64,6 +66,7 @@ namespace BaoZouRiBao.ViewModel
         }
 
         private int balance;
+
         public int Balance
         {
             get
@@ -90,10 +93,10 @@ namespace BaoZouRiBao.ViewModel
         private async void LoadTaskInfo()
         {
             TaskInfo = await ApiService.Instance.GetTaskInfo();
-            //if (TaskInfo != null)
-            //{
-            //    RunCounterAnimations();
-            //}
+            if (TaskInfo != null)
+            {
+                RunCounterAnimations();
+            }
         }
 
         private void LoadDesignData()
@@ -105,7 +108,7 @@ namespace BaoZouRiBao.ViewModel
 
         private void RunCounterAnimations()
         {
-            var dispatcherTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1) };
+            var dispatcherTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(0.01) };
             dispatcherTimer.Tick += (s, e) =>
               {
                   var needToProceed = false;

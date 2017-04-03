@@ -9,6 +9,7 @@
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:m="using:BaoZouRiBao.Model"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    NavigationCacheMode="Required"
     mc:Ignorable="d">
     <Page.Resources>
         <Style x:Key="LightComboBoxStyle" TargetType="ComboBox">
@@ -240,12 +241,7 @@
 
         <controls:AndroidPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" 
                                IndicatorLineStokeThickness="2" 
-                               SelectionChanged="pivot_SelectionChanged">
-            <Pivot.ItemContainerStyle>
-                <Style TargetType="PivotItem">
-                    <Setter Property="Margin" Value="0"/>
-                </Style>
-            </Pivot.ItemContainerStyle>
+                               SelectionChanged="pivot_SelectionChanged"> 
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding }" FontSize="20" Foreground="{ThemeResource PhoneForegroundColorBrush}"  
@@ -259,7 +255,7 @@
                               ItemsSource="{Binding ReadCollection}"
                               ItemTemplate="{StaticResource DocumentDataTemplate}"
                               IsItemClickEnabled="True" SelectionMode="None"
-                              ItemClick="{x:Bind ViewModel.listView_ItemClick}"
+                              ItemClick="{x:Bind ViewModel.ListView_ItemClick}"
                               RefreshCommand="{Binding RefreshReadCollectionCommand}">
                 </controls:RefreshableListView>
             </PivotItem>
@@ -269,7 +265,7 @@
                               ItemsSource="{Binding VoteCollection}"
                               ItemTemplate="{StaticResource DocumentDataTemplate}"
                               IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
-                              ItemClick="{x:Bind ViewModel.listView_ItemClick}"
+                              ItemClick="{x:Bind ViewModel.ListView_ItemClick}"
                               RefreshCommand="{Binding RefreshVoteCollectionCommand}">
                 </toolkit:PullToRefreshListView>
             </PivotItem>
@@ -279,7 +275,7 @@
                               ItemsSource="{Binding CommentCollection}"
                               ItemTemplate="{StaticResource DocumentDataTemplate}"
                               IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
-                              ItemClick="{x:Bind ViewModel.listView_ItemClick}"
+                              ItemClick="{x:Bind ViewModel.ListView_ItemClick}"
                               RefreshCommand="{Binding RefreshCommentCollectionCommand}">
                 </toolkit:PullToRefreshListView>
             </PivotItem>

@@ -1,4 +1,10 @@
-﻿using BaoZouRiBao.Common;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BaoZouRiBao.Common;
 using BaoZouRiBao.Enums;
 using BaoZouRiBao.Helper;
 using BaoZouRiBao.Http;
@@ -7,12 +13,6 @@ using BaoZouRiBao.IncrementalCollection.DataSource;
 using BaoZouRiBao.Model;
 using BaoZouRiBao.ViewModel;
 using BaoZouRiBao.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
 namespace BaoZouRiBao.ViewModel
@@ -79,28 +79,26 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-        private async void LoadDesignData()
-        {
-            await RefreshReadCollectionAsync(RankTimeIndex);
-            await RefreshVoteCollectionAsync(RankTimeIndex);
-            await RefreshCommentCollectionAsync(RankTimeIndex);
-        }
-        
         /// <summary>
         /// 刷新阅读排行榜
         /// </summary>
         /// <param name="rankTimeIndex"></param>
         public async Task RefreshReadCollectionAsync(int rankTimeIndex)
         {
-            IsActive = false;
+            IsActive = true;
             ReadCollection.Clear();
             var result = await LoadRankDataAsync(RankTypeEnum.read, (RankTimeEnum)rankTimeIndex);
-            if (result == null) return;
+            if (result == null)
+            {
+                return;
+            }
+
             foreach (var item in result)
             {
                 ReadCollection.Add(item);
             }
-            IsActive = true;
+
+            IsActive = false;
         }
 
         /// <summary>
@@ -109,32 +107,53 @@ namespace BaoZouRiBao.ViewModel
         /// <param name="rankTimeIndex"></param>
         public async Task RefreshVoteCollectionAsync(int rankTimeIndex)
         {
-            IsActive = false;
+            IsActive = true;
             VoteCollection.Clear();
             var result = await LoadRankDataAsync(RankTypeEnum.vote, (RankTimeEnum)rankTimeIndex);
-            if (result == null) return;
+            if (result == null)
+            {
+                return;
+            }
+
             foreach (var item in result)
             {
                 VoteCollection.Add(item);
             }
-            IsActive = true;
+
+            IsActive = false;
         }
 
         /// <summary>
         /// 刷新评论排行榜
         /// </summary>
-        /// <param name="rankTimeIndex"></param>
+        /// <param name="rankTimeIndex">排行榜时间</param>
+        /// <returns></returns>
         public async Task RefreshCommentCollectionAsync(int rankTimeIndex)
         {
-            IsActive = false;
-            CommentCollection.Clear();
-            var result = await LoadRankDataAsync(RankTypeEnum.comment, (RankTimeEnum)rankTimeIndex);
-            if (result == null) return;
+            this.IsActive = true;
+            this.CommentCollection.Clear();
+            var result = await this.LoadRankDataAsync(RankTypeEnum.comment, (RankTimeEnum)rankTimeIndex);
+            if (result == null)
+            {
+                return;
+            }
+
             foreach (var item in result)
             {
-                CommentCollection.Add(item);
+                this.CommentCollection.Add(item);
             }
-            IsActive = true;
+
+            this.IsActive = false;
+        }
+
+        public void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var story = e.ClickedItem as Document;
+            if (story != null)
+            {
+                WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
+            }
         }
 
         private async Task<List<Document>> LoadRankDataAsync(RankTypeEnum type, RankTimeEnum time)
@@ -143,14 +162,11 @@ namespace BaoZouRiBao.ViewModel
             return result?.Data;
         }
 
-        public void listView_ItemClick(object sender, ItemClickEventArgs e)
+        private async void LoadDesignData()
         {
-            var story = e.ClickedItem as Document;
-            if (story != null)
-            {
-                WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
-                MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
-            }
-        }     
+            await RefreshReadCollectionAsync(RankTimeIndex);
+            await RefreshVoteCollectionAsync(RankTimeIndex);
+            await RefreshCommentCollectionAsync(RankTimeIndex);
+        }
     }
 }

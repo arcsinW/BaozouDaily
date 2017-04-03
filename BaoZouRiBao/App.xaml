@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BaoZouRiBao"
     xmlns:converter="using:BaoZouRiBao.Converter"
+    xmlns:theme="using:BaoZouRiBao.Themes"
     RequestedTheme="Light"> 
     
     <Application.Resources>
@@ -91,10 +92,14 @@
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes/ThemeDictionary.xaml"/>
+                <!--<ResourceDictionary Source="Themes/ThemeDictionary.xaml"/>-->
+                <theme:ThemeDictionary/>
             </ResourceDictionary.MergedDictionaries>
 
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converter:TimeStampToDateTimeConverter x:Key="TimeStampToDateTimeConverter"/>
+            <BitmapImage x:Key="PlaceHolderImage" UriSource="/Assets/Images/image_small_default.jpg"/>
+            <BitmapImage x:Key="PlaceHolderAvatar" UriSource="/Assets/Images/avatar_m.png"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

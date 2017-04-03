@@ -44,15 +44,14 @@
                 </Button>
 
                 <Button x:Name="commentBtn" Style="{ThemeResource BackButtonStyle}" Width="Auto"
-                        Click="commentBtn_Click">
+                        Click="CommentBtn_Click">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <BitmapIcon UriSource="/Assets/Images/actionbar_comment_nor.png"/>
                         <TextBlock Text="{Binding CommentCount}" VerticalAlignment="Center" Margin="2,0"/>
                     </StackPanel>
                 </Button>
 
-                <Button Style="{ThemeResource BackButtonStyle}" x:Name="favoriteBtn"
-                        Click="favoriteBtn_Click">
+                <Button Style="{ThemeResource BackButtonStyle}" x:Name="favoriteBtn" Click="FavoriteBtn_Click">
                     <Image>
                         <Image.Source>
                             <BitmapImage UriSource="{Binding Favorited,Converter={StaticResource BoolToUriConverter}}"/>
@@ -79,8 +78,8 @@
         <!--#endregion-->
 
         <WebView x:Name="webView"  Grid.Row="1" ex:WebViewExtension.HtmlString="{Binding HtmlString}"
-                 NavigationStarting="{x:Bind ViewModel.webView_NavigationStarting}"
-                 NavigationCompleted="{x:Bind ViewModel.webView_NavigationCompleted}"/>
+                 NavigationStarting="{x:Bind ViewModel.WebView_NavigationStarting}"
+                 NavigationCompleted="{x:Bind ViewModel.WebView_NavigationCompleted}"/>
 
         <ProgressRing Grid.Row="0" Grid.RowSpan="2" Style="{ThemeResource LightProgressRingStyle}"
                       IsActive="{Binding IsActive}"

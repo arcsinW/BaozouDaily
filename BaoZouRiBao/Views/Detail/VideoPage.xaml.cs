@@ -1,4 +1,5 @@
-﻿using BaoZouRiBao.Model;
+﻿using BaoZouRiBao.Helper;
+using BaoZouRiBao.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,6 +36,11 @@ namespace BaoZouRiBao.Views
             {
                 ViewModel.LoadData(video.DocumentId);
             }
+        }
+
+        private void Comment_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationHelper.DetailFrameNavigate(typeof(CommentPage), ViewModel.Video.DocumentId);
         }
     }
 }

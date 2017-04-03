@@ -102,6 +102,7 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="BaoZouRiBao_StoreKey.pfx" />
     <None Include="project.json" />
+    <None Include="stylecop.json" />
     <PRIResource Include="Strings\zh-CN\Resources.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
@@ -111,7 +112,6 @@
     </Compile>
     <Compile Include="BaoZouAction\NavigationAction.cs" />
     <Compile Include="BaoZouAction\StoryAction.cs" />
-    <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
@@ -177,6 +177,7 @@
     <Compile Include="Model\DocumentComment.cs" />
     <Compile Include="Model\DocumentExtra.cs" />
     <Compile Include="Model\DocumentRelated.cs" />
+    <Compile Include="Model\HackJs.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\PostModel\LoginPost.cs" />
     <Compile Include="Model\PostModel\SearchPost.cs" />
@@ -200,6 +201,9 @@
     <Compile Include="Model\TaskInfo.cs" />
     <Compile Include="Model\WebViewParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Themes\ThemeDictionary.xaml.cs">
+      <DependentUpon>ThemeDictionary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AndroidPivot.cs" />
     <Compile Include="UserControls\AndroidPopup.cs" />
     <Compile Include="UserControls\BaoZouTaskPopup.cs" />
@@ -312,21 +316,37 @@
     <Content Include="Assets\Images\back.png" />
     <Content Include="Assets\Images\actionbar_comment_nor.png" />
     <Content Include="Assets\Images\actionbar_like_nor.png" />
-    <Content Include="Assets\Images\article_like_nor.png" />
+    <Content Include="Assets\Images\btn_actionbar_like_nor.png" />
+    <Content Include="Assets\Images\btn_actionbar_like_pre.png" />
+    <Content Include="Assets\Images\btn_article_like_nor.png" />
     <Content Include="Assets\Images\btn_article_like_pre.png" />
     <Content Include="Assets\Images\article_reply_nor.png" />
     <Content Include="Assets\Images\article_share.png" />
+    <Content Include="Assets\Images\btn_article_more_nor.png" />
+    <Content Include="Assets\Images\btn_article_qqzone_nor.png" />
+    <Content Include="Assets\Images\btn_article_reply_nor.png" />
+    <Content Include="Assets\Images\btn_article_share.png" />
+    <Content Include="Assets\Images\btn_article_share_favourites_nor.png" />
+    <Content Include="Assets\Images\btn_article_share_favourites_pre.png" />
+    <Content Include="Assets\Images\btn_article_share_more_nor.png" />
+    <Content Include="Assets\Images\btn_article_sinaweibo_nor.png" />
+    <Content Include="Assets\Images\btn_article_wechatmoment_nor.png" />
     <Content Include="Assets\Images\btn_edit_biaoqing.png" />
     <Content Include="Assets\Images\btn_edit_image.png" />
     <Content Include="Assets\Images\btn_edit_link.png" />
     <Content Include="Assets\Images\btn_home_menu_nor.png" />
     <Content Include="Assets\Images\btn_home_publish_article.png" />
     <Content Include="Assets\Images\btn_home_publish_link.png" />
+    <Content Include="Assets\Images\btn_nav_favourite_nor.png" />
+    <Content Include="Assets\Images\btn_nav_favourite_pre.png" />
     <Content Include="Assets\Images\btn_setting_offline.png" />
     <Content Include="Assets\Images\btn_video_like_nor.png" />
     <Content Include="Assets\Images\btn_video_like_pre.png" />
     <Content Include="Assets\Images\btn_video_play.png" />
     <Content Include="Assets\Images\btn_video_reply_nor.png" />
+    <Content Include="Assets\Images\icon_article_channel.png" />
+    <Content Include="Assets\Images\icon_article_guesslike.png" />
+    <Content Include="Assets\Images\icon_article_hotcomment.png" />
     <Content Include="Assets\Images\icon_article_newcomment.png" />
     <Content Include="Assets\Images\icon_delete.png" />
     <Content Include="Assets\Images\icon_publish_link.png" />
@@ -352,6 +372,8 @@
     <Content Include="Assets\Images\icon_sidebar_setting.png" />
     <Content Include="Assets\Images\icon_sidebar_sun.png" />
     <Content Include="Assets\Images\icon_version_information.png" />
+    <Content Include="Assets\Images\image_night_preview_video.png" />
+    <Content Include="Assets\Images\image_preview_video.png" />
     <Content Include="Assets\Images\img_coin_mini.png" />
     <Content Include="Assets\Images\img_popout_box_Comment.png" />
     <Content Include="Assets\Images\img_popout_box_VoteComment.png" />
@@ -359,9 +381,14 @@
     <Content Include="Assets\Images\img_popout_box_ReadDocument.png" />
     <Content Include="Assets\Images\img_popout_box_DailySign.png" />
     <Content Include="Assets\Images\img_popout_box_ShareDocument.png" />
+    <Content Include="Assets\Images\loadinganim1.png" />
+    <Content Include="Assets\Images\loadinganim2.png" />
+    <Content Include="Assets\Images\loadinganim3.png" />
+    <Content Include="Assets\Images\loadinganim4.png" />
+    <Content Include="Assets\Images\loadinganim5.png" />
+    <Content Include="Assets\Images\loadinganim6.png" />
     <Content Include="Assets\Images\login_qq.png" />
     <Content Include="Assets\Images\login_sina.png" />
-    <Content Include="Assets\Images\nav_favourite_pre.png" />
     <Content Include="Assets\Images\home_more.png" />
     <Content Include="Assets\Images\home_notice_nor.png" />
     <Content Include="Assets\Images\home_publish_nor.png" />
@@ -441,7 +468,6 @@
     <Page Include="Themes\ThemeDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Views\Detail\BaozouLoginPage.xaml">
       <SubType>Designer</SubType>
@@ -537,6 +563,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\ARCSINW\OneDrive\Codes\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.UI.Animations\Microsoft.Toolkit.Uwp.UI.Animations.csproj">
+      <Project>{b24a296c-b3eb-4e06-a64e-74ac2d1acc91}</Project>
+      <Name>Microsoft.Toolkit.Uwp.UI.Animations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\ARCSINW\OneDrive\Codes\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.UI.Controls\Microsoft.Toolkit.Uwp.UI.Controls.csproj">
+      <Project>{e9faabfb-d726-42c1-83c1-cb46a29fea81}</Project>
+      <Name>Microsoft.Toolkit.Uwp.UI.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BaoZouRiBao.Background\BaoZouRiBao.Background.csproj">
       <Project>{cfa6ee3f-8f68-4304-a098-0736bb767e4f}</Project>
       <Name>BaoZouRiBao.Background</Name>

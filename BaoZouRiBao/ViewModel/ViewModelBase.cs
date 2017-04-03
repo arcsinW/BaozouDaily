@@ -1,15 +1,8 @@
-﻿using BaoZouRiBao.Helper;
-using BaoZouRiBao.Views;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using BaoZouRiBao.Helper;
+using BaoZouRiBao.Views;
 using Windows.ApplicationModel;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -32,7 +25,7 @@ namespace BaoZouRiBao.ViewModel
            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         #endregion
-         
+
         public bool IsDesignMode
         {
             get
@@ -43,27 +36,34 @@ namespace BaoZouRiBao.ViewModel
 
         public bool IsMobile => DeviceInformationHelper.IsMobile();
 
-        //private ElementTheme appTheme = ElementTheme.Light;
+        // private ElementTheme appTheme = ElementTheme.Light;
         ///// <summary>
         ///// 当前主题
         ///// </summary>
-        //public ElementTheme AppTheme
-        //{
+        // public ElementTheme AppTheme
+        // {
         //    get { return appTheme; }
         //    set { appTheme = value; OnPropertyChanged(); }
-        //}
-
+        // }
 
         public void GoBack() => NavigationHelper.GoBack();
-        
+
         public void OpenDrawer()
         {
             MasterDetailPage.Current.drawer.IsDrawerOpened = true;
         }
 
+        /// <summary>
+        /// 切换日夜间模式
+        /// </summary>
         public void SwitchElementTheme()
         {
             GlobalValue.Current.SwitchElementTheme();
         }
+
+        /// <summary>
+        /// 刷新
+        /// </summary>
+        public virtual void Refresh() { }
     }
 }

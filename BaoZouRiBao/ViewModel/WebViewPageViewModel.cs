@@ -21,14 +21,16 @@ namespace BaoZouRiBao.ViewModel
             HtmlString = new StringBuilder();
         }
 
-        #region Properties 
+        #region Properties
         private Document document;
+
         public Document Document
         {
             get
             {
                 return document;
             }
+
             set
             {
                 document = value;
@@ -37,12 +39,14 @@ namespace BaoZouRiBao.ViewModel
         }
 
         private DocumentExtra documentExtra;
+
         public DocumentExtra DocumentExtra
         {
             get
             {
                 return documentExtra;
             }
+
             set
             {
                 documentExtra = value;
@@ -51,12 +55,14 @@ namespace BaoZouRiBao.ViewModel
         }
 
         private DocumentRelated documentRelated;
+
         public DocumentRelated DocumentRelated
         {
             get
             {
                 return documentRelated;
             }
+
             set
             {
                 documentRelated = value;
@@ -65,12 +71,14 @@ namespace BaoZouRiBao.ViewModel
         }
 
         private DocumentComment documentComment;
+
         public DocumentComment DocumentComment
         {
             get
             {
                 return documentComment;
             }
+
             set
             {
                 documentComment = value;
@@ -81,6 +89,7 @@ namespace BaoZouRiBao.ViewModel
         public StringBuilder HtmlString { get; set; }
 
         private bool isActive;
+
         public bool IsActive
         {
             get
@@ -96,12 +105,12 @@ namespace BaoZouRiBao.ViewModel
 
         #endregion
 
-        public void webView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        public void WebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
             IsActive = true;
         }
 
-        public void webView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args) 
+        public void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args) 
         {
             IsActive = false;
         }
@@ -122,11 +131,13 @@ namespace BaoZouRiBao.ViewModel
                         HtmlString.Append(Document.Head).Append(Document.Body);
                         OnPropertyChanged(nameof(HtmlString));
                     }
+
                     break;
-                case "2": //pure html
-                    
+                case "2": // pure html
+
                     break;
             }
+
             IsActive = false;
         }
 

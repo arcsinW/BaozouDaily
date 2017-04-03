@@ -65,14 +65,7 @@
             </Grid>
         </DataTemplate>
 
-        <Style x:Key="CommentItemContainerStyle" TargetType="ListViewItem">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="Padding" Value="12"/>
-            <Setter Property="BorderBrush" Value="WhiteSmoke"/>
-            <Setter Property="BorderThickness" Value="0,0,0,1"/>
-            <Setter Property="Background" Value="White"/>
-        </Style>
+        
     </Page.Resources>
 
     <Grid Background="{ThemeResource PageBackgroundBrush}">

@@ -58,13 +58,12 @@ namespace BaoZouRiBao.Views
             }
         } 
 
-        private async void favoriteBtn_Click(object sender, RoutedEventArgs e)
+        private async void FavoriteBtn_Click(object sender, RoutedEventArgs e)
         {
             var res = await ViewModel.Favorite(documentId.ToString());
-            
         }
 
-        private void commentBtn_Click(object sender, RoutedEventArgs e)
+        private void CommentBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationHelper.DetailFrameNavigate(typeof(CommentPage), documentId.ToString());
         } 

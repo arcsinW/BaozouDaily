@@ -152,10 +152,9 @@
                                 </Image.Source>
                             </Image>
 
-                            <TextBlock Margin="30,0,0,0" 
-                           Foreground="#FFE49609"
-                           HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Run Text="{Binding Balance}" />
+                            <TextBlock Margin="30,0,0,0" Foreground="#FFE49609"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Run Text="{x:Bind ViewModel.Balance,Mode=OneWay}" />
                             <Run Text="金币" />
                             </TextBlock>
                         </Grid>

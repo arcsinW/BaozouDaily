@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BaoZouRiBao.Model
 {
+    /// <summary>
+    /// 文章的额外信息
+    /// </summary>
     public class DocumentExtra
     {
         [JsonProperty(PropertyName = "channels")]
@@ -27,22 +30,10 @@ namespace BaoZouRiBao.Model
         [JsonProperty(PropertyName = "vote_count")]
         public string VoteCount { get; set; }
 
-        //[JsonProperty(PropertyName = "voted")]
-        //public string Voted { get; set; }
-
+        /// <summary>
+        /// 用于设置日夜间模式的js
+        /// </summary>
         [JsonProperty(PropertyName = "hack_js")]
         public HackJs HackJs { get; set; }
-    }
-
-    public class HackJs
-    {
-        [JsonProperty(PropertyName = "ducoment_loaded")]
-        public string DocumentLoaded { get; set; }
-
-        [JsonProperty(PropertyName = "set_day_mode")]
-        public string SetDayMode { get; set; }
-
-        [JsonProperty(PropertyName = "set_night_mode")]
-        public string SetNightMode { get; set; }
     }
 }
