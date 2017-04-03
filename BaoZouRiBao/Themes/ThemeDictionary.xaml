@@ -2468,9 +2468,8 @@
         </Setter>
     </Style>
 
-
     <Style TargetType="MenuFlyoutPresenter">
         <Setter Property="BorderBrush" Value="{ThemeResource ThemeColorBrush}"/>
-        <Setter Property="Background" Value="White"/>
+        
     </Style>
 </ResourceDictionary>
