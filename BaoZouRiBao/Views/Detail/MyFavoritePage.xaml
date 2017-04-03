@@ -8,6 +8,7 @@
     xmlns:control="using:BaoZouRiBao.UserControls"
     xmlns:m="using:BaoZouRiBao.Model"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -25,7 +26,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="收藏" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -36,7 +37,7 @@
                 <Button.Flyout>
                     <MenuFlyout> 
                         <MenuFlyout.Items>
-                            <MenuFlyoutItem Text="刷新"/>
+                            <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.Refresh}"/>
                             <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                             <MenuFlyoutItem Text="设置"/>
                         </MenuFlyout.Items>
@@ -46,17 +47,17 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <TextBlock Text="加载失败，点击重试" Visibility="{Binding IsEmpty}"
+            <TextBlock Text="加载失败，点击重试" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
                        Foreground="{ThemeResource PhoneForegroundColorBrush}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"/>
             <control:RefreshableListView x:Name="documentListView" ItemsSource="{Binding Favorites}"
                                   SelectionMode="None"
                                   IsItemClickEnabled="True"
-                                  ItemClick="{x:Bind ViewModel.documentListView_ItemClick}"
+                                  ItemClick="{x:Bind ViewModel.FavoriteListView_ItemClick}"
                                   IncrementalLoadingTrigger="Edge"
                                   ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
-                                  RefreshRequested="{x:Bind ViewModel.RefreshFavorites}">
+                                  RefreshRequested="{x:Bind ViewModel.Refresh}">
                 <control:RefreshableListView.RefreshIndicatorContent>
                     <Grid Height="100" Background="Transparent">
                         <FontIcon
@@ -78,13 +79,15 @@
                     <DataTemplate x:DataType="m:Document">
                         <Grid Margin="4">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Source="{x:Bind Thumbnail}" Grid.Column="0"/>
-                            <Image Source="{Binding Tag}" Grid.Column="0" 
-                                                   HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <toolkit:ImageEx Source="{Binding Thumbnail}" PlaceholderSource="{StaticResource PlaceHolderImage}" 
+                                             MaxHeight="80" MaxWidth="80"
+                                             Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Stretch="UniformToFill"/>
+                            
+                            <!--<Image Source="{Binding Tag}" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>-->
                             <StackPanel Grid.Column="1" Margin="12,0">
                                 <TextBlock Text="{x:Bind Title}" FontSize="16" Style="{ThemeResource TitleTextBlockStyle}"/>
                                 <StackPanel Orientation="Horizontal">
@@ -94,9 +97,9 @@
                                         </Ellipse.Fill>
                                     </Ellipse>
                                     <TextBlock Margin="0,8">
-                                                    <Run Text="{x:Bind AuthorName}" FontSize="14" Foreground="#FF767676"/>
-                                                    <Run Text="{x:Bind SectionName,TargetNullValue={StaticResource RecommendString}}"
-                                                        FontSize="12" Foreground="#FF8D8D8D" />
+                                            <Run Text="{x:Bind AuthorName}" FontSize="14" Foreground="#FF767676"/>
+                                            <Run Text="{x:Bind SectionName,TargetNullValue={StaticResource RecommendString}}"
+                                                FontSize="12" Foreground="#FF8D8D8D" />
                                     </TextBlock>
                                 </StackPanel>
                             </StackPanel>

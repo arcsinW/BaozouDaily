@@ -9,7 +9,6 @@
     xmlns:m="using:BaoZouRiBao.Model"
     xmlns:control="using:BaoZouRiBao.UserControls"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:p="using:PullToRefresh.UWP"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
@@ -224,9 +223,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <BitmapImage x:Key="DefaultAvatar" UriSource="ms-appx:///Assets/Images/avatar_m.png"/>
-
+  
         <Storyboard x:Name="SpinnerStoryboard">
             <DoubleAnimation
                     Duration="00:00:00.5"
@@ -431,7 +428,7 @@
                                     <FlipView.ItemTemplate>
                                         <DataTemplate x:DataType="m:Document">
                                             <Grid>
-                                                <Image Source="{x:Bind Image}" VerticalAlignment="Center" Stretch="UniformToFill"/>
+                                                <toolkit:ImageEx Source="{x:Bind Image}" PlaceholderSource="{StaticResource PlaceHolderImage}" VerticalAlignment="Center" Stretch="UniformToFill"/>
                                                 <Border>
                                                     <Border.Background>
                                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.2">
@@ -463,7 +460,7 @@
 
                                     <Grid Grid.Column="0" MaxHeight="80" MaxWidth="80">
                                         <Image Source="/Assets/Images/image_small_default.jpg"/>
-                                        <Image Source="{Binding Thumbnail,TargetNullValue={StaticResource DefaultAvatar}}" 
+                                        <Image Source="{Binding Thumbnail,TargetNullValue={StaticResource PlaceHolderAvatar}}" 
                                                     Stretch="UniformToFill"/>
                                         <Image Source="{Binding OriginalTag}" Height="32" 
                                                     HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -525,7 +522,7 @@
                                         <ColumnDefinition Width="4*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Image Source="{Binding Thumbnail,TargetNullValue={StaticResource DefaultAvatar}}" Grid.Column="0"/>
+                                    <toolkit:ImageEx Source="{Binding Thumbnail}" PlaceholderSource="{StaticResource PlaceHolderImage}" Grid.Column="0"/>
 
                                     <StackPanel Grid.Column="1" Margin="12,0">
                                         <TextBlock Text="{x:Bind Title}" FontWeight="Bold" FontSize="16"  TextWrapping="Wrap"/>

@@ -97,7 +97,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+  
     </Page.Resources>
  
     <Grid Background="{ThemeResource PageBackgroundBrush}">
@@ -108,7 +108,7 @@
 
         <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="个人" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -119,7 +119,7 @@
                 <Button.Flyout>
                     <MenuFlyout>  
                         <MenuFlyout.Items>
-                            <MenuFlyoutItem Text="刷新"/>
+                            <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.Refresh}"/>
                             <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                             <MenuFlyoutItem Text="设置"/>
                         </MenuFlyout.Items>
@@ -154,7 +154,7 @@
 
                             <TextBlock Margin="30,0,0,0" Foreground="#FFE49609"
                             HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Run Text="{x:Bind ViewModel.Balance,Mode=OneWay}" />
+                            <Run x:Name="balanceText" Text="{x:Bind ViewModel.Balance,Mode=OneWay}" />
                             <Run Text="金币" />
                             </TextBlock>
                         </Grid>

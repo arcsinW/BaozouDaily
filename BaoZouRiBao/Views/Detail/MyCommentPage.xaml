@@ -38,7 +38,7 @@
                 <Button.Flyout>
                     <MenuFlyout> 
                         <MenuFlyout.Items>
-                            <MenuFlyoutItem Text="刷新"/>
+                            <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.Refresh}"/>
                             <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                             <MenuFlyoutItem Text="设置"/>
                         </MenuFlyout.Items>

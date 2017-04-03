@@ -23,19 +23,19 @@ namespace BaoZouRiBao.Views
     {
         public UserInfoPage()
         {
-            this.InitializeComponent();
-        }
-
-        private void TaskInfo(object sender, TappedRoutedEventArgs e)
-        {
-            WebViewParameter paramter = new WebViewParameter() { Title = "任务介绍", WebViewUri = "http://dailyapi.ibaozou.com/task_info",DisplayType = "3" };
-            NavigationHelper.DetailFrameNavigate(typeof(WebViewPage), paramter);
-        }
+            this.InitializeComponent(); 
+        } 
         
         public void CoinRank()
         {
             string uri = string.Format(Http.ServiceUri.MyCoins, GlobalValue.Current.User.AccessToken);
             WebViewParameter paramter = new WebViewParameter() { Title = "我的金币", WebViewUri = uri, DisplayType = "3" };
+            NavigationHelper.DetailFrameNavigate(typeof(WebViewPage), paramter);
+        }
+
+        private void TaskInfo(object sender, TappedRoutedEventArgs e)
+        {
+            WebViewParameter paramter = new WebViewParameter() { Title = "任务介绍", WebViewUri = "http://dailyapi.ibaozou.com/task_info", DisplayType = "3" };
             NavigationHelper.DetailFrameNavigate(typeof(WebViewPage), paramter);
         }
     }

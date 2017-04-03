@@ -20,7 +20,7 @@
 
         <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="我的推荐" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -31,7 +31,7 @@
                 <Button.Flyout>
                     <MenuFlyout> 
                         <MenuFlyout.Items>
-                            <MenuFlyoutItem Text="刷新"/>
+                            <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.Refresh}"/>
                             <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                             <MenuFlyoutItem Text="设置"/>
                         </MenuFlyout.Items>

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -108,18 +109,23 @@ namespace BaoZouRiBao.ViewModel
 
         private void RunCounterAnimations()
         {
-            var dispatcherTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(0.01) };
+            DoubleAnimation animation = new DoubleAnimation();
+            animation.From = 0;
+            animation.To = TaskInfo.Balance;
+            animation.Duration = new Duration(TimeSpan.FromMilliseconds(10));
+
+            var dispatcherTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(0.001) };
             dispatcherTimer.Tick += (s, e) =>
               {
                   var needToProceed = false;
-                
+
                   if (Balance < TaskInfo.Balance)
                   {
                       Balance++;
                       needToProceed = true;
                   }
 
-                  if(!needToProceed)
+                  if (!needToProceed)
                   {
                       dispatcherTimer.Stop();
                   }

@@ -8,12 +8,13 @@
     xmlns:control="using:BaoZouRiBao.UserControls"
     xmlns:m="using:BaoZouRiBao.Model"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:MyReadHistoryPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
-    
+
     <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
@@ -34,9 +35,9 @@
                 <Button Style="{ThemeResource BackButtonStyle}" >
                     <BitmapIcon UriSource="ms-appx:///Assets/Images/home_more.png"/>
                     <Button.Flyout>
-                        <MenuFlyout> 
+                        <MenuFlyout>
                             <MenuFlyout.Items>
-                                <MenuFlyoutItem Text="刷新"/>
+                                <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.GoBack}"/>
                                 <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                                 <MenuFlyoutItem Text="设置"/>
                             </MenuFlyout.Items>
@@ -80,12 +81,15 @@
                     <DataTemplate x:DataType="m:Document">
                         <Grid Margin="4">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Source="{x:Bind Thumbnail}" Grid.Column="0"/>
-                            <Image Source="{Binding Tag}" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <toolkit:ImageEx Source="{Binding Thumbnail}" PlaceholderSource="{StaticResource PlaceHolderImage}" 
+                                             MaxHeight="80" MaxWidth="80"
+                                             Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Stretch="UniformToFill"/>
+
+                            <!--<Image Source="{Binding Tag}" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>-->
                             <StackPanel Grid.Column="1" Margin="12,0">
                                 <TextBlock Text="{x:Bind Title}" FontSize="16" Style="{ThemeResource TitleTextBlockStyle}"/>
                                 <StackPanel Orientation="Horizontal">
@@ -95,15 +99,16 @@
                                         </Ellipse.Fill>
                                     </Ellipse>
                                     <TextBlock Margin="0,8">
-                                                    <Run Text="{x:Bind AuthorName}" FontSize="14" Foreground="#FF767676"/>
-                                                    <Run Text="{x:Bind SectionName}" FontSize="12" Foreground="#FF8D8D8D" />
+                                            <Run Text="{x:Bind AuthorName}" FontSize="14" Foreground="#FF767676"/>
+                                            <Run Text="{x:Bind SectionName,TargetNullValue={StaticResource RecommendString}}"
+                                                FontSize="12" Foreground="#FF8D8D8D" />
                                     </TextBlock>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </control:RefreshableListView>
+            </control:RefreshableListView> 
         </Grid>
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>

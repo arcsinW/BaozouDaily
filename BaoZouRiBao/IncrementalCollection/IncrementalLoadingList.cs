@@ -17,23 +17,8 @@ namespace BaoZouRiBao.IncrementalCollection
     /// <typeparam name="T"></typeparam>
     public class IncrementalLoadingList<T> : ObservableCollection<T>, ISupportIncrementalLoading
     {
-        private bool _isBusy = false;
-        public string TimeStamp {set; get; } = string.Empty;
-        //当前页数
-        public int Page { private set; get; }
-        private Func<uint, int, Task<IEnumerable<T>>> pageFunc;
-        private Func<uint, string, Task<IEnumerable<T>>> timeStampFunc;
-
-
-        private Action onDataLoadedAction;
-        private Action onDataLoadingAction;
-
-        public bool HasMoreItems
-        {
-            get; private set;
-        }
-
         /// <summary>
+        /// Initializes a new instance of the <see cref="IncrementalLoadingList{T}"/> class.
         /// 通过页码增量加载
         /// </summary>
         /// <param name="func"></param>
@@ -45,6 +30,24 @@ namespace BaoZouRiBao.IncrementalCollection
 
             this.onDataLoadedAction = onDataLoadedAction;
             this.onDataLoadingAction = onDataLoadingAction;
+        }
+
+        private bool isBusy = false;
+
+        public string TimeStamp {get; set; } = string.Empty;
+
+        // 当前页数
+        public int Page { get; private set; }
+
+        private Func<uint, int, Task<IEnumerable<T>>> pageFunc;
+        private Func<uint, string, Task<IEnumerable<T>>> timeStampFunc;
+
+        private Action onDataLoadedAction;
+        private Action onDataLoadingAction;
+
+        public bool HasMoreItems
+        {
+            get; private set;
         }
 
         /// <summary>
@@ -78,7 +81,7 @@ namespace BaoZouRiBao.IncrementalCollection
         {
             this.HasMoreItems = true;
         }
-      
+
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
             onDataLoadingAction?.Invoke();
@@ -86,11 +89,11 @@ namespace BaoZouRiBao.IncrementalCollection
             {
                 try
                 {
-                    if (_isBusy)
+                    if (isBusy)
                     {
-                        throw new InvalidOperationException("busy now");
+                        
                     }
-                    _isBusy = true;
+                    isBusy = true;
                     if (timeStampFunc != null)
                     {
                         var _items = await timeStampFunc(count, TimeStamp);
@@ -101,15 +104,15 @@ namespace BaoZouRiBao.IncrementalCollection
                     }
                     else
                     {
-                        var _items = await pageFunc(count, ++Page);
-                        foreach (var item in _items)
+                        var items = await pageFunc(count, ++Page);
+                        foreach (var item in items)
                         {
                             this.Add(item);
                         }
                     }
-                    _isBusy = false;
+                    isBusy = false;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     LogHelper.WriteLine(e);
                 }
