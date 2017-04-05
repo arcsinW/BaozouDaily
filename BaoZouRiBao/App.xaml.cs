@@ -69,6 +69,7 @@ namespace BaoZouRiBao
                 // parameter
                 rootFrame.Navigate(typeof(MasterDetailPage), e.Arguments);
             }
+
             // Ensure the current window is active
             Window.Current.Activate();
 

@@ -131,11 +131,11 @@
     <Compile Include="Enums\RankTypeEnum.cs" />
     <Compile Include="Extension\WebViewExtension.cs" />
     <Compile Include="Helper\AuthenticationHelper.cs" />
+    <Compile Include="Helper\BackgroundDownloadHelper.cs" />
     <Compile Include="Helper\BaoZouTaskManager.cs" />
     <Compile Include="Helper\ClipBoardHelper.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\DeviceInformationHelper.cs" />
-    <Compile Include="Helper\DownloadManager.cs" />
     <Compile Include="Helper\ExceptionHandlingSynchronizationContext.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\GlobalValue.cs" />
@@ -344,6 +344,7 @@
     <Content Include="Assets\Images\btn_video_like_pre.png" />
     <Content Include="Assets\Images\btn_video_play.png" />
     <Content Include="Assets\Images\btn_video_reply_nor.png" />
+    <Content Include="Assets\Images\dark_image_small_default.jpg" />
     <Content Include="Assets\Images\icon_article_channel.png" />
     <Content Include="Assets\Images\icon_article_guesslike.png" />
     <Content Include="Assets\Images\icon_article_hotcomment.png" />
@@ -393,6 +394,8 @@
     <Content Include="Assets\Images\home_notice_nor.png" />
     <Content Include="Assets\Images\home_publish_nor.png" />
     <Content Include="Assets\Images\image_small_default.jpg" />
+    <Content Include="Assets\Images\night_image_preview_column.jpg" />
+    <Content Include="Assets\Images\section_image_preview_column.jpg" />
     <Content Include="Assets\Images\sidebar_favourite.png" />
     <Content Include="Assets\Images\img_popout_box_rate_wangmima.png" />
     <Content Include="Assets\Images\profile_getcoin_nor.9.png" />

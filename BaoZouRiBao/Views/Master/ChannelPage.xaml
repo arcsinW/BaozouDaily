@@ -26,7 +26,7 @@
 
             <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
                 <StackPanel Orientation="Horizontal">
-                    <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
+                    <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}">
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                     </Button>
                     <TextBlock Text="频道" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -60,7 +60,7 @@
                             </Grid.ColumnDefinitions>
 
                             <toolkit:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{x:Bind Thumbnail}"
-                                             PlaceholderSource="{StaticResource PlaceHolderImage}"/>
+                                             PlaceholderSource="{StaticResource PlaceHolderImageSmall}"/>
  
                             <!--<Image Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" Source="{x:Bind Thumbnail}"/>-->
                             

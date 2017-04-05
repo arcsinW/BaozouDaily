@@ -7,6 +7,9 @@ using BaoZouRiBao.Http;
 using BaoZouRiBao.Model;
 using BaoZouRiBao.Model.ResultModel;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
+using BaoZouRiBao.Helper;
+using BaoZouRiBao.Views;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -143,8 +146,28 @@ namespace BaoZouRiBao.ViewModel
 
         public async Task<OperationResult> Favorite(string documentId)
         {
-            var res = await ApiService.Instance.Favorite(documentId);
+            var res = await ApiService.Instance.Favorite(Document.DocumentId);
             return res;
+        }
+
+        public async void FavoriteBtnClick(object sender, RoutedEventArgs e)
+        {
+            if (Document == null)
+            {
+                return;
+            }
+
+            var res = await Favorite(Document.DocumentId.ToString());
+        }
+
+        public void CommentBtnClick(object sender, RoutedEventArgs e)
+        {
+            if (Document == null)
+            {
+                return;
+            }
+
+            NavigationHelper.DetailFrameNavigate(typeof(CommentPage), Document.DocumentId);
         }
     }
 }

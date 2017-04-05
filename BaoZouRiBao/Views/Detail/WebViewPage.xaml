@@ -26,10 +26,14 @@
         </Grid.RowDefinitions>
 
         <!--#region Page title-->
-        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}"
-              DataContext="{Binding DocumentExtra}">
+        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}" DataContext="{Binding DocumentExtra}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{x:Bind ViewModel.IsMobile,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock x:Name="titleTextBlock" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -44,14 +48,14 @@
                 </Button>
 
                 <Button x:Name="commentBtn" Style="{ThemeResource BackButtonStyle}" Width="Auto"
-                        Click="CommentBtn_Click">
+                        Click="{x:Bind ViewModel.CommentBtnClick}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <BitmapIcon UriSource="/Assets/Images/actionbar_comment_nor.png"/>
                         <TextBlock Text="{Binding CommentCount}" VerticalAlignment="Center" Margin="2,0"/>
                     </StackPanel>
                 </Button>
 
-                <Button Style="{ThemeResource BackButtonStyle}" x:Name="favoriteBtn" Click="FavoriteBtn_Click">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.FavoriteBtnClick}">
                     <Image>
                         <Image.Source>
                             <BitmapImage UriSource="{Binding Favorited,Converter={StaticResource BoolToUriConverter}}"/>
@@ -80,11 +84,6 @@
         <WebView x:Name="webView"  Grid.Row="1" ex:WebViewExtension.HtmlString="{Binding HtmlString}"
                  NavigationStarting="{x:Bind ViewModel.WebView_NavigationStarting}"
                  NavigationCompleted="{x:Bind ViewModel.WebView_NavigationCompleted}"/>
-
-        <ProgressRing Grid.Row="0" Grid.RowSpan="2" Style="{ThemeResource LightProgressRingStyle}"
-                      IsActive="{Binding IsActive}"
-                      HorizontalAlignment="Center" VerticalAlignment="Center">
-        </ProgressRing>
 
         <Popup Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom"
                Height="48" x:Name="topPop" IsOpen="True" Width="48" Margin="16,32" >

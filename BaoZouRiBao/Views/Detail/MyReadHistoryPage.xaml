@@ -85,7 +85,7 @@
                                 <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
 
-                            <toolkit:ImageEx Source="{Binding Thumbnail}" PlaceholderSource="{StaticResource PlaceHolderImage}" 
+                            <toolkit:ImageEx Source="{Binding Thumbnail}" PlaceholderSource="{StaticResource PlaceHolderImageSmall}" 
                                              MaxHeight="80" MaxWidth="80"
                                              Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Stretch="UniformToFill"/>
 

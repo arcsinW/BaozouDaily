@@ -94,10 +94,11 @@ namespace BaoZouRiBao.ViewModel
         private async void LoadTaskInfo()
         {
             TaskInfo = await ApiService.Instance.GetTaskInfo();
-            if (TaskInfo != null)
-            {
-                RunCounterAnimations();
-            }
+            Balance = TaskInfo.Balance;
+            //if (TaskInfo != null)
+            //{
+            //    RunCounterAnimations();
+            //}
         }
 
         private void LoadDesignData()

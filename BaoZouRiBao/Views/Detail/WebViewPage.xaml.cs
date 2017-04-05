@@ -1,12 +1,12 @@
-﻿using BaoZouRiBao.Model;
-using BaoZouRiBao.Helper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using BaoZouRiBao.Helper;
+using BaoZouRiBao.Model;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -26,23 +26,20 @@ namespace BaoZouRiBao.Views
             this.InitializeComponent();
         }
 
-        private StringBuilder documentId = new StringBuilder();
-        private string displayType;
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var parameter = e.Parameter as WebViewParameter;
             if (parameter != null)
             {
-                documentId.Clear();
-                documentId.Append(parameter.DocumentId);
-                displayType = parameter.DisplayType;
-                if(!string.IsNullOrEmpty(parameter.Title))
+                string documentId = parameter.DocumentId;
+                string displayType = parameter.DisplayType;
+                if (!string.IsNullOrEmpty(parameter.Title))
                 {
                     titleTextBlock.Text = parameter.Title;
                 }
+
                 switch (parameter.DisplayType)
-                {   
+                {
                     case "1":
 
                         break;
@@ -54,18 +51,9 @@ namespace BaoZouRiBao.Views
                         stackPanel.Visibility = Visibility.Collapsed;
                         return;
                 }
+
                 ViewModel.LoadDocument(documentId.ToString(), displayType);
             }
-        } 
-
-        private async void FavoriteBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var res = await ViewModel.Favorite(documentId.ToString());
         }
-
-        private void CommentBtn_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationHelper.DetailFrameNavigate(typeof(CommentPage), documentId.ToString());
-        } 
     }
 }

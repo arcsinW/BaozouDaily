@@ -292,13 +292,12 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="PaneColumn" Width="48"/>
-            <ColumnDefinition x:Name="MasterColumn" Width="500"/>
-            <ColumnDefinition x:Name="DetailColumn"  Width="*"/>
+            <ColumnDefinition x:Name="MasterColumn" MinWidth="300" Width="500"/>
+            <ColumnDefinition x:Name="DetailColumn" Width="*"/>
         </Grid.ColumnDefinitions>
  
         <control:Drawer x:Name="drawer" Grid.Column="1" 
-                        DrawerOpenLength="250"  x:FieldModifier="Public"
-                        MinWidth="300">
+                        DrawerOpenLength="250"  x:FieldModifier="Public">
             <control:Drawer.DrawerMaskerBrush>
                 <SolidColorBrush Color="Black" Opacity="0.7"/>
             </control:Drawer.DrawerMaskerBrush>
@@ -495,8 +494,8 @@
                       Background="{ThemeResource PaneBackgroundColor}" SelectionMode="Single">
                 <ListView.Resources>
                     <Style TargetType="BitmapIcon">
-                        <Setter Property="Height" Value="24"/>
-                        <Setter Property="Height" Value="24"/>
+                        <Setter Property="Height" Value="16"/>
+                        <Setter Property="Height" Value="16"/>
                         <Setter Property="Foreground" Value="Gray"/>
                     </Style>
                 </ListView.Resources>
@@ -511,7 +510,7 @@
                                     <ImageBrush ImageSource="{Binding User.Avatar}"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                        </Button> 
+                        </Button>
                     </Grid>
                 </ListView.Header>
                 <ListView.Items>
@@ -545,7 +544,7 @@
                                 </core:EventTriggerBehavior.Actions>
                             </core:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
-                        <BitmapIcon ToolTipService.ToolTip="频道" UriSource="/Assets/Images/icon_sidebar_column.png"/>
+                        <BitmapIcon ToolTipService.ToolTip="频道" UriSource="/Assets/Images/icon_sidebar_column.png" />
                     </ListViewItem>
 
                     <ListViewItem>
@@ -587,7 +586,7 @@
             </ListView>
         </Grid>
         <!--#endregion-->
-
+        
         <Frame x:Name="DetailFrame" Grid.Column="2"  
                BorderThickness="1,0,0,0" x:FieldModifier="Public" 
                BorderBrush="{ThemeResource SplitLineColorBrush}"
@@ -638,10 +637,6 @@
         <!--#region 任务Popup-->
         <control:BaoZouTaskPopup x:Name="taskPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666" 
                                  BaoZouPopupType="DailySign"  CoinCount="4" Title="获取奖励" Visibility="Collapsed"/>
-        <!--#endregion-->
-        
-        <!--<control:AndroidPopup x:Name="popup">
-            
-        </control:AndroidPopup>-->
+        <!--#endregion--> 
     </Grid>
 </Page>

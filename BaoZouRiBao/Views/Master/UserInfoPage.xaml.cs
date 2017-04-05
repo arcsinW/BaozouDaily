@@ -16,7 +16,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-
 namespace BaoZouRiBao.Views
 {
     public sealed partial class UserInfoPage : Page
@@ -24,8 +23,8 @@ namespace BaoZouRiBao.Views
         public UserInfoPage()
         {
             this.InitializeComponent(); 
-        } 
-        
+        }
+
         public void CoinRank()
         {
             string uri = string.Format(Http.ServiceUri.MyCoins, GlobalValue.Current.User.AccessToken);

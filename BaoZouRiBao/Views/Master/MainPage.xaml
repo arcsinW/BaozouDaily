@@ -428,7 +428,7 @@
                                     <FlipView.ItemTemplate>
                                         <DataTemplate x:DataType="m:Document">
                                             <Grid>
-                                                <toolkit:ImageEx Source="{x:Bind Image}" PlaceholderSource="{StaticResource PlaceHolderImage}" VerticalAlignment="Center" Stretch="UniformToFill"/>
+                                                <toolkit:ImageEx Source="{x:Bind Image}" PlaceholderSource="{StaticResource PlaceHolderImageSmall}" VerticalAlignment="Center" Stretch="UniformToFill"/>
                                                 <Border>
                                                     <Border.Background>
                                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.2">
@@ -522,7 +522,7 @@
                                         <ColumnDefinition Width="4*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <toolkit:ImageEx Source="{Binding Thumbnail}" PlaceholderSource="{StaticResource PlaceHolderImage}" Grid.Column="0"/>
+                                    <toolkit:ImageEx Source="{Binding Thumbnail}" PlaceholderSource="{StaticResource PlaceHolderImageSmall}" Grid.Column="0"/>
 
                                     <StackPanel Grid.Column="1" Margin="12,0">
                                         <TextBlock Text="{x:Bind Title}" FontWeight="Bold" FontSize="16"  TextWrapping="Wrap"/>
