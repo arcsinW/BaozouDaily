@@ -36,10 +36,10 @@
                 <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{x:Bind ViewModel.IsMobile,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
-                <TextBlock x:Name="titleTextBlock" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+                <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" ScrollViewer.HorizontalScrollMode="Enabled" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>
 
-            <StackPanel x:Name="stackPanel" HorizontalAlignment="Right" Orientation="Horizontal">
+            <StackPanel x:Name="stackPanel" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Style="{ThemeResource BackButtonStyle}" Width="Auto">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>

@@ -145,17 +145,16 @@
                             </Ellipse.Fill>
                         </Ellipse>
 
-                        <Grid VerticalAlignment="Top" HorizontalAlignment="Right" Margin="12,0">
-                            <Image Width="100" Tapped="{x:Bind CoinRank}">
+                        <Grid VerticalAlignment="Top" HorizontalAlignment="Right" Margin="12,0" Tapped="{x:Bind CoinRank}">
+                            <Image Width="100" >
                                 <Image.Source>
                                     <BitmapImage UriSource="ms-appx:///Assets/Images/profile_getcoin_nor.9.png"/>
                                 </Image.Source>
                             </Image>
 
-                            <TextBlock Margin="30,0,0,0" Foreground="#FFE49609"
-                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Run x:Name="balanceText" Text="{x:Bind ViewModel.Balance,Mode=OneWay}" />
-                            <Run Text="金币" />
+                            <TextBlock Foreground="#FFE49609" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Run x:Name="balanceText" Text="{x:Bind ViewModel.Balance,Mode=OneWay}" />
+                                <Run Text="金币" />
                             </TextBlock>
                         </Grid>
                     </Grid>

@@ -99,7 +99,7 @@
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <converter:TimeStampToDateTimeConverter x:Key="TimeStampToDateTimeConverter"/>
             <BitmapImage x:Key="PlaceHolderImageSmall" UriSource="/Assets/Images/image_small_default.jpg"/>
-            <BitmapImage x:Key="PlaceHolderImage" UriSource="/Assets/Images/section_image_preview_column.jpg"/>
+            <BitmapImage x:Key="PlaceHolderImageLarge" UriSource="/Assets/Images/section_image_preview_column.jpg"/>
             <BitmapImage x:Key="PlaceHolderAvatar" UriSource="/Assets/Images/avatar_m.png"/>
         </ResourceDictionary>
     </Application.Resources>

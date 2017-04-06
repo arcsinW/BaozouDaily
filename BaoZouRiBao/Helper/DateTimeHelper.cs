@@ -28,7 +28,7 @@ namespace BaoZouRiBao.Helper
         /// <returns></returns>
         public static string GetUnixTimeStamp()
         {
-            return ((DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000 * 100).ToString();
+            return ((DateTime.UtcNow.Ticks - 621355968000000000) / 100000).ToString();
         }
 
         /// <summary>

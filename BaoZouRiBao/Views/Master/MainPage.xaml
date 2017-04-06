@@ -422,13 +422,13 @@
                             <TextBlock Text="Release to refresh"/>
                         </toolkit:PullToRefreshListView.ReleaseToRefreshContent>-->
                         <ListView.Header>
-                            <Grid Height="220">
+                            <Grid Height="240">
                                 <FlipView x:Name="headerFlipView" ItemsSource="{Binding Documents.TopStories}" 
                                              Tapped="headerFlipView_Tapped" SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
                                     <FlipView.ItemTemplate>
                                         <DataTemplate x:DataType="m:Document">
                                             <Grid>
-                                                <toolkit:ImageEx Source="{x:Bind Image}" PlaceholderSource="{StaticResource PlaceHolderImageSmall}" VerticalAlignment="Center" Stretch="UniformToFill"/>
+                                                <toolkit:ImageEx Source="{Binding Image}" PlaceholderSource="{StaticResource PlaceHolderImageLarge}" VerticalAlignment="Center" Stretch="UniformToFill"/>
                                                 <Border>
                                                     <Border.Background>
                                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.2">

@@ -92,7 +92,7 @@ namespace BaoZouRiBao.Model
 
         [JsonProperty(PropertyName = "section_id")]
         public string SectionId { get; set; }
-        
+
         [JsonProperty(PropertyName = "share_url")]
         public string ShareUrl { get; set; }
 
