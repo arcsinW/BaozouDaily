@@ -17,19 +17,20 @@ namespace BaoZouRiBao.ViewModel
         {
             Input = new BaozouLoginInput()
             {
+#if DEBUG
                 Account = "arcsinw",
                 Password = "qwertyx123",
+#endif
             };
 
             LoginCommand = new RelayCommand((input) =>
             {
                 Login((BaozouLoginInput)input);
-            }); 
-
+            });
         }
 
         public BaozouLoginInput Input { get; set; }
-         
+
         public RelayCommand LoginCommand { get; set; }
 
         private async void Login(BaozouLoginInput input)

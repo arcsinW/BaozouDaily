@@ -196,7 +196,6 @@
     <Compile Include="Model\ResultModel\RankResult.cs" />
     <Compile Include="Model\ResultModel\SearchResult.cs" />
     <Compile Include="Model\ResultModel\TaskDoneResult.cs" />
-    <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\TaskInfo.cs" />
     <Compile Include="Model\WebViewParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

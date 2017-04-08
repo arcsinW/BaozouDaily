@@ -19,7 +19,7 @@ namespace BaoZouRiBao.Helper
         {
             EasClientDeviceInformation easDeviceInfo = new EasClientDeviceInformation();
 
-            ApplicationVersion = Package.Current.Id.Version.ToString();
+            ApplicationVersion = Package.Current.Id.Version;
             DeviceId = easDeviceInfo.Id.ToString();
 
             ResourceContext resContext = ResourceContext.GetForCurrentView();
@@ -36,7 +36,7 @@ namespace BaoZouRiBao.Helper
         /// <summary>
         /// Gets Application's version
         /// </summary>
-        public static string ApplicationVersion { get; private set; }
+        public static PackageVersion ApplicationVersion { get; private set; }
 
         /// <summary>
         /// Gets device id

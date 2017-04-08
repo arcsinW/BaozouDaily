@@ -86,7 +86,8 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-        public string AppVersion { get; set; } = InformationHelper.ApplicationVersion;
+
+        public string AppVersion { get; set; } = $"{InformationHelper.ApplicationVersion.Major}.{InformationHelper.ApplicationVersion.Minor}.{InformationHelper.ApplicationVersion.Build}.{InformationHelper.ApplicationVersion.Revision}";
         #endregion
     }
 }

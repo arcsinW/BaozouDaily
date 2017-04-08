@@ -595,7 +595,7 @@
 
         <toolkit:GridSplitter Grid.Column="2" Width="12" ResizeBehavior="BasedOnAlignment"
                               CursorBehavior="ChangeOnSplitterHover"
-                              GripperForeground="White"
+                              GripperForeground="{ThemeResource ThemeColorBrush}"
                               HorizontalAlignment="Left"/>
 
         <!--<control:AndroidPopup x:Name="androidPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666"
