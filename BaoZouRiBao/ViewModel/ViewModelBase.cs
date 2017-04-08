@@ -34,7 +34,7 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-        public bool IsMobile => DeviceInformationHelper.IsMobile();
+        public bool IsMobile => InformationHelper.IsMobile;
 
         // private ElementTheme appTheme = ElementTheme.Light;
         ///// <summary>

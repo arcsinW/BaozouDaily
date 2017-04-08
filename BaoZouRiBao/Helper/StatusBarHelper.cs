@@ -11,22 +11,21 @@ namespace BaoZouRiBao.Helper
 {
     public class StatusBarHelper
     {
-        public static async void ShowStatusBar()
+        public static async void ShowStatusBar(bool isNight)
         {
-            
-            if (DeviceInformationHelper.IsMobile())
+            if (InformationHelper.IsMobile)
             {
                 StatusBar statusBar = StatusBar.GetForCurrentView();
                 statusBar.BackgroundOpacity = 1;
-                statusBar.BackgroundColor = App.Current.Resources["StatusBarBackgroundColor"] as Color?;
+                statusBar.BackgroundColor = (isNight ? App.Current. Resources["DarkThemeColor"] : App.Current.Resources["LightThemeColor"]) as Color?;
                 statusBar.ForegroundColor = Colors.White;
                 await statusBar.ShowAsync();
             }
             else
-            { 
+            {
                 var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-                titleBar.BackgroundColor = App.Current.Resources["LightThemeColor"] as Color?;
-                titleBar.ButtonBackgroundColor = App.Current.Resources["LightThemeColor"] as Color?;
+                titleBar.BackgroundColor = (isNight ? App.Current.Resources["DarkThemeColor"] : App.Current.Resources["LightThemeColor"]) as Color?;
+                titleBar.ButtonBackgroundColor = (isNight ? App.Current.Resources["DarkThemeColor"] : App.Current.Resources["LightThemeColor"]) as Color?;
                 titleBar.ForegroundColor = Colors.White;
             }
         }

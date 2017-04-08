@@ -263,6 +263,11 @@
                     <GridLength x:Key="ColumnCenterLength">4*</GridLength>
                     <GridLength x:Key="ColumnRightLength">*</GridLength>
                 </ListView.Resources>
+                <ListView.Transitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition/>
+                    </TransitionCollection>
+                </ListView.Transitions>
                 <ListView.Items>
                     <ListViewItem>
                         <Grid>
@@ -279,7 +284,7 @@
                                 <TextBlock Text="在Wi-Fi下打开暴走日报，自动下载最新内容" Style="{ThemeResource DescTextBlockStyle}"/>
                             </StackPanel>
 
-                            <ToggleSwitch Grid.Column="2" Style="{ThemeResource LightToggleSwitch}"/>
+                            <ToggleSwitch Grid.Column="2" IsOn="{Binding IsAutoCache}" Style="{ThemeResource LightToggleSwitch}"/>
                         </Grid>
                     </ListViewItem>
 
@@ -313,7 +318,7 @@
                                        VerticalAlignment="Center"
                                        Style="{ThemeResource TitleTextBlockStyle}"/>
 
-                            <ToggleSwitch Grid.Column="2" Style="{ThemeResource LightToggleSwitch}"/>
+                            <ToggleSwitch Grid.Column="2" IsOn="{Binding IsBigFont}" Style="{ThemeResource LightToggleSwitch}"/>
                         </Grid>
                     </ListViewItem>
 
@@ -331,7 +336,7 @@
                                        VerticalAlignment="Center"
                                        Style="{ThemeResource TitleTextBlockStyle}"/>
 
-                            <ToggleSwitch Grid.Column="2" Style="{ThemeResource LightToggleSwitch}"/>
+                            <ToggleSwitch Grid.Column="2" IsOn="{Binding IsNewsNotify}" Style="{ThemeResource LightToggleSwitch}"/>
                         </Grid>
                     </ListViewItem>
 
@@ -384,7 +389,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem>
+                    <!--<ListViewItem>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -397,7 +402,7 @@
                                 <TextBlock Text="分享暴走日报"/>
                             </StackPanel>
                         </Grid>
-                    </ListViewItem>
+                    </ListViewItem>-->
 
                     <ListViewItem>
                         <Grid>
@@ -413,7 +418,7 @@
                                 <TextBlock Text="版本信息"/>
                             </StackPanel>
 
-                            <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="0.1.1"/>
+                            <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="{Binding AppVersion}"/>
                         </Grid>
                     </ListViewItem>
                 </ListView.Items>
@@ -439,7 +444,5 @@
                 </ListView.ItemContainerStyle>
             </ListView>
         </Grid>
-
-        
     </Grid>
 </Page>

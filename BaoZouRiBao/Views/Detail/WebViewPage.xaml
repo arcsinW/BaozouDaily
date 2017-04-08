@@ -28,15 +28,16 @@
         <!--#region Page title-->
         <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}" DataContext="{Binding DocumentExtra}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             
             <StackPanel Orientation="Horizontal">
                 <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{x:Bind ViewModel.IsMobile,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
-                <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" ScrollViewer.HorizontalScrollMode="Enabled" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+                <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
+                           ScrollViewer.HorizontalScrollMode="Enabled" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>
 
             <StackPanel x:Name="stackPanel" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">

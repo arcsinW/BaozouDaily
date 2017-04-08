@@ -459,9 +459,12 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Grid Grid.Column="0" MaxHeight="80" MaxWidth="80">
-                                        <Image Source="/Assets/Images/image_small_default.jpg"/>
+                                        <!--<Image Source="/Assets/Images/image_small_default.jpg"/>
                                         <Image Source="{Binding Thumbnail,TargetNullValue={StaticResource PlaceHolderAvatar}}" 
-                                                    Stretch="UniformToFill"/>
+                                                    Stretch="UniformToFill"/>-->
+                                        <toolkit:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{Binding Thumbnail}"
+                                             PlaceholderSource="{StaticResource PlaceHolderImageSmall}"/>
+                                        
                                         <Image Source="{Binding OriginalTag}" Height="32" 
                                                     HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                     </Grid>
@@ -522,7 +525,8 @@
                                         <ColumnDefinition Width="4*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <toolkit:ImageEx Source="{Binding Thumbnail}" PlaceholderSource="{StaticResource PlaceHolderImageSmall}" Grid.Column="0"/>
+                                    <toolkit:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{Binding Thumbnail}"
+                                             PlaceholderSource="{StaticResource PlaceHolderImageSmall}"/>
 
                                     <StackPanel Grid.Column="1" Margin="12,0">
                                         <TextBlock Text="{x:Bind Title}" FontWeight="Bold" FontSize="16"  TextWrapping="Wrap"/>

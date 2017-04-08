@@ -15,12 +15,14 @@ namespace BaoZouRiBao.ViewModel
     {
         #region Properties
         private User user;
+
         public User User
         {
             get
             {
                 return user;
             }
+
             set
             {
                 user = value;
@@ -29,19 +31,20 @@ namespace BaoZouRiBao.ViewModel
         }
 
         private ElementTheme appTheme;
+
         public ElementTheme AppTheme
         {
             get
             {
                 return appTheme;
             }
+
             set
             {
                 appTheme = value;
                 OnPropertyChanged();
             }
         }
-        
         #endregion
 
         public MasterDetailPageViewModel()
@@ -50,7 +53,7 @@ namespace BaoZouRiBao.ViewModel
             User = GlobalValue.Current.User;
 
             GlobalValue.Current.DataChanged += Current_DataChanged;
-            StatusBarHelper.ShowStatusBar();
+            StatusBarHelper.ShowStatusBar(appTheme == ElementTheme.Dark);
             SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
         }
 
@@ -65,7 +68,6 @@ namespace BaoZouRiBao.ViewModel
             e.Handled = true;
             NavigationHelper.GoBack();
         }
-
 
         #region Pane Method
         public void LoginPage()
@@ -85,10 +87,12 @@ namespace BaoZouRiBao.ViewModel
             if (AppTheme == ElementTheme.Dark)
             {
                 GlobalValue.Current.UpdateAppTheme(ElementTheme.Light);
+                StatusBarHelper.ShowStatusBar(false);
             }
             else
             {
                 GlobalValue.Current.UpdateAppTheme(ElementTheme.Dark);
+                StatusBarHelper.ShowStatusBar(true);
             }
         }
         #endregion

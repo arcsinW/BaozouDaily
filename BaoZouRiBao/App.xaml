@@ -96,6 +96,9 @@
                 <theme:ThemeDictionary/>
             </ResourceDictionary.MergedDictionaries>
 
+            <Color x:Key="DarkThemeColor">#FF343434</Color>
+            <Color x:Key="LightThemeColor">#FB3D4F</Color>
+
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <converter:TimeStampToDateTimeConverter x:Key="TimeStampToDateTimeConverter"/>
             <BitmapImage x:Key="PlaceHolderImageSmall" UriSource="/Assets/Images/image_small_default.jpg"/>

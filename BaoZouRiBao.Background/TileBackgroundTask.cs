@@ -11,7 +11,7 @@ namespace BaoZouRiBao.Background
     {
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaoZouRiBao.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,6 +40,6 @@ namespace BaoZouRiBao.Model
         /// <summary>
         /// 应用版本号
         /// </summary>
-        public string Version { get; set; }
+        public string Version { get; set; } = InformationHelper.ApplicationVersion;
     }
 }

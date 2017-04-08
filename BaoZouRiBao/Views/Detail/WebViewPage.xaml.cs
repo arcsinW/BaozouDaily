@@ -43,7 +43,7 @@ namespace BaoZouRiBao.Views
                     case "1":
 
                         break;
-                    case "2":   //pure html
+                    case "2":   // pure html
                         webView.Navigate(new Uri(parameter.WebViewUri));
                         break;
                     case "3":

@@ -17,13 +17,12 @@ namespace BaoZouRiBao.Helper
         public const string AccessKey = "e132054cb486408fa2add8972b1c4cc3";
         public const string SecretKey = "425de3dbe3874a038c2a07816af215de";
 
-
         #region Properties
 
-        public User User { get; set; }
-         
+        public User User { get; set; } = null;
+
         public string AccessToken { get; set; }
-       
+
         public ElementTheme AppTheme { get; set; }
 
         /// <summary>
@@ -57,20 +56,17 @@ namespace BaoZouRiBao.Helper
             if (AppTheme == ElementTheme.Dark)
             {
                 Current.UpdateAppTheme(ElementTheme.Light);
+                StatusBarHelper.ShowStatusBar(false);
             }
             else
             {
                 Current.UpdateAppTheme(ElementTheme.Dark);
+                StatusBarHelper.ShowStatusBar(true);
             }
         }
 
-        /// <summary>
-        /// Load global value
-        /// </summary>
-
         private void LoadData()
         {
-
         }
 
         /// <summary>
@@ -78,7 +74,6 @@ namespace BaoZouRiBao.Helper
         /// </summary>
         private void SaveData()
         {
-
         }
 
         #region Update methods

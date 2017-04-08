@@ -17,10 +17,6 @@ namespace BaoZouRiBao.ViewModel
     {
         public WebViewPageViewModel()
         {
-            Document = new Document();
-            DocumentExtra = new DocumentExtra();
-            DocumentRelated = new DocumentRelated();
-            DocumentComment = new DocumentComment();
             HtmlString = new StringBuilder();
         }
 
@@ -152,22 +148,22 @@ namespace BaoZouRiBao.ViewModel
 
         public async void FavoriteBtnClick(object sender, RoutedEventArgs e)
         {
-            if (Document == null)
+            if (DocumentExtra == null)
             {
                 return;
             }
 
-            var res = await Favorite(Document.DocumentId.ToString());
+            var res = await Favorite(DocumentExtra.DocumentId.ToString());
         }
 
         public void CommentBtnClick(object sender, RoutedEventArgs e)
         {
-            if (Document == null)
+            if (DocumentExtra == null)
             {
                 return;
             }
 
-            NavigationHelper.DetailFrameNavigate(typeof(CommentPage), Document.DocumentId);
+            NavigationHelper.DetailFrameNavigate(typeof(CommentPage), DocumentExtra.DocumentId);
         }
     }
 }

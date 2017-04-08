@@ -47,7 +47,7 @@ namespace BaoZouRiBao.Http
             dic.Add("password", password);
             dic.Add("username", userName);
             //dic.Add("client_id", "10230202?");
-            dic.Add("client_id", DeviceInformationHelper.GetDeviceId());
+            dic.Add("client_id", InformationHelper.DeviceId);
 
             var result = await PostDicForLogin(ServiceUri.OAuth2, dic);
             return result;

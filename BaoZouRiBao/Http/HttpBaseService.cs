@@ -29,6 +29,7 @@ namespace BaoZouRiBao.Http
             header.Accept.TryParseAdd("text/html, application/xhtml+xml, image/jxr, */*");
             header.AcceptEncoding.TryParseAdd("gzip,deflate");
             header.AcceptLanguage.TryParseAdd("en-US,en;q=0.8,zh-Hans-CN;q=0.5,zh-Hans;q=0.3");
+
             // header["X-APP-VERSION_CODE"] = "7";
             // header["X-APP-VERSION"] = "3.1.0";
             // header["ZA"] = "OS=Android 5.0&Platform=4.5 Lollipop (5.0) XHDPI Phone";
@@ -36,13 +37,14 @@ namespace BaoZouRiBao.Http
             // header.Host = new Windows.Networking.HostName("dailyapi.ibaozou.com");
             header.Connection.TryParseAdd("Keep-Alive");
             header["Host"] = "dailyapi.ibaozou.com";
+
             // header["Sign"] = "04be2eaa0cb7f683fff807fd09110aeb";
         }
 
         /// <summary>
         /// 向服务器发送get请求  返回服务器回复数据(string)
         /// </summary>
-        /// <param name="url"></param>
+        /// <param name="uri"></param>
         /// <returns></returns>
         public static async Task<string> SendGetRequest(string uri)
         {
@@ -53,10 +55,11 @@ namespace BaoZouRiBao.Http
                     var header = httpClient.DefaultRequestHeaders;
                     header["Authorization"] = "Bearer " + GlobalValue.Current.AccessToken;
                 }
+
                 string res = await httpClient.GetStringAsync(new Uri(uri)); 
                 return res;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine("HttpBaseService SendGetRequest:" + e.Message);
                 return null;
@@ -92,26 +95,12 @@ namespace BaoZouRiBao.Http
             }
         }
 
-        //public async static Task<string> SendBytesPostRequest(string uri ,byte[] data)
-        //{
-        //    try
-        //    {
-        //        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, new Uri(uri));
-         
-
-        //    }
-        //    catch(Exception e)
-        //    {
-
-        //    }
-        //}
-
         /// <summary>
         /// 向服务器发送get请求  返回服务器回复数据(bytes)
         /// </summary>
-        /// <param name="url"></param>
+        /// <param name="uri"></param>
         /// <returns></returns>
-        public async static Task<IBuffer> SendGetRequestAsBytes(string uri)
+        public static async Task<IBuffer> SendGetRequestAsBytes(string uri)
         {
             try
             {
@@ -119,17 +108,17 @@ namespace BaoZouRiBao.Http
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsBufferAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine("HttpBaseService SendGetRequestAsBytes:" + e.Message);
                 return null;
             }
         }
 
-        public async static Task<string> SendDicPostRequest(Dictionary<string, string> dic, string uri) 
+        public static async Task<string> SendDicPostRequest(Dictionary<string, string> dic, string uri) 
         {
             try
-            { 
+            {
                 HttpFormUrlEncodedContent content = new HttpFormUrlEncodedContent(dic);
                 HttpResponseMessage msg = await httpClient.PostAsync(new Uri(uri), content);
                 return msg.Content.ToString();
@@ -141,11 +130,10 @@ namespace BaoZouRiBao.Http
             }
         }
 
-
         public static void AddHeader(string key, string value)
         {
             var header = httpClient.DefaultRequestHeaders;
-            
+
             httpClient.DefaultRequestHeaders[key] = value;
         }
     }

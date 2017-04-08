@@ -329,7 +329,7 @@
                                     </Ellipse>
                                 </Grid>
                             </Button>
-                            <TextBlock Text="{Binding User.Name,Mode=OneWay}" VerticalAlignment="Center" Margin="24,0" Foreground="White" />
+                            <TextBlock Text="{Binding User.Name,Mode=OneWay, TargetNullValue={StaticResource LoginString}}" VerticalAlignment="Center" Margin="24,0" Foreground="White" />
                         </StackPanel>
                         <!--#endregion-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="16,0">
