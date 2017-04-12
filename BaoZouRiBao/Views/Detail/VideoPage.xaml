@@ -29,7 +29,7 @@
         <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}"
               DataContext="{Binding DocumentExtra}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{x:Bind ViewModel.IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock x:Name="titleTextBlock" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -39,14 +39,14 @@
                 <Button Style="{ThemeResource BackButtonStyle}" Width="Auto">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>
-                        <TextBlock Text="{Binding VoteCount}" VerticalAlignment="Center" Margin="4,0"/>
+                        <TextBlock Text="{Binding VoteCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
                     </StackPanel>
                 </Button>
 
                 <Button Style="{ThemeResource BackButtonStyle}" Width="Auto" Click="Comment_Click">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <BitmapIcon UriSource="/Assets/Images/actionbar_comment_nor.png"/>
-                        <TextBlock Text="{Binding CommentCount}" VerticalAlignment="Center" Margin="4,0"/>
+                        <TextBlock Text="{Binding CommentCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
                     </StackPanel>
                 </Button>
 
@@ -67,7 +67,7 @@
                             <MenuFlyout.Items>
                                 <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.Refresh}"/>
                                 <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
-                                <MenuFlyoutItem Text="设置"/>
+                                <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
                             </MenuFlyout.Items>
                         </MenuFlyout>
                     </Button.Flyout>
@@ -88,23 +88,16 @@
                                             VerticalAlignment="Top" HorizontalAlignment="Stretch"
                                               Stretch="UniformToFill"
                                             AreTransportControlsEnabled="True"/>
-                                <Button HorizontalAlignment="Center" Style="{ThemeResource ImageButtonStyle}"
+                                <!--<Button HorizontalAlignment="Center" Style="{ThemeResource ImageButtonStyle}"
                                     VerticalAlignment="Center" Foreground="White" 
-                                    Grid.Row="0" Width="64" Height="64">    
+                                    Grid.Row="0" Width="64" Height="64">
                                     <Image Source="/Assets/Images/btn_video_play.png"/>
-                                </Button>
-                                <Border Background="Black" Opacity="0.9"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Bottom"
-                                    Padding="4">
-                                    <TextBlock FontSize="12" Text="{Binding Video.PlayTime,Converter={StaticResource SecondsToDateTimeConverter}}"  
-                                               Foreground="White"/>
-                                </Border>
+                                </Button>-->
                             </Grid>
                             <StackPanel Background="{ThemeResource ListViewHeaderBrush}" 
                                 Orientation="Horizontal">
                                 <Image Source="ms-appx:///Assets/Images/icon_article_newcomment.png"
-                               Height="30" Width="30" Margin="8"/>
+                               Height="20" Width="20" Margin="8"/>
                                 <TextBlock Text="最新评论" VerticalAlignment="Center"/>
                             </StackPanel>
                         </StackPanel>

@@ -32,10 +32,9 @@ namespace BaoZouRiBao.IncrementalCollection
 
         protected override async Task<LoadMoreItemsResult> LoadMoreItemsAsyncCore(CancellationToken cancel, uint count)
         {
-           
             LoadMoreItemsResult result = new LoadMoreItemsResult();
 
-            var contributes = await ApiService.Instance.GetContributeInChannel(id,timeStamp.ToString());
+            var contributes = await ApiService.Instance.GetContributeInChannelAsync(id,timeStamp.ToString());
 
             if (contributes != null)
             {

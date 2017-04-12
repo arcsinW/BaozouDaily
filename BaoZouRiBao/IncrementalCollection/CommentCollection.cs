@@ -45,7 +45,7 @@ namespace BaoZouRiBao.IncrementalCollection
         {
             LoadMoreItemsResult result = new LoadMoreItemsResult();
            
-            LatestOrHotComment comments = await ApiService.Instance.GetLatestOrHotComments(documentId, type,timeStamp.ToString());
+            LatestOrHotComment comments = await ApiService.Instance.GetLatestOrHotCommentsAsync(documentId, type,timeStamp.ToString());
             Debug.WriteLine($"Current TimeStamp : {timeStamp}");
             if (comments != null)
             {

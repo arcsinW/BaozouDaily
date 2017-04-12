@@ -423,7 +423,7 @@
                     </ListViewItem>
                 </ListView.Items>
                 <ListView.Footer>
-                    <Button Content="退出登录" Style="{ThemeResource RoundButtonStyle}"
+                    <Button Content="退出登录" Style="{ThemeResource RoundButtonStyle}" Click="{x:Bind ViewModel.Logout}"
                             Width="200" Height="48" HorizontalAlignment="Center" Margin="0,12"/>
                 </ListView.Footer>
                 <ListView.ItemContainerStyle>

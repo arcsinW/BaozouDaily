@@ -65,5 +65,10 @@ namespace BaoZouRiBao.ViewModel
         /// 刷新
         /// </summary>
         public virtual void Refresh() { }
+
+        public void NavigateToSettingPage()
+        {
+            NavigationHelper.MasterFrameNavigate(typeof(SettingPage));
+        }
     }
 }

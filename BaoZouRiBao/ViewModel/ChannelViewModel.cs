@@ -41,7 +41,7 @@ namespace BaoZouRiBao.ViewModel
                 return channels;
             }
 
-            var result = await ApiService.Instance.GetChannels(pageIndex++);
+            var result = await ApiService.Instance.GetChannelsAsync(pageIndex++);
 
             if (result != null && result.Channels != null)
             {

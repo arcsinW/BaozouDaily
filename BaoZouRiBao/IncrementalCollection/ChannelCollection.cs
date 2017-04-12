@@ -25,7 +25,7 @@ namespace BaoZouRiBao.IncrementalCollection
         protected override async Task<LoadMoreItemsResult> LoadMoreItemsAsyncCore(CancellationToken cancel, uint count)
         {
             LoadMoreItemsResult result = new LoadMoreItemsResult();
-            var channels = await ApiService.Instance.GetChannels(page++);
+            var channels = await ApiService.Instance.GetChannelsAsync(page++);
             if (channels != null && channels.Channels !=null)
             {
                 result.Count = (uint)channels.Channels.Length;

@@ -304,7 +304,9 @@
                                 <Button Grid.Column="0" Style="{ThemeResource ImageButtonStyle}">
                                     <i:Interaction.Behaviors>
                                         <core:EventTriggerBehavior EventName="Click">
-                                            <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.MyRecommendPage"/>
+                                            <core:EventTriggerBehavior.Actions>
+                                                <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.MyRecommendPage"/>
+                                            </core:EventTriggerBehavior.Actions>
                                         </core:EventTriggerBehavior>
                                     </i:Interaction.Behaviors>
                                     <StackPanel>
@@ -315,7 +317,9 @@
                                 <Button Grid.Column="1" Style="{ThemeResource ImageButtonStyle}">
                                     <i:Interaction.Behaviors>
                                         <core:EventTriggerBehavior EventName="Click">
-                                            <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.ContributeArticlePage"/>
+                                            <core:EventTriggerBehavior.Actions>
+                                                <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.ContributeArticlePage"/>
+                                            </core:EventTriggerBehavior.Actions>
                                         </core:EventTriggerBehavior>
                                     </i:Interaction.Behaviors>
                                     <StackPanel>
@@ -338,7 +342,9 @@
                 <Button x:Name="btn" Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right">
                     <i:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
-                            <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.MessagePage"/>
+                            <core:EventTriggerBehavior.Actions>
+                                <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.MessagePage"/>
+                            </core:EventTriggerBehavior.Actions>
                         </core:EventTriggerBehavior>
                     </i:Interaction.Behaviors>
                     <Button.Content>
@@ -521,7 +527,7 @@
                             <DataTemplate x:DataType="m:Contribute">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="4*"/>
                                     </Grid.ColumnDefinitions>
 
@@ -572,14 +578,15 @@
                                         <RowDefinition Height="3*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <!--<MediaElement x:Name="mediaElement"  Height="250" Width="Auto" AutoPlay="False" 
-                                                          Source="{Binding FileUrl}" Grid.Row="0" Visibility="Collapsed"/>-->
 
-                                    <Image Grid.Row="0" Stretch="Fill" Height="250" Width="Auto">
+                                    <MediaElement x:Name="mediaElement"  Height="250" Width="Auto" AutoPlay="False" 
+                                                          Source="{Binding FileUrl}" Grid.Row="0" />
+
+                                    <!--<Image Grid.Row="0" Stretch="Fill" Height="250" Width="Auto">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding Image}"/>
                                         </Image.Source>
-                                    </Image>
+                                    </Image>-->
 
                                     <Grid Grid.Row="1">
                                         <Grid.RowDefinitions>
@@ -588,8 +595,7 @@
                                         </Grid.RowDefinitions>
 
                                         <TextBlock Text="{x:Bind Title}" Grid.Row="0" FontSize="16" 
-                                                               TextTrimming="WordEllipsis"
-                                                             Style="{ThemeResource TitleTextBlockStyle}"/>
+                                                               TextTrimming="WordEllipsis" Style="{ThemeResource TitleTextBlockStyle}"/>
 
                                         <Grid Margin="0,4" Grid.Row="1" VerticalAlignment="Center">
                                             <TextBlock  HorizontalAlignment="Left" Style="{ThemeResource DescTextBlockStyle}">
@@ -607,7 +613,7 @@
                                                 </StackPanel.Resources>
                                                 <Button Style="{ThemeResource ImageButtonStyle}" Width="Auto">
                                                     <StackPanel Orientation="Horizontal">
-                                                        <Image Source="/Assets/Images/article_like_nor.png"/>
+                                                        <Image Source="/Assets/Images/btn_article_like_nor.png"/>
                                                         <TextBlock Text="{x:Bind VoteCount}" Style="{ThemeResource DescTextBlockStyle}" HorizontalAlignment="Right"/>
                                                     </StackPanel>
                                                 </Button>
@@ -632,12 +638,14 @@
                                                     Style="{ThemeResource ImageButtonStyle}"
                                                     VerticalAlignment="Center" Foreground="White" 
                                                     Grid.Row="0" Width="64" Height="64">
-                                        <!--<i:Interaction.Behaviors>
-                                                    <core:EventTriggerBehavior EventName="Tapped">
-                                                        <core:ChangePropertyAction TargetObject="mediaElement"
+                                        <i:Interaction.Behaviors>
+                                            <core:EventTriggerBehavior EventName="Tapped">
+                                                <core:EventTriggerBehavior.Actions>
+                                                    <core:ChangePropertyAction TargetObject="mediaElement" 
                                                                                    PropertyName="AutoPlay" Value="True"/>
-                                                    </core:EventTriggerBehavior>
-                                                </i:Interaction.Behaviors>-->
+                                                </core:EventTriggerBehavior.Actions>
+                                            </core:EventTriggerBehavior>
+                                        </i:Interaction.Behaviors>
                                         <Image Source="/Assets/Images/btn_video_play.png"/>
                                     </Button>
                                 </Grid>

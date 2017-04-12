@@ -41,7 +41,7 @@ namespace BaoZouRiBao.IncrementalCollection
         protected override async Task<LoadMoreItemsResult> LoadMoreItemsAsyncCore(CancellationToken cancel, uint count)
         {
             LoadMoreItemsResult result = new LoadMoreItemsResult();
-            var stories = await ApiService.Instance.GetLatestDocument(timeStamp.ToString());
+            var stories = await ApiService.Instance.GetLatestDocumentAsync(timeStamp.ToString());
 
             if (stories != null)
             {

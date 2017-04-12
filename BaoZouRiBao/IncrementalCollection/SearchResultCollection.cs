@@ -63,7 +63,7 @@ namespace BaoZouRiBao.IncrementalCollection
                 result.Count = 0;
                 return result;
             }
-            var searchResult = await ApiService.Instance.Search(keyword, pageIndex++);
+            var searchResult = await ApiService.Instance.SearchAsync(keyword, pageIndex++);
             if (searchResult == null || searchResult.Documents.Length == 0)
             {
                 hasMore = false;

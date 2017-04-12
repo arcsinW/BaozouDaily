@@ -192,6 +192,7 @@
     <Compile Include="Model\ResultModel\LatestOrHotComment.cs" />
     <Compile Include="Model\ResultModel\LatestVideoResult.cs" />
     <Compile Include="Model\ResultModel\LoginResult.cs" />
+    <Compile Include="Model\ResultModel\LogoutResult.cs" />
     <Compile Include="Model\ResultModel\OfflineDownloadResult.cs" />
     <Compile Include="Model\ResultModel\RankResult.cs" />
     <Compile Include="Model\ResultModel\SearchResult.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="ViewModel\ContributeArticleViewModel.cs" />
     <Compile Include="ViewModel\ContributeInChannelViewModel.cs" />
     <Compile Include="ViewModel\DownloadOfflinePageViewModel.cs" />
+    <Compile Include="ViewModel\LoginPageViewModel.cs" />
     <Compile Include="ViewModel\MasterDetailPageViewModel.cs" />
     <Compile Include="ViewModel\MessagePageViewModel.cs" />
     <Compile Include="ViewModel\MyContributePageViewModel.cs" />
@@ -564,14 +566,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\ARCSINW\OneDrive\Codes\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.UI.Animations\Microsoft.Toolkit.Uwp.UI.Animations.csproj">
-      <Project>{b24a296c-b3eb-4e06-a64e-74ac2d1acc91}</Project>
-      <Name>Microsoft.Toolkit.Uwp.UI.Animations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\ARCSINW\OneDrive\Codes\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.UI.Controls\Microsoft.Toolkit.Uwp.UI.Controls.csproj">
-      <Project>{e9faabfb-d726-42c1-83c1-cb46a29fea81}</Project>
-      <Name>Microsoft.Toolkit.Uwp.UI.Controls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BaoZouRiBao.Background\BaoZouRiBao.Background.csproj">
       <Project>{cfa6ee3f-8f68-4304-a098-0736bb767e4f}</Project>
       <Name>BaoZouRiBao.Background</Name>

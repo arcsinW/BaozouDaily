@@ -35,7 +35,7 @@ namespace BaoZouRiBao.ViewModel
 
         private async void Login(BaozouLoginInput input)
         {
-            await ApiService.Instance.Login(input.Account, input.Password);
+            await ApiService.Instance.LoginAsync(input.Account, input.Password);
         }
     }
 }

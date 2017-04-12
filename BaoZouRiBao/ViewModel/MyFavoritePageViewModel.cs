@@ -89,7 +89,7 @@ namespace BaoZouRiBao.ViewModel
                 return documents;
             }
 
-            var result = await ApiService.Instance.GetMyFavorite(timeStamp);
+            var result = await ApiService.Instance.GetMyFavoriteAsync(timeStamp);
             if (result != null && result.Documents != null)
             {
                 Favorites.TimeStamp = result.TimeStamp;

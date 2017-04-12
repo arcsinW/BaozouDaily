@@ -7,8 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:vm="using:BaoZouRiBao.ViewModel"
     mc:Ignorable="d"
     >
+
+    <Page.DataContext>
+        <vm:LoginPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
     <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
@@ -17,7 +23,7 @@
 
         <Grid Height="48" Grid.Row="0" HorizontalAlignment="Stretch" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Button Style="{ThemeResource BackButtonStyle}">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="登录" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -29,8 +35,8 @@
                     <MenuFlyout> 
                         <MenuFlyout.Items>
                             <MenuFlyoutItem Text="刷新"/>
-                            <MenuFlyoutItem Text="夜间模式" Click="{x:Bind SwitchElementTheme}"/>
-                            <MenuFlyoutItem Text="设置"/>
+                            <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
+                            <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
                         </MenuFlyout.Items>
                     </MenuFlyout>
                 </Button.Flyout>
@@ -47,7 +53,7 @@
                     Width="200" Height="48"
                     Style="{ThemeResource RoundButtonStyle}"
                     HorizontalAlignment="Center"
-                    Click="baozouLoginBtn_Click"
+                    Click="{x:Bind ViewModel.baozouLoginBtn_Click}"
                     >
                 </Button>
 
@@ -65,7 +71,7 @@
                 </Grid>
  
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Click="{x:Bind SinaLogin}" Style="{ThemeResource ImageButtonStyle}" Height="48">
+                    <Button Click="{x:Bind ViewModel.SinaLogin}" Style="{ThemeResource ImageButtonStyle}" Height="48">
                         <Image Source="/Assets/Images/login_sina.png"/>
                     </Button>
 
@@ -73,7 +79,7 @@
                         <Image Source="/Assets/Images/login_wechat.png"/>
                     </Button>
 
-                    <Button Click="{x:Bind QQLogin}" Style="{ThemeResource ImageButtonStyle}" Height="48">
+                    <Button Click="{x:Bind ViewModel.QQLogin}" Style="{ThemeResource ImageButtonStyle}" Height="48">
                         <Image Source="/Assets/Images/login_qq.png"/>
                     </Button>
                 </StackPanel>

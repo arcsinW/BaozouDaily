@@ -27,7 +27,7 @@ namespace BaoZouRiBao.IncrementalCollection.DataSource
 
         public async Task<IEnumerable<Document>> GetPagedItemsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken = default(CancellationToken), string timeStamp = "")
         {
-            LatestDocumentResult result = await ApiService.Instance.GetRank(_type, _time);
+            LatestDocumentResult result = await ApiService.Instance.GetRankAsync(_type, _time);
             
             return result?.Data;
         } 

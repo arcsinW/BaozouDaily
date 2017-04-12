@@ -16,13 +16,6 @@ namespace BaoZouRiBao.Views
 
             Current = this;
 
-            //StatusBarHelper.ShowStatusBar();
-            //SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
-            //if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-            //{
-            //    Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            //}
-
             if(DesignMode.DesignModeEnabled)
             {
                 MasterFrame.Navigate(typeof(MainPage));
@@ -58,8 +51,7 @@ namespace BaoZouRiBao.Views
             }
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = DetailFrame.CanGoBack || MasterFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
-         
-
+        
         private void AdaptiveVisualState_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
             UpdateBackKeyVisibility();

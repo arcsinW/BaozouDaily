@@ -15,13 +15,16 @@ namespace BaoZouRiBao.Helper
         /// </summary>
         public static async void DailySign()
         {
-            var result = await ApiService.Instance.TaskDone(BaoZouTaskEnum.DailySign.ToString());
-            if (result == null)
+            if (GlobalValue.Current.IsToDayFirstStart)
             {
-                return;
+                var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.DailySign.ToString());
+                if (result == null)
+                {
+                    return;
+                }
+                MasterDetailPage.Current.ShowTaskPopup(result);
             }
-
-            MasterDetailPage.Current.ShowTaskPopup(result);
+            GlobalValue.Current.IsToDayFirstStart = false;
         }
 
         /// <summary>
@@ -29,7 +32,7 @@ namespace BaoZouRiBao.Helper
         /// </summary>
         public static async void ReadDocument()
         {
-            var result = await ApiService.Instance.TaskDone(BaoZouTaskEnum.ReadDocument.ToString());
+            var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.ReadDocument.ToString());
             if (result == null)
             {
                 return;
@@ -43,7 +46,7 @@ namespace BaoZouRiBao.Helper
         /// </summary>
         public static async void CommentDocument()
         {
-            var result = await ApiService.Instance.TaskDone(BaoZouTaskEnum.CommentDocument.ToString());
+            var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.CommentDocument.ToString());
             if (result == null)
             {
                 return;
@@ -57,7 +60,7 @@ namespace BaoZouRiBao.Helper
         /// </summary>
         public static async void VoteDocument()
         {
-            var result = await ApiService.Instance.TaskDone(BaoZouTaskEnum.VoteDocument.ToString());
+            var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.VoteDocument.ToString());
             if (result == null)
             {
                 return;
@@ -71,7 +74,7 @@ namespace BaoZouRiBao.Helper
         /// </summary>
         public static async void VoteComment()
         {
-            var result = await ApiService.Instance.TaskDone(BaoZouTaskEnum.VoteComment.ToString());
+            var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.VoteComment.ToString());
             if (result == null)
             {
                 return;
@@ -85,7 +88,7 @@ namespace BaoZouRiBao.Helper
         /// </summary>
         public static async void ShareDocument()
         {
-            var result = await ApiService.Instance.TaskDone(BaoZouTaskEnum.ShareDocument.ToString());
+            var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.ShareDocument.ToString());
             if (result == null)
             {
                 return;

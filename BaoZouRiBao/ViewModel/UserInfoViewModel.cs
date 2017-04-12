@@ -93,7 +93,7 @@ namespace BaoZouRiBao.ViewModel
 
         private async void LoadTaskInfo()
         {
-            TaskInfo = await ApiService.Instance.GetTaskInfo();
+            TaskInfo = await ApiService.Instance.GetTaskInfoAsync();
             Balance = TaskInfo.Balance;
             //if (TaskInfo != null)
             //{

@@ -158,7 +158,7 @@ namespace BaoZouRiBao.ViewModel
 
         private async Task<List<Document>> LoadRankDataAsync(RankTypeEnum type, RankTimeEnum time)
         {
-            var result = await ApiService.Instance.GetRank(type, time);
+            var result = await ApiService.Instance.GetRankAsync(type, time);
             return result?.Data;
         }
 

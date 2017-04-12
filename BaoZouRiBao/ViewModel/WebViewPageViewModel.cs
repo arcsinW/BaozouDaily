@@ -117,13 +117,13 @@ namespace BaoZouRiBao.ViewModel
         public async void LoadDocument(string documentId,string displayType)
         {
             IsActive = true;
-            DocumentExtra = await ApiService.Instance.GetDocumentExtra(documentId);
+            DocumentExtra = await ApiService.Instance.GetDocumentExtraAsync(documentId);
             switch (displayType)
             {
                 case "1":
-                    Document = await ApiService.Instance.GetDocument(documentId);
-                    DocumentComment = await ApiService.Instance.GetDocumentComment(documentId);
-                    DocumentRelated = await ApiService.Instance.GetDocumentRelated(documentId);
+                    Document = await ApiService.Instance.GetDocumentAsync(documentId);
+                    DocumentComment = await ApiService.Instance.GetDocumentCommentAsync(documentId);
+                    DocumentRelated = await ApiService.Instance.GetDocumentRelatedAsync(documentId);
                     if (Document != null)
                     {
                         HtmlString.Clear();
@@ -142,7 +142,7 @@ namespace BaoZouRiBao.ViewModel
 
         public async Task<OperationResult> Favorite(string documentId)
         {
-            var res = await ApiService.Instance.Favorite(Document.DocumentId);
+            var res = await ApiService.Instance.FavoriteAsync(Document.DocumentId);
             return res;
         }
 

@@ -77,6 +77,7 @@ namespace BaoZouRiBao.Helper
         }
 
         #region Update methods
+
         public void UpdateUser(User user)
         {
             if (user != null)

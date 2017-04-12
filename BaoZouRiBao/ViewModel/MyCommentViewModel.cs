@@ -51,7 +51,7 @@ namespace BaoZouRiBao.ViewModel
                 Comments.NoMore();
                 return comments;
             }
-            var result = await ApiService.Instance.GetMyComments(timeStamp);
+            var result = await ApiService.Instance.GetMyCommentsAsync(timeStamp);
             if (result != null && result.Comments != null)
             {
                 Comments.TimeStamp = result.TimeStamp;

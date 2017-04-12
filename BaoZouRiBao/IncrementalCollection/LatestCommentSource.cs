@@ -25,7 +25,7 @@ namespace BaoZouRiBao.IncrementalCollection
 
         public async Task<IEnumerable<Comment>> GetPagedItemsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken = default(CancellationToken), string timeStamp = "")
         {
-            LatestOrHotComment response = await ApiService.Instance.GetLatestOrHotComments(_documentId, Enums.CommentTypeEnum.latest, _timeStamp.ToString());
+            LatestOrHotComment response = await ApiService.Instance.GetLatestOrHotCommentsAsync(_documentId, Enums.CommentTypeEnum.latest, _timeStamp.ToString());
             if (response == null)
             {
                 return null;

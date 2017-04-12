@@ -260,42 +260,64 @@
         <x:String x:Key="LoginString">登录</x:String>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource PageBackgroundBrush}">
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="AdaptiveVisualState" CurrentStateChanged="AdaptiveVisualState_CurrentStateChanged">
-                <VisualState x:Name="Wide">
-                    <VisualState.Setters> 
-                        <Setter Target="PaneColumn.Width" Value="48"/>
-                        <Setter Target="DetailFrame.BorderThickness" Value="1,0,0,0"/>
-                        <Setter Target="drawer.CanOpen" Value="False"/>
-                    </VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="720"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-
-                <VisualState x:Name="Narrow">
-                    <VisualState.Setters>
-                        <Setter Target="DetailFrame.(Grid.Column)" Value="1"/>
-                        <Setter Target="DetailColumn.Width" Value="0"/>
-                        <Setter Target="PaneColumn.Width" Value="0"/>
-                        <Setter Target="MasterColumn.Width" Value="*"/>
-                        <Setter Target="DetailFrame.BorderThickness" Value="0"/>
-                        <Setter Target="drawer.CanOpen" Value="True"/>
-                    </VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
+    <Grid x:Name="gridMain" Background="{ThemeResource PageBackgroundBrush}">
+        <Grid.RenderTransform>
+            <CompositeTransform/>
+        </Grid.RenderTransform>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="PaneColumn" Width="48"/>
             <ColumnDefinition x:Name="MasterColumn" MinWidth="300" Width="500"/>
             <ColumnDefinition x:Name="DetailColumn" Width="*"/>
         </Grid.ColumnDefinitions>
- 
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualState" CurrentStateChanged="AdaptiveVisualState_CurrentStateChanged">
+                <VisualStateGroup.States>
+                    <VisualState x:Name="Wide">
+                        <VisualState.Setters>
+                            <Setter Target="PaneColumn.Width" Value="48"/>
+                            <Setter Target="DetailFrame.BorderThickness" Value="1,0,0,0"/>
+                            <Setter Target="drawer.CanOpen" Value="False"/>
+                        </VisualState.Setters>
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="720"/>
+                        </VisualState.StateTriggers>
+                    </VisualState>
+
+                    <VisualState x:Name="Narrow">
+                        <VisualState.Setters>
+                            <Setter Target="DetailFrame.(Grid.Column)" Value="1"/>
+                            <Setter Target="DetailColumn.Width" Value="0"/>
+                            <Setter Target="PaneColumn.Width" Value="0"/>
+                            <Setter Target="MasterColumn.Width" Value="*"/>
+                            <Setter Target="DetailFrame.BorderThickness" Value="0"/>
+                            <Setter Target="drawer.CanOpen" Value="True"/>
+                        </VisualState.Setters>
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="0"/>
+                        </VisualState.StateTriggers>
+                        <VisualState.Storyboard>
+                            <Storyboard>
+                                <!--<DoubleAnimation Storyboard.TargetName="gridMain" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.6">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>-->
+                                <DoubleAnimation Storyboard.TargetName="gridMain" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" From="100" To="0" Duration="0:0:0.5">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </VisualState.Storyboard>
+                    </VisualState>
+                </VisualStateGroup.States>
+
+                <VisualStateGroup.Transitions>
+                    <VisualTransition From="Wide" To="Narrow"/>
+                </VisualStateGroup.Transitions>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <control:Drawer x:Name="drawer" Grid.Column="1" 
                         DrawerOpenLength="250"  x:FieldModifier="Public">
             <control:Drawer.DrawerMaskerBrush>
@@ -340,15 +362,17 @@
                                     <Setter Property="Foreground" Value="White"/>
                                 </Style>
                                 <Style TargetType="BitmapIcon">
-                                    <Setter Property="Height" Value="24"/>
-                                    <Setter Property="Width" Value="24"/>
+                                    <Setter Property="Height" Value="20"/>
+                                    <Setter Property="Width" Value="20"/>
                                     <Setter Property="Foreground" Value="White"/>
                                 </Style>
                             </StackPanel.Resources>
                             <Button Style="{ThemeResource ImageButtonStyle}">
                                 <i:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Tapped">
-                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.MyFavoritePage" NavigationType="Master"/>
+                                        <core:EventTriggerBehavior.Actions>
+                                            <action:NavigationAction SourcePage="BaoZouRiBao.Views.MyFavoritePage" NavigationType="Master"/>
+                                        </core:EventTriggerBehavior.Actions>
                                     </core:EventTriggerBehavior>
                                 </i:Interaction.Behaviors>
                                 <StackPanel Orientation="Horizontal">
@@ -360,7 +384,9 @@
                             <Button Style="{ThemeResource ImageButtonStyle}">
                                 <i:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Tapped">
-                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.MyCommentPage" NavigationType="Master"/>
+                                        <core:EventTriggerBehavior.Actions>
+                                            <action:NavigationAction SourcePage="BaoZouRiBao.Views.MyCommentPage" NavigationType="Master"/>
+                                        </core:EventTriggerBehavior.Actions>
                                     </core:EventTriggerBehavior>
                                 </i:Interaction.Behaviors>
                                 <StackPanel Orientation="Horizontal">
@@ -372,7 +398,9 @@
                             <Button Style="{ThemeResource ImageButtonStyle}">
                                 <i:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Tapped">
-                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.MyReadHistoryPage" NavigationType="Master"/>
+                                        <core:EventTriggerBehavior.Actions>
+                                            <action:NavigationAction SourcePage="BaoZouRiBao.Views.MyReadHistoryPage" NavigationType="Master"/>
+                                        </core:EventTriggerBehavior.Actions>
                                     </core:EventTriggerBehavior>
                                 </i:Interaction.Behaviors>
                                 <StackPanel Orientation="Horizontal">
@@ -395,7 +423,9 @@
                         <ListViewItem>
                             <i:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Tapped">
-                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.MainPage" NavigationType="Master"/>
+                                    <core:EventTriggerBehavior.Actions>
+                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.MainPage" NavigationType="Master"/>
+                                    </core:EventTriggerBehavior.Actions>
                                 </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                             <StackPanel Orientation="Horizontal">
@@ -407,7 +437,9 @@
                         <ListViewItem>
                             <i:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Tapped">
-                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.RankPage" NavigationType="Master"/>
+                                    <core:EventTriggerBehavior.Actions>
+                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.RankPage" NavigationType="Master"/>
+                                    </core:EventTriggerBehavior.Actions>
                                 </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                             <StackPanel Orientation="Horizontal">
@@ -419,7 +451,9 @@
                         <ListViewItem>
                             <i:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Tapped">
-                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.ChannelPage" NavigationType="Master"/>
+                                    <core:EventTriggerBehavior.Actions>
+                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.ChannelPage" NavigationType="Master"/>
+                                    </core:EventTriggerBehavior.Actions>
                                 </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                             <StackPanel Orientation="Horizontal">
@@ -431,7 +465,9 @@
                         <ListViewItem>
                             <i:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Tapped">
-                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.SearchPage" NavigationType="Master"/>
+                                    <core:EventTriggerBehavior.Actions>
+                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.SearchPage" NavigationType="Master"/>
+                                    </core:EventTriggerBehavior.Actions>
                                 </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                             <StackPanel Orientation="Horizontal">
@@ -443,7 +479,9 @@
                         <ListViewItem>
                             <i:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Tapped">
-                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.SettingPage" NavigationType="Master"/>
+                                    <core:EventTriggerBehavior.Actions>
+                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.SettingPage" NavigationType="Master"/>
+                                    </core:EventTriggerBehavior.Actions>
                                 </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                             <StackPanel Orientation="Horizontal">
@@ -455,7 +493,9 @@
                         <ListViewItem>
                             <i:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Tapped">
-                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.DownloadOfflinePage" NavigationType="Master"/>
+                                    <core:EventTriggerBehavior.Actions>
+                                        <action:NavigationAction SourcePage="BaoZouRiBao.Views.DownloadOfflinePage" NavigationType="Master"/>
+                                    </core:EventTriggerBehavior.Actions>
                                 </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                             <StackPanel Orientation="Horizontal">

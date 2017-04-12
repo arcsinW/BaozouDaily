@@ -66,7 +66,7 @@ namespace BaoZouRiBao.ViewModel
 
                 return histories;
             }
-            var result = await ApiService.Instance.GetMyReadHistory(timeStamp);
+            var result = await ApiService.Instance.GetMyReadHistoryAsync(timeStamp);
             if (result != null && result.Documents != null)
             {
                 ReadHistories.TimeStamp = result.TimeStamp;
@@ -93,6 +93,11 @@ namespace BaoZouRiBao.ViewModel
                 WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
                 MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
             }
+        }
+
+        public async void ClearHistories()
+        {
+            await ApiService.Instance.ClearReadHistoryAsync();
         }
     }
 }

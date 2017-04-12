@@ -40,7 +40,7 @@ namespace BaoZouRiBao.Http
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public async Task<AuthenticationResult> BaoZouOAuth(string userName,string password)
+        public async Task<AuthenticationResult> BaoZouOAuthAsync(string userName,string password)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
             dic.Add("x_auth_mode", "client_auth");
@@ -57,7 +57,7 @@ namespace BaoZouRiBao.Http
         /// 新浪weibo登录
         /// </summary>
         /// <returns></returns>
-        public async Task SinaWeiboLogin()
+        public async Task SinaWeiboLoginAsync()
         {
             string result = await AuthenticationHelper.SinaAuthenticationAsync();
            
@@ -96,7 +96,7 @@ namespace BaoZouRiBao.Http
         /// 腾讯weibo登录
         /// </summary>
         /// <returns></returns>
-        public async Task TecentLogin()
+        public async Task TecentLoginAsync()
         {
             var result = await AuthenticationHelper.TencentAuthenticationAsync();
              
@@ -112,9 +112,15 @@ namespace BaoZouRiBao.Http
             }
         }
 
-        public async Task Login(string userName,string password)
+        /// <summary>
+        /// 暴走账号登录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public async Task LoginAsync(string userName,string password)
         { 
-            var result = await BaoZouOAuth(userName, password);
+            var result = await BaoZouOAuthAsync(userName, password);
             if (result != null && string.IsNullOrEmpty(result.Error))
             { 
                 LoginPost loginPost = new LoginPost()
@@ -136,17 +142,20 @@ namespace BaoZouRiBao.Http
         /// 注销登录
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> Logout()
+        public async Task<bool> LogoutAsync()
         {
-            string res = await PostJson<string>(ServiceUri.LogOut, "");
-            if (res.Contains("success"))
-            {
-                return true;
-            }
-            else
+            var result = await PostJson<LogoutResult>(ServiceUri.LogOut, "");
+            if(result == null || string.IsNullOrEmpty(result.Result))
             {
                 return false;
             }
+
+            if (result.Result.Equals("success"))
+            {
+                return true;
+            }
+
+            return false;
         }
         #endregion
         
@@ -154,7 +163,7 @@ namespace BaoZouRiBao.Http
         /// <summary>
         /// 获取每日任务信息
         /// </summary>
-        public async Task<TaskInfo> GetTaskInfo()
+        public async Task<TaskInfo> GetTaskInfoAsync()
         { 
             try
             {
@@ -174,7 +183,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="taskId"></param>
         /// <returns></returns>
-        public async Task<TaskDoneResult> TaskDone(string taskId)
+        public async Task<TaskDoneResult> TaskDoneAsync(string taskId)
         {
             string post = "\"task_id\": \"" + taskId + "\"}";
             var result = await PostJson<TaskDoneResult>(ServiceUri.TaskDone, post);
@@ -186,7 +195,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="timeStamp"></param>
         /// <returns></returns>
-        public async Task<RankResult> GetMyFavorite(string timeStamp)
+        public async Task<RankResult> GetMyFavoriteAsync(string timeStamp)
         {
             var uri = string.Format(ServiceUri.MyFavorite, timeStamp);
             var result = await GetJson<RankResult>(uri);
@@ -198,7 +207,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="timeStamp"></param>
         /// <returns></returns>
-        public async Task<CommentResult> GetMyComments(string timeStamp)
+        public async Task<CommentResult> GetMyCommentsAsync(string timeStamp)
         {
             var uri = string.Format(ServiceUri.MyComment, timeStamp);
             var result = await GetJson<CommentResult>(uri);
@@ -210,7 +219,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="timeStamp"></param>
         /// <returns></returns>
-        public async Task<RankResult> GetMyReadHistory(string timeStamp)
+        public async Task<RankResult> GetMyReadHistoryAsync(string timeStamp)
         {
             var uri = string.Format(ServiceUri.MyReadHistory, timeStamp);
             var result = await GetJson<RankResult>(uri);
@@ -221,7 +230,7 @@ namespace BaoZouRiBao.Http
         /// 清除阅读历史
         /// </summary>
         /// <returns></returns>
-        public async Task<OperationResult> ClearReadHistory()
+        public async Task<OperationResult> ClearReadHistoryAsync()
         {
             var result = await PostJson<OperationResult>(ServiceUri.ClearReadHistory,"");
             return result;
@@ -232,7 +241,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
-        public async Task Vote(string documentId)
+        public async Task VoteAsync(string documentId)
         {
             string url = string.Format(ServiceUri.Vote, documentId);
             TaskDoneResult result = await PostJson<TaskDoneResult>(url, "");
@@ -244,7 +253,7 @@ namespace BaoZouRiBao.Http
         /// <param name="documentId"></param>
         /// <param name="content"></param>
         /// <returns></returns>
-        public async Task Comment(string documentId, string content)
+        public async Task CommentAsync(string documentId, string content)
         {
             string url = string.Format(ServiceUri.DocumentComments, documentId);
             CommentResult result = await PostJson<CommentResult>(url, "{ \"conten\" : \"" + content + "\"}");
@@ -256,7 +265,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="timestamp"></param>
         /// <returns></returns>
-        public async Task<LatestDocumentResult> GetLatestDocument(string timestamp)
+        public async Task<LatestDocumentResult> GetLatestDocumentAsync(string timestamp)
         {
             string url = string.Format(ServiceUri.LatestDocument, timestamp);
             var stories = await GetJson<LatestDocumentResult>(url);
@@ -268,7 +277,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
-        public async Task<Document> GetDocument(string documentId)
+        public async Task<Document> GetDocumentAsync(string documentId)
         {
             string url = string.Format(ServiceUri.Document, documentId);
             var extra = await GetJson<Document>(url);
@@ -280,7 +289,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
-        public async Task<Video> GetVideo(string documentId)
+        public async Task<Video> GetVideoAsync(string documentId)
         {
             string url = string.Format(ServiceUri.Document, documentId);
             var video = await GetJson<Video>(url);
@@ -292,7 +301,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
-        public async Task<DocumentExtra> GetDocumentExtra(string documentId)
+        public async Task<DocumentExtra> GetDocumentExtraAsync(string documentId)
         {
             string url = string.Format(ServiceUri.DocumentExtra, documentId);
             var extra = await GetJson<DocumentExtra>(url);
@@ -304,7 +313,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
-        public async Task<DocumentRelated> GetDocumentRelated(string documentId)
+        public async Task<DocumentRelated> GetDocumentRelatedAsync(string documentId)
         {
             string url = string.Format(ServiceUri.DocumentRelated, documentId);
             var extra = await GetJson<DocumentRelated>(url);
@@ -316,7 +325,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
-        public async Task<DocumentComment> GetDocumentComment(string documentId)
+        public async Task<DocumentComment> GetDocumentCommentAsync(string documentId)
         {
             string url = string.Format(ServiceUri.DocumentComments, documentId);
             var extra = await GetJson<DocumentComment>(url);
@@ -328,7 +337,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="timeStamp"></param>
         /// <returns></returns>
-        public async Task<LatestContributeResult> GetLatestContribute(string timeStamp)
+        public async Task<LatestContributeResult> GetLatestContributeAsync(string timeStamp)
         {
             string url = string.Format(ServiceUri.LatestContribute, timeStamp);
             var stories = await GetJson<LatestContributeResult>(url);
@@ -340,7 +349,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="timeStamp"></param>
         /// <returns></returns>
-        public async Task<LatestVideoResult> GetLatestVideo(string timeStamp)
+        public async Task<LatestVideoResult> GetLatestVideoAsync(string timeStamp)
         {
             string url = string.Format(ServiceUri.LatestVideo, timeStamp);
             var videos = await GetJson<LatestVideoResult>(url);
@@ -353,7 +362,7 @@ namespace BaoZouRiBao.Http
         /// <param name="page"></param>
         /// <param name="perPage"></param>
         /// <returns></returns>
-        public async Task<ChannelResult> GetChannels(int page,int perPage = 10)
+        public async Task<ChannelResult> GetChannelsAsync(int page,int perPage = 10)
         {
             string url = string.Format(ServiceUri.Channels, page, perPage);
             var channels = await GetJson<ChannelResult>(url);
@@ -365,7 +374,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
-        public async Task<OperationResult> Favorite(string documentId)
+        public async Task<OperationResult> FavoriteAsync(string documentId)
         {
             string url = string.Format(ServiceUri.Favorite, documentId);
             var result = await PostJson<OperationResult>(url, "");
@@ -378,7 +387,7 @@ namespace BaoZouRiBao.Http
         /// <param name="id"></param>
         /// <param name="timeStamp"></param>
         /// <returns></returns>
-        public async Task<ContributeInChannelResult> GetContributeInChannel(string id,string timeStamp)
+        public async Task<ContributeInChannelResult> GetContributeInChannelAsync(string id,string timeStamp)
         {
             string url = string.Format(ServiceUri.ContributeInChannel, id,timeStamp);
             var contributes =await GetJson<ContributeInChannelResult>(url);
@@ -391,7 +400,7 @@ namespace BaoZouRiBao.Http
         /// <param name="type"></param>
         /// <param name="time"></param>
         /// <returns></returns>
-        public async Task<LatestDocumentResult> GetRank(RankTypeEnum type,RankTimeEnum time)
+        public async Task<LatestDocumentResult> GetRankAsync(RankTypeEnum type,RankTimeEnum time)
         {
             string url = string.Format(ServiceUri.Rank, type, time);
             var documents = await GetJson<LatestDocumentResult>(url);
@@ -405,7 +414,7 @@ namespace BaoZouRiBao.Http
         /// <param name="type"></param>
         /// <param name="timeStamp"></param>
         /// <returns></returns>
-        public async Task<LatestOrHotComment> GetLatestOrHotComments(string documentId,CommentTypeEnum type, string timeStamp)
+        public async Task<LatestOrHotComment> GetLatestOrHotCommentsAsync(string documentId,CommentTypeEnum type, string timeStamp)
         {
             string url = string.Format(ServiceUri.LatestOrHotComment, documentId, type.ToString(), timeStamp);
             var comments =  await GetJson<LatestOrHotComment>(url);   
@@ -418,7 +427,7 @@ namespace BaoZouRiBao.Http
         /// <param name="keyword"></param>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public async Task<SearchResult> Search(string keyword, int pageIndex = 1)
+        public async Task<SearchResult> SearchAsync(string keyword, int pageIndex = 1)
         {
             SearchPost searchPost = new SearchPost() { Keyword = keyword, PageIndex = pageIndex };
             var searchResult = await PostJson<SearchPost, SearchResult>(ServiceUri.Search, searchPost);
@@ -428,9 +437,9 @@ namespace BaoZouRiBao.Http
         /// <summary>
         /// 离线下载
         /// </summary>
-        public async void OfflineDownload()
+        public async Task OfflineDownloadAsync()
         {
-            await GetJson<string>(ServiceUri.DocumentOfflineDownload);
+            var result = await GetJson<string>(ServiceUri.DocumentOfflineDownload);
         }
     }
 }

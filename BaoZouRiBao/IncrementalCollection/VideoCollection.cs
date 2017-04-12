@@ -33,7 +33,7 @@ namespace BaoZouRiBao.IncrementalCollection
         {
             
             LoadMoreItemsResult result = new LoadMoreItemsResult();
-            var videos = await ApiService.Instance.GetLatestVideo(timeStamp.ToString());
+            var videos = await ApiService.Instance.GetLatestVideoAsync(timeStamp.ToString());
 
             if (videos != null)
             {

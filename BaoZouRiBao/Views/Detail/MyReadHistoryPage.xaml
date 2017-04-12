@@ -29,7 +29,7 @@
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.ClearHistories}">
                     <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_delete.png"/>
                 </Button>
                 <Button Style="{ThemeResource BackButtonStyle}" >
@@ -39,7 +39,7 @@
                             <MenuFlyout.Items>
                                 <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.GoBack}"/>
                                 <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
-                                <MenuFlyoutItem Text="设置"/>
+                                <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
                             </MenuFlyout.Items>
                         </MenuFlyout>
                     </Button.Flyout>
@@ -100,7 +100,7 @@
                                     </Ellipse>
                                     <TextBlock Margin="0,8">
                                             <Run Text="{x:Bind AuthorName}" FontSize="14" Foreground="#FF767676"/>
-                                            <Run Text="{x:Bind SectionName,TargetNullValue={StaticResource RecommendString}}"
+                                            <Run Text="{x:Bind SectionName}"
                                                 FontSize="12" Foreground="#FF8D8D8D" />
                                     </TextBlock>
                                 </StackPanel>

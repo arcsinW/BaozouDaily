@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 using BaoZouRiBao.Helper;
 using BaoZouRiBao.Model;
 using Windows.Storage;
+using BaoZouRiBao.Http;
+using Windows.Foundation.Collections;
 
 namespace BaoZouRiBao.ViewModel
 {
     public class SettingPageViewModel : ViewModelBase
     {
-        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+        public SettingPageViewModel()
+        {
+            LoadSettings();
+        }
+
+        private static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
         #region Keys
         private const string IsAutoCache_Key = "IsAutoCache";
@@ -22,6 +29,8 @@ namespace BaoZouRiBao.ViewModel
 
         #region Properties
 
+        private bool isAutoCache;
+
         /// <summary>
         /// 是否自动离线下载
         /// </summary>
@@ -29,7 +38,7 @@ namespace BaoZouRiBao.ViewModel
         {
             get
             {
-                return (bool)localSettings.Values[IsAutoCache_Key];
+                return isAutoCache;
             }
 
             set
@@ -38,6 +47,8 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
+        private bool isSmallImage;
+
         /// <summary>
         /// 是否缩略图模式
         /// </summary>
@@ -45,7 +56,7 @@ namespace BaoZouRiBao.ViewModel
         {
             get
             {
-                return (bool)localSettings.Values[IsSmallImage_Key];
+                return isSmallImage;
             }
 
             set
@@ -54,6 +65,8 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
+        private bool isBigFont;
+
         /// <summary>
         /// 是否文章大字号
         /// </summary>
@@ -61,7 +74,7 @@ namespace BaoZouRiBao.ViewModel
         {
             get
             {
-                return (bool)localSettings.Values[IsBigFont_Key];
+                return isBigFont;
             }
 
             set
@@ -70,6 +83,8 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
+        private bool isNewsNotify;
+
         /// <summary>
         /// 是否新消息通知
         /// </summary>
@@ -77,7 +92,7 @@ namespace BaoZouRiBao.ViewModel
         {
             get
             {
-                return (bool)localSettings.Values[IsNewsNotify_Key];
+                return isNewsNotify;
             }
 
             set
@@ -89,5 +104,27 @@ namespace BaoZouRiBao.ViewModel
 
         public string AppVersion { get; set; } = $"{InformationHelper.ApplicationVersion.Major}.{InformationHelper.ApplicationVersion.Minor}.{InformationHelper.ApplicationVersion.Build}.{InformationHelper.ApplicationVersion.Revision}";
         #endregion
+         
+        public void LoadSettings()
+        {
+            IsAutoCache = (bool)GetValue(localSettings, false, IsAutoCache_Key);
+            IsSmallImage = (bool)GetValue(localSettings,false,IsSmallImage_Key);
+            isBigFont = (bool)GetValue(localSettings,false,IsBigFont_Key);
+            IsNewsNotify = (bool)GetValue(localSettings, false, IsNewsNotify_Key);
+        }
+        
+        private object GetValue(ApplicationDataContainer set,object defaultValue,string key)
+        {
+            if(set.Values.ContainsKey(key))
+            {
+                return set.Values[key];
+            }
+            return defaultValue;
+        }
+
+        public async void Logout()
+        {
+            await ApiService.Instance.LogoutAsync();
+        }
     }
 }

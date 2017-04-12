@@ -91,15 +91,15 @@ namespace BaoZouRiBao.ViewModel
 
         public async void LoadData(string documentId)
         {
-            var video = await ApiService.Instance.GetVideo(documentId);
+            var video = await ApiService.Instance.GetVideoAsync(documentId);
             if (video != null)
             {
                 Video = video;
             }
 
-            DocumentExtra = await ApiService.Instance.GetDocumentExtra(documentId);
+            DocumentExtra = await ApiService.Instance.GetDocumentExtraAsync(documentId);
 
-            var comments = await ApiService.Instance.GetDocumentComment(documentId);
+            var comments = await ApiService.Instance.GetDocumentCommentAsync(documentId);
 
             if (comments != null)
             {
