@@ -135,11 +135,11 @@
                         <BitmapImage x:Key="DefaultAvatar" UriSource="ms-appx:///Assets/Images/avatar_m.png"/>
                     </StackPanel.Resources>
                     <Grid>
-                        <Ellipse Height="100" Width="100">
+                        <Ellipse Height="100" Width="100" Tapped="{x:Bind ViewModel.ModifyAvatar}">
                             <Ellipse.Fill>
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>
-                                        <BitmapImage UriSource="{x:Bind ViewModel.User.Avatar,Mode=OneWay,TargetNullValue={StaticResource DefaultAvatar}}"/>
+                                        <BitmapImage UriSource="{Binding User.Avatar}"/>
                                     </ImageBrush.ImageSource>
                                 </ImageBrush>
                             </Ellipse.Fill>
@@ -187,7 +187,9 @@
                         <Button Grid.Column="0" HorizontalAlignment="Stretch" Style="{ThemeResource ImageButtonStyle}">
                             <i:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Tapped">
+                                    <core:EventTriggerBehavior.Actions>
                                     <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.MyFavoritePage"/>
+                                    </core:EventTriggerBehavior.Actions>
                                 </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                             <StackPanel Grid.Column="0">
@@ -199,7 +201,9 @@
                         <Button Grid.Column="1" HorizontalAlignment="Stretch" Style="{ThemeResource ImageButtonStyle}">
                             <i:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Tapped">
+                                    <core:EventTriggerBehavior.Actions>
                                     <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.MyCommentPage"/>
+                                    </core:EventTriggerBehavior.Actions>
                                 </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                             <StackPanel Grid.Column="1">
@@ -211,7 +215,9 @@
                         <Button Grid.Column="2" HorizontalAlignment="Stretch" Style="{ThemeResource ImageButtonStyle}">
                             <i:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Tapped">
+                                    <core:EventTriggerBehavior.Actions>
                                     <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.MyReadHistoryPage"/>
+                                    </core:EventTriggerBehavior.Actions>
                                 </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                             <StackPanel Grid.Column="2">
@@ -223,7 +229,9 @@
                         <Button Grid.Column="3" HorizontalAlignment="Stretch" Style="{ThemeResource ImageButtonStyle}">
                             <i:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Tapped">
+                                    <core:EventTriggerBehavior.Actions>
                                     <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.MyContributePage"/>
+                                    </core:EventTriggerBehavior.Actions>
                                 </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                             <StackPanel Grid.Column="3">

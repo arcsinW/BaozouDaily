@@ -7,7 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 
 namespace BaoZouRiBao.ViewModel
@@ -99,6 +102,20 @@ namespace BaoZouRiBao.ViewModel
             //{
             //    RunCounterAnimations();
             //}
+        }
+
+        /// <summary>
+        /// 修改头像
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public async void ModifyAvatar(object sender, TappedRoutedEventArgs e)
+        {
+            FileOpenPicker picker = new FileOpenPicker();
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".png");
+            picker.FileTypeFilter.Add(".bmp");
+            StorageFile file = await picker.PickSingleFileAsync();
         }
 
         private void LoadDesignData()

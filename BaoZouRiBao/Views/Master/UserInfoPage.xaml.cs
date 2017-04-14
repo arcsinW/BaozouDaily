@@ -37,5 +37,7 @@ namespace BaoZouRiBao.Views
             WebViewParameter paramter = new WebViewParameter() { Title = "任务介绍", WebViewUri = "http://dailyapi.ibaozou.com/task_info", DisplayType = "3" };
             NavigationHelper.DetailFrameNavigate(typeof(WebViewPage), paramter);
         }
+
+        
     }
 }
