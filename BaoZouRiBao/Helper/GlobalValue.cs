@@ -14,8 +14,13 @@ namespace BaoZouRiBao.Helper
     /// </summary>
     public class GlobalValue
     {
+#if DEBUG
+        public const string AccessKey = "";
+        public const string SecretKey = "";
+#else
         public const string AccessKey = "e132054cb486408fa2add8972b1c4cc3";
         public const string SecretKey = "425de3dbe3874a038c2a07816af215de";
+#endif
 
         #region Properties
 
@@ -80,16 +85,15 @@ namespace BaoZouRiBao.Helper
 
         public void UpdateUser(User user)
         {
-            if (user != null)
-            {
-                User = user;
-                OnDataChanged();
-            }
+            User = user;
+            AccessToken = user.AccessToken;
+            OnDataChanged();
         }
+
 
         public void UpdateAccessToken(string accessToken)
         {
-            if(!string.IsNullOrEmpty(accessToken))
+            if (!string.IsNullOrEmpty(accessToken))
             {
                 AccessToken = accessToken;
                 OnDataChanged();

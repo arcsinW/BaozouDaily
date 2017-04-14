@@ -82,7 +82,7 @@ namespace BaoZouRiBao.Http
                         User = acccessToken.Uid,
                     };
 
-                    User user = await PostJson<LoginPost, User>(ServiceUri.Login, loginPost);
+                    User user = await Post<LoginPost, User>(ServiceUri.Login, loginPost);
                     if (user != null)
                     {
                         HttpBaseService.AddHeader("Authorization", "Bearer " + user.AccessToken);
@@ -104,7 +104,7 @@ namespace BaoZouRiBao.Http
             {
 
             };
-            User user = await PostJson<LoginPost, User>(ServiceUri.Login, loginPost);
+            User user = await Post<LoginPost, User>(ServiceUri.Login, loginPost);
             if (user != null)
             {
                 HttpBaseService.AddHeader("Authorization", "Bearer " + user.AccessToken);
@@ -129,7 +129,7 @@ namespace BaoZouRiBao.Http
                     Source = "baozou",
                     User = result.UserId
                 };
-                User user = await PostJson<LoginPost, User>(ServiceUri.Login, loginPost);
+                User user = await Post<LoginPost, User>(ServiceUri.Login, loginPost);
                 if (user != null)
                 {
                     HttpBaseService.AddHeader("Authorization", "Bearer " + user.AccessToken);
@@ -144,7 +144,7 @@ namespace BaoZouRiBao.Http
         /// <returns></returns>
         public async Task<bool> LogoutAsync()
         {
-            var result = await PostJson<LogoutResult>(ServiceUri.LogOut, "");
+            var result = await Post<LogoutResult>(ServiceUri.LogOut, "");
             if(result == null || string.IsNullOrEmpty(result.Result))
             {
                 return false;
@@ -152,6 +152,7 @@ namespace BaoZouRiBao.Http
 
             if (result.Result.Equals("success"))
             {
+                GlobalValue.Current.UpdateUser(null);
                 return true;
             }
 
@@ -168,8 +169,6 @@ namespace BaoZouRiBao.Http
             try
             {
                 return await GetJson<TaskInfo>(ServiceUri.TaskInfo);
-                //string result = await httpClient.GetStringAsync(new Uri(ServiceUri.TaskInfo));
-                //return JsonHelper.Deserlialize<TaskInfo>(result);
             }
             catch(Exception e)
             {
@@ -183,10 +182,10 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="taskId"></param>
         /// <returns></returns>
-        public async Task<TaskDoneResult> TaskDoneAsync(string taskId)
+        public async Task<DailyTaskDoneResult> TaskDoneAsync(string taskId)
         {
-            string post = "\"task_id\": \"" + taskId + "\"}";
-            var result = await PostJson<TaskDoneResult>(ServiceUri.TaskDone, post);
+            string post = "{\"task_id\": \"" + taskId + "\"}";
+            var result = await Post<DailyTaskDoneResult>(ServiceUri.TaskDone, post);
             return result;
         }
 
@@ -230,25 +229,30 @@ namespace BaoZouRiBao.Http
         /// 清除阅读历史
         /// </summary>
         /// <returns></returns>
-        public async Task<OperationResult> ClearReadHistoryAsync()
+        public async Task<VoteOperationResult> ClearReadHistoryAsync()
         {
-            var result = await PostJson<OperationResult>(ServiceUri.ClearReadHistory,"");
+            var result = await Post<VoteOperationResult>(ServiceUri.ClearReadHistory,"");
             return result;
         }
         
+        public async Task UploadAvatarAsync()
+        {
+
+        }
+
         /// <summary>
-        /// 为文章点赞
+        /// 为 文章 | 视频 | 投稿 | 评论 点赞
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
         public async Task VoteAsync(string documentId)
         {
             string url = string.Format(ServiceUri.Vote, documentId);
-            TaskDoneResult result = await PostJson<TaskDoneResult>(url, "");
+            VoteOperationResult result = await Post<VoteOperationResult>(url, "");
         }
 
         /// <summary>
-        /// 评论一篇文章
+        /// 评论文章 | 视频 | 投稿 | 评论 
         /// </summary>
         /// <param name="documentId"></param>
         /// <param name="content"></param>
@@ -256,9 +260,48 @@ namespace BaoZouRiBao.Http
         public async Task CommentAsync(string documentId, string content)
         {
             string url = string.Format(ServiceUri.DocumentComments, documentId);
-            CommentResult result = await PostJson<CommentResult>(url, "{ \"conten\" : \"" + content + "\"}");
+            CommentOperationResult result = await Post<CommentOperationResult>(url, "{ \"conten\" : \"" + content + "\"}");
         }
-#endregion
+
+        /// <summary>
+        /// 用户投稿
+        /// </summary>
+        /// <param name="link"></param>
+        /// <returns></returns>
+        public async Task UserContributeAsync(string link, string title)
+        {
+            string json = "{ \"title\" : \"" + title + "\", \"link\" : \"" + link + "\"}";
+            var result = await Post<UserContributeResult>(ServiceUri.UserContribute, json);
+
+        }
+
+        /// <summary>
+        /// 获取消息数量
+        /// </summary>
+        public async Task GetMessageAsync()
+        {
+            var result = await GetJson<MessageCountResult>(ServiceUri.MessagesCount);
+
+        }
+
+        /// <summary>
+        /// 获取token信息
+        /// </summary>
+        /// <returns></returns>
+        public async Task GetTokenInfoAsync()
+        {
+            var result = await GetJson<TokenInfoResult>(ServiceUri.TokenInfo);
+        }
+        #endregion
+
+        /// <summary>
+        /// 举报评论
+        /// </summary>
+        /// <param name="commentId">评论的Id</param>
+        public void ReportComment(string commentId)
+        {
+            var result = GetJson<ReportCommentResult>(string.Format(ServiceUri.ReportComment, commentId));
+        }
 
         /// <summary>
         /// 获取最新的文章列表
@@ -374,10 +417,10 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
-        public async Task<OperationResult> FavoriteAsync(string documentId)
+        public async Task<VoteOperationResult> FavoriteAsync(string documentId)
         {
             string url = string.Format(ServiceUri.Favorite, documentId);
-            var result = await PostJson<OperationResult>(url, "");
+            var result = await Post<VoteOperationResult>(url, "");
             return result;
         }
 
@@ -430,7 +473,7 @@ namespace BaoZouRiBao.Http
         public async Task<SearchResult> SearchAsync(string keyword, int pageIndex = 1)
         {
             SearchPost searchPost = new SearchPost() { Keyword = keyword, PageIndex = pageIndex };
-            var searchResult = await PostJson<SearchPost, SearchResult>(ServiceUri.Search, searchPost);
+            var searchResult = await Post<SearchPost, SearchResult>(ServiceUri.Search, searchPost);
             return searchResult;
         }
 

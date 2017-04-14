@@ -24,6 +24,8 @@ namespace BaoZouRiBao.Http
 
         public const string MessagesCount = "http://dailyapi.ibaozou.com/api/v31/messages/count";
 
+        public const string TokenInfo = "http://dailyapi.ibaozou.com/api/v31/user/token_info";
+
         public const string UserAvatar = "http://dailyapi.ibaozou.com/api/v1/user/avatar";
 
         /// <summary>
@@ -42,15 +44,42 @@ namespace BaoZouRiBao.Http
         public const string ClearReadHistory = "http://dailyapi.ibaozou.com/api/v31/documents/read/clear";
 
         /// <summary>
+        /// 评论 的消息
+        /// </summary>
+        public const string CommentMessage = "http://dailyapi.ibaozou.com/api/v31/messages/comment_messages";
+
+        /// <summary>
+        /// 赞 的消息
+        /// </summary>
+        public const string CommentVoteMessage = "http://dailyapi.ibaozou.com/api/v31/messages/comment_vote_messages";
+
+        /// <summary>
+        /// 通知 的消息
+        /// </summary>
+        public const string AdminMessage = "http://dailyapi.ibaozou.com/api/v31/messages/admin_messages";
+        
+
+        /// <summary>
         /// Like a comment
         /// {0} comment id 3325434
         /// </summary>
         public const string LikeComment = "http://dailyapi.ibaozou.com/api/v31/comments/{0}/like";
-        
+
         /// <summary>
-        /// POST image
+        /// 用户投稿
+        /// </summary>
+        public const string UserContribute = "http://dailyapi.ibaozou.com/api/v31/documents/user_contribute";
+
+        /// <summary>
+        /// 上传头像
         /// </summary>
         public const string UploadAvatar = "http://dailyapi.ibaozou.com/api/v1/user/avatar";
+
+        /// <summary>
+        /// 举报评论
+        /// {0} 举报的评论id
+        /// </summary>
+        public const string ReportComment = "http://dailyapi.ibaozou.com/api/v31/comments/{0}/report";
         #endregion
 
         public const string LatestDocument = "http://dailyapi.ibaozou.com/api/v31/documents/latest?timestamp={0}";

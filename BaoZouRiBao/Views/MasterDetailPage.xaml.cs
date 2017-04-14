@@ -61,7 +61,7 @@ namespace BaoZouRiBao.Views
         /// 显示任务Popup
         /// </summary>
         /// <param name="taskDoneResult"></param>
-        public void ShowTaskPopup(TaskDoneResult taskDoneResult)
+        public void ShowTaskPopup(DailyTaskDoneResult taskDoneResult)
         {
             taskPopup.BaoZouPopupType = taskDoneResult.Task.TaskType;
             taskPopup.CoinCount = taskDoneResult.Task.Amount;

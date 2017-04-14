@@ -11,7 +11,7 @@ namespace BaoZouRiBao.Model.ResultModel
     /// <summary>
     /// Daily task result model
     /// </summary>
-    public class TaskDoneResult
+    public class DailyTaskDoneResult
     {
         [JsonProperty(PropertyName = "alertDesc")]
         public string AlertDesc { get; set; }

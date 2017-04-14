@@ -38,7 +38,7 @@ namespace BaoZouRiBao.Http
             }
         }
 
-        protected async Task<T> PostJson<T> (string uri,string body) where T : class
+        protected async Task<T> Post<T> (string uri,string body) where T : class
         {
             try
             {
@@ -63,7 +63,7 @@ namespace BaoZouRiBao.Http
         /// <param name="uri"></param>
         /// <param name="t"></param>
         /// <returns></returns>
-        protected async Task<JsonObject>PostJson<T> (string uri,T t) where T : class
+        protected async Task<JsonObject>Post<T> (string uri,T t) where T : class
         {
             string body = JsonHelper.Serializer(t);
             try
@@ -82,7 +82,7 @@ namespace BaoZouRiBao.Http
             }
         }
          
-        protected async Task<ReturnT> PostJson<SendT,ReturnT>(string uri,SendT sendT) where ReturnT : class
+        protected async Task<ReturnT> Post<SendT,ReturnT>(string uri,SendT sendT) where ReturnT : class
         {
             string body = JsonHelper.Serializer(sendT);
             try
@@ -188,6 +188,11 @@ namespace BaoZouRiBao.Http
                 LogHelper.WriteLine(e);
                 return null;
             }
+        }
+
+        protected async Task UploadImage()
+        {
+
         }
     }
 }

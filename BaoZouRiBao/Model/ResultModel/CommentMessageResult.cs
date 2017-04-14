@@ -8,14 +8,17 @@ using System.Threading.Tasks;
 namespace BaoZouRiBao.Model.ResultModel
 {
     /// <summary>
-    /// 获取最新 | 最热评论返回值
+    /// 评论 的消息
     /// </summary>
-    public class CommentResult
+    public class CommentMessageResult
     {
-        [JsonProperty(PropertyName = "data")]
-        public Comment[] Comments { get; set; }
-
         [JsonProperty(PropertyName = "timestamp")]
         public string TimeStamp { get; set; }
+
+        [JsonProperty(PropertyName = "unread_count")]
+        public string UnReadCount { get; set; }
+
+        [JsonProperty(PropertyName = "comment_message")]
+        public string CommentMessage { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using BaoZouRiBao.Helper;
+﻿using BaoZouRiBao.EventHandlers;
+using BaoZouRiBao.Helper;
+using BaoZouRiBao.Views;
 using Microsoft.Toolkit.Uwp;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,8 @@ namespace BaoZouRiBao.Http
     /// </summary>
     public class HttpBaseService
     {
+        public static event UnauthorizedEventHandler OnUnAuthorized;
+
         private static HttpClient httpClient = new HttpClient();
 
         static HttpBaseService()
@@ -34,11 +38,21 @@ namespace BaoZouRiBao.Http
             // header["X-APP-VERSION"] = "3.1.0";
             // header["ZA"] = "OS=Android 5.0&Platform=4.5 Lollipop (5.0) XHDPI Phone";
             // header["Timestamp"] = Functions.GetUnixTimeStamp();
-            // header.Host = new Windows.Networking.HostName("dailyapi.ibaozou.com");
+            
             header.Connection.TryParseAdd("Keep-Alive");
             header["Host"] = "dailyapi.ibaozou.com";
 
-            // header["Sign"] = "04be2eaa0cb7f683fff807fd09110aeb";
+            OnUnAuthorized += HttpBaseService_OnUnAuthorized;
+        }
+
+        ~HttpBaseService()
+        {
+            OnUnAuthorized -= HttpBaseService_OnUnAuthorized;
+        }
+
+        private static void HttpBaseService_OnUnAuthorized()
+        {
+            NavigationHelper.MasterFrameNavigate(typeof(BaozouLoginPage));
         }
 
         /// <summary>
@@ -56,12 +70,19 @@ namespace BaoZouRiBao.Http
                     header["Authorization"] = "Bearer " + GlobalValue.Current.AccessToken;
                 }
 
-                string res = await httpClient.GetStringAsync(new Uri(uri)); 
-                return res;
+                HttpResponseMessage response = await httpClient.GetAsync(new Uri(uri));
+
+                if (response.StatusCode == Windows.Web.Http.HttpStatusCode.Unauthorized)
+                {
+                    OnUnAuthorized?.Invoke();
+                }
+
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
             }
             catch (Exception e)
             {
-                Debug.WriteLine("HttpBaseService SendGetRequest:" + e.Message);
+                Debug.WriteLine($"HttpBaseService.SendGetRequest : {e.Message}");
                 return null;
             }
         }
@@ -82,7 +103,7 @@ namespace BaoZouRiBao.Http
 
                 if (response.StatusCode == Windows.Web.Http.HttpStatusCode.Unauthorized)
                 {
-
+                    OnUnAuthorized?.Invoke();
                 }
 
                 response.EnsureSuccessStatusCode();
@@ -90,7 +111,7 @@ namespace BaoZouRiBao.Http
             }
             catch (Exception e)
             {
-                Debug.Write(e.Message);
+                Debug.Write($"HttpBaseService.SendPostRequest {e.Message}");
                 return null;
             }
         }
@@ -105,12 +126,18 @@ namespace BaoZouRiBao.Http
             try
             {
                 HttpResponseMessage response = await httpClient.GetAsync(new Uri(uri));
+
+                if (response.StatusCode == Windows.Web.Http.HttpStatusCode.Unauthorized)
+                {
+                    OnUnAuthorized?.Invoke();
+                }
+
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsBufferAsync();
             }
             catch (Exception e)
             {
-                Debug.WriteLine("HttpBaseService SendGetRequestAsBytes:" + e.Message);
+                Debug.WriteLine($"HttpBaseService.SendGetRequestAsBytes {e.Message}");
                 return null;
             }
         }
@@ -120,12 +147,19 @@ namespace BaoZouRiBao.Http
             try
             {
                 HttpFormUrlEncodedContent content = new HttpFormUrlEncodedContent(dic);
-                HttpResponseMessage msg = await httpClient.PostAsync(new Uri(uri), content);
-                return msg.Content.ToString();
+                HttpResponseMessage response = await httpClient.PostAsync(new Uri(uri), content);
+
+                if (response.StatusCode == Windows.Web.Http.HttpStatusCode.Unauthorized)
+                {
+                    OnUnAuthorized?.Invoke();
+                }
+
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("SendRequest : " + ex.Message);
+                Debug.WriteLine($"HttpBaseService.SendDicPostRequest : {ex.Message}");
                 return null;
             }
         }

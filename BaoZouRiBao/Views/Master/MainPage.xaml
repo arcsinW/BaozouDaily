@@ -226,11 +226,11 @@
   
         <Storyboard x:Name="SpinnerStoryboard">
             <DoubleAnimation
-                    Duration="00:00:00.5"
+                    Duration="00:00:0.5"
                     FillBehavior="HoldEnd"
                     From="0"
                     RepeatBehavior="Forever"
-                    Storyboard.TargetName="SpinnerTransform"
+                    Storyboard.TargetName="documentSpinnerTransform"
                     Storyboard.TargetProperty="Angle"
                     To="360" />
         </Storyboard>
@@ -398,7 +398,8 @@
                                   ItemClick="{x:Bind ViewModel.documentListView_ItemClick}"
                                   IncrementalLoadingTrigger="Edge"
                                   ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
-                                  RefreshRequested="{x:Bind ViewModel.RefreshDocument}">
+                                  RefreshRequested="{x:Bind ViewModel.RefreshDocument}"
+                                  PullProgressChanged="PullProgressChanged">
                         <control:RefreshableListView.RefreshIndicatorContent>
                             <Grid Height="100" Background="Transparent">
                                 <FontIcon Margin="0,0,0,30"
@@ -470,7 +471,7 @@
                                                     Stretch="UniformToFill"/>-->
                                         <toolkit:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{Binding Thumbnail}"
                                              PlaceholderSource="{StaticResource PlaceHolderImageSmall}"/>
-                                        
+
                                         <Image Source="{Binding OriginalTag}" Height="32" 
                                                     HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                     </Grid>
@@ -492,7 +493,7 @@
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                    <!--</toolkit:PullToRefreshListView>-->
+                        <!--</toolkit:PullToRefreshListView>-->
                     </control:RefreshableListView>
                 </PivotItem>
 
@@ -554,6 +555,7 @@
                                       IsItemClickEnabled="True"
                                       ItemClick="{x:Bind ViewModel.videoListView_ItemClick}"
                                       RefreshRequested="{x:Bind ViewModel.RefreshVideo}"
+                                      PullProgressChanged="PullProgressChanged"
                                       >
                         <control:RefreshableListView.RefreshIndicatorContent>
                             <Grid Height="100" Background="Transparent">

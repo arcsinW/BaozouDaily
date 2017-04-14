@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BaoZouRiBao.Model.ResultModel
 {
-    public class OperationResult
+    public class ReportCommentResult
     {
         [JsonProperty(PropertyName = "alertDesc")]
         public string AlertDesc { get; set; }
 
         [JsonProperty(PropertyName = "desc")]
-        public string Desc { get; set; }
+        public string Description {get; set; }
 
         [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }

@@ -24,7 +24,7 @@
     <SccProvider>SAK</SccProvider>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-    <AppxBundle>Auto</AppxBundle>
+    <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>6B380A8E3CC7DD25A315E4A0271602BDB5BA218E</PackageCertificateThumbprint>
     <HockeyAppResourceId>ea627d35afcc4f81b8eb033f9b2e79df</HockeyAppResourceId>
@@ -129,6 +129,8 @@
     <Compile Include="Enums\CommentTypeEnum.cs" />
     <Compile Include="Enums\RankTimeEnum.cs" />
     <Compile Include="Enums\RankTypeEnum.cs" />
+    <Compile Include="EventHandlers\UnauthorizedEventHandler.cs" />
+    <Compile Include="Events\UnauthorizedEvent.cs" />
     <Compile Include="Extension\WebViewExtension.cs" />
     <Compile Include="Helper\AuthenticationHelper.cs" />
     <Compile Include="Helper\BackgroundDownloadHelper.cs" />
@@ -205,6 +207,10 @@
     </Compile>
     <Compile Include="UserControls\AndroidPivot.cs" />
     <Compile Include="UserControls\AndroidPopup.cs" />
+    <Compile Include="UserControls\MediaPlayer\BaozouMediaElement.xaml.cs">
+      <DependentUpon>BaozouMediaElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MediaPlayer\BaozouMediaTransportControls.cs" />
     <Compile Include="UserControls\BaoZouTaskPopup.cs" />
     <Compile Include="UserControls\Drawer.cs" />
     <Compile Include="UserControls\RefreshableListView.cs" />
@@ -472,6 +478,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\MediaPlayer\BaozouMediaElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Detail\BaozouLoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -571,12 +581,12 @@
       <Name>BaoZouRiBao.Background</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

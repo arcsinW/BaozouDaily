@@ -1,5 +1,6 @@
 ﻿using BaoZouRiBao.Enums;
 using BaoZouRiBao.Helper;
+using BaoZouRiBao.Http;
 using BaoZouRiBao.IncrementalCollection;
 using System;
 using System.Collections.Generic;
@@ -84,6 +85,24 @@ namespace BaoZouRiBao.ViewModel
         {
             CommentCollection c = new CommentCollection(CommentTypeEnum.hot,documentId);
             HotComments = c;
+        }
+
+        /// <summary>
+        /// 给评论点赞
+        /// </summary>
+        /// <param name="commentId"></param>
+        public void Vote(string commentId)
+        {
+            
+        }
+
+        /// <summary>
+        /// 回复评论
+        /// </summary>
+        /// <param name="commentId"></param>
+        public void ReplayComment(string commentId)
+        {
+
         }
     }
 }

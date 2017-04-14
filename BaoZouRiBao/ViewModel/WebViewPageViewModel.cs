@@ -140,7 +140,7 @@ namespace BaoZouRiBao.ViewModel
             IsActive = false;
         }
 
-        public async Task<OperationResult> Favorite(string documentId)
+        public async Task<VoteOperationResult> Favorite(string documentId)
         {
             var res = await ApiService.Instance.FavoriteAsync(Document.DocumentId);
             return res;

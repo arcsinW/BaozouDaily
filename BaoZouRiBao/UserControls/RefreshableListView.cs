@@ -427,10 +427,7 @@ namespace BaoZouRiBao.UserControls
                 }
             }
 
-            if (this.PullProgressChanged != null)
-            {
-                this.PullProgressChanged(this, new RefreshProgressEventArgs() { PullProgress = pullProgress, IsRefreshable = true });
-            }
+            this.PullProgressChanged?.Invoke(this, new RefreshProgressEventArgs() { PullProgress = pullProgress, IsRefreshable = true });
 
             if (m_refreshActivated && this.AutoRefresh)
             {
@@ -464,10 +461,7 @@ namespace BaoZouRiBao.UserControls
                     m_defaultRefreshIndicatorTextBlock.Text = refreshActivatable ? PULL_TO_REFRESH : RELEASE_THEN_PULL_TO_REFRESH;
                 }
 
-                if (this.PullProgressChanged != null)
-                {
-                    this.PullProgressChanged(this, new RefreshProgressEventArgs() { PullProgress = 0, IsRefreshable = refreshActivatable });
-                }
+                this.PullProgressChanged?.Invoke(this, new RefreshProgressEventArgs() { PullProgress = 0, IsRefreshable = refreshActivatable });
             }
         }
 
