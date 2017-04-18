@@ -27,6 +27,22 @@ namespace BaoZouRiBao.Views
         public MainPage()
         {
             this.InitializeComponent();
+
+            MasterDetailPage.Current.AdaptiveVisualStateChanged += Current_AdaptiveVisualStateChanged;
+        }
+
+        private void Current_AdaptiveVisualStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+            switch(e.NewState.Name)
+            {
+                case "Narrow":
+                    splitViewButton.Visibility = Visibility.Collapsed;
+                    break;
+                case "Wide":
+                    splitViewButton.Visibility = Visibility.Visible;
+                    break;
+            }
+            
         }
 
         #region SplitView' Pane Method
@@ -100,10 +116,10 @@ namespace BaoZouRiBao.Views
             }
         }
         #endregion
-
-
+         
         private void headerFlipView_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            
             var story = headerFlipView.SelectedItem as Document;
             if (story != null)
             {

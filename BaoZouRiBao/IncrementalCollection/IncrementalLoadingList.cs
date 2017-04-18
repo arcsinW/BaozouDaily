@@ -18,10 +18,11 @@ namespace BaoZouRiBao.IncrementalCollection
     public class IncrementalLoadingList<T> : ObservableCollection<T>, ISupportIncrementalLoading
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IncrementalLoadingList{T}"/> class.
         /// 通过页码增量加载
         /// </summary>
-        /// <param name="func"></param>
+        /// <param name="func">页码增量加载方法</param>
+        /// <param name="onDataLoadedAction">数据加载完成</param>
+        /// <param name="onDataLoadingAction">数据加载中</param>
         public IncrementalLoadingList(Func<uint, int, Task<IEnumerable<T>>> func, Action onDataLoadedAction = null, Action onDataLoadingAction = null)
         {
             Page = 0;
@@ -32,29 +33,13 @@ namespace BaoZouRiBao.IncrementalCollection
             this.onDataLoadingAction = onDataLoadingAction;
         }
 
-        private bool isBusy = false;
-
-        public string TimeStamp {get; set; } = string.Empty;
-
-        // 当前页数
-        public int Page { get; private set; }
-
-        private Func<uint, int, Task<IEnumerable<T>>> pageFunc;
-        private Func<uint, string, Task<IEnumerable<T>>> timeStampFunc;
-
-        private Action onDataLoadedAction;
-        private Action onDataLoadingAction;
-
-        public bool HasMoreItems
-        {
-            get; private set;
-        }
-
         /// <summary>
-        /// 通过时间戳增量加载
+        /// 通过时间戳加载
         /// </summary>
-        /// <param name="func"></param>
-        public IncrementalLoadingList(Func<uint,string,Task<IEnumerable<T>>> func, Action onDataLoadedAction = null, Action onDataLoadingAction = null)
+        /// <param name="func">通过时间戳加载数据的方法</param>
+        /// <param name="onDataLoadedAction">数据加载完成</param>
+        /// <param name="onDataLoadingAction">数据加载中</param>
+        public IncrementalLoadingList(Func<uint, string, Task<IEnumerable<T>>> func, Action onDataLoadedAction = null, Action onDataLoadingAction = null)
         {
             TimeStamp = string.Empty;
             this.timeStampFunc = func;
@@ -64,6 +49,33 @@ namespace BaoZouRiBao.IncrementalCollection
             this.onDataLoadedAction = onDataLoadedAction;
         }
 
+        #region Fields
+        private bool isBusy = false;
+
+        public string TimeStamp { get; set; } = string.Empty;
+
+        // 当前页数
+        public int Page { get; private set; }
+
+        /// <summary>
+        /// 按页码加载
+        /// </summary>
+        private Func<uint, int, Task<IEnumerable<T>>> pageFunc;
+
+        /// <summary>
+        /// 按时间戳加载
+        /// </summary>
+        private Func<uint, string, Task<IEnumerable<T>>> timeStampFunc;
+
+        private Action onDataLoadedAction;
+        private Action onDataLoadingAction; 
+        #endregion
+
+        public bool HasMoreItems
+        {
+            get; private set;
+        }
+        
         public async Task ClearAndReload()
         {
             Clear();
@@ -72,16 +84,14 @@ namespace BaoZouRiBao.IncrementalCollection
             await LoadMoreItemsAsync(0);
         }
 
+        /// <summary>
+        /// 没有更多数据
+        /// </summary>
         public void NoMore()
         {
             this.HasMoreItems = false;
         }
-
-        public void HasMore()
-        {
-            this.HasMoreItems = true;
-        }
-
+          
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
             onDataLoadingAction?.Invoke();
@@ -118,6 +128,7 @@ namespace BaoZouRiBao.IncrementalCollection
                 }
                 finally
                 {
+                    NoMore();
                     onDataLoadedAction?.Invoke();
                 }
 

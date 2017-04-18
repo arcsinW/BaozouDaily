@@ -295,25 +295,29 @@
                         <VisualState.StateTriggers>
                             <AdaptiveTrigger MinWindowWidth="0"/>
                         </VisualState.StateTriggers>
-                        <VisualState.Storyboard>
+                        <!--<VisualState.Storyboard>
                             <Storyboard>
-                                <!--<DoubleAnimation Storyboard.TargetName="gridMain" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.6">
+                                <DoubleAnimation Storyboard.TargetName="gridMain" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.6">
                                     <DoubleAnimation.EasingFunction>
                                         <CircleEase EasingMode="EaseOut" />
                                     </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>-->
+                                </DoubleAnimation>
                                 <DoubleAnimation Storyboard.TargetName="gridMain" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" From="100" To="0" Duration="0:0:0.5">
                                     <DoubleAnimation.EasingFunction>
                                         <CircleEase EasingMode="EaseOut" />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
                             </Storyboard>
-                        </VisualState.Storyboard>
+                        </VisualState.Storyboard>-->
                     </VisualState>
                 </VisualStateGroup.States>
 
                 <VisualStateGroup.Transitions>
-                    <VisualTransition From="Wide" To="Narrow"/>
+                    <VisualTransition From="Wide" To="Narrow">
+                        <VisualTransition.GeneratedEasingFunction>
+                            <QuinticEase EasingMode="EaseInOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                    </VisualTransition>
                 </VisualStateGroup.Transitions>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>

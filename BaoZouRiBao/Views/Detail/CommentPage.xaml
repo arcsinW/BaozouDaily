@@ -30,7 +30,7 @@
                     <toolkit:ImageEx Grid.Column="0" Height="40" Width="40" PlaceholderSource="/Assets/Image/avatar_m.png" IsCacheEnabled="True" 
                                  DecodePixelHeight="40" DecodePixelWidth="40" Source="{Binding User.RealAvatarUrl}"/>
                 </Border>-->
-                
+
                 <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="{x:Bind User.RealAvatarUrl,Mode=OneWay}"/>
@@ -64,8 +64,6 @@
                 </Grid>
             </Grid>
         </DataTemplate>
-
-        
     </Page.Resources>
 
     <Grid Background="{ThemeResource PageBackgroundBrush}">

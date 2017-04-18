@@ -1,4 +1,5 @@
 ﻿using BaoZouRiBao.Model.ResultModel;
+using System;
 using Windows.ApplicationModel;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -14,14 +15,11 @@ namespace BaoZouRiBao.Views
         {
             this.InitializeComponent();
 
-            Current = this;
-
-            if(DesignMode.DesignModeEnabled)
-            {
-                MasterFrame.Navigate(typeof(MainPage));
-                DetailFrame.Navigate(typeof(DefaultPage));
-            }
+            Current = this; 
         }
+
+
+
         
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -55,7 +53,11 @@ namespace BaoZouRiBao.Views
         private void AdaptiveVisualState_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
             UpdateBackKeyVisibility();
+
+            AdaptiveVisualStateChanged?.Invoke(sender, e);
         }
+
+        public event EventHandler<VisualStateChangedEventArgs> AdaptiveVisualStateChanged;
           
         /// <summary>
         /// 显示任务Popup

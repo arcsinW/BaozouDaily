@@ -31,24 +31,28 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
-            <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{x:Bind ViewModel.IsMobile,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
-                    <Image Source="{StaticResource BackImage}"/>
-                </Button>
-                <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
+
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{x:Bind ViewModel.IsMobile,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
+                        <Image Source="{StaticResource BackImage}"/>
+                    </Button>
+
+                    <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
                            ScrollViewer.HorizontalScrollMode="Enabled" Style="{ThemeResource PageTitleTextBlockStyle}"/>
-            </StackPanel>
+
+                </StackPanel>
+            </Grid>
 
             <StackPanel x:Name="stackPanel" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Width="Auto">
+                <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>
                         <TextBlock Text="{Binding VoteCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="commentBtn" Style="{ThemeResource BackButtonStyle}" Width="Auto"
+                <Button x:Name="commentBtn" Style="{ThemeResource ImageTextButtonStyle}" Width="Auto"
                         Click="{x:Bind ViewModel.CommentBtnClick}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <BitmapIcon UriSource="/Assets/Images/actionbar_comment_nor.png"/>
@@ -72,6 +76,7 @@
                                 <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.Refresh}"/>
                                 <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                                 <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
+                                <MenuFlyoutItem Text="浏览器打开" Click="{x:Bind ViewModel.LaunchByBrower}"/>
                             </MenuFlyout.Items>
                         </MenuFlyout>
                     </Button.Flyout>

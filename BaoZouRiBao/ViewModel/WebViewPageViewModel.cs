@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using BaoZouRiBao.Helper;
 using BaoZouRiBao.Views;
+using Windows.System;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -164,6 +165,17 @@ namespace BaoZouRiBao.ViewModel
             }
 
             NavigationHelper.DetailFrameNavigate(typeof(CommentPage), DocumentExtra.DocumentId);
+        }
+
+        /// <summary>
+        /// 浏览器打开
+        /// </summary>
+        public async void LaunchByBrower()
+        {
+            if(DocumentExtra != null)
+            {
+                await Launcher.LaunchUriAsync(new Uri(Document.Url));
+            }
         }
     }
 }
