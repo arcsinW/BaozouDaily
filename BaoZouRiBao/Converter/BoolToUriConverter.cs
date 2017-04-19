@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace BaoZouRiBao.Converter
 {
@@ -11,8 +12,8 @@ namespace BaoZouRiBao.Converter
     {
         public BoolToUriConverter()
         {
-            TrueValue = new Uri("ms-appx:///Assets/Images/nav_favourite_pre.png");
-            FalseValue = new Uri("ms-appx:///Assets/Images/sidebar_favourite.png");
+            TrueValue = new BitmapImage(new Uri("ms-appx:///Assets/Images/btn_nav_favourite_pre.png"));
+            FalseValue = new BitmapImage(new Uri("ms-appx:///Assets/Images/sidebar_favourite.png"));
         }
 
         //public object Convert(object value, Type targetType, object parameter, string language)

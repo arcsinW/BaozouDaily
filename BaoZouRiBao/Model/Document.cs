@@ -44,9 +44,9 @@ namespace BaoZouRiBao.Model
 
         [JsonProperty(PropertyName = "document_id")]
         public string DocumentId { get; set; }
-
-        [JsonProperty(PropertyName = "favorited")]
-        public string Favorited { get; set; }
+        
+        [JsonProperty(PropertyName = "favorited",DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool Favorited { get; set; }
 
         [JsonProperty(PropertyName = "ga_prefix")]
         public string GaPrefix { get; set; }

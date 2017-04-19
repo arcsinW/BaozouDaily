@@ -16,7 +16,8 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <converter:BoolToUriConverter x:Key="BoolToUriConverter"/>
+        
+        <converter:BoolToPathIconConverter x:Key="BoolToPathIconConverter"/>
     </Page.Resources>
 
     <Grid Background="{ThemeResource PageBackgroundBrush}">
@@ -61,11 +62,7 @@
                 </Button>
 
                 <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.FavoriteBtnClick}">
-                    <Image>
-                        <Image.Source>
-                            <BitmapImage UriSource="{Binding Favorited,Converter={StaticResource BoolToUriConverter}}"/>
-                        </Image.Source>
-                    </Image> 
+                    <PathIcon Data="{x:Bind ViewModel.IsFavorite,Mode=OneWay,Converter={StaticResource BoolToPathIconConverter}}"/>
                 </Button>
 
                 <Button Style="{ThemeResource BackButtonStyle}">
@@ -76,7 +73,7 @@
                                 <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.Refresh}"/>
                                 <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                                 <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
-                                <MenuFlyoutItem Text="浏览器打开" Click="{x:Bind ViewModel.LaunchByBrower}"/>
+                                <MenuFlyoutItem Text="浏览器打开" Click="{x:Bind ViewModel.LaunchByBrower}" Visibility="{x:Bind ViewModel.IsBrowerEnable,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}"/>
                             </MenuFlyout.Items>
                         </MenuFlyout>
                     </Button.Flyout>

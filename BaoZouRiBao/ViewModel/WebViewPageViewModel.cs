@@ -38,6 +38,7 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
+
         private DocumentExtra documentExtra;
 
         public DocumentExtra DocumentExtra
@@ -53,6 +54,7 @@ namespace BaoZouRiBao.ViewModel
                 OnPropertyChanged();
             }
         }
+
 
         private DocumentRelated documentRelated;
 
@@ -70,6 +72,7 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
+
         private DocumentComment documentComment;
 
         public DocumentComment DocumentComment
@@ -85,6 +88,7 @@ namespace BaoZouRiBao.ViewModel
                 OnPropertyChanged();
             }
         }
+
 
         public StringBuilder HtmlString { get; set; }
 
@@ -103,6 +107,27 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
+
+        private bool isBrowerEnable = false;
+
+        /// <summary>
+        /// 是否可以用浏览器打开
+        /// </summary>
+        public bool IsBrowerEnable
+        {
+            get { return isBrowerEnable; }
+            set { isBrowerEnable = value; OnPropertyChanged(); }
+        }
+
+
+        private bool isFavorite;
+
+        public bool IsFavorite
+        {
+            get { return isFavorite; }
+            set { isFavorite = value; OnPropertyChanged(); }
+        }
+
         #endregion
 
         public void WebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
@@ -119,10 +144,11 @@ namespace BaoZouRiBao.ViewModel
         {
             IsActive = true;
             DocumentExtra = await ApiService.Instance.GetDocumentExtraAsync(documentId);
+            Document = await ApiService.Instance.GetDocumentAsync(documentId);
             switch (displayType)
             {
                 case "1":
-                    Document = await ApiService.Instance.GetDocumentAsync(documentId);
+                    //Document = await ApiService.Instance.GetDocumentAsync(documentId);
                     DocumentComment = await ApiService.Instance.GetDocumentCommentAsync(documentId);
                     DocumentRelated = await ApiService.Instance.GetDocumentRelatedAsync(documentId);
                     if (Document != null)
@@ -131,19 +157,21 @@ namespace BaoZouRiBao.ViewModel
                         HtmlString.Append(Document.Head).Append(Document.Body);
                         OnPropertyChanged(nameof(HtmlString));
                     }
-
+                    
+                    IsBrowerEnable = true;
                     break;
                 case "2": // pure html
-
+                    
                     break;
-            }
+            IsFavorite = document.Favorited;
+        }
 
             IsActive = false;
         }
 
         public async Task<VoteOperationResult> Favorite(string documentId)
         {
-            var res = await ApiService.Instance.FavoriteAsync(Document.DocumentId);
+            var res = await ApiService.Instance.FavoriteAsync(documentId);
             return res;
         }
 
@@ -155,6 +183,10 @@ namespace BaoZouRiBao.ViewModel
             }
 
             var res = await Favorite(DocumentExtra.DocumentId.ToString());
+            if(res.Status.Equals("2006"))
+            {
+                IsFavorite = true;
+            }
         }
 
         public void CommentBtnClick(object sender, RoutedEventArgs e)
@@ -172,9 +204,9 @@ namespace BaoZouRiBao.ViewModel
         /// </summary>
         public async void LaunchByBrower()
         {
-            if(DocumentExtra != null)
+            if(Document != null)
             {
-                await Launcher.LaunchUriAsync(new Uri(Document.Url));
+                await Launcher.LaunchUriAsync(new Uri(Document.ShareUrl));
             }
         }
     }

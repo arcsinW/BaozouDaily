@@ -16,11 +16,8 @@ namespace BaoZouRiBao.Views
             this.InitializeComponent();
 
             Current = this; 
-        }
+        } 
 
-
-
-        
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             DetailFrame.Navigate(typeof(DefaultPage));
