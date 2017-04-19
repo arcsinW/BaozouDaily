@@ -140,7 +140,7 @@ namespace BaoZouRiBao.ViewModel
             IsActive = false;
         }
 
-        public async void LoadDocument(string documentId,string displayType)
+        public async void LoadDocument(string documentId, string displayType)
         {
             IsActive = true;
             DocumentExtra = await ApiService.Instance.GetDocumentExtraAsync(documentId);
@@ -148,7 +148,6 @@ namespace BaoZouRiBao.ViewModel
             switch (displayType)
             {
                 case "1":
-                    //Document = await ApiService.Instance.GetDocumentAsync(documentId);
                     DocumentComment = await ApiService.Instance.GetDocumentCommentAsync(documentId);
                     DocumentRelated = await ApiService.Instance.GetDocumentRelatedAsync(documentId);
                     if (Document != null)
@@ -157,15 +156,14 @@ namespace BaoZouRiBao.ViewModel
                         HtmlString.Append(Document.Head).Append(Document.Body);
                         OnPropertyChanged(nameof(HtmlString));
                     }
-                    
+
                     IsBrowerEnable = true;
                     break;
                 case "2": // pure html
-                    
-                    break;
-            IsFavorite = document.Favorited;
-        }
 
+                    break;
+            }
+            IsFavorite = document.Favorited;
             IsActive = false;
         }
 
