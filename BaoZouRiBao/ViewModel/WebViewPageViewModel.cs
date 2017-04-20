@@ -167,34 +167,43 @@ namespace BaoZouRiBao.ViewModel
             IsActive = false;
         }
 
-        public async Task<VoteOperationResult> Favorite(string documentId)
+        private async Task<VoteOperationResult> Favorite(string documentId)
         {
             var res = await ApiService.Instance.FavoriteAsync(documentId);
             return res;
         }
 
+        /// <summary>
+        /// 收藏
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public async void FavoriteBtnClick(object sender, RoutedEventArgs e)
         {
-            if (DocumentExtra == null)
+            if (DocumentExtra != null)
             {
-                return;
-            }
-
-            var res = await Favorite(DocumentExtra.DocumentId.ToString());
-            if(res.Status.Equals("2006"))
-            {
-                IsFavorite = true;
+                var res = await Favorite(DocumentExtra.DocumentId.ToString());
+                if (res != null)
+                {
+                    if (res.Status.Equals("2006"))
+                    {
+                        IsFavorite = true;
+                    }
+                }
             }
         }
 
+        /// <summary>
+        /// 跳转到评论列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void CommentBtnClick(object sender, RoutedEventArgs e)
         {
-            if (DocumentExtra == null)
+            if (DocumentExtra != null)
             {
-                return;
+                NavigationHelper.DetailFrameNavigate(typeof(CommentPage), DocumentExtra.DocumentId);
             }
-
-            NavigationHelper.DetailFrameNavigate(typeof(CommentPage), DocumentExtra.DocumentId);
         }
 
         /// <summary>

@@ -7,6 +7,17 @@
 
     <Color x:Key="StatusBarBackgroundColor">#FF1F1F1F</Color>
 
+    <SolidColorBrush x:Key="PivotHeaderColorBrush">#343434</SolidColorBrush>
+    
+    <!--分隔线的颜色-->
+    <SolidColorBrush x:Key="SplitLineColorBrush">#FFFFFF</SolidColorBrush>
+
+    <!--MasterDetailPage Pane背景色-->
+    <SolidColorBrush x:Key="PaneBackgroundColor">#343434</SolidColorBrush>
+
+    <!--页面标题背景色-->
+    <SolidColorBrush x:Key="PageTitleBackground">#343434</SolidColorBrush>
+
     <SolidColorBrush x:Key="ThemeColorBrush" Color="{StaticResource DarkThemeColor}"/>
 
     <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FF2D2D2D"/>

@@ -153,7 +153,6 @@
                                       VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" 
                                       MinZoomFactor="0.5"
                                       MaxZoomFactor="5.0"
-                                      Style="{ThemeResource LightScrollViewerStyle}"
                                       ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
                             <Grid x:Name="ScrollerContent" VerticalAlignment="Top">
                                 <Grid.RowDefinitions>

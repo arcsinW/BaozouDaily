@@ -8,97 +8,21 @@
     RequestedTheme="Light"> 
     
     <Application.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary> 
             <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <Color x:Key="LightThemeColor">#FB3D4F</Color>
-
-                    <Color x:Key="StatusBarBackgroundColor">#FF97252F</Color>
-
-                    <SolidColorBrush x:Key="PivotHeaderColorBrush">#FFFFFF</SolidColorBrush>
-                    
-                    <!--分隔线的颜色-->
-                    <SolidColorBrush x:Key="SplitLineColorBrush">#FB3D4F</SolidColorBrush>
-                    
-                    <!--MasterDetailPage Pane背景色-->
-                    <SolidColorBrush x:Key="PaneBackgroundColor">#FFFFFF</SolidColorBrush>
-
-                    <!--页面标题背景色-->
-                    <SolidColorBrush x:Key="PageTitleBackground">#FB3D4F</SolidColorBrush>
-                    
-                    <SolidColorBrush x:Key="ThemeColorBrush" Color="{StaticResource LightThemeColor}"/>
-
-                    <!--页面背景色-->
-                    <SolidColorBrush x:Key="PageBackgroundBrush" Color="#EEEEEE"/>
-
-                    <SolidColorBrush x:Key="AdjustColorBrush" Color="White"/>
-
-                    <SolidColorBrush x:Key="PhoneForegroundColorBrush" Color="Black"/>
-
-                    <SolidColorBrush x:Key="ListViewBackgroundBrush" Color="White"/>
-
-                    <SolidColorBrush x:Key="ListViewHeaderBrush" Color="#FFEEEEEE"/>
-
-                    <SolidColorBrush x:Key="AndroidPopupButtonBackgroundColorBrush" Color="#FFFEC64F"/>
-
-                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FFF2F2F2"/>
-
-                    <SolidColorBrush x:Key="FlyoutForegroundBrush" Color="#FF7F7F7F"/>
-
-                    <SolidColorBrush x:Key="SplitViewSpanBackground" Color="#FFEEEEEE"/>
-
-                    <!--MyCommentPage 评论内文章标题背景色-->
-                    <SolidColorBrush x:Key="InnerDocumentBackgroundThemeBrush">#FF393939</SolidColorBrush>
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Dark">
-                    <Color x:Key="DarkThemeColor">#FF343434</Color>
-
-                    <Color x:Key="StatusBarBackgroundColor">#FF1F1F1F</Color>
-
-                    <SolidColorBrush x:Key="PivotHeaderColorBrush">#343434</SolidColorBrush>
-
-                    <!--分隔线的颜色-->
-                    <SolidColorBrush x:Key="SplitLineColorBrush">#FFFFFF</SolidColorBrush>
-
-                    <!--MasterDetailPage Pane背景色-->
-                    <SolidColorBrush x:Key="PaneBackgroundColor">#343434</SolidColorBrush>
-
-                    <!--页面标题背景色-->
-                    <SolidColorBrush x:Key="PageTitleBackground">#343434</SolidColorBrush>
-
-                    <SolidColorBrush x:Key="ThemeColorBrush" Color="{StaticResource DarkThemeColor}"/>
-
-                    <!--页面背景色-->
-                    <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FF2D2D2D"/>
-
-                    <SolidColorBrush x:Key="AdjustColorBrush" Color="Black"/>
-
-                    <SolidColorBrush x:Key="PhoneForegroundColorBrush" Color="#FFB5B5B5"/>
-
-                    <SolidColorBrush x:Key="ListViewBackgroundBrush" Color="#FF343434"/>
-
-                    <SolidColorBrush x:Key="ListViewHeaderBrush" Color="#FF2D2D2D"/>
-
-                    <SolidColorBrush x:Key="AndroidPopupButtonBackgroundColorBrush" Color="#FFFEC64F"/>
-
-                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FF404040"/>
-
-                    <SolidColorBrush x:Key="FlyoutForegroundBrush" Color="#FFFEFEFE"/>
-
-                    <SolidColorBrush x:Key="SplitViewSpanBackground" Color="#FF3E3E42"/>
-
-                    <!--MyCommentPage 评论内文章标题背景色-->
-                    <SolidColorBrush x:Key="InnerDocumentBackgroundThemeBrush">#FF393939</SolidColorBrush>
-                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark" Source="Themes/DarkDictionary"/>
+                <ResourceDictionary x:Key="Light" Source="Themes/LightDictionary"/>
             </ResourceDictionary.ThemeDictionaries>
-            <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="Themes/ThemeDictionary.xaml"/>-->
+            <ResourceDictionary.MergedDictionaries> 
                 <theme:ThemeDictionary/>
             </ResourceDictionary.MergedDictionaries>
 
             <Color x:Key="DarkThemeColor">#FF343434</Color>
             <Color x:Key="LightThemeColor">#FB3D4F</Color>
 
+            <Color x:Key="DarkStatusBarBackgroundColor">#FF1F1F1F</Color>
+            <Color x:Key="LightStatusBarBackgroundColor">#FF97252F</Color>
+            
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <converter:TimeStampToDateTimeConverter x:Key="TimeStampToDateTimeConverter"/>
             <BitmapImage x:Key="PlaceHolderImageSmall" UriSource="/Assets/Images/image_small_default.jpg"/>

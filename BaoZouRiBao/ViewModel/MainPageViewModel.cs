@@ -130,7 +130,10 @@ namespace BaoZouRiBao.ViewModel
         public void videoListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var video = e.ClickedItem as Video;
-            NavigationHelper.DetailFrameNavigate(typeof(VideoPage), video);
+            if (video != null)
+            {
+                NavigationHelper.DetailFrameNavigate(typeof(VideoPage), video.DocumentId);
+            }
         }
 
         public void contributeListView_ItemClick(object sender, ItemClickEventArgs e)

@@ -52,7 +52,7 @@ namespace BaoZouRiBao.Http
 
         private static void HttpBaseService_OnUnAuthorized()
         {
-            NavigationHelper.MasterFrameNavigate(typeof(BaozouLoginPage));
+            NavigationHelper.DetailFrameNavigate(typeof(BaozouLoginPage));
         }
 
         /// <summary>

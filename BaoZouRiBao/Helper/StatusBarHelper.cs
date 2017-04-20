@@ -17,7 +17,7 @@ namespace BaoZouRiBao.Helper
             {
                 StatusBar statusBar = StatusBar.GetForCurrentView();
                 statusBar.BackgroundOpacity = 1;
-                statusBar.BackgroundColor = (isNight ? App.Current. Resources["DarkThemeColor"] : App.Current.Resources["LightThemeColor"]) as Color?;
+                statusBar.BackgroundColor = (isNight ? App.Current. Resources["DarkStatusBarBackgroundColor"] : App.Current.Resources["LightStatusBarBackgroundColor"]) as Color?;
                 statusBar.ForegroundColor = Colors.White;
                 await statusBar.ShowAsync();
             }
@@ -26,7 +26,12 @@ namespace BaoZouRiBao.Helper
                 var titleBar = ApplicationView.GetForCurrentView().TitleBar;
                 titleBar.BackgroundColor = (isNight ? App.Current.Resources["DarkThemeColor"] : App.Current.Resources["LightThemeColor"]) as Color?;
                 titleBar.ButtonBackgroundColor = (isNight ? App.Current.Resources["DarkThemeColor"] : App.Current.Resources["LightThemeColor"]) as Color?;
-                titleBar.ForegroundColor = Colors.White;
+                titleBar.ButtonInactiveBackgroundColor = (isNight ? App.Current.Resources["DarkThemeColor"] : App.Current.Resources["LightThemeColor"]) as Color?;
+                titleBar.InactiveBackgroundColor = (isNight ? App.Current.Resources["DarkThemeColor"] : App.Current.Resources["LightThemeColor"]) as Color?;
+                titleBar.InactiveForegroundColor = Colors.White;
+                titleBar.ButtonInactiveForegroundColor = Colors.White;
+                titleBar.ForegroundColor = Colors.White; 
+                titleBar.ButtonForegroundColor = Colors.White;
             }
         }
     }

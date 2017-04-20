@@ -87,11 +87,18 @@ namespace BaoZouRiBao.ViewModel
 
         public void documentListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var story = e.ClickedItem as Document;
-            if (story != null)
+            var document = e.ClickedItem as Document;
+            if (document != null)
             {
-                WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
-                MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
+                if (!document.DisplayType.Equals("3"))
+                {
+                    WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = document.Url, DocumentId = document.DocumentId, DisplayType = document.DisplayType };
+                    MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
+                }
+                else
+                {
+                    NavigationHelper.DetailFrameNavigate(typeof(VideoPage), document.DocumentId);
+                }
             }
         }
 
