@@ -23,6 +23,8 @@ namespace BaoZouRiBao.Views
         public UserInfoPage()
         {
             this.InitializeComponent(); 
+
+            MasterDetailPage.Current.AdaptiveVisualStateChanged += Current_AdaptiveVisualStateChanged;
         }
 
         public void CoinRank()
@@ -38,6 +40,19 @@ namespace BaoZouRiBao.Views
             NavigationHelper.DetailFrameNavigate(typeof(WebViewPage), paramter);
         }
 
-        
+        private void Current_AdaptiveVisualStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+            switch (e.NewState.Name)
+            {
+                case "Narrow":
+                    splitViewButton.Visibility = Visibility.Collapsed;
+                    pageTitleTextBlock.Margin = new Thickness(4, 0, 4, 0);
+                    break;
+                case "Wide":
+                    splitViewButton.Visibility = Visibility.Visible;
+                    pageTitleTextBlock.Margin = new Thickness(12, 0, 12, 0);
+                    break;
+            }
+        }
     }
 }

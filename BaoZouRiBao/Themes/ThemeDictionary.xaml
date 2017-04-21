@@ -382,7 +382,7 @@
     <Style x:Key="PageTitleTextBlockStyle" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Margin" Value="6,0"/>
+        <Setter Property="Margin" Value="12,0"/>
         <Setter Property="FontSize" Value="{StaticResource PageTitleFontSize}"/>
     </Style>
     <!--#endregion -->
@@ -739,7 +739,7 @@
                             <RepeatButton  x:Name="VerticalSmallIncrease" Visibility="Collapsed" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="4" Template="{StaticResource VerticalIncrementTemplate}"/>
                         </Grid>
                         <Grid x:Name="VerticalPanningRoot" >
-                            <Border CornerRadius="1" x:Name="VerticalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}" HorizontalAlignment="Right" Margin="2,0,2,0" MinHeight="32" VerticalAlignment="Top" Width="2"/>
+                            <Border CornerRadius="2" x:Name="VerticalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}" HorizontalAlignment="Right" Margin="2,0,2,0" MinHeight="32" VerticalAlignment="Top" Width="2"/>
                         </Grid>
                     </Grid>
                 </ControlTemplate>

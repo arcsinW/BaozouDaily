@@ -282,7 +282,8 @@
 
         <Grid HorizontalAlignment="Stretch" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Button x:Name="splitViewButton" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}" >
+                <Button x:Name="splitViewButton" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}" 
+                        Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                 </Button>
                 <TextBlock x:Name="pageTitleTextBlock" Text="首页" Style="{ThemeResource PageTitleTextBlockStyle}"/>

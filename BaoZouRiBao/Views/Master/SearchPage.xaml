@@ -259,17 +259,18 @@
             <RowDefinition Height="48"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
+        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="48"/>
-                <ColumnDefinition/>
+                <ColumnDefinition x:Name="searchColumn" Width="48"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
+            <Button x:Name="splitViewButton" Grid.Column="0" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}" 
+                        Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
+                </Button>
 
-            <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
-            </Button>
-
-            <TextBox Grid.Column="1" PlaceholderText="输入关键词"  Height="40"
+                <TextBox PlaceholderText="输入关键词"  Height="40" Grid.Column="1"
                      Style="{ThemeResource LightTextBoxStyle}" Foreground="White"
                      Text="{Binding Keyword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>

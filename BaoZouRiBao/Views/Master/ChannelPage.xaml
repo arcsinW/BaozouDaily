@@ -26,10 +26,11 @@
 
             <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
                 <StackPanel Orientation="Horizontal">
-                    <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}">
+                    <Button x:Name="splitViewButton" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}" 
+                            Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                     </Button>
-                    <TextBlock Text="频道" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+                    <TextBlock x:Name="pageTitleTextBlock" Text="频道" Style="{ThemeResource PageTitleTextBlockStyle}"/>
                 </StackPanel>
                 
                 <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right">
