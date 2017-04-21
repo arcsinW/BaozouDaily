@@ -16,7 +16,6 @@
     </Page.DataContext>
 
     <Page.Resources>
-        
         <converter:BoolToPathIconConverter x:Key="BoolToPathIconConverter"/>
     </Page.Resources>
 

@@ -90,8 +90,15 @@ namespace BaoZouRiBao.ViewModel
             var story = e.ClickedItem as Document;
             if (story != null)
             {
-                WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
-                MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
+                if (!story.DisplayType.Equals("3"))
+                {
+                    WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
+                    MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
+                }
+                else
+                {
+                    NavigationHelper.DetailFrameNavigate(typeof(VideoPage), story.DocumentId);
+                }
             }
         }
 

@@ -39,11 +39,12 @@ namespace BaoZouRiBao.Views
             {
                 case "Narrow":
                     splitViewButton.Visibility = Visibility.Visible;
-                    searchColumn.Width = new GridLength(48);
+                    //Grid.SetColumn(searchTextBox, 1);
                     break;
                 case "Wide":
                     splitViewButton.Visibility = Visibility.Collapsed;
-                    searchColumn.Width = new GridLength(0);
+                    //Grid.SetColumn(searchTextBox, 0);
+                    //Grid.SetColumnSpan(searchTextBox, 2);
                     break;
             }
         }

@@ -8,13 +8,27 @@ namespace BaoZouRiBao.ViewModel
 {
     public class MessagePageViewModel : ViewModelBase
     {
-        private bool isActive;
+        public MessagePageViewModel()
+        {
+            if(IsDesignMode)
+            {
+                LoadDesignData();
+            }
+        }
+
+        private void LoadDesignData()
+        {
+
+        }
+
+        #region Properties
+        private bool isActive = false;
 
         public bool IsActive
         {
             get { return isActive; }
             set { isActive = value; OnPropertyChanged(); }
-        }
-
+        } 
+        #endregion
     }
 }

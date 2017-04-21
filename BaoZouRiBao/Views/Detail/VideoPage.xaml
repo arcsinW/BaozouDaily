@@ -18,6 +18,7 @@
     <Page.Resources>
         <converter:BoolToUriConverter x:Key="BoolToUriConverter"/>
         <converter:SecondsToDateTimeConverter x:Key="SecondsToDateTimeConverter"/>
+        <converter:BoolToPathIconConverter x:Key="BoolToPathIconConverter"/>
     </Page.Resources>
 
     <Grid Background="{ThemeResource PageBackgroundBrush}">
@@ -51,14 +52,8 @@
                     </StackPanel>
                 </Button>
 
-                <Button Style="{ThemeResource BackButtonStyle}" x:Name="favoriteBtn">
-                    <Image>
-                        <Image.Source>
-                            <BitmapImage UriSource="{Binding Favorited,Converter={StaticResource BoolToUriConverter}}"/>
-                            <!--<BitmapImage UriSource="/Assets/Images/sidebar_favourite.png"/>-->
-                        </Image.Source>
-                    </Image>
-                    <!--<BitmapImage UriSource="{Binding Favorited,Converter={StaticResource BoolToUriConverter}}"/>-->
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.FavoriteBtnClick}">
+                    <PathIcon Data="{x:Bind ViewModel.IsFavorite,Mode=OneWay,Converter={StaticResource BoolToPathIconConverter}}"/>
                 </Button>
 
                 <Button Style="{ThemeResource BackButtonStyle}">
