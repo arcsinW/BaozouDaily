@@ -15,18 +15,15 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
-
 namespace BaoZouRiBao.Views
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
     public sealed partial class ChannelPage : Page
     {
         public ChannelPage()
         {
             this.InitializeComponent();
+
+            MasterDetailPage.Current.AdaptiveVisualStateChanged += Current_AdaptiveVisualStateChanged;
         }
 
         private void channelListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -35,6 +32,21 @@ namespace BaoZouRiBao.Views
             if (channel != null)
             {
                 NavigationHelper.MasterFrameNavigate(typeof(ContributeInChannelPage),channel);
+            }
+        }
+
+        private void Current_AdaptiveVisualStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+            switch (e.NewState.Name)
+            {
+                case "Narrow":
+                    splitViewButton.Visibility = Visibility.Visible;
+                    pageTitleTextBlock.Margin = new Thickness(4, 0, 4, 0);
+                    break;
+                case "Wide":
+                    splitViewButton.Visibility = Visibility.Collapsed;
+                    pageTitleTextBlock.Margin = new Thickness(12, 0, 12, 0);
+                    break;
             }
         }
     }

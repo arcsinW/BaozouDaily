@@ -382,7 +382,7 @@
     <Style x:Key="PageTitleTextBlockStyle" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Margin" Value="6,0"/>
+        <Setter Property="Margin" Value="12,0"/>
         <Setter Property="FontSize" Value="{StaticResource PageTitleFontSize}"/>
     </Style>
     <!--#endregion -->

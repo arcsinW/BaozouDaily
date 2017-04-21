@@ -26,12 +26,14 @@ namespace BaoZouRiBao.Helper
                 var titleBar = ApplicationView.GetForCurrentView().TitleBar;
                 titleBar.BackgroundColor = (isNight ? App.Current.Resources["DarkThemeColor"] : App.Current.Resources["LightThemeColor"]) as Color?;
                 titleBar.ButtonBackgroundColor = (isNight ? App.Current.Resources["DarkThemeColor"] : App.Current.Resources["LightThemeColor"]) as Color?;
-                titleBar.ButtonInactiveBackgroundColor = (isNight ? App.Current.Resources["DarkThemeColor"] : App.Current.Resources["LightThemeColor"]) as Color?;
-                titleBar.InactiveBackgroundColor = (isNight ? App.Current.Resources["DarkThemeColor"] : App.Current.Resources["LightThemeColor"]) as Color?;
+                titleBar.ForegroundColor = Colors.White;
+                titleBar.ButtonForegroundColor = Colors.White;
+
+                titleBar.ButtonInactiveBackgroundColor = (isNight ? App.Current.Resources["DarkStatusBarBackgroundColor"] : App.Current.Resources["LightStatusBarBackgroundColor"]) as Color?;
+                titleBar.InactiveBackgroundColor = (isNight ? App.Current.Resources["DarkStatusBarBackgroundColor"] : App.Current.Resources["LightStatusBarBackgroundColor"]) as Color?;
                 titleBar.InactiveForegroundColor = Colors.White;
                 titleBar.ButtonInactiveForegroundColor = Colors.White;
-                titleBar.ForegroundColor = Colors.White; 
-                titleBar.ButtonForegroundColor = Colors.White;
+                
             }
         }
     }

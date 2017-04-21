@@ -21,7 +21,7 @@
             <Color x:Key="LightThemeColor">#FB3D4F</Color>
 
             <Color x:Key="DarkStatusBarBackgroundColor">#FF1F1F1F</Color>
-            <Color x:Key="LightStatusBarBackgroundColor">#FF97252F</Color>
+            <Color x:Key="LightStatusBarBackgroundColor">#F7717E</Color>
             
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <converter:TimeStampToDateTimeConverter x:Key="TimeStampToDateTimeConverter"/>

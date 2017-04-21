@@ -6,7 +6,7 @@
 
     <Color x:Key="LightThemeColor">#FFFB3D4F</Color>
 
-    <Color x:Key="StatusBarBackgroundColor">#FF97252F</Color>
+    <Color x:Key="StatusBarBackgroundColor">#FFEF939C</Color>
 
     <SolidColorBrush x:Key="PivotHeaderColorBrush" Color="#FFFFFF"/>
 
