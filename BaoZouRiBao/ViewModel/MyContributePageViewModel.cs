@@ -14,6 +14,11 @@ namespace BaoZouRiBao.ViewModel
         public MyContributePageViewModel()
         {
             Contributes = new IncrementalLoadingList<Contribute>(GetContributes, () => { IsActive = false; }, () => { IsActive = true; });
+
+            if (IsDesignMode)
+            {
+
+            }
         }
          
         #region Properties
@@ -37,6 +42,10 @@ namespace BaoZouRiBao.ViewModel
 
         #endregion
 
+        public void LoadDesignData()
+        {
+            string json = "";
+        }
 
         public async Task<IEnumerable<Contribute>> GetContributes(uint count, string timeStamp)
         {
