@@ -16,6 +16,9 @@ namespace BaoZouRiBao.Model
         public string Id { get; set; }
 
         [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        public string Name { get; set; } 
+
+        [JsonProperty(PropertyName = "type")]
+        public string UserType { get; set; }
     }
 }

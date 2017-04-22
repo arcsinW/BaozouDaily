@@ -180,6 +180,7 @@
     <Compile Include="Model\DocumentExtra.cs" />
     <Compile Include="Model\DocumentRelated.cs" />
     <Compile Include="Model\HackJs.cs" />
+    <Compile Include="Model\Message.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\PostModel\LoginPost.cs" />
     <Compile Include="Model\PostModel\SearchPost.cs" />

@@ -18,7 +18,7 @@ namespace BaoZouRiBao.Model.ResultModel
         [JsonProperty(PropertyName = "unread_count")]
         public string UnReadCount { get; set; }
 
-        [JsonProperty(PropertyName = "comment_message")]
-        public string CommentMessage { get; set; }
+        [JsonProperty(PropertyName = "admin_message")]
+        public List<Message> CommentMessage { get; set; }
     }
 }

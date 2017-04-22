@@ -234,11 +234,77 @@ namespace BaoZouRiBao.Http
             var result = await Post<VoteOperationResult>(ServiceUri.ClearReadHistory,"");
             return result;
         }
-        
+
+        /// <summary>
+        /// 获取我的投稿
+        /// </summary>
+        /// <param name="timeStamp"></param>
+        /// <returns></returns>
+        public async Task<LatestContributeResult> GetMyContributeAsync(string timeStamp)
+        {
+            string uri = string.Format(ServiceUri.MyContribute, timeStamp);
+            var result = await GetJson<LatestContributeResult>(uri);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public async Task UploadAvatarAsync()
         {
 
         }
+
+        #region 消息
+        /// <summary>
+        /// 获取 评论 消息
+        /// </summary>
+        public async Task<List<Message>> GetCommentMessages()
+        {
+            var result = await GetJson<CommentMessageResult>(ServiceUri.CommentMessage);
+            if (result != null)
+            {
+                return result.CommentMessage;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取 赞 消息
+        /// </summary>
+        public async Task<List<Message>> GetCommentVoteMessages()
+        {
+            var result = await GetJson<CommentVoteMessageResult>(ServiceUri.CommentVoteMessage);
+            if (result != null)
+            {
+                return result.CommentMessage;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Message>> GetAdminMessages()
+        {
+            var result = await GetJson<AdminMessageResult>(ServiceUri.AdminMessage);
+            if (result != null)
+            {
+                return result.CommentMessage;
+            }
+            else
+            {
+                return null;
+            }
+        } 
+        #endregion
 
         /// <summary>
         /// 为 文章 | 视频 | 投稿 | 评论 点赞
