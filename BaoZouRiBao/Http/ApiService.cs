@@ -334,11 +334,11 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="link"></param>
         /// <returns></returns>
-        public async Task UserContributeAsync(string link, string title)
+        public async Task<UserContributeResult> UserContributeAsync(string link, string title)
         {
             string json = "{ \"title\" : \"" + title + "\", \"link\" : \"" + link + "\"}";
             var result = await Post<UserContributeResult>(ServiceUri.UserContribute, json);
-
+            return result;
         }
 
         /// <summary>

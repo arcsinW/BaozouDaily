@@ -19,5 +19,20 @@ namespace BaoZouRiBao.Helper
             DataPackageView dataPackageView = Clipboard.GetContent();
             string text = await dataPackageView.GetTextAsync();
         }
+         
+        /// <summary>
+        /// 获取剪切板中的超链接
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<string> GetTextAsync()
+        {
+            DataPackageView dataPackage = Clipboard.GetContent();
+            if (dataPackage.Contains(StandardDataFormats.WebLink))
+            {
+                string text = await dataPackage.GetTextAsync();
+                return text;
+            }
+            return string.Empty;
+        }
     }
 }

@@ -130,7 +130,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Background="{ThemeResource ListViewBackgroundBrush}">
-            <ScrollViewer>
+            <ScrollViewer Style="{ThemeResource LightScrollViewerStyle}">
                 <StackPanel Padding="0,24,0,0">
                     <StackPanel.Resources>
                         <BitmapImage x:Key="DefaultAvatar" UriSource="ms-appx:///Assets/Images/avatar_m.png"/>

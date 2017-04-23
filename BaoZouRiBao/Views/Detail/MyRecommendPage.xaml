@@ -52,19 +52,18 @@
                         </Image>
                         <TextBlock VerticalAlignment="Center" Margin="16,0" Text="{Binding ShareUri}"/>
                     </StackPanel>
-                    <Button x:Name="faqBtn" Click="faqBtn_Click" 
-                            Content="如何复制" Padding="6"
+                    <Button x:Name="faqBtn" Click="faqBtn_Click" Content="如何复制" Padding="6"
                         HorizontalAlignment="Right"
                         Style="{ThemeResource RoundButtonStyle}"/>
                 </Grid>
 
                 <Grid Background="{ThemeResource ListViewBackgroundBrush}"
                       Padding="12" Margin="0,12" MinHeight="100">
-                    <TextBlock Text="链接标题"/>
+                    <TextBlock Text="{Binding Title}"/>
                 </Grid>
 
                 <Button Content="提交" HorizontalAlignment="Center" 
-                        Width="200" Height="48"
+                        Width="200" Height="48" Click="{x:Bind ViewModel.Contribute}"
                         Style="{ThemeResource RoundButtonStyle}"/>
             </StackPanel>
         </Grid>

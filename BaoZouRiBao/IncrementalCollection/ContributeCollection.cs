@@ -40,7 +40,7 @@ namespace BaoZouRiBao.IncrementalCollection
                 Debug.WriteLine(contributes.TimeStamp);
                 timeStamp.Clear();
                 timeStamp.Append(contributes.TimeStamp);
-                result.Count = (uint)contributes.Contributes.Length;
+                result.Count = (uint)contributes.Contributes.Count;
                 foreach (var item in contributes.Contributes)
                 {
                     Add(item);

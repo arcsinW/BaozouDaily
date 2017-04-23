@@ -40,6 +40,19 @@
         </Grid>
 
         <Grid Grid.Row="1">
+            <ListView ItemsSource="{Binding Contributes}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}"/>
+                                <TextBlock Text="{Binding PublishTime}"/> 
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
             <TextBlock Text="加载失败，点击重试" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
                        Foreground="{ThemeResource PhoneForegroundColorBrush}"
                        HorizontalAlignment="Center"
