@@ -53,7 +53,7 @@ namespace BaoZouRiBao.ViewModel
                 {
                     Contributes.Add(item);
                 }
-            }
+            } 
         }
 
         public async Task<IEnumerable<Contribute>> GetContributes(uint count, string timeStamp)
