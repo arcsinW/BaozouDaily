@@ -39,26 +39,20 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Row="1">
-<<<<<<< HEAD
+        <Grid Grid.Row="1"> 
             <ListView ItemsSource="{Binding Contributes}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <StackPanel>
-                                <TextBlock Text="{Binding Title}"/>
-                                <TextBlock Text="{Binding PublishTime}"/> 
+                                <TextBlock Text="{Binding Title}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding PublishTime,Converter={StaticResource TimeStampToDateTimeConverter}}"/> 
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
-=======
-            <ListView ItemsSource="{Binding Contributes}"
-                      ItemTemplate="{ThemeResource }"/>
-
->>>>>>> 14a77c857ddac68023dfc78ee8949f7aeffb896b
+             
             <TextBlock Text="加载失败，点击重试" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
                        Foreground="{ThemeResource PhoneForegroundColorBrush}"
                        HorizontalAlignment="Center"

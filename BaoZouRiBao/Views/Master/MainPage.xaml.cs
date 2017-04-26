@@ -43,11 +43,7 @@ namespace BaoZouRiBao.Views
                     splitViewButton.Visibility = Visibility.Collapsed;
                     pageTitleTextBlock.Margin = new Thickness(12, 0, 12, 0);
                     break;
-<<<<<<< HEAD
-            }
-=======
             } 
->>>>>>> dev
         }
 
         #region SplitView' Pane Method
