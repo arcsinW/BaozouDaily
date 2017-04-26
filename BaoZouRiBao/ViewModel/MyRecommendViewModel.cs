@@ -46,7 +46,7 @@ namespace BaoZouRiBao.ViewModel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void Contribute(object sender, RoutedEventArgs e)
+        public async void Contribute(object sender, RoutedEventArgs e)
         {
             var result = await ApiService.Instance.UserContributeAsync(ShareUri, Title);
             if (result != null)
