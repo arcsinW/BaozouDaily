@@ -1,12 +1,14 @@
 ﻿using BaoZouRiBao.Helper;
 using BaoZouRiBao.Http;
 using BaoZouRiBao.Model;
+using BaoZouRiBao.Model.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -63,6 +65,15 @@ namespace BaoZouRiBao.ViewModel
             set { isActive = value; OnPropertyChanged(); }
         }
 
+        private bool isFavorite;
+
+        public bool IsFavorite
+        {
+            get { return isFavorite; }
+            set { isFavorite = value; OnPropertyChanged(); }
+        }
+
+
         #endregion
 
         private void LoadDesignData()
@@ -95,10 +106,11 @@ namespace BaoZouRiBao.ViewModel
             if (video != null)
             {
                 Video = video;
+                IsFavorite = Video.Favorited;
             }
 
             DocumentExtra = await ApiService.Instance.GetDocumentExtraAsync(documentId);
-
+            
             var comments = await ApiService.Instance.GetDocumentCommentAsync(documentId);
 
             if (comments != null)
@@ -112,7 +124,27 @@ namespace BaoZouRiBao.ViewModel
                 {
                     LatestComments.Add(item);
                 }
+            }
+        }
 
+        public async Task<VoteOperationResult> Favorite(string documentId)
+        {
+            var res = await ApiService.Instance.FavoriteAsync(documentId);
+            return res;
+        }
+
+        public async void FavoriteBtnClick(object sender, RoutedEventArgs e)
+        {
+            if (DocumentExtra != null)
+            {
+                var res = await Favorite(DocumentExtra.DocumentId.ToString());
+                if (res != null && !string.IsNullOrEmpty(res.Status))
+                {
+                    if (res.Status.Equals("2006"))
+                    {
+                        IsFavorite = true;
+                    }
+                }
             }
         }
     }

@@ -86,7 +86,7 @@ namespace BaoZouRiBao.Helper
         public void UpdateUser(User user)
         {
             User = user;
-            AccessToken = user.AccessToken;
+            AccessToken = string.Empty;
             OnDataChanged();
         }
 

@@ -26,9 +26,8 @@ namespace BaoZouRiBao.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string documentId = e.Parameter as string;
-
-            if(string.IsNullOrEmpty(documentId))
+            string documentId = (string)e.Parameter;
+            if (!string.IsNullOrEmpty(documentId))
             {
                 ViewModel.LoadData(documentId);
             }

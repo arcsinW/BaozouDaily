@@ -5,6 +5,7 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:local="using:BaoZouRiBao.Themes"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:m="using:BaoZouRiBao.Model">
 
     <x:Double x:Key="PageTitleFontSize">16</x:Double>
@@ -16,7 +17,9 @@
     <BitmapImage x:Key="BackImage" UriSource="ms-appx:///Assets/Images/back.png"/>
     <BitmapImage x:Key="DefaultAvatar" UriSource="ms-appx:///Assets/Images/avatar_m.png"/>
 
-    <!--#region 评论 ItemTemplate-->
+    <!--#region DataTemplate-->
+    
+    <!--评论 ItemTemplate-->
     <DataTemplate x:Key="CommentItemTemplate" x:DataType="m:Comment">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -24,12 +27,12 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Ellipse x:Name="avatar" Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top" x:DeferLoadStrategy="Lazy">
+            <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="{x:Bind User.RealAvatarUrl,Mode=OneWay}"/>
+                    <ImageBrush ImageSource="{x:Bind User.RealAvatarUrl,Mode=OneWay,FallbackValue={StaticResource DefaultAvatar}}"/>
                 </Ellipse.Fill>
             </Ellipse>
-
+  
             <Grid Grid.Column="1" Margin="8,0">
                 <StackPanel>
                     <TextBlock Text="{x:Bind User.Name,Mode=OneWay}"/>
@@ -57,6 +60,43 @@
             </Grid>
         </Grid>
     </DataTemplate>
+    
+    <!--首页 ItemTemplate-->
+    <DataTemplate x:Key="DocumentItemTemplate" x:DataType="m:Document">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" MaxHeight="80" MaxWidth="80">
+                <!--<Image Source="/Assets/Images/image_small_default.jpg"/>
+                                        <Image Source="{Binding Thumbnail,TargetNullValue={StaticResource PlaceHolderAvatar}}" 
+                                                    Stretch="UniformToFill"/>-->
+                <toolkit:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{Binding Thumbnail}"
+                                             PlaceholderSource="{StaticResource PlaceHolderImageSmall}"/>
+
+                <Image Source="{Binding OriginalTag}" Height="32" 
+                                                    HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Grid>
+            <StackPanel Grid.Column="1" Margin="12,0">
+                <TextBlock Text="{x:Bind Title}" FontSize="16" Style="{ThemeResource TitleTextBlockStyle}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Height="20" Width="20" Margin="0,0,4,0">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding AuthorAvatar}"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock Margin="0,8">
+                                                    <Run Text="{x:Bind AuthorName}" FontSize="14" Foreground="#FF767676"/>
+                                                    <Run Text="{x:Bind SectionName,TargetNullValue={StaticResource RecommendString}}"
+                                                        FontSize="12" Foreground="#FF8D8D8D" />
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
     <!--#endregion-->
     
     <!--#region Button's Style-->
@@ -739,7 +779,7 @@
                             <RepeatButton  x:Name="VerticalSmallIncrease" Visibility="Collapsed" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="4" Template="{StaticResource VerticalIncrementTemplate}"/>
                         </Grid>
                         <Grid x:Name="VerticalPanningRoot" >
-                            <Border CornerRadius="1" x:Name="VerticalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}" HorizontalAlignment="Right" Margin="2,0,2,0" MinHeight="32" VerticalAlignment="Top" Width="2"/>
+                            <Border CornerRadius="2" x:Name="VerticalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}" HorizontalAlignment="Right" Margin="2,0,2,0" MinHeight="32" VerticalAlignment="Top" Width="2"/>
                         </Grid>
                     </Grid>
                 </ControlTemplate>

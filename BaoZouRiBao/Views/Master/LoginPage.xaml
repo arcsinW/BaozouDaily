@@ -23,10 +23,10 @@
 
         <Grid Height="48" Grid.Row="0" HorizontalAlignment="Stretch" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
-                    <Image Source="{StaticResource BackImage}"/>
+                <Button x:Name="splitViewButton" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}" >
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                 </Button>
-                <TextBlock Text="登录" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+                <TextBlock x:Name="pageTitleTextBlock" Text="登录" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>
 
             <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right">

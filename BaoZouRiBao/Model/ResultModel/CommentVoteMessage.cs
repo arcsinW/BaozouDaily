@@ -10,7 +10,7 @@ namespace BaoZouRiBao.Model.ResultModel
     /// <summary>
     /// 赞 的消息
     /// </summary>
-    public class CommentVoteMessage
+    public class CommentVoteMessageResult
     {
         [JsonProperty(PropertyName = "timestamp")]
         public string TimeStamp { get; set; }
@@ -19,6 +19,6 @@ namespace BaoZouRiBao.Model.ResultModel
         public string UnReadCount { get; set; }
 
         [JsonProperty(PropertyName = "comment_message")]
-        public string CommentMessage { get; set; }
+        public List<Message> CommentMessage { get; set; }
     }
 }

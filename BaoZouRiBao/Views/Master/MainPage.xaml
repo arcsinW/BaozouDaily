@@ -283,7 +283,8 @@
 
         <Grid HorizontalAlignment="Stretch" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Button x:Name="splitViewButton" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}" Visibility="Collapsed">
+                <Button x:Name="splitViewButton" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}" 
+                        Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                 </Button>
                 <TextBlock x:Name="pageTitleTextBlock" Text="首页" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -396,6 +397,7 @@
                                   SelectionMode="None"
                                   IsItemClickEnabled="True"
                                   ItemClick="{x:Bind ViewModel.documentListView_ItemClick}"
+                                  ItemTemplate="{StaticResource DocumentItemTemplate}"
                                   IncrementalLoadingTrigger="Edge"
                                   ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                                   RefreshRequested="{x:Bind ViewModel.RefreshDocument}"
@@ -415,19 +417,7 @@
                                 </FontIcon>
                             </Grid>
                         </control:RefreshableListView.RefreshIndicatorContent>
-                    <!--<toolkit:PullToRefreshListView x:Name="documentListVIew" 
-                                                    ItemsSource="{Binding Documents}"
-                                                    SelectionMode="None" IsItemClickEnabled="True"
-                                                    IsPullToRefreshWithMouseEnabled="True"
-                                                    ItemClick="documentListView_ItemClick" 
-                                                    ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
-                                                    RefreshRequested="{x:Bind ViewModel.RefreshDocument}">-->
-                        <!--<toolkit:PullToRefreshListView.RefreshIndicatorContent>
-                            <ProgressRing/>
-                        </toolkit:PullToRefreshListView.RefreshIndicatorContent>
-                        <toolkit:PullToRefreshListView.ReleaseToRefreshContent>
-                            <TextBlock Text="Release to refresh"/>
-                        </toolkit:PullToRefreshListView.ReleaseToRefreshContent>-->
+                    
                         <ListView.Header>
                             <Grid Height="240">
                                 <FlipView x:Name="headerFlipView" ItemsSource="{Binding Documents.TopStories}" 
@@ -457,43 +447,7 @@
                                                         ItemContainerStyle="{StaticResource LegendItemContainerStyle}" />
                             </Grid>
                         </ListView.Header>
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="m:Document">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="4*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Grid Grid.Column="0" MaxHeight="80" MaxWidth="80">
-                                        <!--<Image Source="/Assets/Images/image_small_default.jpg"/>
-                                        <Image Source="{Binding Thumbnail,TargetNullValue={StaticResource PlaceHolderAvatar}}" 
-                                                    Stretch="UniformToFill"/>-->
-                                        <toolkit:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{Binding Thumbnail}"
-                                             PlaceholderSource="{StaticResource PlaceHolderImageSmall}"/>
-
-                                        <Image Source="{Binding OriginalTag}" Height="32" 
-                                                    HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                    </Grid>
-                                    <StackPanel Grid.Column="1" Margin="12,0">
-                                        <TextBlock Text="{x:Bind Title}" FontSize="16" Style="{ThemeResource TitleTextBlockStyle}"/>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Ellipse Height="20" Width="20" Margin="0,0,4,0">
-                                                <Ellipse.Fill>
-                                                    <ImageBrush ImageSource="{Binding AuthorAvatar}"/>
-                                                </Ellipse.Fill>
-                                            </Ellipse>
-                                            <TextBlock Margin="0,8">
-                                                    <Run Text="{x:Bind AuthorName}" FontSize="14" Foreground="#FF767676"/>
-                                                    <Run Text="{x:Bind SectionName,TargetNullValue={StaticResource RecommendString}}"
-                                                        FontSize="12" Foreground="#FF8D8D8D" />
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <!--</toolkit:PullToRefreshListView>-->
+                          
                     </control:RefreshableListView>
                 </PivotItem>
 

@@ -28,12 +28,12 @@ namespace BaoZouRiBao.Views
         {
             switch (e.NewState.Name)
             {
-                case "Narrow":
-                    splitViewButton.Visibility = Visibility.Visible;
+                case "Narrow": 
+                    splitViewButton.Visibility = Visibility.Collapsed;
                     pageTitleTextBlock.Margin = new Thickness(4, 0, 4, 0);
                     break;
                 case "Wide":
-                    splitViewButton.Visibility = Visibility.Collapsed;
+                    splitViewButton.Visibility = Visibility.Visible; 
                     pageTitleTextBlock.Margin = new Thickness(12, 0, 12, 0);
                     break;
             }

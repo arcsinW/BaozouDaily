@@ -89,10 +89,11 @@ namespace BaoZouRiBao.ViewModel
         {
             var document = e.ClickedItem as Document;
             if (document != null)
-            {
+            { 
                 if (!document.DisplayType.Equals("3"))
                 {
                     WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = document.Url, DocumentId = document.DocumentId, DisplayType = document.DisplayType };
+ 
                     MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
                 }
                 else

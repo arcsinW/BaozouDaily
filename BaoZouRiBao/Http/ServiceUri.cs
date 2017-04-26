@@ -37,8 +37,14 @@ namespace BaoZouRiBao.Http
 
         public const string MyComment = "http://dailyapi.ibaozou.com/api/v31/comments/my?timestamp={0}&";
 
+        /// <summary>
+        /// 阅读历史
+        /// </summary>
         public const string MyReadHistory = "http://dailyapi.ibaozou.com/api/v31/documents/read?timestamp={0}&";
 
+        /// <summary>
+        /// 我的投稿
+        /// </summary>
         public const string MyContribute = "http://dailyapi.ibaozou.com/api/v31/documents/my_contribute?timestamp={0}&";
 
         public const string ClearReadHistory = "http://dailyapi.ibaozou.com/api/v31/documents/read/clear";

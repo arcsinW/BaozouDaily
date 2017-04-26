@@ -20,6 +20,8 @@ namespace BaoZouRiBao.Views
         public SearchPage()
         {
             this.InitializeComponent();
+
+            MasterDetailPage.Current.AdaptiveVisualStateChanged += Current_AdaptiveVisualStateChanged;
         }
          
 
@@ -29,6 +31,22 @@ namespace BaoZouRiBao.Views
             {
                 ViewModel.Search();
             }
-        }  
+        }
+
+        private void Current_AdaptiveVisualStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+            switch (e.NewState.Name)
+            {
+                case "Narrow":
+                    splitViewButton.Visibility = Visibility.Visible;
+                    //Grid.SetColumn(searchTextBox, 1);
+                    break;
+                case "Wide":
+                    splitViewButton.Visibility = Visibility.Collapsed;
+                    //Grid.SetColumn(searchTextBox, 0);
+                    //Grid.SetColumnSpan(searchTextBox, 2);
+                    break;
+            }
+        }
     }
 }

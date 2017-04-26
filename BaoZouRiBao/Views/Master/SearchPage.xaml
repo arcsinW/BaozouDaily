@@ -257,64 +257,33 @@
     <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="48"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0">
+            <Grid  Background="{ThemeResource PageTitleBackground}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
-            </Button>
+                <Button x:Name="splitViewButton" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}"
+                        Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}" >
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
+                </Button>
 
-            <TextBox Grid.Column="1" PlaceholderText="输入关键词"  Height="40"
-                     Style="{ThemeResource LightTextBoxStyle}" Foreground="White"
+                <TextBox x:Name="searchTextBox" PlaceholderText="输入关键词"  Height="40" Grid.Column="1"
+                     Style="{ThemeResource LightTextBoxStyle}" Foreground="White" Margin="4"
                      Text="{Binding Keyword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-        </Grid>
+            </Grid>
+        </StackPanel>
 
         <Grid Grid.Row="1">
-            <ListView x:Name="searchListView" ItemsSource="{Binding ResultCollection}"
-                      ItemContainerStyle="{StaticResource BaoZouListViewItemStyle}"
+            <ListView x:Name="searchListView" 
+                      ItemsSource="{Binding ResultCollection}"
+                      ItemTemplate="{StaticResource DocumentItemTemplate}"
                       IsItemClickEnabled="True"
+                      ItemContainerStyle="{StaticResource BaoZouListViewItemStyle}"
                       ItemClick="{x:Bind ViewModel.SearchListView_ItemClick}">
-                <ListView.Resources>
-                    <x:String x:Key="RecommendString">推荐</x:String>
-                </ListView.Resources>
-                <ListView.ItemTemplate>
-                    <DataTemplate >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="4*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Grid.Column="0" MaxHeight="80" MaxWidth="80">
-                                <Image Source="/Assets/Images/image_small_default.jpg"/>
-                                <Image Source="{Binding Thumbnail,TargetNullValue={StaticResource DefaultAvatar}}" 
-                                                    Stretch="UniformToFill"/>
-                                <Image Source="{Binding OriginalTag}" Height="32" 
-                                                    HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            </Grid>
-                            <StackPanel Grid.Column="1" Margin="12,0">
-                                <TextBlock Text="{Binding Title}" FontSize="16" Style="{ThemeResource TitleTextBlockStyle}"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <Ellipse Height="20" Width="20" Margin="0,0,4,0">
-                                        <Ellipse.Fill>
-                                            <ImageBrush ImageSource="{Binding AuthorAvatar}"/>
-                                        </Ellipse.Fill>
-                                    </Ellipse>
-                                    <TextBlock Margin="0,8">
-                                                    <Run Text="{Binding AuthorName}" FontSize="14" Foreground="#FF767676"/>
-                                                    <Run Text="{Binding SectionName,TargetNullValue={StaticResource RecommendString}}"
-                                                        FontSize="12" Foreground="#FF8D8D8D" />
-                                    </TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
             </ListView>
         </Grid>
 

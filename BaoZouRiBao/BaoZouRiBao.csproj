@@ -136,7 +136,6 @@
     <Compile Include="Helper\AuthenticationHelper.cs" />
     <Compile Include="Helper\BackgroundDownloadHelper.cs" />
     <Compile Include="Helper\BaoZouTaskManager.cs" />
-    <Compile Include="Helper\ClipBoardHelper.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\InformationHelper.cs" />
     <Compile Include="Helper\ExceptionHandlingSynchronizationContext.cs" />
@@ -180,6 +179,7 @@
     <Compile Include="Model\DocumentExtra.cs" />
     <Compile Include="Model\DocumentRelated.cs" />
     <Compile Include="Model\HackJs.cs" />
+    <Compile Include="Model\Message.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\PostModel\LoginPost.cs" />
     <Compile Include="Model\PostModel\SearchPost.cs" />

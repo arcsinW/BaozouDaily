@@ -235,10 +235,11 @@
 
         <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}">
+                <Button x:Name="splitViewButton" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}"
+                        Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                 </Button>
-            <TextBlock Style="{ThemeResource PageTitleTextBlockStyle}" Text="设置"/>
+                <TextBlock x:Name="pageTitleTextBlock" Style="{ThemeResource PageTitleTextBlockStyle}" Text="设置"/>
             </StackPanel>
         </Grid>
 

@@ -20,10 +20,11 @@
 
         <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="splitViewButton" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}" Visibility="Collapsed">
+                <Button x:Name="splitViewButton" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}" 
+                        Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                 </Button>
-                <TextBlock x:Name="pageTitleTextBlock" Text="离线下载" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+                <TextBlock Text="离线下载" x:Name="pageTitleTextBlock" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>
 
             <Button HorizontalAlignment="Right" Style="{ThemeResource BackButtonStyle}" 
