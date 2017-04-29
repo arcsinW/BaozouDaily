@@ -8,7 +8,7 @@
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:m="using:BaoZouRiBao.Model">
 
-    <x:Double x:Key="PageTitleFontSize">16</x:Double>
+    <x:Double x:Key="PageTitleFontSize">14</x:Double>
     <!--PageTitle 同时存在图片和数字的按钮中  图片和数字的间距-->
     <Thickness x:Key="PageTitleImageTextMargin">4,0</Thickness>
     <!--评论中 赞 图片和数字的间距-->
@@ -89,7 +89,7 @@
                     </Ellipse>
                     <TextBlock Margin="0,8">
                                                     <Run Text="{x:Bind AuthorName}" FontSize="14" Foreground="#FF767676"/>
-                                                    <Run Text="{x:Bind SectionName,TargetNullValue={StaticResource RecommendString}}"
+                                                    <Run Text="{x:Bind SectionName,FallbackValue={StaticResource RecommendString}}"
                                                         FontSize="12" Foreground="#FF8D8D8D" />
                     </TextBlock>
                 </StackPanel>
@@ -407,7 +407,7 @@
 
     <!--#region TextBlock's Style-->
     <Style TargetType="TextBlock" x:Key="TitleTextBlockStyle">
-        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 

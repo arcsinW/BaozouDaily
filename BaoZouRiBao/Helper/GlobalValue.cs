@@ -18,8 +18,8 @@ namespace BaoZouRiBao.Helper
         public const string AccessKey = "";
         public const string SecretKey = "";
 #else
-        public const string AccessKey = "e132054cb486408fa2add8972b1c4cc3";
-        public const string SecretKey = "425de3dbe3874a038c2a07816af215de";
+        private const string AccessKey = "e132054cb486408fa2add8972b1c4cc3";
+        private const string SecretKey = "425de3dbe3874a038c2a07816af215de";
 #endif
 
         #region Properties

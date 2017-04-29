@@ -373,7 +373,7 @@
                               HeaderBrush="{ThemeResource PivotHeaderColorBrush}">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding }" FontSize="20" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
+                    <TextBlock Text="{Binding }" FontSize="16" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             <Pivot.Resources>

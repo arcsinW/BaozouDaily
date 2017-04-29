@@ -8,6 +8,7 @@ using BaoZouRiBao.Model;
 using Windows.Storage;
 using BaoZouRiBao.Http;
 using Windows.Foundation.Collections;
+using BaoZouRiBao.Model.ResultModel;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -16,6 +17,21 @@ namespace BaoZouRiBao.ViewModel
         public SettingPageViewModel()
         {
             LoadSettings();
+
+            GlobalValue.Current.DataChanged += Current_DataChanged;
+
+            if (GlobalValue.Current.User != null)
+            {
+                IsLogoutEnable = true;
+            }
+        }
+
+        private void Current_DataChanged()
+        {
+            if (GlobalValue.Current.User != null)
+            {
+                IsLogoutEnable = true;
+            }
         }
 
         private static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
@@ -101,6 +117,14 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
+
+        private bool isLogoutEnable;
+
+        public bool IsLogoutEnable
+        {
+            get { return isLogoutEnable; }
+            set { isLogoutEnable = value; OnPropertyChanged(); }
+        }
 
         public string AppVersion { get; set; } = $"{InformationHelper.ApplicationVersion.Major}.{InformationHelper.ApplicationVersion.Minor}.{InformationHelper.ApplicationVersion.Build}.{InformationHelper.ApplicationVersion.Revision}";
         #endregion
