@@ -22,7 +22,9 @@
 
             <Color x:Key="DarkStatusBarBackgroundColor">#FF1F1F1F</Color>
             <Color x:Key="LightStatusBarBackgroundColor">#F7717E</Color>
-            
+
+            <x:String x:Key="RecommendString">推荐</x:String>
+
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <converter:TimeStampToDateTimeConverter x:Key="TimeStampToDateTimeConverter"/>
             <BitmapImage x:Key="PlaceHolderImageSmall" UriSource="/Assets/Images/image_small_default.jpg"/>

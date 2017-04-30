@@ -34,7 +34,7 @@
                 <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{x:Bind ViewModel.IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
-                <TextBlock x:Name="titleTextBlock" Style="{ThemeResource PageTitleTextBlockStyle}"/>
+                <TextBlock Text="{x:Bind ViewModel.Video.Title, Mode=OneWay}" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
@@ -72,7 +72,7 @@
         </Grid>
         <!--#endregion-->
 
-        <Grid Grid.Row="1"> 
+        <Grid Grid.Row="1">
             <ListView Grid.Row="1" ItemsSource="{Binding LatestComments}" 
                       ItemContainerStyle="{ThemeResource CommentItemContainerStyle}"
                       ItemTemplate="{ThemeResource CommentItemTemplate}">
@@ -80,7 +80,6 @@
                     <Grid Grid.Row="0">
                         <StackPanel>
                             <Grid>
-                                 
                                 <MediaElement Source="{Binding Video.FileUrl}" MinHeight="200"
                                             VerticalAlignment="Top" HorizontalAlignment="Stretch"
                                               Stretch="UniformToFill"
@@ -103,11 +102,8 @@
                             </StackPanel>
                         </StackPanel>
                     </Grid>
-                
                 </ListView.Header>
-               
             </ListView>
-
         </Grid>
 
         <Popup Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom"

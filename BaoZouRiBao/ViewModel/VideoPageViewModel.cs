@@ -102,8 +102,8 @@ namespace BaoZouRiBao.ViewModel
 
         public async void LoadData(string documentId)
         {
-            var video = await ApiService.Instance.GetVideoAsync(documentId);
-            if (video != null)
+            Video = await ApiService.Instance.GetVideoAsync(documentId);
+            if (Video != null)
             {
                 Video = video;
                 IsFavorite = Video.Favorited;
