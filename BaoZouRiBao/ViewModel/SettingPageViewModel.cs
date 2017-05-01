@@ -9,6 +9,7 @@ using Windows.Storage;
 using BaoZouRiBao.Http;
 using Windows.Foundation.Collections;
 using BaoZouRiBao.Model.ResultModel;
+using BaoZouRiBao.UserControls;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -148,7 +149,11 @@ namespace BaoZouRiBao.ViewModel
 
         public async void Logout()
         {
-            await ApiService.Instance.LogoutAsync();
+            bool result = await ApiService.Instance.LogoutAsync();
+            if (result)
+            {
+                ToastService.SendToast("已注销登录");
+            }
         }
     }
 }

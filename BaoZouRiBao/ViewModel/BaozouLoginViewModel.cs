@@ -2,6 +2,7 @@
 using BaoZouRiBao.Helper;
 using BaoZouRiBao.Http;
 using BaoZouRiBao.Model;
+using BaoZouRiBao.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,11 @@ namespace BaoZouRiBao.ViewModel
 
         private async void Login(BaozouLoginInput input)
         {
-            await ApiService.Instance.LoginAsync(input.Account, input.Password);
+            bool result = await ApiService.Instance.LoginAsync(input.Account, input.Password);
+            if (result)
+            {
+                ToastService.SendToast("登录成功");
+            }
         }
     }
 }

@@ -533,7 +533,7 @@
         </control:Drawer>
 
         <!--#region Pane-->
-        <Grid Grid.Column="0" BorderBrush="{ThemeResource ThemeColorBrush}" BorderThickness="0,0,1,0">
+        <Grid Grid.Column="0" BorderBrush="{ThemeResource SplitLineColorBrush}" BorderThickness="0,0,1,0">
             <ListView ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
                       Background="{ThemeResource PaneBackgroundColor}" SelectionMode="Single">
                 <ListView.Resources>

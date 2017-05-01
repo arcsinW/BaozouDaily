@@ -81,7 +81,7 @@
                         <Image Source="/Assets/Images/login_wechat.png"/>
                     </Button>
 
-                    <Button Click="{x:Bind ViewModel.QQLogin}" Style="{ThemeResource ImageButtonStyle}" Height="48">
+                    <Button Click="{x:Bind ViewModel.QQLogin}" Style="{ThemeResource ImageButtonStyle}" Height="48" IsEnabled="False">
                         <Image Source="/Assets/Images/login_qq.png"/>
                     </Button>
                 </StackPanel>

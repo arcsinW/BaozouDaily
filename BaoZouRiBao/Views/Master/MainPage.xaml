@@ -535,14 +535,14 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
 
-                                    <MediaElement x:Name="mediaElement"  Height="250" Width="Auto" AutoPlay="False" 
-                                                          Source="{Binding FileUrl}" Grid.Row="0" />
+                                    <!--<MediaElement x:Name="mediaElement"  Height="250" Width="Auto" AutoPlay="False" 
+                                                          Source="{Binding FileUrl}" Grid.Row="0" />-->
 
-                                    <!--<Image Grid.Row="0" Stretch="Fill" Height="250" Width="Auto">
+                                    <Image Grid.Row="0" Stretch="Fill" Height="250" Width="Auto">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding Image}"/>
                                         </Image.Source>
-                                    </Image>-->
+                                    </Image>
 
                                     <Grid Grid.Row="1">
                                         <Grid.RowDefinitions>
@@ -567,14 +567,14 @@
                                                         <Setter Property="Margin" Value="0,0,8,0"/>
                                                     </Style>
                                                 </StackPanel.Resources>
-                                                <Button Style="{ThemeResource ImageButtonStyle}" Width="Auto">
+                                                <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto">
                                                     <StackPanel Orientation="Horizontal">
                                                         <Image Source="/Assets/Images/btn_article_like_nor.png"/>
                                                         <TextBlock Text="{x:Bind VoteCount}" Style="{ThemeResource DescTextBlockStyle}" HorizontalAlignment="Right"/>
                                                     </StackPanel>
                                                 </Button>
 
-                                                <Button Style="{ThemeResource ImageButtonStyle}" Width="Auto">
+                                                <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto">
                                                     <StackPanel Orientation="Horizontal">
                                                         <Image Source="/Assets/Images/article_reply_nor.png"/>
                                                         <TextBlock Text="{x:Bind CommentCount}" Style="{ThemeResource DescTextBlockStyle}" HorizontalAlignment="Right"/>
@@ -583,7 +583,7 @@
 
                                                 <Button Style="{ThemeResource ImageButtonStyle}" 
                                                             Height="Auto" Width="Auto">
-                                                    <Image Source="/Assets/Images/article_share.png" Height="48" Width="48"/>
+                                                    <Image Source="/Assets/Images/article_share.png" Height="40" Width="40"/>
                                                 </Button>
                                             </StackPanel>
                                         </Grid>
@@ -594,14 +594,14 @@
                                                     Style="{ThemeResource ImageButtonStyle}"
                                                     VerticalAlignment="Center" Foreground="White" 
                                                     Grid.Row="0" Width="64" Height="64">
-                                        <i:Interaction.Behaviors>
+                                        <!--<i:Interaction.Behaviors>
                                             <core:EventTriggerBehavior EventName="Tapped">
                                                 <core:EventTriggerBehavior.Actions>
                                                     <core:ChangePropertyAction TargetObject="mediaElement" 
                                                                                    PropertyName="AutoPlay" Value="True"/>
                                                 </core:EventTriggerBehavior.Actions>
                                             </core:EventTriggerBehavior>
-                                        </i:Interaction.Behaviors>
+                                        </i:Interaction.Behaviors>-->
                                         <Image Source="/Assets/Images/btn_video_play.png"/>
                                     </Button>
                                 </Grid>

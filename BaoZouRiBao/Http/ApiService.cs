@@ -122,7 +122,7 @@ namespace BaoZouRiBao.Http
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public async Task LoginAsync(string userName,string password)
+        public async Task<bool> LoginAsync(string userName,string password)
         { 
             var result = await BaoZouOAuthAsync(userName, password);
             if (result != null && string.IsNullOrEmpty(result.Error))
@@ -133,13 +133,17 @@ namespace BaoZouRiBao.Http
                     Source = "baozou",
                     User = result.UserId
                 };
+
                 User user = await Post<LoginPost, User>(ServiceUri.Login, loginPost);
                 if (user != null)
                 {
                     HttpBaseService.AddHeader("Authorization", "Bearer " + user.AccessToken);
-                    GlobalValue.Current.UpdateUser(user); 
+                    GlobalValue.Current.UpdateUser(user);
+                    return true;
                 }
             }
+
+            return false;
         }
 
         /// <summary>
