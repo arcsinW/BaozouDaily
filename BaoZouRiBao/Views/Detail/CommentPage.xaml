@@ -9,7 +9,7 @@
     xmlns:m="using:BaoZouRiBao.Model"
     xmlns:controls="using:BaoZouRiBao.UserControls"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:converter="using:BaoZouRiBao.Converter"
+    xmlns:converter="using:BaoZouRiBao.Converters"
     mc:Ignorable="d">
  
     <Page.DataContext>

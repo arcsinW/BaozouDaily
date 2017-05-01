@@ -13,7 +13,7 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
     xmlns:action="using:BaoZouRiBao.BaoZouAction"
-    xmlns:convert="using:BaoZouRiBao.Converter"
+    xmlns:convert="using:BaoZouRiBao.Converters"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
     

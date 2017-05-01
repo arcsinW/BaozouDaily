@@ -7,7 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
-namespace BaoZouRiBao.Converter
+namespace BaoZouRiBao.Converters
 {
     /// <summary>
     /// This converter helps mapping the selection state of a list legend item

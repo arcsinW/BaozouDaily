@@ -1,5 +1,6 @@
 ﻿using BaoZouRiBao.Helper;
 using BaoZouRiBao.Http;
+using BaoZouRiBao.UserControls;
 using BaoZouRiBao.Views;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,20 @@ namespace BaoZouRiBao.ViewModel
 
         public async void SinaLogin()
         {
-            await ApiService.Instance.SinaWeiboLoginAsync();
+             bool result = await ApiService.Instance.SinaWeiboLoginAsync();
+            if (result)
+            {
+                ToastService.SendToast("登录成功");
+            }
         }
 
         public async void QQLogin()
         {
-            await ApiService.Instance.TecentLoginAsync();
+            bool result = await ApiService.Instance.TecentLoginAsync();
+            if (result)
+            {
+                ToastService.SendToast("登录成功");
+            }
         }
 
         public async void WechatLogin()

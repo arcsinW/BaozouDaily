@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 
-namespace BaoZouRiBao.Converter
+namespace BaoZouRiBao.Converters
 {
     public class BoolToVisibilityConverter : BoolToObjectConverter
     {

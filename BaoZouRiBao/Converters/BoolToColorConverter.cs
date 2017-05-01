@@ -8,7 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
-namespace BaoZouRiBao.Converter
+namespace BaoZouRiBao.Converters
 {
     public class BoolToColorConverter : IValueConverter
     {

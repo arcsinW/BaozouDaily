@@ -1,27 +1,21 @@
-﻿using System;
+﻿using BaoZouRiBao.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
-namespace BaoZouRiBao.Converter
+namespace BaoZouRiBao.Converters
 {
-    public class DoneToStringConverter : IValueConverter
+    public class TimeStampToDateTimeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            switch ( (string)value)
-            {
-                case "True":
-                case "true":
-                    return "已完成";
-                case "False":
-                case "false":
-                    return "未完成";
-                default:
-                    return "";
-            }
+            long timeStamp =  (long)value;
+
+            return DateTimeHelper.UnixTimeStampToDateTime(timeStamp).ToString("yyyy-MM-dd HH:MM:ss");
+            
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

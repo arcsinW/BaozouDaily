@@ -5,7 +5,7 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:converter="using:BaoZouRiBao.Converter"
+    xmlns:converter="using:BaoZouRiBao.Converters"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:m="using:BaoZouRiBao.Model"
     xmlns:uc="using:BaoZouRiBao.UserControls.MediaPlayer"

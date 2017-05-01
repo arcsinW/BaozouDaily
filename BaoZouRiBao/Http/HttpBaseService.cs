@@ -64,10 +64,10 @@ namespace BaoZouRiBao.Http
         {
             try
             {
-                if (!string.IsNullOrEmpty(GlobalValue.Current.AccessToken))
+                if (!string.IsNullOrEmpty(GlobalValue.Current.User.AccessToken))
                 {
                     var header = httpClient.DefaultRequestHeaders;
-                    header["Authorization"] = "Bearer " + GlobalValue.Current.AccessToken;
+                    header["Authorization"] = "Bearer " + GlobalValue.Current.User.AccessToken;
                 }
 
                 HttpResponseMessage response = await httpClient.GetAsync(new Uri(uri));

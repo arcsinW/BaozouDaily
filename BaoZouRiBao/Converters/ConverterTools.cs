@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Markup;
 
-namespace BaoZouRiBao.Converter
+namespace BaoZouRiBao.Converters
 {
     /// <summary>
     /// Static class used to provide internal tools

@@ -33,7 +33,7 @@ namespace BaoZouRiBao.ViewModel
             set { isActive = value; OnPropertyChanged(); }
         }
 
-        private bool isEmpty;
+        private bool isEmpty = false;
 
         public bool IsEmpty
         {

@@ -72,7 +72,7 @@ namespace BaoZouRiBao.ViewModel
         #region Pane Method
         public void LoginPage()
         {
-            if (GlobalValue.Current.User != null)
+            if (GlobalValue.Current.User != null && !string.IsNullOrEmpty(GlobalValue.Current.User.AccessToken))
             {
                 NavigationHelper.MasterFrameNavigate(typeof(UserInfoPage));
             }

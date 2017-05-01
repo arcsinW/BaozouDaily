@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
-namespace BaoZouRiBao.Converter
+namespace BaoZouRiBao.Converters
 {
     /// <summary>
     /// Converte seconds to MM:ss

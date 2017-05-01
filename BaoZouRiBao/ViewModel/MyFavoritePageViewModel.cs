@@ -100,7 +100,11 @@ namespace BaoZouRiBao.ViewModel
                 }
             }
 
-            IsEmpty = documents.Any();
+            if (documents.Count == 0 && Favorites.Count == 0)
+            {
+                IsEmpty = true;
+            }
+
             return documents;
         }
 

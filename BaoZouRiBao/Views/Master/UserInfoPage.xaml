@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:model="using:BaoZouRiBao.Model"
-    xmlns:converter="using:BaoZouRiBao.Converter"
+    xmlns:converter="using:BaoZouRiBao.Converters"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:action="using:BaoZouRiBao.BaoZouAction"

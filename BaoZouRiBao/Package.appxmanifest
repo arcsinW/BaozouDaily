@@ -19,9 +19,13 @@
         <uap:LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
         </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#fb3d4f" />
       </uap:VisualElements>
       <Extensions>
+        <uap:Extension Category="windows.personalAssistantLaunch" />
+        <uap:Extension Category="windows.appService" EntryPoint="BaoZouRiBao.Background.VoiceCommandBackgroundTask">
+          <uap:AppService Name="VoiceCommandBackgroundTask" />
+        </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
           <uap:FileTypeAssociation Name="wechat">
             <uap:SupportedFileTypes>
@@ -29,10 +33,6 @@
             </uap:SupportedFileTypes>
           </uap:FileTypeAssociation>
         </uap:Extension>
-        <uap:Extension Category="windows.appService" EntryPoint="BaoZouRiBao.Background.VoiceCommandBackgroundTask">
-          <uap:AppService Name="VoiceCommandBackgroundTask" />
-        </uap:Extension>
-        <uap:Extension Category="windows.personalAssistantLaunch" />
       </Extensions>
     </Application>
   </Applications>

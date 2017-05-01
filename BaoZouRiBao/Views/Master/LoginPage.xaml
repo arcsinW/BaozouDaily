@@ -14,8 +14,8 @@
     <Page.DataContext>
         <vm:LoginPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
-    
-    <Grid Background="{ThemeResource PageBackgroundBrush}">
+
+    <Grid Background="{ThemeResource PaneBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
@@ -23,7 +23,8 @@
 
         <Grid Height="48" Grid.Row="0" HorizontalAlignment="Stretch" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Button x:Name="splitViewButton" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}" >
+                <Button x:Name="splitViewButton" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.OpenDrawer}" 
+                        Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
                 </Button>
                 <TextBlock x:Name="pageTitleTextBlock" Text="登录" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -42,6 +43,7 @@
                 </Button.Flyout>
             </Button>
         </Grid>
+        
         <Grid Grid.Row="1">
             <StackPanel>
                 <Image Source="ms-appx:///Assets/Images/login_appname.png" 

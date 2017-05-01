@@ -46,11 +46,7 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Row="1">
-            <TextBlock Text="加载失败，点击重试" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
-                       Foreground="{ThemeResource PhoneForegroundColorBrush}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
+        <Grid Grid.Row="1"> 
             <control:RefreshableListView x:Name="documentListView" ItemsSource="{Binding Favorites}"
                                   SelectionMode="None"
                                   IsItemClickEnabled="True"
@@ -107,8 +103,13 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </control:RefreshableListView>
-        </Grid>
 
+            <TextBlock Text="加载失败，点击重试" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
+                       Foreground="{ThemeResource PhoneForegroundColorBrush}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Grid> 
+        
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
     </Grid>
 </Page>

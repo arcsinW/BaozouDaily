@@ -23,7 +23,7 @@ namespace BaoZouRiBao.ViewModel
             set { isActive = value; OnPropertyChanged(); }
         }
 
-        private bool isEmpty;
+        private bool isEmpty = false;
 
         public bool IsEmpty
         {
@@ -75,8 +75,13 @@ namespace BaoZouRiBao.ViewModel
                 {
                     histories.Add(item);
                 }
-            } 
-            IsEmpty = (histories.Count == 0);
+            }
+
+            if (histories.Count == 0 && ReadHistories.Count == 0)
+            {
+                IsEmpty = true;
+            }
+
             return histories;
         }
 

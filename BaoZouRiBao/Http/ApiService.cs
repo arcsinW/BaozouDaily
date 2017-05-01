@@ -57,7 +57,7 @@ namespace BaoZouRiBao.Http
         /// 新浪weibo登录
         /// </summary>
         /// <returns></returns>
-        public async Task SinaWeiboLoginAsync()
+        public async Task<bool> SinaWeiboLoginAsync()
         {
             string result = await AuthenticationHelper.SinaAuthenticationAsync();
            
@@ -87,16 +87,18 @@ namespace BaoZouRiBao.Http
                     {
                         HttpBaseService.AddHeader("Authorization", "Bearer " + user.AccessToken);
                         GlobalValue.Current.UpdateUser(user);
+                        return true;
                     }
                 }
             }
+            return false;
         }
 
         /// <summary>
         /// 腾讯weibo登录
         /// </summary>
         /// <returns></returns>
-        public async Task TecentLoginAsync()
+        public async Task<bool> TecentLoginAsync()
         {
             var result = await AuthenticationHelper.TencentAuthenticationAsync();
              
@@ -109,7 +111,9 @@ namespace BaoZouRiBao.Http
             {
                 HttpBaseService.AddHeader("Authorization", "Bearer " + user.AccessToken);
                 GlobalValue.Current.UpdateUser(user);
+                return true;
             }
+            return false;
         }
 
         /// <summary>
