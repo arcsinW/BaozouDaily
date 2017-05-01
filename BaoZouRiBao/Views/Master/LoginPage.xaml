@@ -52,14 +52,14 @@
                    HorizontalAlignment="Center"
                    />
                 <Button x:Name="baozouLoginBtn" Content="暴走漫画" 
-                    Width="200" Height="48"
+                    Width="200" Height="48" Margin="0,24,0,12"
                     Style="{ThemeResource RoundButtonStyle}"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Center" 
                     Click="{x:Bind ViewModel.baozouLoginBtn_Click}"
                     >
                 </Button>
 
-                <Grid Margin="12,0">
+                <Grid Margin="12,12,12,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
@@ -77,7 +77,7 @@
                         <Image Source="/Assets/Images/login_sina.png"/>
                     </Button>
 
-                    <Button x:Name="wechatBtn" Style="{ThemeResource ImageButtonStyle}" Height="48">
+                    <Button x:Name="wechatBtn" Style="{ThemeResource ImageButtonStyle}" Height="48" IsEnabled="False">
                         <Image Source="/Assets/Images/login_wechat.png"/>
                     </Button>
 
