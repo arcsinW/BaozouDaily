@@ -14,6 +14,8 @@ namespace BaoZouRiBao.Helper
 {
     public class MD5Helper
     {
+        private static string SECRET_KEY = "18a75cf12dff8cf6e17550e25c860839";
+
         //    public static string EncryptString(string data)
         //    {
         //        HashAlgorithmProvider provider = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Md5);
@@ -114,6 +116,7 @@ namespace BaoZouRiBao.Helper
             return dic;
         }
 
+
         public static string GetMD5Sign(Dictionary<string,string> dic,List<string> list)
         {
             string tmp;
@@ -126,7 +129,7 @@ namespace BaoZouRiBao.Helper
                 {
                     sb.Append(item.Key + "=" + item.Value);
                 }
-                sb.Append(GlobalValue.AccessKey);
+                sb.Append(SECRET_KEY);
                 tmp = sb.ToString();
                 tmp = WebUtility.UrlEncode(tmp);
             }

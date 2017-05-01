@@ -75,9 +75,9 @@ namespace BaoZouRiBao.ViewModel
                     Title = ShareUri;
                 }
             }
-            catch(Exception e)
+            catch
             {
-                
+                Title = ShareUri;
             }
         }
 

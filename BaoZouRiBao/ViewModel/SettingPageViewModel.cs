@@ -46,7 +46,7 @@ namespace BaoZouRiBao.ViewModel
 
         #region Properties
 
-        private bool isAutoCache;
+        private bool isAutoCache = false;
 
         /// <summary>
         /// 是否自动离线下载
@@ -64,7 +64,7 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-        private bool isSmallImage;
+        private bool isSmallImage = false;
 
         /// <summary>
         /// 是否缩略图模式
@@ -82,7 +82,7 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-        private bool isBigFont;
+        private bool isBigFont = false;
 
         /// <summary>
         /// 是否文章大字号
@@ -100,7 +100,7 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-        private bool isNewsNotify;
+        private bool isNewsNotify = false;
 
         /// <summary>
         /// 是否新消息通知

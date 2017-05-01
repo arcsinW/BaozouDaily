@@ -262,7 +262,7 @@ namespace BaoZouRiBao.Http
             }
         }
 
-        public async Task UploadAvatarAsync()
+        public void UploadAvatarAsync()
         {
 
         }
