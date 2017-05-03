@@ -32,7 +32,6 @@ namespace BaoZouRiBao.Views
             if (parameter != null)
             {
                 string documentId = parameter.DocumentId;
-                string displayType = parameter.DisplayType;
                 if (!string.IsNullOrEmpty(parameter.Title))
                 {
                     titleTextBlock.Text = parameter.Title;
@@ -44,15 +43,21 @@ namespace BaoZouRiBao.Views
 
                         break;
                     case "2":   // pure html
-                        webView.Navigate(new Uri(parameter.WebViewUri));
+                        if (!string.IsNullOrEmpty(parameter.WebViewUri))
+                        {
+                            webView.Navigate(new Uri(parameter.WebViewUri));
+                        }
                         break;
                     case "3":
-                        webView.Navigate(new Uri(parameter.WebViewUri));
+                        if (!string.IsNullOrEmpty(parameter.WebViewUri))
+                        {
+                            webView.Navigate(new Uri(parameter.WebViewUri));
+                        }
                         stackPanel.Visibility = Visibility.Collapsed;
                         return;
                 }
 
-                ViewModel.LoadDocument(documentId.ToString(), displayType);
+                ViewModel.LoadDocument(documentId.ToString(), parameter.DisplayType);
             }
         }
     }

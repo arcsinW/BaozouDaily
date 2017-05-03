@@ -36,7 +36,7 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-        public async void WechatLogin()
+        public void WechatLogin()
         {
            
         }

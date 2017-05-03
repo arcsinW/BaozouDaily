@@ -32,7 +32,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Grid>
+            <Grid Grid.Column="0">
                 <StackPanel Orientation="Horizontal">
                     <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{x:Bind ViewModel.IsMobile,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
                         <Image Source="{StaticResource BackImage}"/>
@@ -60,7 +60,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.FavoriteBtnClick}">
+                <Button Style="{ThemeResource BackButtonStyle}" Padding="4,10" Click="{x:Bind ViewModel.FavoriteBtnClick}">
                     <PathIcon Data="{x:Bind ViewModel.IsFavorite,Mode=OneWay,Converter={StaticResource BoolToPathIconConverter}}"/>
                 </Button>
 
