@@ -40,7 +40,7 @@ namespace BaoZouRiBao.Http
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public async Task<AuthenticationResult> BaoZouOAuthAsync(string userName,string password)
+        private async Task<AuthenticationResult> BaoZouOAuthAsync(string userName,string password)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
             dic.Add("x_auth_mode", "client_auth");
@@ -300,6 +300,10 @@ namespace BaoZouRiBao.Http
             }
         }
 
+        /// <summary>
+        /// 获取 系统 消息
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Message>> GetAdminMessages()
         {
             var result = await GetJson<AdminMessageResult>(ServiceUri.AdminMessage);

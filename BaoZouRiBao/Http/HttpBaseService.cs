@@ -16,7 +16,7 @@ using Windows.Web.Http;
 namespace BaoZouRiBao.Http
 {
     /// <summary>
-    /// provide basic http function
+    /// Provide basic http function and fire UnAuthorized event
     /// </summary>
     public class HttpBaseService
     {

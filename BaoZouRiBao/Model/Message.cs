@@ -13,7 +13,7 @@ namespace BaoZouRiBao.Model
     public class Message
     {
         [JsonProperty(PropertyName = "content")]
-        public string content { get; set; }
+        public string Content { get; set; }
         
         [JsonProperty(PropertyName = "created_at")]
         public string CreatedTime { get; set; }

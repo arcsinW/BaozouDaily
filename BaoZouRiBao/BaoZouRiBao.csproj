@@ -226,6 +226,9 @@
     <Compile Include="UserControls\AndroidPivot.cs" />
     <Compile Include="UserControls\AndroidPopup.cs" />
     <Compile Include="UserControls\DialogService.cs" />
+    <Compile Include="UserControls\GifControl.xaml.cs">
+      <DependentUpon>GifControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\MediaPlayer\BaozouMediaElement.xaml.cs">
       <DependentUpon>BaozouMediaElement.xaml</DependentUpon>
     </Compile>
@@ -495,6 +498,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Themes\ThemeDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\GifControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

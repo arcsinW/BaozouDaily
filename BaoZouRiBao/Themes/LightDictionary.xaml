@@ -21,6 +21,7 @@
     
     <SolidColorBrush x:Key="ThemeColorBrush" Color="{StaticResource LightThemeColor}"/>
 
+    <!--页面背景色-->
     <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FFEEEEEE"/>
 
     <SolidColorBrush x:Key="AdjustColorBrush" Color="White"/>

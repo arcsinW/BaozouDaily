@@ -81,10 +81,17 @@
         </Grid>
         <!--#endregion-->
 
+        <controls:GifControl>
+            <controls:GifControl.Items>
+                
+            </controls:GifControl.Items>
+        </controls:GifControl>
+
         <WebView x:Name="webView"  Grid.Row="1" ex:WebViewExtension.HtmlString="{Binding HtmlString}"
                  NavigationStarting="{x:Bind ViewModel.WebView_NavigationStarting}"
                  NavigationCompleted="{x:Bind ViewModel.WebView_NavigationCompleted}"/>
-
+ 
+        
         <Popup Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom"
                Height="48" x:Name="topPop" IsOpen="True" Width="48" Margin="16,32" >
             <Popup.ChildTransitions>
