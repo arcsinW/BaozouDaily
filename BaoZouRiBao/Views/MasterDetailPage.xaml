@@ -414,7 +414,7 @@
                         </StackPanel>
                     </Grid>
 
-                    <ListView Grid.Row="1" Background="{ThemeResource SplitViewSpanBackground}" SelectionMode="Single">
+                    <ListView Grid.Row="1" Background="{ThemeResource SplitViewSpanBackground}" SelectionMode="None">
                         <ListView.Resources>
                             <Style TargetType="BitmapIcon">
                                 <Setter Property="Foreground" Value="Gray"/>
