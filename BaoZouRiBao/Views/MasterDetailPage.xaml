@@ -18,9 +18,8 @@
     <Page.DataContext>
         <vm:MasterDetailPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
-    
+
     <Page.Resources>
-         
         <Style x:Key="NavMenuItemContainerStyle" TargetType="ListViewItem">
             <Setter Property="MinWidth" Value="{StaticResource SplitViewCompactPaneThemeLength}"/>
             <Setter Property="MinHeight" Value="48"/>
@@ -343,12 +342,12 @@
                                 Orientation="Horizontal" Margin="20,0">
                             <Button Style="{ThemeResource ImageButtonStyle}" Click="{x:Bind ViewModel.LoginPage}">
                                 <Grid> 
-                                    <Ellipse Height="80" Width="80" >
+                                    <Ellipse Height="72" Width="72" >
                                         <Ellipse.Fill>
                                             <ImageBrush ImageSource="{StaticResource DefaultAvatar}"/>
                                         </Ellipse.Fill>
                                     </Ellipse>
-                                    <Ellipse Height="80" Width="80" >
+                                    <Ellipse Height="72" Width="72" >
                                         <Ellipse.Fill>
                                             <ImageBrush ImageSource="{Binding User.Avatar,TargetNullValue={StaticResource DefaultAvatar}}"/>
                                         </Ellipse.Fill>

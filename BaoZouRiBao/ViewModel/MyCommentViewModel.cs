@@ -75,6 +75,10 @@ namespace BaoZouRiBao.ViewModel
             {
                 IsEmpty = true;
             }
+            else
+            {
+                IsEmpty = false;
+            }
 
             return comments;
         }

@@ -271,12 +271,12 @@ namespace BaoZouRiBao.Http
         /// <summary>
         /// 获取 评论 消息
         /// </summary>
-        public async Task<List<Message>> GetCommentMessages()
+        public async Task<CommentMessageResult> GetCommentMessages()
         {
             var result = await GetJson<CommentMessageResult>(ServiceUri.CommentMessage);
             if (result != null)
             {
-                return result.CommentMessage;
+                return result;
             }
             else
             {
@@ -287,12 +287,12 @@ namespace BaoZouRiBao.Http
         /// <summary>
         /// 获取 赞 消息
         /// </summary>
-        public async Task<List<Message>> GetCommentVoteMessages()
+        public async Task<CommentVoteMessageResult> GetCommentVoteMessages()
         {
             var result = await GetJson<CommentVoteMessageResult>(ServiceUri.CommentVoteMessage);
             if (result != null)
             {
-                return result.CommentMessage;
+                return result;
             }
             else
             {
@@ -304,12 +304,12 @@ namespace BaoZouRiBao.Http
         /// 获取 系统 消息
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Message>> GetAdminMessages()
+        public async Task<AdminMessageResult> GetAdminMessages()
         {
             var result = await GetJson<AdminMessageResult>(ServiceUri.AdminMessage);
             if (result != null)
             {
-                return result.CommentMessage;
+                return result;
             }
             else
             {

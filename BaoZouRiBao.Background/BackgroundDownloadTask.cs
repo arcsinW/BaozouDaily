@@ -21,6 +21,8 @@ namespace BaoZouRiBao.Background
             IReadOnlyList<DownloadOperation> downloads = detail.Downloads;
 
             // post-processing
+
+            deferral.Complete();
         }
     }
 }

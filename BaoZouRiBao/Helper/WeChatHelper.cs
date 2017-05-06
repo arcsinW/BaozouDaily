@@ -36,7 +36,7 @@ namespace BaoZouRiBao.Helper
                 };
                 SendMessageToWX.Req req = new SendMessageToWX.Req(message, scene);
                 IWXAPI api = WXAPIFactory.CreateWXAPI(APP_ID);
-                var isValid = await api.SendReq(req);
+                await api.SendReq(req);
             }
             catch (WXException ex)
             {
@@ -69,7 +69,7 @@ namespace BaoZouRiBao.Helper
                     };
                     SendMessageToWX.Req req = new SendMessageToWX.Req(message, scene);
                     IWXAPI api = WXAPIFactory.CreateWXAPI(APP_ID);
-                    var isValid = await api.SendReq(req);
+                    await api.SendReq(req);
                 }
             }
             catch (WXException ex)
@@ -100,7 +100,7 @@ namespace BaoZouRiBao.Helper
                     };
                     SendMessageToWX.Req req = new SendMessageToWX.Req(message, scene);
                     IWXAPI api = WXAPIFactory.CreateWXAPI(APP_ID);
-                    var isValid = await api.SendReq(req);
+                    await api.SendReq(req);
                 }
             }
             catch (WXException ex)
@@ -132,7 +132,7 @@ namespace BaoZouRiBao.Helper
                 };
                 SendMessageToWX.Req req = new SendMessageToWX.Req(message, scene);
                 IWXAPI api = WXAPIFactory.CreateWXAPI(APP_ID);
-                var isValid = await api.SendReq(req);
+                await api.SendReq(req);
             }
             catch (WXException ex)
             {
@@ -165,7 +165,7 @@ namespace BaoZouRiBao.Helper
                     };
                     SendMessageToWX.Req req = new SendMessageToWX.Req(message, scene);
                     IWXAPI api = WXAPIFactory.CreateWXAPI(APP_ID);
-                    var isValid = await api.SendReq(req);
+                    await api.SendReq(req);
                 }
             }
             catch (WXException ex)
@@ -196,7 +196,7 @@ namespace BaoZouRiBao.Helper
                     };
                     SendMessageToWX.Req req = new SendMessageToWX.Req(message, scene);
                     IWXAPI api = WXAPIFactory.CreateWXAPI(APP_ID);
-                    var isValid = await api.SendReq(req);
+                    await api.SendReq(req);
                 }
             }
             catch (WXException ex)

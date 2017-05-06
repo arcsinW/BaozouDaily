@@ -1,5 +1,6 @@
 ﻿using BaoZouRiBao.Helper;
 using BaoZouRiBao.Http;
+using BaoZouRiBao.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,7 +54,7 @@ namespace BaoZouRiBao.ViewModel
             {
                 if (result.Status.Equals("success"))
                 {
-
+                    ToastService.SendToast("投稿成功");
                 }
             }
         }

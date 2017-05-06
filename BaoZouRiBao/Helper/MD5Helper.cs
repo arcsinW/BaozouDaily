@@ -76,7 +76,7 @@ namespace BaoZouRiBao.Helper
                 {
                     int n = arrayOfByte[j];
                     arrayOfChar2[m] = arrayOfChar[(0xF & n >> 4)];    //取字节中高四位进行转换
-                    var x = n & 0xF;
+                    //var x = n & 0xF;
                     arrayOfChar2[++m] = arrayOfChar[(n & 0xF)];
                     m++;
                 }

@@ -16,16 +16,7 @@ namespace BaoZouRiBao.Views
         {
             this.InitializeComponent();
         }
-
-        private async void Clipboard_ContentChanged(object sender, object e)
-        {
-            DataPackageView dataPackage = Clipboard.GetContent();
-            if (dataPackage.Contains(StandardDataFormats.Text))
-            {
-                string link = await dataPackage.GetTextAsync();
-            }
-        }
-
+          
         private void faqBtn_Click(object sender, RoutedEventArgs e)
         {
             WebViewParameter paramter = new WebViewParameter() { Title = "如何复制", WebViewUri = "http://dailyapi.ibaozou.com/faq?category_id=1", DisplayType = "3" };
