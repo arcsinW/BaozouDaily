@@ -1,7 +1,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BaoZouRiBao.UserControls"
+    xmlns:local="using:BaoZouRiBao.Controls"
     >
 
     <Style TargetType="local:AndroidPopup" >
@@ -204,6 +204,7 @@
         <Setter Property="Padding" Value="0" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HeaderBrush" Value="{ThemeResource PivotHeaderColorBrush}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
         <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False" />

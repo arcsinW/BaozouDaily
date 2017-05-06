@@ -85,7 +85,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
-    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
     <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
@@ -223,21 +223,21 @@
     <Compile Include="Themes\ThemeDictionary.xaml.cs">
       <DependentUpon>ThemeDictionary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\AndroidPivot.cs" />
-    <Compile Include="UserControls\AndroidPopup.cs" />
-    <Compile Include="UserControls\DialogService.cs" />
-    <Compile Include="UserControls\GifControl.xaml.cs">
+    <Compile Include="Controls\AndroidPivot.cs" />
+    <Compile Include="Controls\AndroidPopup.cs" />
+    <Compile Include="Controls\DialogService.cs" />
+    <Compile Include="Controls\GifControl.xaml.cs">
       <DependentUpon>GifControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\MediaPlayer\BaozouMediaElement.xaml.cs">
+    <Compile Include="Controls\MediaPlayer\BaozouMediaElement.xaml.cs">
       <DependentUpon>BaozouMediaElement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\MediaPlayer\BaozouMediaTransportControls.cs" />
-    <Compile Include="UserControls\BaoZouTaskPopup.cs" />
-    <Compile Include="UserControls\Drawer.cs" />
-    <Compile Include="UserControls\RefreshableListView.cs" />
-    <Compile Include="UserControls\RoundButton.cs" />
-    <Compile Include="UserControls\ToastService.cs" />
+    <Compile Include="Controls\MediaPlayer\BaozouMediaTransportControls.cs" />
+    <Compile Include="Controls\BaoZouTaskPopup.cs" />
+    <Compile Include="Controls\Drawer.cs" />
+    <Compile Include="Controls\RefreshableListView.cs" />
+    <Compile Include="Controls\RoundButton.cs" />
+    <Compile Include="Controls\ToastService.cs" />
     <Compile Include="ViewModel\BaozouLoginViewModel.cs" />
     <Compile Include="ViewModel\ChannelViewModel.cs" />
     <Compile Include="ViewModel\CommentPageViewModel.cs" />
@@ -501,11 +501,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\GifControl.xaml">
+    <Page Include="Controls\GifControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\MediaPlayer\BaozouMediaElement.xaml">
+    <Page Include="Controls\MediaPlayer\BaozouMediaElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

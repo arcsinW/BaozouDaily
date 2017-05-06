@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:m="using:BaoZouRiBao.Model"
-    xmlns:control="using:BaoZouRiBao.UserControls"
+    xmlns:control="using:BaoZouRiBao.Controls"
     xmlns:converter="using:BaoZouRiBao.Converters"
     mc:Ignorable="d">
 
@@ -90,24 +90,18 @@
                                 <!--#region Avatar-->
                                 <Ellipse Grid.Column="0" Grid.Row="0" MinHeight="48" MinWidth="48" HorizontalAlignment="Left">
                                     <Ellipse.Fill>
-                                        <ImageBrush ImageSource="{StaticResource DefaultAvatar}"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-
-                                <Ellipse Grid.Column="0" Grid.Row="0" MinHeight="48" MinWidth="48" HorizontalAlignment="Left">
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="{x:Bind User.RealAvatarUrl}"/>
+                                        <ImageBrush ImageSource="{Binding User.RealAvatarUrl,FallbackValue={StaticResource DefaultAvatar}}"/>
                                     </Ellipse.Fill>
                                 </Ellipse>
                                 <!--#endregion-->
 
-                                <TextBlock Margin="24,0" Grid.Row="0" Grid.Column="1" Text="{x:Bind User.Name}" 
+                                <TextBlock Margin="24,0" Grid.Row="0" Grid.Column="1" Text="{Binding User.Name}" 
                                            VerticalAlignment="Center"/>
 
                                 <Grid Margin="24,0" Grid.Column="1" Grid.Row="1">
                                     <StackPanel>
-                                        <TextBlock Text="{x:Bind Content}" TextWrapping="Wrap" Margin="0,8"/>
-                                        <TextBlock Text="{x:Bind Time,Converter={StaticResource TimeStampToDateTimeConverter}}" 
+                                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="0,8"/>
+                                        <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" 
                                                    Foreground="#FF686868"/>
                                     </StackPanel>
                                 </Grid>
@@ -136,10 +130,8 @@
                 </ListView.ItemTemplate>
             </control:RefreshableListView>
 
-            <TextBlock Text="加载失败，点击重试" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
-                       Foreground="{ThemeResource PhoneForegroundColorBrush}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
+            <TextBlock Text="暂无数据" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
+                       Style="{ThemeResource LoadErrorTextBlockStyle}"/>
         </Grid>
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>

@@ -5,7 +5,7 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:control="using:BaoZouRiBao.UserControls"
+    xmlns:control="using:BaoZouRiBao.Controls"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core" 
     xmlns:action="using:BaoZouRiBao.BaoZouAction"
@@ -557,7 +557,7 @@
                     </Grid>
                 </ListView.Header>
                 <ListView.Items>
-                    <ListViewItem>
+                    <ListViewItem IsSelected="True">
                         <i:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
                                 <core:EventTriggerBehavior.Actions>

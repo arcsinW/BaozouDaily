@@ -1,6 +1,6 @@
 ﻿using BaoZouRiBao.Helper;
 using BaoZouRiBao.Model;
-using BaoZouRiBao.UserControls;
+using BaoZouRiBao.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;

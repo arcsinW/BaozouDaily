@@ -9,7 +9,7 @@ using Windows.Storage;
 using BaoZouRiBao.Http;
 using Windows.Foundation.Collections;
 using BaoZouRiBao.Model.ResultModel;
-using BaoZouRiBao.UserControls;
+using BaoZouRiBao.Controls;
 
 namespace BaoZouRiBao.ViewModel
 {

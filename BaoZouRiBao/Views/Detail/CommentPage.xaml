@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:m="using:BaoZouRiBao.Model"
-    xmlns:controls="using:BaoZouRiBao.UserControls"
+    xmlns:controls="using:BaoZouRiBao.Controls"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:converter="using:BaoZouRiBao.Converters"
     mc:Ignorable="d">
@@ -25,22 +25,17 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
-                <!--<Border Height="40" Width="40" CornerRadius="20">
-                    <toolkit:ImageEx Grid.Column="0" Height="40" Width="40" PlaceholderSource="/Assets/Image/avatar_m.png" IsCacheEnabled="True" 
-                                 DecodePixelHeight="40" DecodePixelWidth="40" Source="{Binding User.RealAvatarUrl}"/>
-                </Border>-->
-
+  
                 <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="{x:Bind User.RealAvatarUrl,Mode=OneWay}"/>
+                        <ImageBrush ImageSource="{Binding User.RealAvatarUrl,FallbackValue={StaticResource PlaceHolderAvatar}}"/>
                     </Ellipse.Fill>
                 </Ellipse>
 
                 <Grid Grid.Column="1" Margin="8,0">
                     <StackPanel>
                         <TextBlock Text="{x:Bind User.Name,Mode=OneWay}"/>
-                        <TextBlock Text="{x:Bind Content,Mode=OneWay}" TextWrapping="Wrap" Margin="0,16"/>
+                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="0,16"/>
 
                         <Grid>
                             <TextBlock Text="{x:Bind Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0,0,12,0"/>
@@ -94,11 +89,10 @@
             </Button>
         </Grid>
 
-        <controls:AndroidPivot x:Name="pivot" Grid.Row="1" 
-               SelectionChanged="pivot_SelectionChanged">
+        <controls:AndroidPivot x:Name="pivot" Grid.Row="1" SelectionChanged="pivot_SelectionChanged">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding }" FontSize="20" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
+                    <TextBlock Text="{Binding }" FontSize="{StaticResource PivotHeaderFontSize}" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             <PivotItem Header="最新">

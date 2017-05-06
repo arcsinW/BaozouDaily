@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:m="using:BaoZouRiBao.Model"
-    xmlns:control="using:BaoZouRiBao.UserControls"
+    xmlns:control="using:BaoZouRiBao.Controls"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
@@ -359,9 +359,9 @@
                     </Button.Content>
                     <Button.Flyout>
                         <MenuFlyout> 
-                            <MenuFlyoutItem Text="刷新" Click="{x:Bind Refresh}" MinHeight="48"/>
-                            <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}" MinHeight="48"/>
-                            <MenuFlyoutItem Text="设置" Click="{x:Bind SettingPage}" MinHeight="48"/>
+                            <MenuFlyoutItem Text="刷新" Click="{x:Bind Refresh}"/>
+                            <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
+                            <MenuFlyoutItem Text="设置" Click="{x:Bind SettingPage}"/>
                         </MenuFlyout>
                     </Button.Flyout>
                 </Button>
@@ -373,7 +373,7 @@
                               HeaderBrush="{ThemeResource PivotHeaderColorBrush}">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding }" FontSize="16" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
+                    <TextBlock Text="{Binding }" FontSize="{StaticResource PivotHeaderFontSize}" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             <Pivot.Resources>

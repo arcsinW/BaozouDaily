@@ -21,7 +21,7 @@
             <Color x:Key="LightThemeColor">#FB3D4F</Color>
 
             <Color x:Key="DarkStatusBarBackgroundColor">#FF1F1F1F</Color>
-            <Color x:Key="LightStatusBarBackgroundColor">#F7717E</Color>
+            <Color x:Key="LightStatusBarBackgroundColor">#97252f</Color>
 
             <x:String x:Key="RecommendString">推荐</x:String>
 

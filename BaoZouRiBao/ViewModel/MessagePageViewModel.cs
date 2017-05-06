@@ -123,7 +123,39 @@ namespace BaoZouRiBao.ViewModel
             }
 
             return messages;
-        }  
+        }
+        #endregion
+
+        #region Refresh methods
+        /// <summary>
+        /// 刷新评论消息
+        /// </summary>
+        public async void RefreshCommentMessages()
+        {
+            IsActive = true;
+            await CommentMessages.ClearAndReloadAsync();
+            IsActive = false;
+        }
+
+        /// <summary>
+        /// 刷新赞消息
+        /// </summary>
+        public async void RefreshVoteMessages()
+        {
+            IsActive = true;
+            await VoteMessages.ClearAndReloadAsync();
+            IsActive = false;
+        }
+
+        /// <summary>
+        /// 刷新系统消息
+        /// </summary>
+        public async void RefreshAdminMessages()
+        {
+            IsActive = true;
+            await AdminMessages.ClearAndReloadAsync();
+            IsActive = false;
+        } 
         #endregion
 
         #region Properties

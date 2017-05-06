@@ -2,7 +2,7 @@
 using BaoZouRiBao.Helper;
 using BaoZouRiBao.Http;
 using BaoZouRiBao.Model;
-using BaoZouRiBao.UserControls;
+using BaoZouRiBao.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;

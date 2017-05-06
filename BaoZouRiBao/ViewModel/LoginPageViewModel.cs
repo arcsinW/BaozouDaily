@@ -1,6 +1,6 @@
 ﻿using BaoZouRiBao.Helper;
 using BaoZouRiBao.Http;
-using BaoZouRiBao.UserControls;
+using BaoZouRiBao.Controls;
 using BaoZouRiBao.Views;
 using System;
 using System.Collections.Generic;

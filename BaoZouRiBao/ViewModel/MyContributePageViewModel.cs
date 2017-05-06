@@ -84,5 +84,13 @@ namespace BaoZouRiBao.ViewModel
 
             return contributes;
         }
+
+        /// <summary>
+        /// 刷新页面
+        /// </summary>
+        public override async void Refresh()
+        {
+            await Contributes.ClearAndReloadAsync();
+        }
     }
 }

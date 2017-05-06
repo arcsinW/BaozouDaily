@@ -111,7 +111,7 @@ namespace BaoZouRiBao.ViewModel
         public override async void Refresh()
         {
             IsActive = true;
-            await Favorites.ClearAndReload();
+            await Favorites.ClearAndReloadAsync();
             IsActive = false;
         }
 

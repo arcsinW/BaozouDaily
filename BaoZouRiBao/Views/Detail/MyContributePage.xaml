@@ -40,20 +40,21 @@
         </Grid>
 
         <Grid Grid.Row="1"> 
-            <ListView ItemsSource="{Binding Contributes}">
+            <ListView ItemsSource="{Binding Contributes}"
+                      ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <StackPanel>
+                            <StackPanel Padding="12,0">
                                 <TextBlock Text="{Binding Title}" TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding PublishTime,Converter={StaticResource TimeStampToDateTimeConverter}}"/> 
+                                <TextBlock Text="{Binding PublishedAt}" Margin="0,8,0,0"/> 
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
              
-            <TextBlock Text="加载失败，点击重试" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
+            <TextBlock Text="暂无数据" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
                        Foreground="{ThemeResource PhoneForegroundColorBrush}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"/>

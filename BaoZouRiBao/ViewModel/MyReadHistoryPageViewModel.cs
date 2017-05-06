@@ -87,7 +87,7 @@ namespace BaoZouRiBao.ViewModel
 
         public async void RefreshReadHistories()
         {
-            await ReadHistories.ClearAndReload();
+            await ReadHistories.ClearAndReloadAsync();
         }
 
         public void documentListView_ItemClick(object sender, ItemClickEventArgs e)

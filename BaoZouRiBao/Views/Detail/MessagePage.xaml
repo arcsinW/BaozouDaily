@@ -5,7 +5,7 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:BaoZouRiBao.UserControls"
+    xmlns:controls="using:BaoZouRiBao.Controls"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:m="using:BaoZouRiBao.Model"
     mc:Ignorable="d">
@@ -13,6 +13,31 @@
     <Page.DataContext>
         <vm:MessagePageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
+
+    <Page.Resources>
+        <DataTemplate x:Key="MessageDataTemplate" x:DataType="m:Message">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding Sender.Avatar,FallbackValue={StaticResource DefaultAvatar}}"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <Grid Grid.Column="1" Margin="12,0">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Sender.Name}"/>
+                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="0,16"/>
+                        <TextBlock Text="{Binding SendTime}" Margin="0,0,12,0"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
     
     <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
@@ -35,7 +60,7 @@
                 <Button.Flyout>
                     <MenuFlyout> 
                         <MenuFlyout.Items>
-                            <MenuFlyoutItem Text="刷新"/>
+                            <MenuFlyoutItem Text="刷新" Click="{x:Bind Refresh}"/>
                             <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                             <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
                         </MenuFlyout.Items>
@@ -48,39 +73,44 @@
             <controls:AndroidPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" IndicatorLineStokeThickness="2" >
                 <Pivot.HeaderTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding }" FontSize="20" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
+                        <TextBlock Text="{Binding }" FontSize="{StaticResource PivotHeaderFontSize}" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
                     </DataTemplate>
                 </Pivot.HeaderTemplate>
                 <PivotItem Header="评论">
-                    <ListView ItemsSource="{Binding CommentMessages}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="m:Message">
-                                <Grid>
-                                    <TextBlock Text="{x:Bind Content}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <Grid>
+                        <ListView ItemsSource="{Binding CommentMessages}"
+                              ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
+                              ItemTemplate="{StaticResource MessageDataTemplate}">
+                        </ListView>
+
+                        <TextBlock Text="暂无数据" 
+                               Visibility="{Binding IsCommentMessageEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{ThemeResource LoadErrorTextBlockStyle}"/>
+                    </Grid>
                 </PivotItem>
 
                 <PivotItem Header="赞">
-                    <ListView ItemsSource="{Binding VoteMessages}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="m:Message">
-                                <TextBlock Text="{x:Bind Content}"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <Grid>
+                        <ListView ItemsSource="{Binding VoteMessages}"
+                              ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
+                              ItemTemplate="{StaticResource MessageDataTemplate}">
+                        </ListView>
+                        <TextBlock Text="暂无数据" 
+                               Visibility="{Binding IsVoteMessageEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{ThemeResource LoadErrorTextBlockStyle}"/>
+                    </Grid>
                 </PivotItem>
 
                 <PivotItem Header="通知">
-                    <ListView ItemsSource="{Binding AdminMessages}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="m:Message">
-                                <TextBlock Text="{x:Bind Content}"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <Grid>
+                        <ListView ItemsSource="{Binding AdminMessages}"
+                              ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
+                              ItemTemplate="{StaticResource MessageDataTemplate}">
+                            <TextBlock Text="暂无数据" 
+                               Visibility="{Binding IsAdminMessageEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{ThemeResource LoadErrorTextBlockStyle}"/>
+                        </ListView>
+                    </Grid>
                 </PivotItem>
             </controls:AndroidPivot>
         </Grid>

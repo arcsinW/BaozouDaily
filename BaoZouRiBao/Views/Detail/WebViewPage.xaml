@@ -8,7 +8,7 @@
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:ex="using:BaoZouRiBao.Extension"
     xmlns:converter="using:BaoZouRiBao.Converters"
-    xmlns:controls="using:BaoZouRiBao.UserControls"
+    xmlns:controls="using:BaoZouRiBao.Controls"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -80,12 +80,6 @@
             </StackPanel>
         </Grid>
         <!--#endregion-->
-
-        <controls:GifControl>
-            <controls:GifControl.Items>
-                
-            </controls:GifControl.Items>
-        </controls:GifControl>
 
         <WebView x:Name="webView"  Grid.Row="1" ex:WebViewExtension.HtmlString="{Binding HtmlString}"
                  NavigationStarting="{x:Bind ViewModel.WebView_NavigationStarting}"

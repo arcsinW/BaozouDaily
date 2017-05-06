@@ -21,5 +21,21 @@ namespace BaoZouRiBao.Views
         {
             this.InitializeComponent();
         }
+
+        public void Refresh()
+        {
+            switch (pivot.SelectedIndex)
+            {
+                case 0:
+                    ViewModel.RefreshCommentMessages();
+                    break;
+                case 1:
+                    ViewModel.RefreshVoteMessages();
+                    break;
+                case 2:
+                    ViewModel.RefreshAdminMessages();
+                    break;
+            }
+        }
     }
 }

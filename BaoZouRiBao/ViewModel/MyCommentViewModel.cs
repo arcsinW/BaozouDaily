@@ -85,7 +85,7 @@ namespace BaoZouRiBao.ViewModel
 
         public async void RefreshComments()
         {
-            await Comments.ClearAndReload();
+            await Comments.ClearAndReloadAsync();
         }
          
     }

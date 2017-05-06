@@ -76,7 +76,7 @@ namespace BaoZouRiBao.IncrementalCollection
             get; private set;
         }
         
-        public async Task ClearAndReload()
+        public async Task ClearAndReloadAsync()
         {
             Clear();
             Page = 0;

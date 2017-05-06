@@ -5,7 +5,7 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:control="using:BaoZouRiBao.UserControls"
+    xmlns:control="using:BaoZouRiBao.Controls"
     xmlns:m="using:BaoZouRiBao.Model"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
@@ -104,7 +104,7 @@
                 </ListView.ItemTemplate>
             </control:RefreshableListView>
 
-            <TextBlock Text="加载失败，点击重试" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
+            <TextBlock Text="暂无数据" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
                        Foreground="{ThemeResource PhoneForegroundColorBrush}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"/>

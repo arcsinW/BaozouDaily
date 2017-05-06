@@ -10,13 +10,15 @@ namespace BaoZouRiBao.Views
 {
     public sealed partial class MasterDetailPage : Page
     {
-        public static MasterDetailPage Current;
         public MasterDetailPage()
         {
             this.InitializeComponent();
 
             Current = this; 
-        } 
+        }
+
+        public static MasterDetailPage Current;
+         
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -24,6 +26,7 @@ namespace BaoZouRiBao.Views
             MasterFrame.Navigate(typeof(MainPage));
         }
 
+        #region Adaptive 
         private void MasterFrame_Navigated(object sender, NavigationEventArgs e)
         {
             UpdateBackKeyVisibility();
@@ -36,7 +39,7 @@ namespace BaoZouRiBao.Views
 
         private void UpdateBackKeyVisibility()
         {
-            if(AdaptiveVisualState.CurrentState == Narrow)
+            if (AdaptiveVisualState.CurrentState == Narrow)
             {
                 DetailFrame.Visibility = DetailFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
             }
@@ -46,7 +49,7 @@ namespace BaoZouRiBao.Views
             }
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = DetailFrame.CanGoBack || MasterFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
-        
+
         private void AdaptiveVisualState_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
             UpdateBackKeyVisibility();
@@ -54,8 +57,9 @@ namespace BaoZouRiBao.Views
             AdaptiveVisualStateChanged?.Invoke(sender, e);
         }
 
-        public event EventHandler<VisualStateChangedEventArgs> AdaptiveVisualStateChanged;
-          
+        public event EventHandler<VisualStateChangedEventArgs> AdaptiveVisualStateChanged; 
+        #endregion
+
         /// <summary>
         /// 显示任务Popup
         /// </summary>
