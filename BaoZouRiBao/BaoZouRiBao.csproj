@@ -118,6 +118,7 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Controls\GifAnimControl.cs" />
     <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\BoolToObjectConverter.cs" />
     <Compile Include="Converters\BoolToPathIconConverter.cs" />
@@ -412,12 +413,12 @@
     <Content Include="Assets\Images\img_popout_box_ReadDocument.png" />
     <Content Include="Assets\Images\img_popout_box_DailySign.png" />
     <Content Include="Assets\Images\img_popout_box_ShareDocument.png" />
+    <Content Include="Assets\Images\loadinganim0.png" />
     <Content Include="Assets\Images\loadinganim1.png" />
     <Content Include="Assets\Images\loadinganim2.png" />
     <Content Include="Assets\Images\loadinganim3.png" />
     <Content Include="Assets\Images\loadinganim4.png" />
     <Content Include="Assets\Images\loadinganim5.png" />
-    <Content Include="Assets\Images\loadinganim6.png" />
     <Content Include="Assets\Images\login_qq.png" />
     <Content Include="Assets\Images\login_sina.png" />
     <Content Include="Assets\Images\home_more.png" />

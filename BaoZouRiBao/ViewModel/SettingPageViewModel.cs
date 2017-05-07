@@ -21,7 +21,7 @@ namespace BaoZouRiBao.ViewModel
 
             GlobalValue.Current.DataChanged += Current_DataChanged;
 
-            if (GlobalValue.Current.User != null)
+            if (GlobalValue.Current.User != null && !string.IsNullOrEmpty(GlobalValue.Current.User.AccessToken))
             {
                 IsLogoutEnable = true;
             }
@@ -29,7 +29,7 @@ namespace BaoZouRiBao.ViewModel
 
         private void Current_DataChanged()
         {
-            if (GlobalValue.Current.User != null)
+            if (GlobalValue.Current.User != null && !string.IsNullOrEmpty(GlobalValue.Current.User.AccessToken))
             {
                 IsLogoutEnable = true;
             }
@@ -119,7 +119,7 @@ namespace BaoZouRiBao.ViewModel
         }
 
 
-        private bool isLogoutEnable;
+        private bool isLogoutEnable = false;
 
         public bool IsLogoutEnable
         {
@@ -153,6 +153,7 @@ namespace BaoZouRiBao.ViewModel
             if (result)
             {
                 ToastService.SendToast("已注销登录");
+                IsLogoutEnable = false;
             }
         }
     }

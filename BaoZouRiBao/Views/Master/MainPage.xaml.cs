@@ -4,6 +4,7 @@ using BaoZouRiBao.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using System;
 
 namespace BaoZouRiBao.Views
 {
@@ -12,6 +13,8 @@ namespace BaoZouRiBao.Views
         public MainPage()
         {
             this.InitializeComponent();
+
+             
 
             MasterDetailPage.Current.AdaptiveVisualStateChanged += Current_AdaptiveVisualStateChanged;
         }

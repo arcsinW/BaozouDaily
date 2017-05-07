@@ -613,5 +613,7 @@
         </control:AndroidPivot>
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
+
+        <control:GifAnimControl HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Page>

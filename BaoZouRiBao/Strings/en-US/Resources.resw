@@ -42,6 +42,9 @@
   <data name="AppName" xml:space="preserve">
     <value>BaoZouDaily</value>
   </data>
+  <data name="ClearHistory.Text" xml:space="preserve">
+    <value>Clear Histories</value>
+  </data>
   <data name="MainPage.Text" xml:space="preserve">
     <value>MainPage</value>
   </data>

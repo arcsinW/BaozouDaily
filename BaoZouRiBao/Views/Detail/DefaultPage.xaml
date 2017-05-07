@@ -5,9 +5,21 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:control="using:BaoZouRiBao.Controls"
+    xmlns:win2d="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource PageBackgroundBrush}">
-        <Image Source="ms-appx:///Assets/Images/img_popout_box_rate_wangmima.png" Height="200"/>
+        <!--<Image Source="ms-appx:///Assets/Images/img_popout_box_rate_wangmima.png" Height="200"/>-->
+
+        
+        <Grid Height="200" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <win2d:CanvasAnimatedControl x:Name="canvas" Draw="CanvasAnimatedControl_Draw"
+                                     Update="CanvasAnimatedControl_Update" 
+                                     CreateResources="CanvasAnimatedControl_CreateResources"/>
+
+            <!--<control:GifAnimControl HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Height="200" Width="200"/>-->
+        </Grid>
     </Grid>
 </Page>

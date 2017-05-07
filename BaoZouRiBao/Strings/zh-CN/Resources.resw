@@ -42,6 +42,9 @@
   <data name="AppName" xml:space="preserve">
     <value>暴走日报</value>
   </data>
+  <data name="ClearHistory.Text" xml:space="preserve">
+    <value>清除历史</value>
+  </data>
   <data name="MainPage.Text" xml:space="preserve">
     <value>首页</value>
   </data>

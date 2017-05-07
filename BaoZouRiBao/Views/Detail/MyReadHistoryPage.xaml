@@ -29,7 +29,7 @@
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.ClearHistories}">
+                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.ClearHistories}" ToolTipService.ToolTip="清除历史记录">
                     <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_delete.png"/>
                 </Button>
                 <Button Style="{ThemeResource BackButtonStyle}" >
