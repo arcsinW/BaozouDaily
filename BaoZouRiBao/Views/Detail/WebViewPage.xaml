@@ -17,6 +17,11 @@
 
     <Page.Resources>
         <converter:BoolToPathIconConverter x:Key="BoolToPathIconConverter"/>
+
+        <Style TargetType="BitmapIcon">
+            <Setter Property="Width" Value="{StaticResource BitmapIconWidth}"/>
+            <Setter Property="Height" Value="{StaticResource BitmapIconHeight}"/>
+        </Style>
     </Page.Resources>
 
     <Grid Background="{ThemeResource PageBackgroundBrush}">
@@ -28,23 +33,23 @@
         <!--#region Page title-->
         <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}" DataContext="{Binding DocumentExtra}">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0">
-                <StackPanel Orientation="Horizontal">
-                    <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" 
+            <Button Grid.Column="0" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" 
                             Visibility="{x:Bind ViewModel.IsMobile,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
-                        <Image Source="{StaticResource BackImage}"/>
-                    </Button>
+                <Image Source="{StaticResource BackImage}"/>
+            </Button>
 
-                    <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
-                           ScrollViewer.HorizontalScrollMode="Enabled" Style="{ThemeResource PageTitleTextBlockStyle}"/>
-                </StackPanel>
+            <Grid Grid.Column="1">
+                <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
+                            Style="{ThemeResource PageTitleTextBlockStyle}" 
+                            HorizontalAlignment="Left" ScrollViewer.HorizontalScrollMode="Enabled"/>
             </Grid>
-
-            <StackPanel x:Name="stackPanel" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+            
+            <StackPanel x:Name="stackPanel" Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>
@@ -67,7 +72,7 @@
                 <Button Style="{ThemeResource BackButtonStyle}">
                     <BitmapIcon UriSource="/Assets/Images/home_more.png"/>
                     <Button.Flyout>
-                        <MenuFlyout> 
+                        <MenuFlyout>
                             <MenuFlyout.Items>
                                 <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.Refresh}"/>
                                 <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>

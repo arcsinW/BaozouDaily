@@ -15,9 +15,12 @@ namespace BaoZouRiBao.ViewModel
 {
     public class SearchPageViewModel : ViewModelBase
     {
+        #region Properties
         public SearchResultCollection ResultCollection { get; set; } = new SearchResultCollection();
 
-        private string keyword;
+        public IncrementalLoadingList<Document> SearchResults { get; set; } 
+
+        private string keyword = "暴走日报";
 
         public string Keyword
         {
@@ -33,9 +36,21 @@ namespace BaoZouRiBao.ViewModel
             set { isActive = value; OnPropertyChanged(); }
         }
 
+        private bool isEmpty = false;
+
+        public bool IsEmpty
+        {
+            get { return isEmpty; }
+            set { isEmpty = value; }
+        }
+
+        #endregion
+
 
         public SearchPageViewModel()
         {
+            SearchResults = new IncrementalLoadingList<Document>(Search);
+
             ResultCollection.OnDataLoadingEvent += ResultCollection_OnDataLoadingEvent;
             ResultCollection.OnDataLoadedEvent += ResultCollection_OnDataLoadedEvent;
 
@@ -45,7 +60,37 @@ namespace BaoZouRiBao.ViewModel
                 Search();
             }
         }
-         
+
+        private async Task<IEnumerable<Document>> Search(uint count, int pageIndex)
+        {
+            List<Document> documents = new List<Document>();
+            if (string.IsNullOrWhiteSpace(Keyword))
+            {
+                count = 0;
+                return documents;
+            }
+
+            var searchResult = await ApiService.Instance.SearchAsync(Keyword, pageIndex++);
+            if (searchResult == null || searchResult.Documents.Length == 0)
+            {
+                SearchResults.NoMore();
+            }
+            else
+            {
+                foreach (var item in searchResult.Documents)
+                {
+                    documents.Add(item);
+                }
+            }
+
+            if(documents.Count == 0 && SearchResults.Count == 0)
+            {
+                IsEmpty = true;
+            }
+
+            return documents;
+        }
+          
         public void SearchListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var story = e.ClickedItem as Document;
@@ -56,10 +101,10 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-
-        public void Search()
+        public async void Search()
         {
-            ResultCollection.SetKeyword(Keyword);
+            //ResultCollection.SetKeyword(Keyword); 
+            await SearchResults.ClearAndReloadAsync();
         }
 
         private void ResultCollection_OnDataLoadingEvent()

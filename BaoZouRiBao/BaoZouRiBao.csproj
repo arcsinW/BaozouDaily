@@ -375,6 +375,8 @@
     <Content Include="Assets\Images\btn_video_like_pre.png" />
     <Content Include="Assets\Images\btn_video_play.png" />
     <Content Include="Assets\Images\btn_video_reply_nor.png" />
+    <Content Include="Assets\Images\btn_wordsend.png" />
+    <Content Include="Assets\Images\btn_wordsend_pre.png" />
     <Content Include="Assets\Images\dark_image_small_default.jpg" />
     <Content Include="Assets\Images\icon_article_channel.png" />
     <Content Include="Assets\Images\icon_article_guesslike.png" />
@@ -404,6 +406,7 @@
     <Content Include="Assets\Images\icon_sidebar_setting.png" />
     <Content Include="Assets\Images\icon_sidebar_sun.png" />
     <Content Include="Assets\Images\icon_version_information.png" />
+    <Content Include="Assets\Images\ic_logo.png" />
     <Content Include="Assets\Images\image_night_preview_video.png" />
     <Content Include="Assets\Images\image_preview_video.png" />
     <Content Include="Assets\Images\img_coin_mini.png" />

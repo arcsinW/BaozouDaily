@@ -41,6 +41,11 @@ namespace BaoZouRiBao.Views
         private List<Uri> Items = new List<Uri>();
         private int currentIndex = 0;
 
+        /// <summary>
+        /// 第一帧是否已经绘制, 用于绘制第一帧后暂停
+        /// </summary>
+        private bool isFirstBitmapDrawed = false;
+
         async Task Canvas_CreateResourcesAsync(CanvasAnimatedControl sender)
         {
             bitmap = await CanvasBitmap.LoadAsync(sender, Items[currentIndex]);
@@ -50,8 +55,14 @@ namespace BaoZouRiBao.Views
         {
             args.DrawingSession.Clear(Colors.Transparent);
             args.DrawingSession.DrawImage(bitmap);
-            //args.DrawingSession.DrawImage(bitmap, new System.Numerics.Vector2(200));
+            
             canvas.Invalidate();
+
+            if (!isFirstBitmapDrawed)
+            {
+                isFirstBitmapDrawed = true;
+                canvas.Paused = true;
+            }
         }
 
         private async void CanvasAnimatedControl_Update(Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedUpdateEventArgs args)
@@ -71,6 +82,11 @@ namespace BaoZouRiBao.Views
                 Items.Add(new Uri($"ms-appx:///Assets/Images/loadinganim{i}.png"));
             }
             args.TrackAsyncAction(Canvas_CreateResourcesAsync(sender).AsAsyncAction());
+        }
+
+        private void img_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            canvas.Paused = !canvas.Paused; 
         }
     }
 }

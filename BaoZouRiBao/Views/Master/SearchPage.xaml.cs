@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaoZouRiBao.Helper;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,11 +21,10 @@ namespace BaoZouRiBao.Views
         public SearchPage()
         {
             this.InitializeComponent();
-
+             
             MasterDetailPage.Current.AdaptiveVisualStateChanged += Current_AdaptiveVisualStateChanged;
         }
          
-
         protected override void OnKeyUp(KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
@@ -39,12 +39,11 @@ namespace BaoZouRiBao.Views
             {
                 case "Narrow":
                     splitViewButton.Visibility = Visibility.Visible;
-                    //Grid.SetColumn(searchTextBox, 1);
+                    searchTextBox.Margin = new Thickness(4, 0, 4, 0);
                     break;
                 case "Wide":
                     splitViewButton.Visibility = Visibility.Collapsed;
-                    //Grid.SetColumn(searchTextBox, 0);
-                    //Grid.SetColumnSpan(searchTextBox, 2);
+                    searchTextBox.Margin = new Thickness(12, 0, 12, 0);
                     break;
             }
         }

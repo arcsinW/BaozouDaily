@@ -40,4 +40,7 @@
 
     <!--MyCommentPage 评论内文章标题背景色-->
     <Color x:Key="InnerDocumentBackgroundThemeBrush">#FF393939</Color>
+
+    <!--评论框边框颜色-->
+    <SolidColorBrush x:Key="CommentPaneBorderBrush">#FFFFFF</SolidColorBrush>
 </ResourceDictionary>

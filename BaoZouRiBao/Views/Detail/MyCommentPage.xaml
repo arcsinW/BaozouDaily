@@ -83,24 +83,20 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
                                 <!--#region Avatar-->
-                                <Ellipse Grid.Column="0" Grid.Row="0" MinHeight="48" MinWidth="48" HorizontalAlignment="Left">
+                                <Ellipse Grid.Column="0"  MinHeight="48" MinWidth="48" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <Ellipse.Fill>
                                         <ImageBrush ImageSource="{Binding User.RealAvatarUrl,FallbackValue={StaticResource DefaultAvatar}}"/>
                                     </Ellipse.Fill>
                                 </Ellipse>
                                 <!--#endregion-->
-
-                                <TextBlock Margin="24,0" Grid.Row="0" Grid.Column="1" Text="{Binding User.Name}" 
-                                           VerticalAlignment="Center"/>
-
+                                
                                 <Grid Margin="24,0" Grid.Column="1" Grid.Row="1">
                                     <StackPanel>
-                                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="0,8"/>
+                                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding User.Name}" 
+                                           VerticalAlignment="Center"/>
+                                        
+                                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="0,16"/>
                                         <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" 
                                                    Foreground="#FF686868"/>
                                     </StackPanel>
@@ -114,13 +110,13 @@
                                     Background="{ThemeResource InnerDocumentBackgroundThemeBrush}"
                                    Click="Button_Click"
                                     HorizontalContentAlignment="Stretch">
-                                <Grid Background="Gray">
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="64"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" Source="{x:Bind Article.Thumbnail}"/>
-                                    <TextBlock Grid.Column="1" Text="{x:Bind Article.Title}" Margin="12,0"
+                                    <Image Grid.Column="0" Source="{Binding Article.Thumbnail}"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Article.Title}" Margin="12,0"
                                            TextWrapping="Wrap" VerticalAlignment="Center"/>
                                 </Grid>
                             </Button>

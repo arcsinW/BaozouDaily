@@ -8,11 +8,11 @@
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     mc:Ignorable="d"
     >
-
+    
     <Page.DataContext>
         <vm:BaozouLoginViewModel x:Name="ViewModel"/>
     </Page.DataContext>
-    
+
     <Grid Background="{ThemeResource PaneBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
