@@ -1,14 +1,9 @@
 ﻿using BaoZouRiBao.EventHandlers;
 using BaoZouRiBao.Helper;
 using BaoZouRiBao.Views;
-using Microsoft.Toolkit.Uwp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
 using Windows.Web.Http;

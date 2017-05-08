@@ -620,7 +620,9 @@
                     <Button Height="48" Width="48" Style="{ThemeResource ImageButtonStyle}"  VerticalAlignment="Bottom">
                         <i:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
-                                <action:NavigationAction SourcePage="BaoZouRiBao.Views.SettingPage" NavigationType="Master"/>
+                                <core:EventTriggerBehavior.Actions>
+                                    <action:NavigationAction SourcePage="BaoZouRiBao.Views.SettingPage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior.Actions>
                             </core:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                         <BitmapIcon UriSource="/Assets/Images/icon_sidebar_setting.png"/>

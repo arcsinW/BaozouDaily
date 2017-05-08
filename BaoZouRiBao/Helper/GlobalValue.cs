@@ -144,6 +144,7 @@ namespace BaoZouRiBao.Helper
         {
             AppTheme = theme;
             OnDataChanged();
+            ThemeChanged?.Invoke(null, theme == ElementTheme.Light);
         }
         #endregion
 
@@ -151,6 +152,13 @@ namespace BaoZouRiBao.Helper
         public delegate void DataChangedEventHandler();
 
         public event DataChangedEventHandler DataChanged;
+
+        /// <summary>
+        /// Light Dark 主题变化  
+        /// true 表示变成 Light
+        /// false 表示变成 Dark
+        /// </summary>
+        public event EventHandler<bool> ThemeChanged;
 
         private void OnDataChanged()
         {

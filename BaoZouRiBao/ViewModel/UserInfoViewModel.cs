@@ -3,8 +3,9 @@ using BaoZouRiBao.Http;
 using BaoZouRiBao.Model;
 using BaoZouRiBao.Model.ResultModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -116,6 +117,11 @@ namespace BaoZouRiBao.ViewModel
             picker.FileTypeFilter.Add(".png");
             picker.FileTypeFilter.Add(".bmp");
             StorageFile file = await picker.PickSingleFileAsync();
+
+            if (file != null)
+            {
+                await UploadFile(ServiceUri.UploadAvatar, file);
+            }
         }
 
         private void LoadDesignData()
@@ -123,6 +129,34 @@ namespace BaoZouRiBao.ViewModel
             string json = "{'balance':0,'favorite_count':0,'comment_count':0,'article_read_count':0,'contribute_count':0,'daily_tasks':[{'task_id':1,'name':'每日签到','task_amount':null,'task_amount_min':5,'task_amount_max':15,'amount':13,'done':true,'increase':true},{'task_id':2,'name':'阅读文章','task_amount':5,'task_amount_min':null,'task_amount_max':null,'amount':0,'done':false,'increase':false},{'task_id':6,'name':'评论文章','task_amount':10,'task_amount_min':null,'task_amount_max':null,'amount':0,'done':false,'increase':false},{'task_id':4,'name':'点赞文章','task_amount':5,'task_amount_min':null,'task_amount_max':null,'amount':0,'done':false,'increase':false},{'task_id':5,'name':'点赞评论','task_amount':5,'task_amount_min':null,'task_amount_max':null,'amount':0,'done':false,'increase':false},{'task_id':3,'name':'分享文章','task_amount':10,'task_amount_min':null,'task_amount_max':null,'amount':0,'done':false,'increase':false}]}";
             var taskInfo = JsonHelper.Deserlialize<TaskInfo>(json);
             TaskInfo = taskInfo;
+        }
+
+        private static async Task UploadFile(string url, StorageFile file)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + GlobalValue.Current.User.AccessToken);
+                    using (var content = new MultipartFormDataContent("TLq-mXb4y62pbCa_bPiNZXitxUS3RV29c8"))
+                    {
+                        var imageContent = new StreamContent(await file.OpenStreamForReadAsync());
+                        content.Headers.Add("ContentType", "multipart/form-data; boundary=TLq-mXb4y62pbCa_bPiNZXitxUS3RV29c8");
+                        //content.Headers.ContentDisposition = ContentDispositionHeaderValue.Parse("form-data; name='avatar'; filename='"+file.Name+"'");
+                        content.Add(imageContent, "form-data", file.Name);
+                        content.Headers.Add("Content-Disposition", $"form-data; name='avatar'; filename='{file.Name}'");
+                        var result = await client.PostAsync(new Uri(url), content);
+
+                        var resContent = await result.Content.ReadAsByteArrayAsync();
+
+                        string json = Encoding.UTF8.GetString(resContent);
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
         }
 
         private void RunCounterAnimations()

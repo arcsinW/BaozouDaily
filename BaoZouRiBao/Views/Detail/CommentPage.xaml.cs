@@ -1,4 +1,6 @@
-﻿using BaoZouRiBao.Helper;
+﻿using BaoZouRiBao.Controls;
+using BaoZouRiBao.Helper;
+using BaoZouRiBao.Model;
 using BaoZouRiBao.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -78,9 +80,64 @@ namespace BaoZouRiBao.Views
             {
                 if (!string.IsNullOrEmpty(ViewModel.Content))
                 {
-                    await ViewModel.Comment();
+                    if (isReplyComment)
+                    {
+                        await ViewModel.ReplyCommentAsync(currentParentId);
+                    }
+                    else
+                    {
+                        await ViewModel.CommentAsync();
+                    }
                 }
             }
+        }
+
+        private void replyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Comment comment = ((Button)e.OriginalSource).DataContext as Comment;
+            if (comment != null)
+            {
+                commentTextBox.PlaceholderText = $"@{comment.User.Name}";
+                commentTextBox.Focus(FocusState.Programmatic);
+
+                currentParentId = comment.Id;
+
+                isReplyComment = true;
+            }
+        }
+
+        private async void Comment(object sender, RoutedEventArgs e)
+        {
+            if (isReplyComment)
+            {
+                var result = await ViewModel.ReplyCommentAsync(currentParentId);
+
+                if (result != null && string.IsNullOrEmpty(result.Id))
+                {
+                    ToastService.SendToast("评论成功");
+                }
+            }
+            else
+            {
+                var result = await ViewModel.CommentAsync();
+                if (result != null && !string.IsNullOrEmpty(result.Id))
+                {
+                    ToastService.SendToast("评论成功");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 是否是回复评论
+        /// </summary>
+        private bool isReplyComment = false;
+
+        private string currentParentId = string.Empty;
+
+        private void commentTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            commentTextBox.PlaceholderText = "忍不住吐个槽";
+            isReplyComment = false;
         }
     }
 }

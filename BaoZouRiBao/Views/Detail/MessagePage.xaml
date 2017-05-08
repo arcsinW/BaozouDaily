@@ -70,7 +70,7 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <controls:AndroidPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" IndicatorLineStokeThickness="2" >
+            <controls:IndicatorPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" IndicatorLineStokeThickness="2" >
                 <Pivot.HeaderTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding }" FontSize="{StaticResource PivotHeaderFontSize}" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
@@ -112,7 +112,7 @@
                         </ListView>
                     </Grid>
                 </PivotItem>
-            </controls:AndroidPivot>
+            </controls:IndicatorPivot>
         </Grid>
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>

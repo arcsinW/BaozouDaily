@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using BaoZouRiBao.Common;
+using BaoZouRiBao.Controls;
+using BaoZouRiBao.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +10,12 @@ using System.Threading.Tasks;
 
 namespace BaoZouRiBao.Model
 {
-    public class Comment
+    /// <summary>
+    /// 评论
+    /// </summary>
+    public class Comment : ModelBase
     {
+        #region Properties
         [JsonProperty(PropertyName = "article")]
         public Article Article { get; set; }
 
@@ -16,10 +23,22 @@ namespace BaoZouRiBao.Model
         public string Content { get; set; }
 
         [JsonProperty(PropertyName = "dislike")]
-        public string Dislike { get; set; }
+        public bool Dislike { get; set; }
 
+        private int dislikes = 0;
         [JsonProperty(PropertyName = "dislikes")]
-        public string Dislikes { get; set; }
+        public int Dislikes
+        {
+            get
+            {
+                return dislikes;
+            }
+            set
+            {
+                dislikes = value;
+                OnPropertyChanged();
+            }
+        }
 
         [JsonProperty(PropertyName = "hottest")]
         public string Hottest { get; set; }
@@ -27,11 +46,35 @@ namespace BaoZouRiBao.Model
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
+        private bool like = false;
         [JsonProperty(PropertyName = "like")]
-        public string Like { get; set; }
+        public bool Like
+        {
+            get
+            {
+                return like;
+            }
+            set
+            {
+                like = value;
+                OnPropertyChanged();
+            }
+        }
 
+        private int likes = 0;
         [JsonProperty(PropertyName = "likes")]
-        public string Likes { get; set; }
+        public int Likes
+        {
+            get
+            {
+                return likes;
+            }
+            set
+            {
+                likes = value;
+                OnPropertyChanged();
+            }
+        }
 
         [JsonProperty(PropertyName = "own")]
         public string Own { get; set; }
@@ -50,5 +93,39 @@ namespace BaoZouRiBao.Model
 
         [JsonProperty(PropertyName = "user")]
         public CommentUser User { get; set; }
+        #endregion
+
+        /// <summary>
+        /// 评论 此评论
+        /// </summary>
+        /// <param name="content"></param>
+        public async void Reply(string content)
+        {
+            await ApiService.Instance.CommentAsync(Id, content);
+        }
+        
+        public RelayCommand VoteCommand { get; set; } 
+
+        public Comment()
+        {
+            VoteCommand = new RelayCommand(() => { Vote(); });
+        }
+
+        /// <summary>
+        /// 点赞此评论
+        /// </summary>
+        public async void Vote()
+        {
+            var result = await ApiService.Instance.VoteCommentAsync(Id);
+            if (result != null)
+            {
+                if (result.Status == "1000")
+                {
+                    Like = true;
+                    Likes++;
+                }
+                ToastService.SendToast(result.alertDesc);
+            }
+        }
     }
 }

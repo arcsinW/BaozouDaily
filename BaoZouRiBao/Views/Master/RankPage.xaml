@@ -234,7 +234,7 @@
             </ComboBox>
         </Grid>
 
-        <controls:AndroidPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" 
+        <controls:IndicatorPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" 
                                IndicatorLineStokeThickness="2" 
                                SelectionChanged="pivot_SelectionChanged"> 
             <Pivot.HeaderTemplate>
@@ -274,7 +274,7 @@
                               RefreshCommand="{Binding RefreshCommentCollectionCommand}">
                 </toolkit:PullToRefreshListView>
             </PivotItem>
-        </controls:AndroidPivot>
+        </controls:IndicatorPivot>
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
     </Grid>

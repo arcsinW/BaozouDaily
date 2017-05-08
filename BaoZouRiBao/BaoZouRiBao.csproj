@@ -120,6 +120,7 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Controls\GifAnimControl.cs" />
     <Compile Include="Converters\BoolToColorConverter.cs" />
+    <Compile Include="Converters\BoolToLikeBitmapConverter.cs" />
     <Compile Include="Converters\BoolToObjectConverter.cs" />
     <Compile Include="Converters\BoolToPathIconConverter.cs" />
     <Compile Include="Converters\BoolToUriConverter.cs" />
@@ -127,6 +128,8 @@
     <Compile Include="Converters\ConverterTools.cs" />
     <Compile Include="Converters\DoneToStringConverter.cs" />
     <Compile Include="Converters\IsNullOrEmptyToBoolConverter.cs" />
+    <Compile Include="Converters\NullToReplyTextConverter.cs" />
+    <Compile Include="Converters\ParentToTextBlockConverter.cs" />
     <Compile Include="Converters\SecondsToDateTimeConverter.cs" />
     <Compile Include="Converters\SelectedLegendItemToColorConverter.cs" />
     <Compile Include="Converters\TaskIdToUriConverter.cs" />
@@ -226,7 +229,7 @@
     <Compile Include="Themes\ThemeDictionary.xaml.cs">
       <DependentUpon>ThemeDictionary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AndroidPivot.cs" />
+    <Compile Include="Controls\IndicatorPivot.cs" />
     <Compile Include="Controls\AndroidPopup.cs" />
     <Compile Include="Controls\DialogService.cs" />
     <Compile Include="Controls\GifControl.xaml.cs">

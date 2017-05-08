@@ -63,13 +63,19 @@ namespace BaoZouRiBao.Http
         /// 通知 的消息
         /// </summary>
         public const string AdminMessage = "http://dailyapi.ibaozou.com/api/v31/messages/admin_messages";
-        
-
+         
         /// <summary>
         /// Like a comment
         /// {0} comment id 3325434
         /// </summary>
         public const string LikeComment = "http://dailyapi.ibaozou.com/api/v31/comments/{0}/like";
+
+        /// <summary>
+        /// 在文章下回复一个评论
+        /// Post
+        /// {"content":"x","parent_id":"3484432"}
+        /// </summary>
+        public const string replyComment = "http://dailyapi.ibaozou.com/api/v31/documents/{0}/comments";
 
         /// <summary>
         /// 用户投稿
@@ -125,13 +131,15 @@ namespace BaoZouRiBao.Http
 
         public const string TaskDone = "http://dailyapi.ibaozou.com/api/v31/task/done";
 
+        /// <summary>
+        /// 点赞文章
+        /// </summary>
         public const string Favorite  = "http://dailyapi.ibaozou.com/api/v31/documents/{0}/favorite";
 
         public const string Search = "http://dailyapi.ibaozou.com/api/v31/documents/search";
 
         public const string Vote = "http://dailyapi.ibaozou.com/api/v31/documents/{0}/vote";
         
-
         public const string FAQ = "http://dailyapi.ibaozou.com/faq?category_id=1";
 
         public const string DocumentOfflineDownload = "http://dailyapi.ibaozou.com/api/v31/documents/android_offline_download";

@@ -39,7 +39,7 @@ namespace BaoZouRiBao.Views
         private CanvasBitmap bitmap;
 
         private List<Uri> Items = new List<Uri>();
-        private int currentIndex = 0;
+        private int currentIndex = new Random().Next(0, 5);
 
         /// <summary>
         /// 第一帧是否已经绘制, 用于绘制第一帧后暂停

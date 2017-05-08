@@ -368,9 +368,9 @@
             </StackPanel>
         </Grid>
 
-        <control:AndroidPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" 
+        <control:IndicatorPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" 
                               IndicatorLineStokeThickness="2" 
-                              HeaderBrush="{ThemeResource PivotHeaderColorBrush}">
+                              HeaderBackground="{ThemeResource PivotHeaderColorBrush}">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding }" FontSize="{StaticResource PivotHeaderFontSize}" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
@@ -610,7 +610,7 @@
                     </control:RefreshableListView>
                 </PivotItem>
             </Pivot.Items> 
-        </control:AndroidPivot>
+        </control:IndicatorPivot>
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
 

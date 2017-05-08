@@ -200,21 +200,12 @@
         </Setter>
     </Style>
 
-    <Style TargetType="local:AndroidPivot" >
+    <Style TargetType="local:IndicatorPivot">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="HeaderBackground" Value="{ThemeResource PivotHeaderColorBrush}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="HeaderBrush" Value="{ThemeResource PivotHeaderColorBrush}"/>
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
-        <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False" />
-        <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="False" />
-        <Setter Property="ScrollViewer.IsHorizontalScrollChainingEnabled" Value="True" />
-        <Setter Property="ScrollViewer.IsVerticalScrollChainingEnabled" Value="True" />
-        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
-        <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
-        <Setter Property="UseSystemFocusVisuals" Value="True" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -222,16 +213,9 @@
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
-        <!--<Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel AreScrollSnapPointsRegular="True" Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>-->
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:AndroidPivot">
+                <ControlTemplate TargetType="local:IndicatorPivot">
                     <Grid
                         x:Name="RootElement"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
@@ -261,7 +245,6 @@
                                 <Setter Property="FontWeight" Value="{ThemeResource PivotTitleThemeFontWeight}" />
                                 <Setter Property="FontSize" Value="{ThemeResource PivotTitleFontSize}" />
                             </Style>
-                    
                         </Grid.Resources>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="Orientation">
@@ -318,15 +301,13 @@
                                 HorizontalSnapPointsType="MandatorySingle"
                                 HorizontalSnapPointsAlignment="Center"
                                 HorizontalScrollBarVisibility="Hidden"
-                                IsHorizontalScrollChainingEnabled="True"
                                 VerticalScrollMode="Disabled"
                                 VerticalScrollBarVisibility="Disabled"
                                 VerticalSnapPointsType="None"
                                 VerticalContentAlignment="Stretch"
                                 ZoomMode="Disabled"
                                 Template="{StaticResource ScrollViewerScrollBarlessTemplate}"
-                                BringIntoViewOnFocusChange="True">
-                                <!--<ItemsPresenter x:Name="Panel"/>-->
+                                BringIntoViewOnFocusChange="False">
                                 <PivotPanel x:Name="Panel" VerticalAlignment="Stretch">
                                     <Grid x:Name="PivotLayoutElement">
                                         <Grid.RowDefinitions>
@@ -348,7 +329,7 @@
                                             <ContentControl.Clip>
                                                 <RectangleGeometry x:Name="HeaderClipperGeometry" />
                                             </ContentControl.Clip>
-                                            <Grid Background="{TemplateBinding HeaderBrush}">
+                                            <Grid Background="{TemplateBinding HeaderBackground}">
                                                 <PivotHeaderPanel x:Name="StaticHeader" Visibility="Collapsed" />
                                                 <PivotHeaderPanel x:Name="Header" Margin="0">
                                                     <PivotHeaderPanel.RenderTransform>
@@ -368,6 +349,7 @@
                                                 <TranslateTransform x:Name="TipLineTranslateTransform"></TranslateTransform>
                                             </Line.RenderTransform>
                                         </Line>
+
 
                                         <ItemsPresenter x:Name="PivotItemPresenter" Grid.Row="1" Grid.ColumnSpan="3">
                                             <ItemsPresenter.RenderTransform>

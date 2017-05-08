@@ -319,7 +319,7 @@ namespace BaoZouRiBao.Http
         #endregion
 
         /// <summary>
-        /// 为 文章 | 视频 | 投稿 | 评论 点赞
+        /// 为 文章 | 视频 | 投稿 点赞
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
@@ -330,8 +330,36 @@ namespace BaoZouRiBao.Http
             return result;
         }
 
+        
+
         /// <summary>
-        /// 评论文章 | 视频 | 投稿 | 评论 
+        /// 为 评论 点赞
+        /// </summary>
+        /// <param name="documentId"></param>
+        /// <returns></returns>
+        public async Task<VoteOperationResult> VoteCommentAsync(string commentId)
+        {
+            string url = string.Format(ServiceUri.LikeComment, commentId);
+            VoteOperationResult result = await Post<VoteOperationResult>(url, "");
+            return result;
+        }
+
+        /// <summary>
+        /// 回复评论 
+        /// </summary>
+        /// <param name="documentId">文章Id</param>
+        /// <param name="parentId">回复的评论id</param>
+        /// <param name="content">回复内容</param>
+        /// <returns></returns>
+        public async Task<CommentOperationResult> ReplyCommentAsync(string documentId, string parentId, string content)
+        {
+            string url = string.Format(ServiceUri.replyComment, documentId);
+            CommentOperationResult result = await Post<CommentOperationResult>(url, "{ \"content\" : \"" + content + "\", \"parent_id\" : \""+ parentId + "\"}");
+            return result;
+        }
+
+        /// <summary>
+        /// 评论文章 | 视频 | 投稿
         /// </summary>
         /// <param name="documentId"></param>
         /// <param name="content"></param>

@@ -18,11 +18,11 @@
         <vm:CommentPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Page.Resources>
-        <converter:TimeStampToDateTimeConverter x:Key="TimeStampToDateTimeConverter"/>
+    <Page.Resources> 
         <converter:IsNullOrEmptyToBoolConverter x:Key="IsNullOrEmptyToBoolConverter"/>
-        
-        
+        <converter:ParentToTextBlockConverter x:Key="ParentToTextBlockConverter"/>
+        <converter:BoolToLikeBitmapConverter x:Key="BoolToLikeBitmapConverter"/>
+
         <Style x:Key="SendButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
@@ -126,7 +126,7 @@
             </Button>
         </Grid>
 
-        <controls:AndroidPivot x:Name="pivot" Grid.Row="1" SelectionChanged="pivot_SelectionChanged">
+        <controls:IndicatorPivot x:Name="pivot" Grid.Row="1" SelectionChanged="pivot_SelectionChanged">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding }" FontSize="{StaticResource PivotHeaderFontSize}" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
@@ -152,13 +152,17 @@
                                 <Grid Grid.Column="1" Margin="8,0">
                                     <StackPanel>
                                         <TextBlock Text="{Binding User.Name,Mode=OneWay}"/>
-                                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="0,16"/>
 
+                                        <TextBlock x:Name="parent" TextWrapping="Wrap" Margin="0,16">
+                                            <Run Text="{Binding Content}" />
+                                        </TextBlock>
+                                        
                                         <Grid>
                                             <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0,0,12,0"/>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                                 <Button x:Name="replyBtn" Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0"
-                                                        Command="{Binding DataContext.CommentCommand,ElementName=latestListView}" CommandParameter="{Binding Id}">
+                                                        Click="replyBtn_Click">
+                                                    <!--Command="{Binding DataContext.CommentCommand,ElementName=latestListView}" CommandParameter="{Binding Id}">-->
                                                     <StackPanel Orientation="Horizontal">
                                                         <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>
                                                         <TextBlock Text="回复" Style="{ThemeResource DescTextBlockStyle}"/>
@@ -166,9 +170,9 @@
                                                 </Button>
 
                                                 <Button x:Name="likeBtn" Height="24" Width="48" Style="{ThemeResource ImageButtonStyle}"
-                                                        Command="{Binding DataContext.VoteCommand, ElementName=latestListView}" CommandParameter="{Binding Id}">
+                                                        Command="{Binding VoteCommand}" CommandParameter="{Binding Id}">
                                                     <StackPanel Orientation="Horizontal">
-                                                        <Image Source="ms-appx:///Assets/Images/btn_video_like_nor.png" VerticalAlignment="Center"/>
+                                                        <Image Source="{Binding Like,Converter={StaticResource BoolToLikeBitmapConverter}}" VerticalAlignment="Center"/>
                                                         <TextBlock Text="{Binding Likes}"   Style="{ThemeResource DescTextBlockStyle}"/>
                                                     </StackPanel>
                                                 </Button>
@@ -237,12 +241,12 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </PivotItem>
-        </controls:AndroidPivot>
+        </controls:IndicatorPivot>
 
         <ProgressRing IsActive="{Binding IsActive}" Grid.RowSpan="2" Style="{ThemeResource LightProgressRingStyle}"/>
 
         <Grid Background="{ThemeResource PaneBackgroundColor}" MinHeight="48" Grid.Row="1" 
-              VerticalAlignment="Bottom" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource CommentPaneBorderBrush}">
+              VerticalAlignment="Bottom" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource ThemeColorBrush}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="48"/>
@@ -250,9 +254,10 @@
 
             <TextBox Grid.Column="0" x:Name="commentTextBox" PlaceholderText="忍不住吐个槽" 
                      Padding="12,4" Style="{ThemeResource LightTextBoxStyle}"
+                     LostFocus="commentTextBox_LostFocus"
                      Text="{Binding Content,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Button Grid.Column="1" Click="{x:Bind ViewModel.Comment}" Background="Transparent"
+            <Button Grid.Column="1" Click="{x:Bind Comment}" Background="Transparent"
                     IsEnabled="{Binding ElementName=commentTextBox,Path=Text,Converter={StaticResource IsNullOrEmptyToBoolConverter}}" Style="{StaticResource SendButtonStyle}">
                 <Button.Content>
                     <BitmapIcon UriSource="ms-appx:///Assets/Images/btn_wordsend.png"/>
