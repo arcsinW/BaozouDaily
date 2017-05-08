@@ -31,7 +31,7 @@ namespace BaoZouRiBao.Views
 
         private DocumentExtra documentExtra;
 
-        private async void Current_ThemeChanged(object sender, bool e)
+        private void Current_ThemeChanged(object sender, bool e)
         {
             // Dark -> Light
             if (e)
