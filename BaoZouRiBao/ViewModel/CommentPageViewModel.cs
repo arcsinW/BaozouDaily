@@ -1,17 +1,35 @@
-﻿using BaoZouRiBao.Enums;
+﻿using BaoZouRiBao.Common;
+using BaoZouRiBao.Controls;
+using BaoZouRiBao.Enums;
 using BaoZouRiBao.Helper;
 using BaoZouRiBao.Http;
 using BaoZouRiBao.IncrementalCollection;
+using BaoZouRiBao.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace BaoZouRiBao.ViewModel
 {
     public class CommentPageViewModel : ViewModelBase
     {
+        public CommentPageViewModel()
+        {
+            if (IsDesignMode)
+            {
+                SetDocumentId("44791");
+                GetLatestComments();
+                GetHotComments();
+            }
+
+            CommentCommand = new RelayCommand((str) => { ReplyCommentAsync((string)str, Content); },()=> { return !string.IsNullOrEmpty(Content); });
+            VoteCommand = new RelayCommand((str) => { VoteAsync((string)str); });
+        }
+
         #region Properties
         public CommentCollection LatestComments { get; set; }
 
@@ -30,6 +48,26 @@ namespace BaoZouRiBao.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private string content;
+        /// <summary>
+        /// 评论的内容
+        /// </summary>
+        public string Content
+        {
+            get { return content; }
+            set { content = value; OnPropertyChanged(); }
+        }
+
+        /// <summary>
+        /// 评论 Command
+        /// </summary>
+        public RelayCommand CommentCommand { get; set; }
+
+        /// <summary>
+        /// 点赞 Command
+        /// </summary>
+        public RelayCommand VoteCommand { get; set; }
         #endregion
 
         #region Fields
@@ -40,17 +78,7 @@ namespace BaoZouRiBao.ViewModel
         {
             this.documentId = documentId;
         }
-
-        public CommentPageViewModel()
-        {
-            if(IsDesignMode)
-            {
-                SetDocumentId("44791");
-                GetLatestComments();
-                GetHotComments();
-            }
-        } 
-
+         
         private void OnDataLoadingEvent()
         {
             IsActive = true;
@@ -91,18 +119,47 @@ namespace BaoZouRiBao.ViewModel
         /// 给评论点赞
         /// </summary>
         /// <param name="commentId"></param>
-        public void Vote(string commentId)
+        public async void VoteAsync(string commentId)
         {
-            
+            var result = await ApiService.Instance.VoteAsync(commentId);
+
         }
 
         /// <summary>
         /// 回复评论
         /// </summary>
         /// <param name="commentId"></param>
-        public void ReplayComment(string commentId)
+        public async void ReplyCommentAsync(string commentId, string content)
         {
+            var result = await ApiService.Instance.CommentAsync(commentId, content);
 
+        }
+
+        /// <summary>
+        /// 评论文章
+        /// </summary>
+        /// <param name="commentId"></param>
+        /// <returns></returns>
+        public async Task Comment()
+        {
+            var result = await ApiService.Instance.CommentAsync(documentId, Content);
+            if (result != null && !string.IsNullOrEmpty(result.Id))
+            {
+                ToastService.SendToast("评论成功");
+            }
+        }
+
+
+        public async void replyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Comment dataContext = (Comment)((Button)e.OriginalSource).DataContext;
+            ReplyCommentAsync(dataContext.Id, Content);
+        }
+
+        public async void likeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Comment dataContext = (Comment)((Button)e.OriginalSource).DataContext;
+            VoteAsync(dataContext.Id);
         }
     }
 }

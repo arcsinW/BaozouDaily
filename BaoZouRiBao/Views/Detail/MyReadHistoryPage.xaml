@@ -47,15 +47,15 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="1">  
-            <control:RefreshableListView x:Name="documentListView" ItemsSource="{Binding ReadHistories}"
+        <Grid Grid.Row="1">
+            <ListView x:Name="documentListView" ItemsSource="{Binding ReadHistories}"
                                   SelectionMode="None"
                                   IsItemClickEnabled="True"
                                   ItemClick="{x:Bind ViewModel.documentListView_ItemClick}"
                                   IncrementalLoadingTrigger="Edge"
-                                  ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
-                                  RefreshRequested="{x:Bind ViewModel.RefreshReadHistories}">
-                <control:RefreshableListView.RefreshIndicatorContent>
+                                  ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}">
+                <!--RefreshRequested="{x:Bind ViewModel.RefreshReadHistories}">-->
+                <!--<control:RefreshableListView.RefreshIndicatorContent>
                     <Grid Height="100" Background="Transparent">
                         <FontIcon
                                     Margin="0,0,0,30"
@@ -70,7 +70,7 @@
                             </FontIcon.RenderTransform>
                         </FontIcon>
                     </Grid>
-                </control:RefreshableListView.RefreshIndicatorContent>
+                </control:RefreshableListView.RefreshIndicatorContent>-->
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="m:Document">
@@ -103,7 +103,7 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </control:RefreshableListView>
+            </ListView>
 
             <TextBlock Text="暂无数据" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
                        Foreground="{ThemeResource PhoneForegroundColorBrush}"

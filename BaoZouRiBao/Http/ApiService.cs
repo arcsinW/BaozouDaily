@@ -323,10 +323,11 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
-        public async Task VoteAsync(string documentId)
+        public async Task<VoteOperationResult> VoteAsync(string documentId)
         {
             string url = string.Format(ServiceUri.Vote, documentId);
             VoteOperationResult result = await Post<VoteOperationResult>(url, "");
+            return result;
         }
 
         /// <summary>
@@ -335,10 +336,11 @@ namespace BaoZouRiBao.Http
         /// <param name="documentId"></param>
         /// <param name="content"></param>
         /// <returns></returns>
-        public async Task CommentAsync(string documentId, string content)
+        public async Task<CommentOperationResult> CommentAsync(string documentId, string content)
         {
             string url = string.Format(ServiceUri.DocumentComments, documentId);
-            CommentOperationResult result = await Post<CommentOperationResult>(url, "{ \"conten\" : \"" + content + "\"}");
+            CommentOperationResult result = await Post<CommentOperationResult>(url, "{ \"content\" : \"" + content + "\"}");
+            return result;
         }
 
         /// <summary>

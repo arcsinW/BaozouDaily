@@ -13,7 +13,7 @@ namespace BaoZouRiBao.Model.ResultModel
     public class CommentOperationResult
     {
         [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty(PropertyName = "content")]
         public string Content { get; set; }
@@ -27,8 +27,8 @@ namespace BaoZouRiBao.Model.ResultModel
         [JsonProperty(PropertyName = "dislikes")]
         public int Dislikes { get; set; }
         
-        [JsonProperty(PropertyName = "Time")]
-        public int time { get; set; }
+        [JsonProperty(PropertyName = "time")]
+        public string time { get; set; }
         
         [JsonProperty(PropertyName = "score")]
         public int Score { get; set; }
@@ -39,13 +39,13 @@ namespace BaoZouRiBao.Model.ResultModel
         [JsonProperty(PropertyName = "like")]
         public string Like { get; set; }
         
-        [JsonProperty(PropertyName = "Dislike")]
+        [JsonProperty(PropertyName = "dislike")]
         public string dislike { get; set; }
         
         [JsonProperty(PropertyName = "user")]
         public CommentUser user { get; set; }
         
-        [JsonProperty(PropertyName = "parent")]
+        [JsonProperty(PropertyName = "parent",NullValueHandling = NullValueHandling.Ignore)]
         public CommentParent parent { get; set; }
         
         [JsonProperty(PropertyName = "hottest")]

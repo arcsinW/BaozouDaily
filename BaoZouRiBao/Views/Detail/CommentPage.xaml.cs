@@ -71,15 +71,15 @@ namespace BaoZouRiBao.Views
             }
         }
 
-        private void DayNightMode()
+        protected override async void OnKeyDown(KeyRoutedEventArgs e)
         {
-            if (this.RequestedTheme == ElementTheme.Dark)
+            base.OnKeyDown(e);
+            if (e.Key == Windows.System.VirtualKey.Enter)
             {
-                GlobalValue.Current.UpdateAppTheme(ElementTheme.Light);
-            }
-            else
-            {
-                GlobalValue.Current.UpdateAppTheme(ElementTheme.Dark);
+                if (!string.IsNullOrEmpty(ViewModel.Content))
+                {
+                    await ViewModel.Comment();
+                }
             }
         }
     }

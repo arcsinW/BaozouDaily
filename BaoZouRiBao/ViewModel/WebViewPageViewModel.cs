@@ -163,7 +163,7 @@ namespace BaoZouRiBao.ViewModel
 
                     break;
             }
-            IsFavorite = document.Favorited;
+            IsFavorite = Document.Favorited;
             IsActive = false;
         }
 
@@ -190,6 +190,19 @@ namespace BaoZouRiBao.ViewModel
                         IsFavorite = true;
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// 点赞文章
+        /// </summary>
+        /// <param name="documentId"></param>
+        /// <returns></returns>
+        public async Task Vote()
+        {
+            if (Document != null)
+            {
+                var result = await ApiService.Instance.VoteAsync(Document.DocumentId);
             }
         }
 
