@@ -52,7 +52,6 @@
                                   SelectionMode="None"
                                   IsItemClickEnabled="True"
                                   ItemClick="{x:Bind ViewModel.documentListView_ItemClick}"
-                                  IncrementalLoadingTrigger="Edge"
                                   ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}">
                 <!--RefreshRequested="{x:Bind ViewModel.RefreshReadHistories}">-->
                 <!--<control:RefreshableListView.RefreshIndicatorContent>

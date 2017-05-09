@@ -134,7 +134,8 @@
             </Pivot.HeaderTemplate>
             <PivotItem Header="最新">
                 <ListView x:Name="latestListView" ItemsSource="{Binding LatestComments}"
-                          ItemContainerStyle="{ThemeResource CommentItemContainerStyle}">
+                          ItemContainerStyle="{ThemeResource CommentItemContainerStyle}"
+                          Margin="0,0,0,48">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -158,7 +159,7 @@
                                         </TextBlock>
                                         
                                         <Grid>
-                                            <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0,0,12,0"/>
+                                            <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0"/>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                                 <Button x:Name="replyBtn" Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0"
                                                         Click="replyBtn_Click">
@@ -169,7 +170,7 @@
                                                     </StackPanel>
                                                 </Button>
 
-                                                <Button x:Name="likeBtn" Height="24" Width="48" Style="{ThemeResource ImageButtonStyle}"
+                                                <Button x:Name="likeBtn" Height="24" Width="48" HorizontalAlignment="Right" Style="{ThemeResource ImageButtonStyle}"
                                                         Command="{Binding VoteCommand}" CommandParameter="{Binding Id}">
                                                     <StackPanel Orientation="Horizontal">
                                                         <Image Source="{Binding Like,Converter={StaticResource BoolToLikeBitmapConverter}}" VerticalAlignment="Center"/>
@@ -245,7 +246,7 @@
 
         <ProgressRing IsActive="{Binding IsActive}" Grid.RowSpan="2" Style="{ThemeResource LightProgressRingStyle}"/>
 
-        <Grid Background="{ThemeResource PaneBackgroundColor}" MinHeight="48" Grid.Row="1" 
+        <Grid Background="{ThemeResource PaneBackground}" MinHeight="48" Grid.Row="1" 
               VerticalAlignment="Bottom" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource ThemeColorBrush}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

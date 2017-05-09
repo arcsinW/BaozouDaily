@@ -128,7 +128,6 @@ namespace BaoZouRiBao.IncrementalCollection
                 }
                 finally
                 {
-                    NoMore();
                     onDataLoadedAction?.Invoke();
                 }
 

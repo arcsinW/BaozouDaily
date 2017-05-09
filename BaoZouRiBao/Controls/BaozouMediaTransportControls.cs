@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
-namespace BaoZouRiBao.Controls.MediaPlayer
+namespace BaoZouRiBao.Controls
 {
     public sealed class BaozouMediaTransportControls : MediaTransportControls
     {

@@ -8,7 +8,8 @@
     xmlns:converter="using:BaoZouRiBao.Converters"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:m="using:BaoZouRiBao.Model"
-    xmlns:uc="using:BaoZouRiBao.Controls.MediaPlayer"
+    xmlns:uc="using:BaoZouRiBao.UserControls"
+    
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -28,47 +29,56 @@
         </Grid.RowDefinitions>
 
         <!--#region Page title-->
-        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}"
-              DataContext="{Binding DocumentExtra}">
-            <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{x:Bind ViewModel.IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
-                    <Image Source="{StaticResource BackImage}"/>
-                </Button>
-                <TextBlock Text="{x:Bind ViewModel.Video.Title, Mode=OneWay}" Style="{ThemeResource PageTitleTextBlockStyle}"/>
-            </StackPanel>
+        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}" DataContext="{Binding DocumentExtra}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>
-                        <TextBlock Text="{Binding VoteCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
-                    </StackPanel>
-                </Button>
+            <Button Grid.Column="0" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{x:Bind ViewModel.IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
+                <Image Source="{StaticResource BackImage}"/>
+            </Button>
 
-                <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto" Click="Comment_Click">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <BitmapIcon UriSource="/Assets/Images/actionbar_comment_nor.png"/>
-                        <TextBlock Text="{Binding CommentCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
-                    </StackPanel>
-                </Button>
+            <Grid Grid.Column="1" ScrollViewer.HorizontalScrollMode="Enabled">
+                <TextBlock Text="{x:Bind ViewModel.Video.Title, Mode=OneWay}" Style="{ThemeResource PageTitleTextBlockStyle}"
+                            ScrollViewer.HorizontalScrollMode="Enabled"/>
+            </Grid>
 
-                <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.FavoriteBtnClick}">
-                    <PathIcon Data="{x:Bind ViewModel.IsFavorite,Mode=OneWay,Converter={StaticResource BoolToPathIconConverter}}"/>
-                </Button>
+            <Grid Grid.Column="2">
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>
+                            <TextBlock Text="{Binding VoteCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
+                        </StackPanel>
+                    </Button>
 
-                <Button Style="{ThemeResource BackButtonStyle}">
-                    <BitmapIcon UriSource="/Assets/Images/home_more.png"/>
-                    <Button.Flyout>
-                        <MenuFlyout> 
-                            <MenuFlyout.Items>
-                                <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.Refresh}"/>
-                                <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
-                                <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
-                            </MenuFlyout.Items>
-                        </MenuFlyout>
-                    </Button.Flyout>
-                </Button>
-            </StackPanel>
+                    <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto" Click="Comment_Click">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <BitmapIcon UriSource="/Assets/Images/actionbar_comment_nor.png"/>
+                            <TextBlock Text="{Binding CommentCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.FavoriteBtnClick}">
+                        <PathIcon Data="{x:Bind ViewModel.IsFavorite,Mode=OneWay,Converter={StaticResource BoolToPathIconConverter}}"/>
+                    </Button>
+
+                    <Button Style="{ThemeResource BackButtonStyle}">
+                        <BitmapIcon UriSource="/Assets/Images/home_more.png"/>
+                        <Button.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyout.Items>
+                                    <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.Refresh}"/>
+                                    <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
+                                    <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
+                                </MenuFlyout.Items>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </Grid>
         <!--#endregion-->
 
@@ -80,14 +90,20 @@
                     <Grid Grid.Row="0">
                         <StackPanel>
                             <Grid>
-                                <MediaElement Source="{Binding Video.FileUrl}" MinHeight="200"
+                                <!--<MediaElement Source="{Binding Video.FileUrl}" MinHeight="200"
                                             VerticalAlignment="Top" HorizontalAlignment="Stretch"
                                               Stretch="UniformToFill"
                                             AreTransportControlsEnabled="True">
-                                    <!--<MediaElement.TransportControls>
+                                    <MediaElement.TransportControls>
+                                        <controls:BaozouMediaTransportControls/>
+                                    </MediaElement.TransportControls>
+                                </MediaElement>-->
+
+                                <uc:MediaPlayer/>
+
+                                <!--<MediaElement.TransportControls>
                                         <uc:MediaPlayer.BaozouMediaTransportControls/>
                                     </MediaElement.TransportControls>-->
-                                </MediaElement>
                                 <!--<Button HorizontalAlignment="Center" Style="{ThemeResource ImageButtonStyle}"
                                     VerticalAlignment="Center" Foreground="White" 
                                     Grid.Row="0" Width="64" Height="64">

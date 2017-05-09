@@ -327,7 +327,7 @@
                 <SolidColorBrush Color="Black" Opacity="0.7"/>
             </control:Drawer.DrawerMaskerBrush>
             <control:Drawer.DrawerContent>
-                <Grid Background="{ThemeResource PageBackgroundBrush}">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="180"/>
                         <RowDefinition Height="*"/>
@@ -534,7 +534,7 @@
         <!--#region Pane-->
         <Grid Grid.Column="0" BorderBrush="{ThemeResource SplitLineColorBrush}" BorderThickness="0,0,1,0">
             <ListView ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
-                      Background="{ThemeResource PaneBackgroundColor}" SelectionMode="Single">
+                      Background="{ThemeResource PaneBackground}" SelectionMode="Single">
                 <ListView.Resources>
                     <Style TargetType="BitmapIcon">
                         <Setter Property="Height" Value="16"/>
@@ -638,10 +638,10 @@
                Navigated="DetailFrame_Navigated">
         </Frame>
 
-        <toolkit:GridSplitter Grid.Column="2" Width="12" ResizeBehavior="BasedOnAlignment"
+        <!--<toolkit:GridSplitter Grid.Column="2" Width="12" ResizeBehavior="BasedOnAlignment"
                               CursorBehavior="ChangeOnSplitterHover"
                               GripperForeground="{ThemeResource ThemeColorBrush}"
-                              HorizontalAlignment="Left"/>
+                              HorizontalAlignment="Left"/>-->
 
         <!--<control:AndroidPopup x:Name="androidPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666"
                               HorizontalAlignment="Stretch" Visibility="Collapsed"

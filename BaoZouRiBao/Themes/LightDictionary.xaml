@@ -14,7 +14,7 @@
     <SolidColorBrush x:Key="SplitLineColorBrush">#FB3D4F</SolidColorBrush>
 
     <!--MasterDetailPage Pane背景色-->
-    <SolidColorBrush x:Key="PaneBackgroundColor">#FFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="PaneBackground">#FFFFFF</SolidColorBrush>
 
     <!--页面标题背景色-->
     <SolidColorBrush x:Key="PageTitleBackground">#FB3D4F</SolidColorBrush>
@@ -38,7 +38,7 @@
 
     <SolidColorBrush x:Key="FlyoutForegroundBrush" Color="#FF7F7F7F"/>
 
-    <SolidColorBrush x:Key="SplitViewSpanBackground" Color="#FFEEEEEE"/>
+    <SolidColorBrush x:Key="SplitViewSpanBackground" Color="White"/>
 
     <!--MyCommentPage 评论内文章标题背景色-->
     <Color x:Key="InnerDocumentBackgroundThemeBrush">#FF393939</Color>

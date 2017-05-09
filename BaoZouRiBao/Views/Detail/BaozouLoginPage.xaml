@@ -13,7 +13,7 @@
         <vm:BaozouLoginViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource PaneBackgroundColor}">
+    <Grid Background="{ThemeResource PaneBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>

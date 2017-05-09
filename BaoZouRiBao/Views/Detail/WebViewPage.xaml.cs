@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using BaoZouRiBao.Http;
+using System.Threading.Tasks;
 
 namespace BaoZouRiBao.Views
 {
@@ -26,30 +27,32 @@ namespace BaoZouRiBao.Views
         {
             this.InitializeComponent();
 
-            GlobalValue.Current.ThemeChanged += Current_ThemeChanged;
+            appTheme = GlobalValue.Current.AppTheme;
+            GlobalValue.Current.DataChanged += Current_DataChanged;
         }
 
-        private DocumentExtra documentExtra;
+        private ElementTheme appTheme;
 
-        private void Current_ThemeChanged(object sender, bool e)
+        private void Current_DataChanged()
         {
-            // Dark -> Light
-            if (e)
-            {
-                Light();
-            }
-            // Light -> Dark
-            else
+            appTheme = GlobalValue.Current.AppTheme;
+            if (appTheme == ElementTheme.Dark)
             {
                 Dark();
             }
+            else
+            {
+                Light();
+            }
         }
 
+        private DocumentExtra documentExtra;
+        
         public async void Light()
         {
             if (documentExtra != null && documentExtra.HackJs != null && !string.IsNullOrEmpty(documentExtra.HackJs.SetDayMode))
             {
-                await webView.InvokeScriptAsync("eval", new string[] { documentExtra.HackJs.SetDayMode });
+                await InvokeScriptAsync("eval", new string[] { documentExtra.HackJs.SetDayMode });
             }
         }
 
@@ -57,7 +60,42 @@ namespace BaoZouRiBao.Views
         {
             if (documentExtra != null && documentExtra.HackJs != null && !string.IsNullOrEmpty(documentExtra.HackJs.SetNightMode))
             {
-                await webView.InvokeScriptAsync("eval", new string[] { documentExtra.HackJs.SetNightMode });
+                await InvokeScriptAsync("eval", new string[] { documentExtra.HackJs.SetNightMode });
+            }
+        }
+
+        /// <summary>
+        /// Invoke js
+        /// </summary>
+        /// <param name="funcName">function name of js</param>
+        /// <param name="args">arguments of js </param>
+        public async Task<string> InvokeScriptAsync(string funcName, IEnumerable<string> args)
+        {
+            try
+            {
+                return await webView?.InvokeScriptAsync(funcName, args);
+            }
+            catch (Exception ex)
+            {
+                string errorText = string.Empty;
+                switch (ex.HResult)
+                {
+                    case unchecked((int)0x80020006):
+                        errorText = $"There is no function called {funcName}";
+                        break;
+                    case unchecked((int)0x80020101):
+                        errorText = $"A JavaScript error or exception occured while executing the function {funcName}";
+                        break;
+                    case unchecked((int)0x800a138a):
+                        errorText = $"{funcName} is not a function";
+                        break;
+                    default:
+                        // Some other error occurred.
+                        errorText = funcName + ex.Message;
+                        break;
+                }
+                Debug.WriteLine(errorText);
+                return string.Empty;
             }
         }
 
@@ -102,16 +140,16 @@ namespace BaoZouRiBao.Views
                     {
                         if (!string.IsNullOrEmpty(documentExtra.HackJs.DocumentLoaded))
                         {
-                            await webView.InvokeScriptAsync("eval", new string[] { documentExtra.HackJs.DocumentLoaded });
+                            await InvokeScriptAsync("eval", new string[] { documentExtra.HackJs.DocumentLoaded });
                         }
 
-                        if (this.RequestedTheme == ElementTheme.Light)
+                        if (appTheme == ElementTheme.Dark)
                         {
-                            Light();
+                            Dark();
                         }
                         else
                         {
-                            Dark();
+                            Light();
                         }
                     }
                 }

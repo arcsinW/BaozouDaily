@@ -13,7 +13,7 @@
     <SolidColorBrush x:Key="SplitLineColorBrush">#FFFFFF</SolidColorBrush>
 
     <!--MasterDetailPage Pane背景色-->
-    <SolidColorBrush x:Key="PaneBackgroundColor">#343434</SolidColorBrush>
+    <SolidColorBrush x:Key="PaneBackground">#343434</SolidColorBrush>
 
     <!--页面标题背景色-->
     <SolidColorBrush x:Key="PageTitleBackground">#343434</SolidColorBrush>

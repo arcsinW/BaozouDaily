@@ -235,15 +235,18 @@
     <Compile Include="Controls\GifControl.xaml.cs">
       <DependentUpon>GifControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MediaPlayer\BaozouMediaElement.xaml.cs">
-      <DependentUpon>BaozouMediaElement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MediaPlayer\BaozouMediaTransportControls.cs" />
+    <Compile Include="Controls\BaozouMediaTransportControls.cs" />
     <Compile Include="Controls\BaoZouTaskPopup.cs" />
     <Compile Include="Controls\Drawer.cs" />
     <Compile Include="Controls\RefreshableListView.cs" />
     <Compile Include="Controls\RoundButton.cs" />
     <Compile Include="Controls\ToastService.cs" />
+    <Compile Include="UserControls\CommentItem.xaml.cs">
+      <DependentUpon>CommentItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MediaPlayer.xaml.cs">
+      <DependentUpon>MediaPlayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaozouLoginViewModel.cs" />
     <Compile Include="ViewModel\ChannelViewModel.cs" />
     <Compile Include="ViewModel\CommentPageViewModel.cs" />
@@ -514,7 +517,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MediaPlayer\BaozouMediaElement.xaml">
+    <Page Include="UserControls\CommentItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MediaPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

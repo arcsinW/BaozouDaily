@@ -9,7 +9,7 @@
     xmlns:win2d="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource PageBackgroundBrush}">
+    <Grid Background="{ThemeResource PaneBackground}">
         <!--<Image x:Name="img" Source="ms-appx:///Assets/Images/loadinganim0.png" 
                Height="200" Width="200" Tapped="img_Tapped"/>-->
 

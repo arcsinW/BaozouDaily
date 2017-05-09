@@ -200,7 +200,6 @@
                 </StackPanel>
             </Grid>
         </DataTemplate>
-
     </Page.Resources>
 
     <Page.DataContext>

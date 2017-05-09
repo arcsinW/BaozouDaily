@@ -252,7 +252,7 @@
         <Setter Property="Width" Value="Auto"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="MinWidth" Value="0"/>
-        <Setter Property="Padding" Value="4,10"/>
+        <Setter Property="Padding" Value="0,10"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -429,7 +429,7 @@
     <!--#endregion -->
 
     <!--#region ListView's Style-->
-    <Style x:Key="LightScrollBarStyle" TargetType="ScrollBar">
+    <Style TargetType="ScrollBar">
         <Setter Property="MinWidth" Value="12"/>
         <Setter Property="MinHeight" Value="12"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -780,7 +780,7 @@
                             <RepeatButton  x:Name="VerticalSmallIncrease" Visibility="Collapsed" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="4" Template="{StaticResource VerticalIncrementTemplate}"/>
                         </Grid>
                         <Grid x:Name="VerticalPanningRoot" >
-                            <Border CornerRadius="4" x:Name="VerticalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}" HorizontalAlignment="Right" Margin="2,0,2,0" MinHeight="32" VerticalAlignment="Top" Width="2"/>
+                            <Border CornerRadius="16" x:Name="VerticalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}" HorizontalAlignment="Right" Margin="2,0,2,0" MinHeight="32" VerticalAlignment="Top" Width="2"/>
                         </Grid>
                     </Grid>
                 </ControlTemplate>
@@ -902,7 +902,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <ScrollContentPresenter x:Name="ScrollContentPresenter" Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" Grid.RowSpan="2"/>
-                            <ScrollBar x:Name="VerticalScrollBar" Style="{StaticResource LightScrollBarStyle}" Grid.Column="1" HorizontalAlignment="Right" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}"/>
+                            <ScrollBar x:Name="VerticalScrollBar" Grid.Column="1" HorizontalAlignment="Right" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}"/>
                             <ScrollBar x:Name="HorizontalScrollBar" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Orientation="Horizontal" Grid.Row="1" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}"/>
                             <Border x:Name="ScrollBarSeparator" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Grid.Column="1" Grid.Row="1"/>
                         </Grid>
@@ -1489,9 +1489,10 @@
                                                                 <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ButtonLayoutGrid">
                                                                         <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAccentBrush}"/>
                                                                     </ObjectAnimationUsingKeyFrames>-->
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="GlyphElement">
+                                                                <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="GlyphElement">
                                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltChromeWhiteBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
+                                                                </ObjectAnimationUsingKeyFrames>-->
+                                                                <!--<PointerDownThemeAnimation/>-->
                                                             </Storyboard>
                                                         </VisualState>
                                                         <VisualState x:Name="Disabled">

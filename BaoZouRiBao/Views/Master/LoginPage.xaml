@@ -15,7 +15,7 @@
         <vm:LoginPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource PaneBackgroundColor}">
+    <Grid Background="{ThemeResource PaneBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
@@ -47,12 +47,12 @@
         <Grid Grid.Row="1">
             <StackPanel>
                 <Image Source="ms-appx:///Assets/Images/login_appname.png" 
-                   Margin="80" Width="200"
+                   Margin="0,80,0,70" Width="200"
                    VerticalAlignment="Top"
                    HorizontalAlignment="Center"
                    />
                 <Button x:Name="baozouLoginBtn" Content="暴走漫画" 
-                    Width="200" Height="48" Margin="0,24,0,12"
+                    Width="200" Height="48"
                     Style="{ThemeResource RoundButtonStyle}"
                     HorizontalAlignment="Center" 
                     Click="{x:Bind ViewModel.baozouLoginBtn_Click}"
