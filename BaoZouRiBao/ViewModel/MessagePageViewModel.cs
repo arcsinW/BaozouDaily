@@ -14,16 +14,16 @@ namespace BaoZouRiBao.ViewModel
     {
         public MessagePageViewModel()
         {
-            if(IsDesignMode)
+            if (IsDesignMode)
             {
                 LoadDesignData();
             }
 
-            CommentMessages = new IncrementalLoadingList<Message>(LoadCommentMessages, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(e.Message); });
-            VoteMessages = new IncrementalLoadingList<Message>(LoadVoteMessage, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(e.Message); });
-            AdminMessages = new IncrementalLoadingList<Message>(LoadAdminMessage, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(e.Message); });
+            CommentMessages = new IncrementalLoadingList<Message>(LoadCommentMessages, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { IsActive = false; ToastService.SendToast(e.Message); });
+            VoteMessages = new IncrementalLoadingList<Message>(LoadVoteMessage, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { IsActive = false; ToastService.SendToast(e.Message); });
+            AdminMessages = new IncrementalLoadingList<Message>(LoadAdminMessage, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { IsActive = false; ToastService.SendToast(e.Message); });
         }
-         
+
         private void LoadDesignData()
         {
 
@@ -36,10 +36,7 @@ namespace BaoZouRiBao.ViewModel
         {
             List<Message> messages = new List<Message>();
             
-            System.Diagnostics.Debug.WriteLine($"Previous timestamp : {commentMessageStringBuilder}");
-            System.Diagnostics.Debug.WriteLine($"Current timestamp : {timeStamp}");
-
-            if (timeStamp.Equals(commentMessageStringBuilder.ToString())) 
+            if (timeStamp.Equals(commentMessageStringBuilder.ToString()))
             {
                 CommentMessages.NoMore();
                 return messages;
@@ -52,7 +49,7 @@ namespace BaoZouRiBao.ViewModel
 
                 commentMessageStringBuilder.Clear();
                 commentMessageStringBuilder.Append(timeStamp);
-                
+
                 foreach (var item in result.CommentMessages)
                 {
                     messages.Add(item);
@@ -74,7 +71,7 @@ namespace BaoZouRiBao.ViewModel
         private StringBuilder voteMessageTimeStamp = new StringBuilder("0");
 
         public async Task<IEnumerable<Message>> LoadVoteMessage(uint count, string timeStamp)
-        { 
+        {
             List<Message> messages = new List<Message>();
 
             if (timeStamp.Equals(voteMessageTimeStamp))
@@ -84,14 +81,14 @@ namespace BaoZouRiBao.ViewModel
             }
 
             var result = await ApiService.Instance.GetCommentVoteMessages(timeStamp);
-            if (result != null && result.CommentMessages != null)
+            if (result != null && result.CommentVoteMessages != null)
             {
                 VoteMessages.TimeStamp = result.TimeStamp;
 
                 voteMessageTimeStamp.Clear();
                 voteMessageTimeStamp.Append(result.TimeStamp);
 
-                foreach (var item in result.CommentMessages)
+                foreach (var item in result.CommentVoteMessages)
                 {
                     messages.Add(item);
                 }
@@ -106,13 +103,13 @@ namespace BaoZouRiBao.ViewModel
                 IsVoteMessageEmpty = false;
             }
 
-            return messages; 
+            return messages;
         }
 
         private StringBuilder adminMessageTimeStamp = new StringBuilder("0");
 
         public async Task<IEnumerable<Message>> LoadAdminMessage(uint count, string timeStamp)
-        { 
+        {
             List<Message> messages = new List<Message>();
 
             if (timeStamp.Equals(adminMessageTimeStamp))
@@ -124,7 +121,7 @@ namespace BaoZouRiBao.ViewModel
             var result = await ApiService.Instance.GetAdminMessages(timeStamp);
             if (result != null && result.AdminMessages != null)
             {
-                CommentMessages.TimeStamp = result.TimeStamp;
+                AdminMessages.TimeStamp = result.TimeStamp;
 
                 adminMessageTimeStamp.Clear();
                 adminMessageTimeStamp.Append(result.TimeStamp);

@@ -18,6 +18,9 @@ namespace BaoZouRiBao.Model
         [JsonProperty(PropertyName = "thumbnail")]
         public string Thumbnail { get; set; }
 
+        [JsonProperty(PropertyName = "image")]
+        public string Image { get; set; }
+
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 

@@ -26,5 +26,14 @@ namespace BaoZouRiBao.Model
 
         [JsonProperty(PropertyName = "sender")]
         public Recommender Sender { get; set; }
+        
+        [JsonProperty(PropertyName = "receiver")]
+        public Recommender Receiver { get; set; }
+
+        [JsonProperty(PropertyName = "vote")]
+        public Vote Vote { get; set; }
+
+        [JsonProperty(PropertyName = "voted_comment")]
+        public Comment VotedComment { get; set; }
     }
 }

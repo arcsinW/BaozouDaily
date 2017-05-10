@@ -107,6 +107,7 @@ namespace BaoZouRiBao.IncrementalCollection
             Clear();
             Page = 0;
             TimeStamp = string.Empty;
+            HasMoreItems = true;
             await LoadMoreItemsAsync(0);
         }
 
@@ -137,18 +138,32 @@ namespace BaoZouRiBao.IncrementalCollection
                     isBusy = true;
                     if (timeStampFunc != null)
                     {
-                        var _items = await timeStampFunc(count, TimeStamp);
-                        foreach (var item in _items)
+                        var items = await timeStampFunc(count, TimeStamp);
+                        if (items != null && items.Any())
                         {
-                            this.Add(item);
+                            foreach (var item in items)
+                            {
+                                this.Add(item);
+                            }
+                        }
+                        else
+                        {
+                            NoMore();
                         }
                     }
                     else
                     {
                         var items = await pageFunc(count, ++Page);
-                        foreach (var item in items)
+                        if (items != null && items.Any())
                         {
-                            this.Add(item);
+                            foreach (var item in items)
+                            {
+                                this.Add(item);
+                            }
+                        }
+                        else
+                        {
+                            NoMore();
                         }
                     }
                     isBusy = false;
@@ -156,6 +171,7 @@ namespace BaoZouRiBao.IncrementalCollection
                 catch (Exception e)
                 {
                     onErrorAction?.Invoke(e);
+                    NoMore();
                     LogHelper.WriteLine(e);
                 }
                 finally
