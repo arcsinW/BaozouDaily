@@ -52,17 +52,17 @@ namespace BaoZouRiBao.Http
         /// <summary>
         /// 评论 的消息
         /// </summary>
-        public const string CommentMessage = "http://dailyapi.ibaozou.com/api/v31/messages/comment_messages";
+        public const string CommentMessage = "http://dailyapi.ibaozou.com/api/v31/messages/comment_messages?timestamp={0}&";
 
         /// <summary>
         /// 赞 的消息
         /// </summary>
-        public const string CommentVoteMessage = "http://dailyapi.ibaozou.com/api/v31/messages/comment_vote_messages";
+        public const string CommentVoteMessage = "http://dailyapi.ibaozou.com/api/v31/messages/comment_vote_messages&timestamp={0}&";
 
         /// <summary>
         /// 通知 的消息
         /// </summary>
-        public const string AdminMessage = "http://dailyapi.ibaozou.com/api/v31/messages/admin_messages";
+        public const string AdminMessage = "http://dailyapi.ibaozou.com/api/v31/messages/admin_messages&timestamp={0}&";
          
         /// <summary>
         /// Like a comment

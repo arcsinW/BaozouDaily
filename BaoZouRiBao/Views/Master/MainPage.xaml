@@ -550,23 +550,14 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
-                                        <TextBlock Text="{x:Bind Title}" Grid.Row="0" FontSize="16" 
-                                                               TextTrimming="WordEllipsis" Style="{ThemeResource TitleTextBlockStyle}"/>
+                                        <TextBlock Text="{Binding Title}" Grid.Row="0" FontSize="16" TextTrimming="WordEllipsis" Style="{ThemeResource TitleTextBlockStyle}"/>
 
                                         <Grid Margin="0,4" Grid.Row="1" VerticalAlignment="Center">
-                                            <TextBlock  HorizontalAlignment="Left" Style="{ThemeResource DescTextBlockStyle}">
-                                                    <Run Text="{x:Bind PlayCount}"/>
-                                                    <Run Text="播放"/>
+                                            <TextBlock Text="{Binding PlayCount}" Margin="0"  HorizontalAlignment="Left" Style="{ThemeResource DescTextBlockStyle}">
+                                                <Run Text="播放"/>
                                             </TextBlock>
 
-                                            <StackPanel HorizontalAlignment="Right" 
-                                                            VerticalAlignment="Center"
-                                                            Orientation="Horizontal">
-                                                <StackPanel.Resources>
-                                                    <Style TargetType="Button">
-                                                        <Setter Property="Margin" Value="0,0,8,0"/>
-                                                    </Style>
-                                                </StackPanel.Resources>
+                                            <StackPanel  HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
                                                 <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto">
                                                     <StackPanel Orientation="Horizontal">
                                                         <Image Source="/Assets/Images/btn_article_like_nor.png"/>
@@ -581,27 +572,16 @@
                                                     </StackPanel>
                                                 </Button>
 
-                                                <Button Style="{ThemeResource ImageButtonStyle}" 
-                                                            Height="Auto" Width="Auto">
+                                                <Button Style="{ThemeResource ImageButtonStyle}">
                                                     <Image Source="/Assets/Images/article_share.png" Height="40" Width="40"/>
                                                 </Button>
                                             </StackPanel>
                                         </Grid>
-
                                     </Grid>
 
-                                    <Button HorizontalAlignment="Center"
-                                                    Style="{ThemeResource ImageButtonStyle}"
+                                    <Button HorizontalAlignment="Center" Style="{ThemeResource ImageButtonStyle}"
                                                     VerticalAlignment="Center" Foreground="White" 
-                                                    Grid.Row="0" Width="64" Height="64">
-                                        <!--<i:Interaction.Behaviors>
-                                            <core:EventTriggerBehavior EventName="Tapped">
-                                                <core:EventTriggerBehavior.Actions>
-                                                    <core:ChangePropertyAction TargetObject="mediaElement" 
-                                                                                   PropertyName="AutoPlay" Value="True"/>
-                                                </core:EventTriggerBehavior.Actions>
-                                            </core:EventTriggerBehavior>
-                                        </i:Interaction.Behaviors>-->
+                                                    Grid.Row="0" Width="64" Height="64"> 
                                         <Image Source="/Assets/Images/btn_video_play.png"/>
                                     </Button>
                                 </Grid>

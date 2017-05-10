@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using BaoZouRiBao.Model.ResultModel;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -18,12 +19,20 @@ namespace BaoZouRiBao.ViewModel
             NavigationHelper.DetailFrameNavigate(typeof(BaozouLoginPage));
         }
 
+        /// <summary>
+        /// 新浪微博授权登录
+        /// </summary>
         public async void SinaLogin()
         {
-             bool result = await ApiService.Instance.SinaWeiboLoginAsync();
-            if (result)
+            User user = await ApiService.Instance.SinaWeiboLoginAsync();
+            if (user != null)
             {
+                GlobalValue.Current.UpdateUser(user);
                 ToastService.SendToast("登录成功");
+            }
+            else
+            {
+                ToastService.SendToast("登录失败");
             }
         }
 

@@ -7,6 +7,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Media.SpeechRecognition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 namespace BaoZouRiBao
@@ -67,7 +68,7 @@ namespace BaoZouRiBao
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(MasterDetailPage), e.Arguments);
+                rootFrame.Navigate(typeof(MasterDetailPage), e.Arguments, new SlideNavigationTransitionInfo());
             }
 
             // Ensure the current window is active

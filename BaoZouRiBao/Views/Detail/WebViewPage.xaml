@@ -45,7 +45,7 @@
 
             <Grid Grid.Column="1">
                 <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
-                            Style="{ThemeResource PageTitleTextBlockStyle}" 
+                            Style="{ThemeResource PageTitleTextBlockStyle}" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                             HorizontalAlignment="Left" ScrollViewer.HorizontalScrollMode="Enabled"/>
             </Grid>
             

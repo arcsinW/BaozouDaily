@@ -130,7 +130,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Background="{ThemeResource ListViewBackgroundBrush}">
-            <ScrollViewer Style="{ThemeResource LightScrollViewerStyle}">
+            <ScrollViewer Style="{ThemeResource LightScrollViewerStyle}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <StackPanel Padding="0,24,0,0">
                     <StackPanel.Resources>
                         <BitmapImage x:Key="DefaultAvatar" UriSource="ms-appx:///Assets/Images/avatar_m.png"/>
@@ -160,9 +160,7 @@
                         </Grid>
                     </Grid>
 
-                    <TextBlock Text="{x:Bind ViewModel.User.Name}" 
-                           Margin="0,12"
-                           HorizontalAlignment="Center"/>
+                    <TextBlock Text="{x:Bind ViewModel.User.Name}" Margin="0,12" HorizontalAlignment="Center"/>
 
                     <Grid Margin="0,4">
                         <Grid.Resources>
@@ -244,12 +242,10 @@
 
                     <Grid x:Name="listViewHeader" Background="{ThemeResource ListViewHeaderBrush}" Padding="16,8" >
                         <TextBlock Text="每日任务" Foreground="#FF6D6D6D"/>
-                        <TextBlock Text="任务介绍>" Tapped="{x:Bind TaskInfo}" HorizontalAlignment="Right" 
-                                   Foreground="#FFBCBCBC"/>
+                        <TextBlock Text="任务介绍>" Tapped="{x:Bind TaskInfo}" HorizontalAlignment="Right" Foreground="#FFBCBCBC"/>
                     </Grid>
 
-                    <ItemsControl Background="{ThemeResource PageBackgroundBrush}" 
-                      DataContext="{Binding TaskInfo}" ItemsSource="{Binding DailyTasks}"
+                    <ItemsControl Background="{ThemeResource PageBackgroundBrush}" DataContext="{Binding TaskInfo}" ItemsSource="{Binding DailyTasks}"
                               ScrollViewer.VerticalScrollMode="Enabled">
                         <ItemsControl.Resources>
                             <BitmapImage x:Key="CoinBitmapImage" UriSource="ms-appx:///Assets/Images/self_coin_detail.png"/>
@@ -272,8 +268,7 @@
                                     <StackPanel Grid.Column="1" Margin="12,0">
                                         <TextBlock Text="{x:Bind Name}" Margin="0,0,0,4"/>
                                         <StackPanel Orientation="Horizontal">
-                                            <Image Source="{StaticResource CoinBitmapImage}" Height="16"
-                                           VerticalAlignment="Center"/>
+                                            <Image Source="{StaticResource CoinBitmapImage}" Height="16" VerticalAlignment="Center"/>
                                             <TextBlock Margin="4,0">
                                             <Run Text="+"/>
                                             <Run Text="{x:Bind Amount}"/>
@@ -281,8 +276,7 @@
                                         </StackPanel>
                                     </StackPanel>
 
-                                    <TextBlock Grid.Column="2" VerticalAlignment="Center"
-                                       Foreground="{Binding Done,Converter={StaticResource BoolToColorConverter}}"
+                                    <TextBlock Grid.Column="2" VerticalAlignment="Center" Foreground="{Binding Done,Converter={StaticResource BoolToColorConverter}}"
                                        Text="{Binding Done,Converter={StaticResource DoneToStringConverter}}"/>
                                 </Grid>
                             </DataTemplate>

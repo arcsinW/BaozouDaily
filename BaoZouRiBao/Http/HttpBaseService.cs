@@ -159,11 +159,28 @@ namespace BaoZouRiBao.Http
             }
         }
 
-        public static void AddHeader(string key, string value)
+        /// <summary>
+        /// 修改Http Header
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public static void SetHeader(string key, string value)
         {
             var header = httpClient.DefaultRequestHeaders;
 
             httpClient.DefaultRequestHeaders[key] = value;
+        }
+
+        /// <summary>
+        /// 移除一个Http Header
+        /// </summary>
+        /// <param name="key"></param>
+        public static void RemoveHeader(string key)
+        {
+            if (httpClient.DefaultRequestHeaders.ContainsKey(key))
+            {
+                httpClient.DefaultRequestHeaders.Remove(key);
+            }
         }
     }
 }

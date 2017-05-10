@@ -57,8 +57,11 @@ namespace BaoZouRiBao.Http
         /// 新浪weibo登录
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> SinaWeiboLoginAsync()
+        public async Task<User> SinaWeiboLoginAsync()
         {
+            //先清除Authorization信息
+            HttpBaseService.RemoveHeader("Authorization");
+
             string result = await AuthenticationHelper.SinaAuthenticationAsync();
            
             Regex regex = new Regex(@"(?<=code=)(.)*");
@@ -85,13 +88,12 @@ namespace BaoZouRiBao.Http
                     User user = await Post<LoginPost, User>(ServiceUri.Login, loginPost);
                     if (user != null)
                     {
-                        HttpBaseService.AddHeader("Authorization", "Bearer " + user.AccessToken);
-                        GlobalValue.Current.UpdateUser(user);
-                        return true;
+                        HttpBaseService.SetHeader("Authorization", "Bearer " + user.AccessToken);
                     }
+                    return user;
                 }
             }
-            return false;
+            return null;
         }
 
         /// <summary>
@@ -109,7 +111,7 @@ namespace BaoZouRiBao.Http
             User user = await Post<LoginPost, User>(ServiceUri.Login, loginPost);
             if (user != null)
             {
-                HttpBaseService.AddHeader("Authorization", "Bearer " + user.AccessToken);
+                HttpBaseService.SetHeader("Authorization", "Bearer " + user.AccessToken);
                 GlobalValue.Current.UpdateUser(user);
                 return true;
             }
@@ -122,8 +124,11 @@ namespace BaoZouRiBao.Http
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public async Task<bool> LoginAsync(string userName,string password)
-        { 
+        public async Task<User> LoginAsync(string userName,string password)
+        {
+            //先清除Authorization信息
+            HttpBaseService.RemoveHeader("Authorization");
+
             var result = await BaoZouOAuthAsync(userName, password);
             if (result != null && string.IsNullOrEmpty(result.Error))
             { 
@@ -137,13 +142,12 @@ namespace BaoZouRiBao.Http
                 User user = await Post<LoginPost, User>(ServiceUri.Login, loginPost);
                 if (user != null)
                 {
-                    HttpBaseService.AddHeader("Authorization", "Bearer " + user.AccessToken);
-                    GlobalValue.Current.UpdateUser(user);
-                    return true;
+                    HttpBaseService.SetHeader("Authorization", "Bearer " + user.AccessToken);
                 }
+                return user;
             }
 
-            return false;
+            return null;
         }
 
         /// <summary>
@@ -271,9 +275,9 @@ namespace BaoZouRiBao.Http
         /// <summary>
         /// 获取 评论 消息
         /// </summary>
-        public async Task<CommentMessageResult> GetCommentMessages()
+        public async Task<CommentMessageResult> GetCommentMessages(string timeStamp)
         {
-            var result = await GetJson<CommentMessageResult>(ServiceUri.CommentMessage);
+            var result = await GetJson<CommentMessageResult>(string.Format(ServiceUri.CommentMessage,timeStamp));
             if (result != null)
             {
                 return result;
@@ -287,9 +291,9 @@ namespace BaoZouRiBao.Http
         /// <summary>
         /// 获取 赞 消息
         /// </summary>
-        public async Task<CommentVoteMessageResult> GetCommentVoteMessages()
+        public async Task<CommentVoteMessageResult> GetCommentVoteMessages(string timeStamp)
         {
-            var result = await GetJson<CommentVoteMessageResult>(ServiceUri.CommentVoteMessage);
+            var result = await GetJson<CommentVoteMessageResult>(string.Format(ServiceUri.CommentVoteMessage, timeStamp));
             if (result != null)
             {
                 return result;
@@ -304,9 +308,9 @@ namespace BaoZouRiBao.Http
         /// 获取 系统 消息
         /// </summary>
         /// <returns></returns>
-        public async Task<AdminMessageResult> GetAdminMessages()
+        public async Task<AdminMessageResult> GetAdminMessages(string timeStamp)
         {
-            var result = await GetJson<AdminMessageResult>(ServiceUri.AdminMessage);
+            var result = await GetJson<AdminMessageResult>(string.Format(ServiceUri.AdminMessage, timeStamp));
             if (result != null)
             {
                 return result;
@@ -315,7 +319,7 @@ namespace BaoZouRiBao.Http
             {
                 return null;
             }
-        } 
+        }
         #endregion
 
         /// <summary>

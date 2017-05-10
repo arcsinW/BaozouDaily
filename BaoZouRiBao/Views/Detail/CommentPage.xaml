@@ -154,6 +154,11 @@
                                     <StackPanel>
                                         <TextBlock Text="{Binding User.Name,Mode=OneWay}"/>
 
+                                        <RichTextBlock>
+                                            <RichTextBlock.Blocks>
+                                                
+                                            </RichTextBlock.Blocks>
+                                        </RichTextBlock>
                                         <TextBlock x:Name="parent" TextWrapping="Wrap" Margin="0,16">
                                             <Run Text="{Binding Content}" />
                                         </TextBlock>

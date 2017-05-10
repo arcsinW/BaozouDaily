@@ -75,7 +75,6 @@ namespace BaoZouRiBao.Views
 
         protected override async void OnKeyDown(KeyRoutedEventArgs e)
         {
-            base.OnKeyDown(e);
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
                 if (!string.IsNullOrEmpty(ViewModel.Content))

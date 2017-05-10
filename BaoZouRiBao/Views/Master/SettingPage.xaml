@@ -244,7 +244,7 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <ListView Background="{ThemeResource PageBackgroundBrush}" SelectionMode="None">
+            <ListView Background="{ThemeResource PageBackgroundBrush}" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionMode="None">
                 <ListView.Resources>
                     <Style TargetType="BitmapIcon">
                         <Setter Property="Height" Value="24"/>

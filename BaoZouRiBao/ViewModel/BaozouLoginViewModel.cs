@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using BaoZouRiBao.Model.ResultModel;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -36,10 +37,16 @@ namespace BaoZouRiBao.ViewModel
 
         private async void Login(BaozouLoginInput input)
         {
-            bool result = await ApiService.Instance.LoginAsync(input.Account, input.Password);
-            if (result)
+            User user = await ApiService.Instance.LoginAsync(input.Account, input.Password);
+            if (user != null)
             {
+                HttpBaseService.SetHeader("Authorization", "Bearer " + user.AccessToken);
+                GlobalValue.Current.UpdateUser(user);
                 ToastService.SendToast("登录成功");
+            }
+            else
+            {
+                ToastService.SendToast("登录失败");
             }
         }
     }

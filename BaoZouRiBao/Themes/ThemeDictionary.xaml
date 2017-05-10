@@ -301,6 +301,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -780,7 +781,7 @@
                             <RepeatButton  x:Name="VerticalSmallIncrease" Visibility="Collapsed" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="4" Template="{StaticResource VerticalIncrementTemplate}"/>
                         </Grid>
                         <Grid x:Name="VerticalPanningRoot" >
-                            <Border CornerRadius="16" x:Name="VerticalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}" HorizontalAlignment="Right" Margin="2,0,2,0" MinHeight="32" VerticalAlignment="Top" Width="2"/>
+                            <Border CornerRadius="8" x:Name="VerticalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}" HorizontalAlignment="Right" Margin="2,0,2,0" MinHeight="32" VerticalAlignment="Top" Width="2"/>
                         </Grid>
                     </Grid>
                 </ControlTemplate>
@@ -1479,9 +1480,9 @@
                                                         <VisualState x:Name="Normal"/>
                                                         <VisualState x:Name="PointerOver">
                                                             <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="GlyphElement">
+                                                                <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="GlyphElement">
                                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAccentBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
+                                                                </ObjectAnimationUsingKeyFrames>-->
                                                             </Storyboard>
                                                         </VisualState>
                                                         <VisualState x:Name="Pressed">
