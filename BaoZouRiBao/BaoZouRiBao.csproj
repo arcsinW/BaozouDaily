@@ -244,9 +244,6 @@
     <Compile Include="Controls\RefreshableListView.cs" />
     <Compile Include="Controls\RoundButton.cs" />
     <Compile Include="Controls\ToastService.cs" />
-    <Compile Include="UserControls\CommentItem.xaml.cs">
-      <DependentUpon>CommentItem.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\MediaPlayer.xaml.cs">
       <DependentUpon>MediaPlayer.xaml</DependentUpon>
     </Compile>
@@ -520,10 +517,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\GifControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\CommentItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

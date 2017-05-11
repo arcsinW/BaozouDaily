@@ -6,11 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
+    xmlns:converter="using:BaoZouRiBao.Converters"
     mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:MyRecommendViewModel x:Name="ViewModel"/>
     </Page.DataContext>
+
+    <Page.Resources>
+        <converter:IsNullOrEmptyToBoolConverter x:Key="IsNullOrEmptyToBoolConverter"/>
+    </Page.Resources>
     
     <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
@@ -45,24 +50,23 @@
                 <Grid Background="{ThemeResource ListViewBackgroundBrush}"
                   Padding="12">
                     <StackPanel Orientation="Horizontal">
-                        <Image Height="30" >
+                        <Image Height="24" >
                             <Image.Source>
                                 <BitmapImage UriSource="ms-appx:///Assets/Images/icon_publish_link.png"/>
                             </Image.Source>
                         </Image>
-                        <TextBlock VerticalAlignment="Center" Margin="16,0" Text="{Binding ShareUri}"/>
+                        <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Margin="16,0" Text="{Binding ShareUri}"/>
                     </StackPanel>
                     <Button x:Name="faqBtn" Click="faqBtn_Click" Content="如何复制" Padding="6"
                         HorizontalAlignment="Right"
                         Style="{ThemeResource RoundButtonStyle}"/>
                 </Grid>
 
-                <Grid Background="{ThemeResource ListViewBackgroundBrush}"
-                      Padding="12" Margin="0,12" MinHeight="100">
-                    <TextBlock Text="{Binding Title}"/>
+                <Grid Background="{ThemeResource ListViewBackgroundBrush}" Padding="12" Margin="0,12" MinHeight="100">
+                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap"/>
                 </Grid>
-
-                <Button Content="提交" HorizontalAlignment="Center" 
+                
+                <Button Content="提交" HorizontalAlignment="Center" IsEnabled="{Binding IsValid}"
                         Width="200" Height="48" Click="{x:Bind ViewModel.Contribute}"
                         Style="{ThemeResource RoundButtonStyle}"/>
             </StackPanel>

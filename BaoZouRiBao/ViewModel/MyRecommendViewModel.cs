@@ -22,14 +22,9 @@ namespace BaoZouRiBao.ViewModel
             Clipboard.ContentChanged += Clipboard_ContentChanged;
         }
 
-        private async void Clipboard_ContentChanged(object sender, object e)
+        private void Clipboard_ContentChanged(object sender, object e)
         {
-            DataPackageView dataPackage = Clipboard.GetContent();
-            if (dataPackage.Contains(StandardDataFormats.Text))
-            {
-                ShareUri = await dataPackage.GetTextAsync();
-                await GetTitleByUri();
-            } 
+            LoadShareUri();
         }
 
         public async void LoadShareUri()
@@ -39,6 +34,14 @@ namespace BaoZouRiBao.ViewModel
             {
                 ShareUri = await dataPackage.GetTextAsync();
                 await GetTitleByUri();
+
+                Uri result = null;
+                Uri.TryCreate(ShareUri, UriKind.RelativeOrAbsolute, out result);
+                
+                if (result != null)
+                {
+                    IsValid = true;
+                }
             }
         }
 
@@ -52,7 +55,7 @@ namespace BaoZouRiBao.ViewModel
             var result = await ApiService.Instance.UserContributeAsync(ShareUri, Title);
             if (result != null)
             {
-                if (result.Status.Equals("success"))
+                if (result.Status.Equals("1000"))
                 {
                     ToastService.SendToast("投稿成功");
                 }
@@ -64,17 +67,21 @@ namespace BaoZouRiBao.ViewModel
             try
             {
                 string html = await new HttpClient().GetStringAsync(ShareUri);
-                //Regex regex = new Regex("(?<=<title>)(.*?)(?=</title>)");
                 Regex regex = new Regex(@"(?<=<title>)[\s\S]*?(?=</title>)");
-                var match = regex.Match(html);
-                if (match.Success)
+                MatchCollection matches = regex.Matches(html);
+                for (int i = 0; i < matches.Count; i++)
                 {
-                    Title = WebUtility.HtmlDecode(match.Value).Trim();
+                    if (matches[i].Success)
+                    {
+                        if (!string.IsNullOrEmpty(matches[i].Value))
+                        {
+                            Title = WebUtility.HtmlDecode(matches[i].Value).Trim();
+                            return;
+                        }
+                    }
                 }
-                else
-                {
-                    Title = ShareUri;
-                }
+                
+                Title = ShareUri;
             }
             catch
             {
@@ -86,8 +93,15 @@ namespace BaoZouRiBao.ViewModel
         private bool isActive;
         public bool IsActive
         {
-            get { return isActive; }
-            set { isActive = value; OnPropertyChanged(); }
+            get
+            {
+                return isActive;
+            }
+            set
+            {
+                isActive = value;
+                OnPropertyChanged();
+            }
         }
 
         private string shareUri = "请先复制你想推荐的链接";
@@ -104,7 +118,23 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-
+        private bool isValid = false;
+        /// <summary>
+        /// Uri是否合法
+        /// </summary>
+        public bool IsValid
+        {
+            get
+            {
+                return isValid;
+            }
+            set
+            {
+                isValid = value;
+                OnPropertyChanged();
+            }
+        }
+        
         private string title = "链接标题";
         /// <summary>
         /// 标题

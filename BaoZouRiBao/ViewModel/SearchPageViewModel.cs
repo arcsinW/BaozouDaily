@@ -20,7 +20,7 @@ namespace BaoZouRiBao.ViewModel
 
         public IncrementalLoadingList<Document> SearchResults { get; set; } 
 
-        private string keyword = "暴走日报";
+        private string keyword;
 
         public string Keyword
         {
