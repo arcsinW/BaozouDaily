@@ -21,17 +21,17 @@ namespace BaoZouRiBao.Views
 
         private void Current_AdaptiveVisualStateChanged(object sender, VisualStateChangedEventArgs e)
         {
-            switch(e.NewState.Name)
+            switch (e.NewState.Name)
             {
                 case "Narrow":
                     splitViewButton.Visibility = Visibility.Visible;
-                    pageTitleTextBlock.Margin = new Thickness(4, 0, 4, 0);
+                    pageTitleTextBlock.Margin = (Thickness)(Application.Current.Resources["NarrowPageTitleMargin"]);
                     break;
                 case "Wide":
                     splitViewButton.Visibility = Visibility.Collapsed;
-                    pageTitleTextBlock.Margin = new Thickness(12, 0, 12, 0);
+                    pageTitleTextBlock.Margin = (Thickness)(Application.Current.Resources["WidePageTitleMargin"]);
                     break;
-            } 
+            }
         }
 
         #region SplitView' Pane Method

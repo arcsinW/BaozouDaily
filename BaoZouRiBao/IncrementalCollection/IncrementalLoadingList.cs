@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml.Data;
+using System.Threading;
 
 namespace BaoZouRiBao.IncrementalCollection
 {
@@ -127,60 +128,62 @@ namespace BaoZouRiBao.IncrementalCollection
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
             onDataLoadingAction?.Invoke();
-            return AsyncInfo.Run(async token =>
+            return AsyncInfo.Run(LoadMoreItemsTaskProvider); 
+        }
+
+        private async Task<LoadMoreItemsResult> LoadMoreItemsTaskProvider(CancellationToken token)
+        {
+            try
             {
-                try
+                if (isBusy)
                 {
-                    if (isBusy)
+
+                }
+                isBusy = true;
+                if (timeStampFunc != null)
+                {
+                    var items = await timeStampFunc(0, TimeStamp);
+                    if (items != null && items.Any())
                     {
-                        
-                    }
-                    isBusy = true;
-                    if (timeStampFunc != null)
-                    {
-                        var items = await timeStampFunc(count, TimeStamp);
-                        if (items != null && items.Any())
+                        foreach (var item in items)
                         {
-                            foreach (var item in items)
-                            {
-                                this.Add(item);
-                            }
-                        }
-                        else
-                        {
-                            NoMore();
+                            this.Add(item);
                         }
                     }
                     else
                     {
-                        var items = await pageFunc(count, ++Page);
-                        if (items != null && items.Any())
+                        NoMore();
+                    }
+                }
+                else
+                {
+                    var items = await pageFunc(0, ++Page);
+                    if (items != null && items.Any())
+                    {
+                        foreach (var item in items)
                         {
-                            foreach (var item in items)
-                            {
-                                this.Add(item);
-                            }
-                        }
-                        else
-                        {
-                            NoMore();
+                            this.Add(item);
                         }
                     }
-                    isBusy = false;
+                    else
+                    {
+                        NoMore();
+                    }
                 }
-                catch (Exception e)
-                {
-                    onErrorAction?.Invoke(e);
-                    NoMore();
-                    LogHelper.WriteLine(e);
-                }
-                finally
-                {
-                    onDataLoadedAction?.Invoke();
-                }
+                isBusy = false;
+            }
+            catch (Exception e)
+            {
+                onErrorAction?.Invoke(e);
+                NoMore();
+                LogHelper.WriteLine(e);
+            }
+            finally
+            {
+                onDataLoadedAction?.Invoke();
+            }
 
-                return new LoadMoreItemsResult { Count = (uint)this.Count };
-            });
+            return new LoadMoreItemsResult { Count = (uint)this.Count };
         }
     }
 }

@@ -39,11 +39,11 @@ namespace BaoZouRiBao.Views
             {
                 case "Narrow":
                     splitViewButton.Visibility = Visibility.Visible;
-                    searchTextBox.Margin = new Thickness(4, 0, 4, 0);
+                    searchTextBox.Margin = (Thickness)(Application.Current.Resources["NarrowPageTitleMargin"]);
                     break;
                 case "Wide":
                     splitViewButton.Visibility = Visibility.Collapsed;
-                    searchTextBox.Margin = new Thickness(12, 0, 12, 0);
+                    searchTextBox.Margin = (Thickness)(Application.Current.Resources["WidePageTitleMargin"]);
                     break;
             }
         }

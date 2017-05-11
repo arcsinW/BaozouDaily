@@ -4,6 +4,7 @@ using BaoZouRiBao.IncrementalCollection;
 using BaoZouRiBao.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,8 @@ namespace BaoZouRiBao.ViewModel
         {
             List<Message> messages = new List<Message>();
             
+            Debug.WriteLine($"Current timestamp {timeStamp}");
+
             if (timeStamp.Equals(commentMessageStringBuilder.ToString()))
             {
                 CommentMessages.NoMore();
@@ -47,13 +50,19 @@ namespace BaoZouRiBao.ViewModel
             {
                 CommentMessages.TimeStamp = result.TimeStamp;
 
+                Debug.WriteLine($"Next timestamp {CommentMessages.TimeStamp}");
+
                 commentMessageStringBuilder.Clear();
-                commentMessageStringBuilder.Append(timeStamp);
+                commentMessageStringBuilder.Append(result.TimeStamp);
 
                 foreach (var item in result.CommentMessages)
                 {
                     messages.Add(item);
                 }
+            }
+            else
+            {
+                CommentMessages.NoMore();
             }
 
             if (messages.Count == 0 && CommentMessages.Count == 0)
@@ -74,7 +83,7 @@ namespace BaoZouRiBao.ViewModel
         {
             List<Message> messages = new List<Message>();
 
-            if (timeStamp.Equals(voteMessageTimeStamp))
+            if (timeStamp.Equals(voteMessageTimeStamp.ToString()))
             {
                 VoteMessages.NoMore();
                 return messages;
@@ -112,7 +121,7 @@ namespace BaoZouRiBao.ViewModel
         {
             List<Message> messages = new List<Message>();
 
-            if (timeStamp.Equals(adminMessageTimeStamp))
+            if (timeStamp.Equals(adminMessageTimeStamp.ToString()))
             {
                 AdminMessages.NoMore();
                 return messages;
@@ -152,6 +161,8 @@ namespace BaoZouRiBao.ViewModel
         public async void RefreshCommentMessages()
         {
             IsActive = true;
+            commentMessageStringBuilder.Clear();
+            commentMessageStringBuilder.Append("0");
             await CommentMessages.ClearAndReloadAsync();
             IsActive = false;
         }
@@ -162,6 +173,8 @@ namespace BaoZouRiBao.ViewModel
         public async void RefreshVoteMessages()
         {
             IsActive = true;
+            voteMessageTimeStamp.Clear();
+            voteMessageTimeStamp.Append("0");
             await VoteMessages.ClearAndReloadAsync();
             IsActive = false;
         }
@@ -172,6 +185,8 @@ namespace BaoZouRiBao.ViewModel
         public async void RefreshAdminMessages()
         {
             IsActive = true;
+            adminMessageTimeStamp.Clear();
+            adminMessageTimeStamp.Append("0");
             await AdminMessages.ClearAndReloadAsync();
             IsActive = false;
         }

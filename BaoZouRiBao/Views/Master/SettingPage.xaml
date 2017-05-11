@@ -405,7 +405,7 @@
                         </Grid>
                     </ListViewItem>-->
 
-                    <ListViewItem>
+                    <ListViewItem Tapped="{x:Bind LauncherStore}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>

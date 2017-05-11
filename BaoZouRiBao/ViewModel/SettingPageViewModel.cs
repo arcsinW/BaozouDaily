@@ -144,6 +144,7 @@ namespace BaoZouRiBao.ViewModel
             {
                 return set.Values[key];
             }
+
             return defaultValue;
         }
 
@@ -152,8 +153,8 @@ namespace BaoZouRiBao.ViewModel
             bool result = await ApiService.Instance.LogoutAsync();
             if (result)
             {
-                ToastService.SendToast("已注销登录");
                 IsLogoutEnable = false;
+                ToastService.SendToast("已注销登录");
             }
         }
     }
