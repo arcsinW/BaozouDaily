@@ -16,25 +16,39 @@ namespace BaoZouRiBao.Http
         public const string Login = "http://dailyapi.ibaozou.com/api/v31/user/login";
 
         /// <summary>
+        /// 注销
         /// Post 
         /// </summary>
         public const string LogOut = "http://dailyapi.ibaozou.com/api/v31/user/logout";
 
         public const string TaskInfo = "http://dailyapi.ibaozou.com/api/v31/task/info";
 
+        /// <summary>
+        /// 消息数量
+        /// </summary>
         public const string MessagesCount = "http://dailyapi.ibaozou.com/api/v31/messages/count";
 
         public const string TokenInfo = "http://dailyapi.ibaozou.com/api/v31/user/token_info";
 
+        /// <summary>
+        /// 用户头像
+        /// </summary>
         public const string UserAvatar = "http://dailyapi.ibaozou.com/api/v1/user/avatar";
 
         /// <summary>
+        /// 我的coin
         /// {0} AccessToken
         /// </summary>
         public const string MyCoins = "http://dailyapi.ibaozou.com/coin?token={0}";
 
+        /// <summary>
+        /// 我的收藏
+        /// </summary>
         public const string MyFavorite = "http://dailyapi.ibaozou.com/api/v31/documents/favorites?timestamp={0}&";
 
+        /// <summary>
+        /// 我的评论
+        /// </summary>
         public const string MyComment = "http://dailyapi.ibaozou.com/api/v31/comments/my?timestamp={0}&";
 
         /// <summary>
@@ -47,6 +61,9 @@ namespace BaoZouRiBao.Http
         /// </summary>
         public const string MyContribute = "http://dailyapi.ibaozou.com/api/v31/documents/my_contribute?timestamp={0}&";
 
+        /// <summary>
+        /// 清除浏览历史记录
+        /// </summary>
         public const string ClearReadHistory = "http://dailyapi.ibaozou.com/api/v31/documents/read/clear";
 
         /// <summary>
@@ -94,12 +111,24 @@ namespace BaoZouRiBao.Http
         public const string ReportComment = "http://dailyapi.ibaozou.com/api/v31/comments/{0}/report";
         #endregion
 
+        /// <summary>
+        /// 新闻列表
+        /// </summary>
         public const string LatestDocument = "http://dailyapi.ibaozou.com/api/v31/documents/latest?timestamp={0}";
 
+        /// <summary>
+        /// 查看新闻
+        /// </summary>
         public const string Document = "http://dailyapi.ibaozou.com/api/v31/documents/{0}";
 
+        /// <summary>
+        /// 新闻的额外信息 （点赞，评论数量，HackJs）
+        /// </summary>
         public const string DocumentExtra = "http://dailyapi.ibaozou.com/api/v31/documents/{0}/extra";
 
+        /// <summary>
+        /// 相关新闻
+        /// </summary>
         public const string DocumentRelated = "http://dailyapi.ibaozou.com/api/v31/documents/{0}/related";
 
         /// <summary>
@@ -115,8 +144,14 @@ namespace BaoZouRiBao.Http
         /// </summary>
         public const string LatestOrHotComment = "http://dailyapi.ibaozou.com/api/v31/documents/{0}/comments/{1}?timestamp={2}&";
         
+        /// <summary>
+        /// 投稿列表
+        /// </summary>
         public const string LatestContribute = "http://dailyapi.ibaozou.com/api/v31/documents/contributes/latest?timestamp={0}";
 
+        /// <summary>
+        /// 视频列表
+        /// </summary>
         public const string LatestVideo = "http://dailyapi.ibaozou.com/api/v31/documents/videos/latest?timestamp={0}";
          
         /// <summary>
@@ -125,10 +160,19 @@ namespace BaoZouRiBao.Http
         /// </summary>
         public const string Rank = "http://dailyapi.ibaozou.com/api/v31/rank/{0}/{1}";
          
+        /// <summary>
+        /// 频道
+        /// </summary>
         public const string Channels = "http://dailyapi.ibaozou.com/api/v31/channels/index?page={0}&per_page={1}&";
 
+        /// <summary>
+        /// 频道里的内容
+        /// </summary>
         public const string ContributeInChannel = "http://dailyapi.ibaozou.com/api/v31/channels/{0}?timestamp={1}&";
 
+        /// <summary>
+        /// 任务完成
+        /// </summary>
         public const string TaskDone = "http://dailyapi.ibaozou.com/api/v31/task/done";
 
         /// <summary>
@@ -136,12 +180,24 @@ namespace BaoZouRiBao.Http
         /// </summary>
         public const string Favorite  = "http://dailyapi.ibaozou.com/api/v31/documents/{0}/favorite";
 
+        /// <summary>
+        /// 搜索
+        /// </summary>
         public const string Search = "http://dailyapi.ibaozou.com/api/v31/documents/search";
 
+        /// <summary>
+        /// 给新闻点赞
+        /// </summary>
         public const string Vote = "http://dailyapi.ibaozou.com/api/v31/documents/{0}/vote";
         
+        /// <summary>
+        /// 问答
+        /// </summary>
         public const string FAQ = "http://dailyapi.ibaozou.com/faq?category_id=1";
 
+        /// <summary>
+        /// 离线下载新闻
+        /// </summary>
         public const string DocumentOfflineDownload = "http://dailyapi.ibaozou.com/api/v31/documents/android_offline_download";
     }
 }

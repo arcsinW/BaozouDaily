@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converter="using:BaoZouRiBao.Converters"
+    DataContext="{Binding }"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -28,18 +29,16 @@
 
         <Grid Grid.Column="1" Margin="8,0">
             <StackPanel>
-                <TextBlock Text="{Binding User.Name,Mode=OneWay}"/>
-
-                <TextBlock x:Name="parent" TextWrapping="Wrap" Margin="0,16">
+                <TextBlock x:Name="parentTextBlock" Text="{Binding User.Name,Mode=OneWay}"/>
+                <TextBlock  TextWrapping="Wrap" Margin="0,16">
                         <Run Text="{Binding Content}" />
                 </TextBlock>
 
                 <Grid>
                     <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0,0,12,0"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="replyBtn" Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0"
-                                                        Click="replyBtn_Click">
-                            <!--Command="{Binding DataContext.CommentCommand,ElementName=latestListView}" CommandParameter="{Binding Id}">-->
+                        <Button Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0"
+                            Command="{Binding CommentCommand}" CommandParameter="{Binding CommentCommandParamter}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>
                                 <TextBlock Text="回复" Style="{ThemeResource DescTextBlockStyle}"/>
@@ -47,7 +46,7 @@
                         </Button>
 
                         <Button x:Name="likeBtn" Height="24" Width="48" Style="{ThemeResource ImageButtonStyle}"
-                                    Command="{Binding VoteCommand}" CommandParameter="{Binding Id}">
+                                    Command="{Binding VoteCommand}" CommandParameter="{Binding VoteCommandParameter}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="{Binding Like,Converter={StaticResource BoolToLikeBitmapConverter}}" VerticalAlignment="Center"/>
                                 <TextBlock Text="{Binding Likes}"   Style="{ThemeResource DescTextBlockStyle}"/>
