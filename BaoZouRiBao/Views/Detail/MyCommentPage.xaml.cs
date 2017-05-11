@@ -1,4 +1,5 @@
-﻿using BaoZouRiBao.Model;
+﻿using BaoZouRiBao.Helper;
+using BaoZouRiBao.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,12 +26,19 @@ namespace BaoZouRiBao.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Comment comment = (e.OriginalSource as Button)?.DataContext as Comment;
-       
-            if (comment != null)
+            Comment comment = ((Button)sender)?.DataContext as Comment;
+            
+            if (comment != null && comment.Article != null)
             {
-                WebViewParameter parameter = new WebViewParameter() { Title = "", DocumentId = comment.Article.DocumentId, DisplayType = "1"};
-                MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
+                if (!comment.Article.DisplayType.Equals("3"))
+                {
+                    WebViewParameter parameter = new WebViewParameter() { Title = "", DocumentId = comment.Article.DocumentId, DisplayType = "1" };
+                    MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
+                }
+                else
+                {
+                    NavigationHelper.DetailFrameNavigate(typeof(VideoPage), comment.Article.DocumentId);
+                }   
             }
         }
     }

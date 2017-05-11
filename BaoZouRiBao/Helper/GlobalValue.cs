@@ -50,6 +50,7 @@ namespace BaoZouRiBao.Helper
         private const string Settings_Key = "Settings";
         private const string User_Key = "User";
         private const string AppTheme_Key = "AppTheme";
+        private const string LastSignDate_Key = "LastSignDate";
         #endregion
 
         #region Properties
@@ -80,11 +81,24 @@ namespace BaoZouRiBao.Helper
             }
         }
 
+        private string lastSignDate = string.Empty;
         /// <summary>
-        /// 是否当日首次打开 用于完成每日签到任务
+        /// 上一次签到日期
         /// </summary>
-        public bool IsToDayFirstStart { get; set; } = false;
+        public string LastSignDate
+        {
+            get
+            {
+                return lastSignDate;
+            }
+            set
+            {
+                lastSignDate = value;
+                provider.UpdateItem(LastSignDate_Key, value);
+            }
+        }
         
+
         private Settings appSettings;
         public Settings AppSettings
         {
@@ -145,6 +159,13 @@ namespace BaoZouRiBao.Helper
             AppTheme = theme;
             OnDataChanged();
         }
+            
+        public void UpdateLastSignDate(string lastSignDate)
+        {
+            LastSignDate = lastSignDate;
+            OnDataChanged();
+        }
+
         #endregion
 
         #region Data changed 

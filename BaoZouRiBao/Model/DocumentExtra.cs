@@ -10,7 +10,7 @@ namespace BaoZouRiBao.Model
     /// <summary>
     /// 文章的额外信息
     /// </summary>
-    public class DocumentExtra
+    public class DocumentExtra : ModelBase
     {
         [JsonProperty(PropertyName = "channels")]
         public Channel[] Channels { get; set; }
@@ -27,8 +27,13 @@ namespace BaoZouRiBao.Model
         [JsonProperty(PropertyName = "favorited")]
         public string Favorited { get; set; }
 
+        private string voteCount = "0";
         [JsonProperty(PropertyName = "vote_count")]
-        public string VoteCount { get; set; }
+        public string VoteCount
+        {
+            get { return voteCount; }
+            set { voteCount = value; OnPropertyChanged(); }
+        }
 
         /// <summary>
         /// 用于设置日夜间模式的js

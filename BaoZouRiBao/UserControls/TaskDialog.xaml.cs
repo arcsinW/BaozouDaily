@@ -1,4 +1,6 @@
-﻿using BaoZouRiBao.Enums;
+﻿using BaoZouRiBao.Controls;
+using BaoZouRiBao.Enums;
+using BaoZouRiBao.Model.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,10 +19,18 @@ using Windows.UI.Xaml.Navigation;
 
 namespace BaoZouRiBao.UserControls
 {
-    public sealed partial class TaskDialog : UserControl
+    public sealed partial class TaskDialog : DialogService
     {
         public TaskDialog()
         {
+            this.InitializeComponent();
+        }
+
+        public TaskDialog(DailyTaskDoneResult result)
+        {
+            BaoZouPopupType = result.Task.TaskType;
+            CoinCount = result.Task.Amount;
+            Title = result.AlertDesc;
             this.InitializeComponent();
         }
          
@@ -33,7 +43,21 @@ namespace BaoZouRiBao.UserControls
 
         // Using a DependencyProperty as the backing store for PopupType.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PopupTypeProperty =
-            DependencyProperty.Register("PopupType", typeof(BaoZouTaskEnum), typeof(TaskDialog), new PropertyMetadata(0));
+            DependencyProperty.Register("BaoZouPopupType", typeof(BaoZouTaskEnum), typeof(TaskDialog), new PropertyMetadata(0,BaoZouPopupTypeChangedCallback));
+
+        private static void BaoZouPopupTypeChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            TaskDialog dialog = d as TaskDialog;
+            if (dialog != null)
+            {
+                dialog.UpdateUriSource(dialog.BaoZouPopupType);
+            }
+        }
+
+        private void UpdateUriSource(BaoZouTaskEnum task)
+        {
+            UriSource = new Uri("ms-appx:///Assets/Images/img_popout_box_" + task.ToString() + ".png");
+        }
 
         public string CoinCount
         {
@@ -83,8 +107,6 @@ namespace BaoZouRiBao.UserControls
                 dialog.image.Source = new BitmapImage() { UriSource = (Uri)e.NewValue };
             }
         }
-
-
         #endregion
     }
 }

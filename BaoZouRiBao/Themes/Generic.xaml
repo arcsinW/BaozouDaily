@@ -589,7 +589,7 @@
                                 <Setter Property='FontFamily' Value="{ThemeResource MTCMediaFontFamily}" />
                                 <Setter Property="IsTextScaleFactorEnabled" Value="False"/>
                             </Style>
- 
+
                             <!--Style for Position slider used in Media Transport Controls-->
                             <Style x:Key='MediaSliderStyle' TargetType='Slider'>
                                 <Setter Property="Background" Value="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" />
@@ -1086,7 +1086,7 @@
                                     <TextBlock x:Name='ErrorTextBlock'
                                         Style="{StaticResource MediaTextBlockStyle}"
                                         TextWrapping="WrapWholeWords"
-                                        Margin='12'/>   
+                                        Margin='12'/>
                                 </Border>
                                 <Border x:Name='MediaTransportControls_Timeline_Border'
                                     Grid.Column='1' Grid.Row='1'>
@@ -1146,7 +1146,7 @@
                                             <Style TargetType="AppBarButton" x:Key="WhiteAppBarButton" BasedOn="{StaticResource AppBarButtonStyle}">
                                                 <Setter Property="Foreground" Value="White"/>
                                             </Style>
-                                            
+
                                             <Style x:Key='MediaTextBlockStyle' TargetType='TextBlock'>
                                                 <Setter Property='VerticalAlignment' Value='Center' />
                                                 <Setter Property='FontSize' Value="{ThemeResource MTCMediaFontSize}" />
@@ -1268,20 +1268,6 @@
                             </Grid>
                         </Border>
                     </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="local2:BaoZouTaskDialog" xmlns:local2="using:BaoZouRiBao.Controls">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="local2:BaoZouTaskDialog">
-                    <Border
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

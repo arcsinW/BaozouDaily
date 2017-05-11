@@ -50,7 +50,7 @@
             </Grid>
             
             <StackPanel x:Name="stackPanel" Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto">
+                <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto" Click="{x:Bind ViewModel.Vote}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>
                         <TextBlock Text="{Binding VoteCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>

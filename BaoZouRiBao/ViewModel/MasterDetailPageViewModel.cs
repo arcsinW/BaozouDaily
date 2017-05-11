@@ -1,4 +1,5 @@
 ﻿using BaoZouRiBao.Helper;
+using BaoZouRiBao.Http;
 using BaoZouRiBao.Model.ResultModel;
 using BaoZouRiBao.Views;
 using System;
@@ -94,6 +95,14 @@ namespace BaoZouRiBao.ViewModel
                 GlobalValue.Current.UpdateAppTheme(ElementTheme.Dark);
                 StatusBarHelper.ShowStatusBar(true);
             }
+        }
+
+        /// <summary>
+        /// 每日签到
+        /// </summary>
+        public void DailySign()
+        {
+            BaoZouTaskManager.DailySign();
         }
         #endregion
     }

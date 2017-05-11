@@ -106,7 +106,7 @@
                             <!--#region 文章标题和图片-->
                             <Button Margin="0,12" Grid.Row="1" Height="64" 
                                     Style="{ThemeResource ImageButtonStyle}"
-                                    HorizontalAlignment="Stretch" BorderThickness="0"
+                                    HorizontalAlignment="Stretch" BorderThickness="0,0,0,1"
                                     Background="{ThemeResource InnerDocumentBackgroundThemeBrush}"
                                    Click="Button_Click"
                                     HorizontalContentAlignment="Stretch">
@@ -115,9 +115,9 @@
                                         <ColumnDefinition Width="64"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" Source="{Binding Article.Thumbnail}"/>
+                                    <Image Grid.Column="0" Stretch="UniformToFill" Source="{Binding Article.Thumbnail}"/>
                                     <TextBlock Grid.Column="1" Text="{Binding Article.Title}" Margin="12,0"
-                                           TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                           TextWrapping="Wrap" VerticalAlignment="Center" Foreground="{ThemeResource PhoneForegroundColorBrush}"/>
                                 </Grid>
                             </Button>
                             <!--#endregion-->

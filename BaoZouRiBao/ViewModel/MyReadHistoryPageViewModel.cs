@@ -1,4 +1,5 @@
-﻿using BaoZouRiBao.Helper;
+﻿using BaoZouRiBao.Controls;
+using BaoZouRiBao.Helper;
 using BaoZouRiBao.Http;
 using BaoZouRiBao.IncrementalCollection;
 using BaoZouRiBao.Model;
@@ -110,7 +111,12 @@ namespace BaoZouRiBao.ViewModel
 
         public async void ClearHistories()
         {
-            await ApiService.Instance.ClearReadHistoryAsync();
+            var result = await ApiService.Instance.ClearReadHistoryAsync();
+            if (result != null && result.Status.Equals("1000"))
+            {
+                ToastService.SendToast(result.alertDesc);
+                ReadHistories.Clear();
+            }
         }
     }
 }

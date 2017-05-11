@@ -11,6 +11,7 @@ using Windows.UI.Xaml;
 using BaoZouRiBao.Helper;
 using BaoZouRiBao.Views;
 using Windows.System;
+using BaoZouRiBao.Controls;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -203,7 +204,22 @@ namespace BaoZouRiBao.ViewModel
             if (Document != null)
             {
                 var result = await ApiService.Instance.VoteAsync(Document.DocumentId);
+                if (result != null)
+                {
+                    if (result.Status.Equals("1000")) //点赞成功
+                    {
+                        DocumentExtra.VoteCount = result.Data.Count;
+                    }
+                    ToastService.SendToast(result.alertDesc);
+                }
             }
+
+            VoteTask();
+        }
+
+        public void VoteTask()
+        {
+            BaoZouTaskManager.VoteDocument();
         }
 
         /// <summary>

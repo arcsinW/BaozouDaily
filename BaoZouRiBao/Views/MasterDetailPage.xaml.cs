@@ -1,4 +1,5 @@
 ﻿using BaoZouRiBao.Model.ResultModel;
+using BaoZouRiBao.UserControls;
 using System;
 using Windows.ApplicationModel;
 using Windows.UI.Core;
@@ -19,7 +20,6 @@ namespace BaoZouRiBao.Views
 
         public static MasterDetailPage Current;
          
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             DetailFrame.Navigate(typeof(DefaultPage));
@@ -64,11 +64,12 @@ namespace BaoZouRiBao.Views
         /// 显示任务Popup
         /// </summary>
         /// <param name="taskDoneResult"></param>
-        public void ShowTaskPopup(DailyTaskDoneResult taskDoneResult)
+        public void ShowTaskDialog(DailyTaskDoneResult taskDoneResult)
         {
-            taskPopup.BaoZouPopupType = taskDoneResult.Task.TaskType;
-            taskPopup.CoinCount = taskDoneResult.Task.Amount;
-            taskPopup.Visibility = Visibility.Visible;
+            if (taskDoneResult != null && taskDoneResult.Task != null)
+            {
+                new TaskDialog(taskDoneResult).Show();
+            }
         }
     }
 }

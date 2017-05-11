@@ -105,8 +105,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}" 
-                        Click="{x:Bind ViewModel.GoBack}">
+                <Button Style="{ThemeResource BackButtonStyle}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind ViewModel.GoBack}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="评论" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -154,11 +153,6 @@
                                     <StackPanel>
                                         <TextBlock Text="{Binding User.Name,Mode=OneWay}"/>
 
-                                        <RichTextBlock>
-                                            <RichTextBlock.Blocks>
-                                                
-                                            </RichTextBlock.Blocks>
-                                        </RichTextBlock>
                                         <TextBlock x:Name="parent" TextWrapping="Wrap" Margin="0,16">
                                             <Run Text="{Binding Content}" />
                                         </TextBlock>

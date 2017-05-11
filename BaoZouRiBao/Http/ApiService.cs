@@ -194,9 +194,9 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="taskId"></param>
         /// <returns></returns>
-        public async Task<DailyTaskDoneResult> TaskDoneAsync(string taskId)
+        public async Task<DailyTaskDoneResult> TaskDoneAsync(BaoZouTaskEnum taskId)
         {
-            string post = "{\"task_id\": \"" + taskId + "\"}";
+            string post = "{\"task_id\": \"" + 2 + "\"}";
             var result = await Post<DailyTaskDoneResult>(ServiceUri.TaskDone, post);
             return result;
         }
@@ -333,9 +333,7 @@ namespace BaoZouRiBao.Http
             VoteOperationResult result = await Post<VoteOperationResult>(url, "");
             return result;
         }
-
         
-
         /// <summary>
         /// 为 评论 点赞
         /// </summary>
