@@ -238,8 +238,7 @@
                                SelectionChanged="pivot_SelectionChanged"> 
             <Pivot.HeaderTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding }" FontSize="20" Foreground="{ThemeResource PhoneForegroundColorBrush}"  
-                               TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
+                    <TextBlock Text="{Binding }" Style="{ThemeResource PivotHeaderTextBlockStyle}" Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
 

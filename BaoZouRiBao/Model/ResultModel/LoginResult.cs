@@ -11,9 +11,21 @@ namespace BaoZouRiBao.Model.ResultModel
     {
         [JsonProperty(PropertyName = "access_token")]
         public string AccessToken { get; set; }
-        
+
+        private string avatar;
         [JsonProperty(PropertyName = "avatar")]
-        public string Avatar { get; set; } = "/Assets/Images/avatar_m.png";
+        public string Avatar
+        {
+            get
+            {
+                return avatar;
+            }
+            set
+            {
+                avatar = value;
+                OnPropertyChanged();
+            }
+        }
 
         [JsonProperty(PropertyName = "bound_services")]
         public string[] BoundServices { get; set; }

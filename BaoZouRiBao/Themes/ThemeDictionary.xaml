@@ -431,6 +431,13 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
+
+    <Style x:Key="PivotHeaderTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{StaticResource PivotHeaderFontSize}"/>
+        <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundColorBrush}"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,0,0,4"/>
+    </Style>
     <!--#endregion -->
 
     <!--#region ListView's Style-->

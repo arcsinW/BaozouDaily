@@ -75,8 +75,20 @@ namespace BaoZouRiBao.UserControls
 
         // Using a DependencyProperty as the backing store for CommentCommandParamter.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CommentCommandParamterProperty =
-            DependencyProperty.Register("CommentCommandParamter", typeof(object), typeof(CommentItem), new PropertyMetadata(0)); 
-        #endregion
+            DependencyProperty.Register("CommentCommandParamter", typeof(object), typeof(CommentItem), new PropertyMetadata(0));
         
+        public object CommentId
+        {
+            get { return (object)GetValue(CommentIdProperty); }
+            set { SetValue(CommentIdProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CommentId.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CommentIdProperty =
+            DependencyProperty.Register("CommentId", typeof(object), typeof(CommentItem), new PropertyMetadata(0));
+
+
+        #endregion
+
     }
 }

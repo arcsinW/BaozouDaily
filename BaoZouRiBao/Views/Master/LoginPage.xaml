@@ -51,7 +51,7 @@
                    VerticalAlignment="Top"
                    HorizontalAlignment="Center"
                    />
-                <Button x:Name="baozouLoginBtn" Content="暴走漫画" 
+                <Button x:Name="baozouLoginBtn" Content="登录" 
                     Width="200" Height="48"
                     Style="{ThemeResource RoundButtonStyle}"
                     HorizontalAlignment="Center" 
@@ -77,11 +77,11 @@
                         <Image Source="/Assets/Images/login_sina.png"/>
                     </Button>
 
-                    <Button x:Name="wechatBtn" Style="{ThemeResource ImageButtonStyle}" Height="48" IsEnabled="False">
+                    <Button x:Name="wechatBtn" Visibility="Collapsed" Style="{ThemeResource ImageButtonStyle}" Height="48" IsEnabled="False">
                         <Image Source="/Assets/Images/login_wechat.png"/>
                     </Button>
 
-                    <Button Click="{x:Bind ViewModel.QQLogin}" Style="{ThemeResource ImageButtonStyle}" Height="48" IsEnabled="False">
+                    <Button Click="{x:Bind ViewModel.QQLogin}" Visibility="Collapsed" Style="{ThemeResource ImageButtonStyle}" Height="48" IsEnabled="False">
                         <Image Source="/Assets/Images/login_qq.png"/>
                     </Button>
                 </StackPanel>

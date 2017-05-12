@@ -38,7 +38,7 @@
                     <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0,0,12,0"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0"
-                            Command="{Binding CommentCommand}" CommandParameter="{Binding CommentCommandParamter}">
+                            Command="{x:Bind CommentCommand}" CommandParameter="{x:Bind CommentId}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>
                                 <TextBlock Text="回复" Style="{ThemeResource DescTextBlockStyle}"/>
@@ -46,7 +46,7 @@
                         </Button>
 
                         <Button x:Name="likeBtn" Height="24" Width="48" Style="{ThemeResource ImageButtonStyle}"
-                                    Command="{Binding VoteCommand}" CommandParameter="{Binding VoteCommandParameter}">
+                                    Command="{Binding VoteCommand}" CommandParameter="{Binding CommentId}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="{Binding Like,Converter={StaticResource BoolToLikeBitmapConverter}}" VerticalAlignment="Center"/>
                                 <TextBlock Text="{Binding Likes}"   Style="{ThemeResource DescTextBlockStyle}"/>

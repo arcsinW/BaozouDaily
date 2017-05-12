@@ -119,7 +119,7 @@ namespace BaoZouRiBao.IncrementalCollection
         {
             this.HasMoreItems = false;
         }
-        
+
         /// <summary>
         /// 加载数据
         /// </summary>
@@ -127,19 +127,22 @@ namespace BaoZouRiBao.IncrementalCollection
         /// <returns></returns>
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
-            onDataLoadingAction?.Invoke();
-            return AsyncInfo.Run(LoadMoreItemsTaskProvider); 
+            if (isBusy)
+            {
+                return Task.Run(() => new LoadMoreItemsResult { Count = 0 }).AsAsyncOperation();
+            }
+
+            isBusy = true;
+
+            return AsyncInfo.Run((c) => LoadMoreItemsAsync(c, count));
         }
 
-        private async Task<LoadMoreItemsResult> LoadMoreItemsTaskProvider(CancellationToken token)
+        private async Task<LoadMoreItemsResult> LoadMoreItemsAsync(CancellationToken token, uint count)
         {
             try
             {
-                if (isBusy)
-                {
-
-                }
-                isBusy = true;
+                onDataLoadingAction?.Invoke();
+        
                 if (timeStampFunc != null)
                 {
                     var items = await timeStampFunc(0, TimeStamp);
@@ -170,7 +173,6 @@ namespace BaoZouRiBao.IncrementalCollection
                         NoMore();
                     }
                 }
-                isBusy = false;
             }
             catch (Exception e)
             {
@@ -180,6 +182,7 @@ namespace BaoZouRiBao.IncrementalCollection
             }
             finally
             {
+                isBusy = false;
                 onDataLoadedAction?.Invoke();
             }
 

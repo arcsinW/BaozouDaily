@@ -194,29 +194,32 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-        /// <summary>
-        /// 点赞文章
-        /// </summary>
-        /// <param name="documentId"></param>
-        /// <returns></returns>
-        public async Task Vote()
+    /// <summary>
+    /// 点赞文章
+    /// </summary>
+    /// <param name="documentId"></param>
+    /// <returns></returns>
+    public async Task Vote()
+    {
+        if (Document != null)
         {
-            if (Document != null)
+            var result = await ApiService.Instance.VoteAsync(Document.DocumentId);
+            if (result != null)
             {
-                var result = await ApiService.Instance.VoteAsync(Document.DocumentId);
-                if (result != null)
+                if (result.Status.Equals("1000")) //点赞成功
                 {
-                    if (result.Status.Equals("1000")) //点赞成功
-                    {
-                        DocumentExtra.VoteCount = result.Data.Count;
-                    }
-                    ToastService.SendToast(result.alertDesc);
+                    DocumentExtra.VoteCount = result.Data.Count;
                 }
+                ToastService.SendToast(result.alertDesc);
             }
-
-            VoteTask();
         }
 
+        VoteTask();
+    }
+
+        /// <summary>
+        /// 完成点赞文章的任务
+        /// </summary>
         public void VoteTask()
         {
             BaoZouTaskManager.VoteDocument();

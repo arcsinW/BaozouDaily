@@ -73,7 +73,7 @@
             <controls:IndicatorPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" IndicatorLineStokeThickness="2" >
                 <Pivot.HeaderTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding }" FontSize="{StaticResource PivotHeaderFontSize}" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
+                        <TextBlock Text="{Binding }" Style="{ThemeResource PivotHeaderTextBlockStyle}" Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
                     </DataTemplate>
                 </Pivot.HeaderTemplate>
                 <PivotItem Header="评论">

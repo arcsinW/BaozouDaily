@@ -244,6 +244,9 @@
     <Compile Include="Controls\RefreshableListView.cs" />
     <Compile Include="Controls\RoundButton.cs" />
     <Compile Include="Controls\ToastService.cs" />
+    <Compile Include="UserControls\CommentItem.xaml.cs">
+      <DependentUpon>CommentItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\MediaPlayer.xaml.cs">
       <DependentUpon>MediaPlayer.xaml</DependentUpon>
     </Compile>
@@ -272,6 +275,9 @@
     <Compile Include="ViewModel\VideoPageViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WebViewPageViewModel.cs" />
+    <Compile Include="Views\Detail\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Detail\BaozouLoginPage.xaml.cs">
       <DependentUpon>BaozouLoginPage.xaml</DependentUpon>
     </Compile>
@@ -520,11 +526,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\CommentItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UserControls\MediaPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\TaskDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Detail\AboutPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

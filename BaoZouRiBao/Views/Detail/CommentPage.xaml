@@ -12,6 +12,7 @@
     xmlns:converter="using:BaoZouRiBao.Converters"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:uc="using:BaoZouRiBao.UserControls"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -128,14 +129,14 @@
         <controls:IndicatorPivot x:Name="pivot" Grid.Row="1" SelectionChanged="pivot_SelectionChanged">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding }" FontSize="{StaticResource PivotHeaderFontSize}" Foreground="{ThemeResource PhoneForegroundColorBrush}"  TextAlignment="Center" Margin="0,0,0,5"  Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
+                    <TextBlock Text="{Binding }" Style="{ThemeResource PivotHeaderTextBlockStyle}" Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             <PivotItem Header="最新">
                 <ListView x:Name="latestListView" ItemsSource="{Binding LatestComments}"
                           ItemContainerStyle="{ThemeResource CommentItemContainerStyle}"
                           Margin="0,0,0,48">
-                    <ListView.ItemTemplate>
+                    <ListView.ItemTemplate> 
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
