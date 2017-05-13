@@ -297,7 +297,7 @@
 
                     <Grid Padding="16,0" Margin="0,20,0,0" MinHeight="60" Background="{ThemeResource ListViewBackgroundBrush}">
                         <TextBlock VerticalAlignment="Center" Text="任务完成提示" HorizontalAlignment="Left" />
-                        <ToggleSwitch MinWidth="0" HorizontalAlignment="Right"/>
+                        <ToggleSwitch Style="{ThemeResource LightToggleSwitch}" MinWidth="0" HorizontalAlignment="Right"/>
                     </Grid>
                 </StackPanel>
             </ScrollViewer>

@@ -169,9 +169,7 @@ namespace BaoZouRiBao.Http
                 return null;
             }
         }
-
         
-
         protected async Task<AuthenticationResult> PostDicForLogin(string uri,Dictionary<string,string> dic) 
         {
             try

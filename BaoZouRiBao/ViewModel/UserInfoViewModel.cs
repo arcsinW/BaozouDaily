@@ -95,14 +95,24 @@ namespace BaoZouRiBao.ViewModel
 
         #endregion
 
-        private async void LoadTaskInfo()
+        private async Task LoadTaskInfo()
         {
             TaskInfo = await ApiService.Instance.GetTaskInfoAsync();
-            Balance = TaskInfo.Balance;
+            if (TaskInfo != null)
+            {
+                Balance = TaskInfo.Balance;
+            }
             //if (TaskInfo != null)
             //{
             //    RunCounterAnimations();
             //}
+        }
+
+        public override async void Refresh()
+        {
+            IsActive = true;
+            await LoadTaskInfo();
+            IsActive = false;
         }
 
         /// <summary>

@@ -65,22 +65,33 @@ namespace BaoZouRiBao.Helper
                 Initial();
             }
         }
-
-        public static void WriteLine(string message, LogTypeEnum logType = LogTypeEnum.Info)
+        
+        /// <summary>
+        /// info 日志写入
+        /// </summary>
+        /// <param name="message"></param>
+        public static void WriteLine(string message)
         {
-            Debug.WriteLine(message);
-
-            logQueue.Enqueue($"[{logType}]  {message}");
-
+            logQueue.Enqueue($"[{LogTypeEnum.Info}]  {message}");
             if (!timer.IsEnabled)
             {
                 timer.Start();
             }
         }
-    
-        public static void WriteLine(Exception e,[CallerMemberName]string name = "")
+        
+        /// <summary>
+        /// Error 日志写入
+        /// </summary>
+        /// <param name="e">异常</param>
+        /// <param name="callerMemeberName">调用的函数名</param>
+        /// <param name="sourceLineNumber">代码位置</param>
+        public static void WriteLine(Exception e,[CallerMemberName]string callerMemeberName = "", [CallerLineNumber]int sourceLineNumber = 0)
         {
-            Debug.WriteLine($"[{name} {e.Message}");
+            logQueue.Enqueue($"[{LogTypeEnum.Error}] {callerMemeberName}  {sourceLineNumber}  {e.Message}");
+            if (!timer.IsEnabled)
+            {
+                timer.Start();
+            }
         }
     }
 

@@ -50,23 +50,22 @@ namespace BaoZouRiBao.Http
             NavigationHelper.DetailFrameNavigate(typeof(BaozouLoginPage));
         }
 
+        //if (!string.IsNullOrEmpty(GlobalValue.Current.User.AccessToken))
+        //{
+        //    var header = httpClient.DefaultRequestHeaders;
+        //    header["Authorization"] = "Bearer " + GlobalValue.Current.User.AccessToken;
+        //}
+
         /// <summary>
         /// 向服务器发送get请求  返回服务器回复数据(string)
         /// </summary>
-        /// <param name="uri"></param>
+        /// <param name="uri">API地址</param>
         /// <returns></returns>
         public static async Task<string> SendGetRequest(string uri)
         {
             try
-            {
-                if (!string.IsNullOrEmpty(GlobalValue.Current.User.AccessToken))
-                {
-                    var header = httpClient.DefaultRequestHeaders;
-                    header["Authorization"] = "Bearer " + GlobalValue.Current.User.AccessToken;
-                }
-
+            {   
                 HttpResponseMessage response = await httpClient.GetAsync(new Uri(uri));
-
                 if (response.StatusCode == Windows.Web.Http.HttpStatusCode.Unauthorized)
                 {
                     OnUnAuthorized?.Invoke();
@@ -77,7 +76,7 @@ namespace BaoZouRiBao.Http
             }
             catch (Exception e)
             {
-                Debug.WriteLine($"HttpBaseService.SendGetRequest : {e.Message}");
+                LogHelper.WriteLine($"HttpBaseService.SendGetRequest : {e.Message}");
                 return null;
             }
         }
