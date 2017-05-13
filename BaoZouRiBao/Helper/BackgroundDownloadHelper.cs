@@ -23,6 +23,11 @@ namespace BaoZouRiBao.Helper
         private StorageFolder downloadFolder;
         private BackgroundTransferCompletionGroup completionGroup;
 
+        /// <summary>
+        /// 当前下载
+        /// </summary>
+        private List<DownloadOperation> activeDownloads;
+
         public BackgroundDownloadHelper()
         {
             completionGroup = new BackgroundTransferCompletionGroup();
