@@ -29,7 +29,7 @@ namespace BaoZouRiBao.Views
 
         //private void DefaultPage_Loaded(object sender, RoutedEventArgs e)
         //{
-        //    for (int i = 1; i < 6; i++)
+        //    for (int i = 0; i < 6; i++)
         //    {
         //        gifControl.Items.Add(new BitmapImage(new Uri($"ms-appx:///Assets/Images/loadinganim{i}.png")));
         //    }

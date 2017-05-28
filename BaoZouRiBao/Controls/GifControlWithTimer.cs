@@ -111,13 +111,14 @@ namespace BaoZouRiBao.Controls
             }
             else
             {
-                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () =>
                  {
                      Source = Items[currentIndex];
                  });
 
                 IsActive = true;
             }
+
             ++currentIndex;
 
             currentIndex = currentIndex >= Items.Count ? 0 : currentIndex;

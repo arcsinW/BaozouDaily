@@ -1378,4 +1378,65 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="local:CommentControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:CommentControl">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid IsHoldingEnabled="True"
+                              IsRightTapEnabled="True"
+                              Holding="Grid_Holding"
+                              RightTapped="Grid_RightTapped">       
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding User.RealAvatarUrl,FallbackValue={StaticResource PlaceHolderAvatar}}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Grid Grid.Column="1" Margin="8,0">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding User.Name,Mode=OneWay}"/>
+
+                                    <TextBlock x:Name="parentTextBlock" TextWrapping="Wrap" Margin="0,16">
+                                        <!--<Run Text="{Binding Content}" />-->
+                                    </TextBlock>
+
+                                    <Grid>
+                                        <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Button x:Name="replyBtn" Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0">
+                                                <!--Command="{Binding DataContext.CommentCommand,ElementName=latestListView}" CommandParameter="{Binding Id}">-->
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>
+                                                    <TextBlock Text="»Ø¸´" Style="{ThemeResource DescTextBlockStyle}"/>
+                                                </StackPanel>
+                                            </Button>
+
+                                            <Button x:Name="likeBtn" Height="24" Width="48" HorizontalAlignment="Right" Style="{ThemeResource ImageButtonStyle}"
+                                                    Command="{Binding VoteCommand}" CommandParameter="{Binding Id}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image Source="{Binding Like,Converter={StaticResource BoolToLikeBitmapConverter}}" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="{Binding Likes}"   Style="{ThemeResource DescTextBlockStyle}"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

@@ -70,6 +70,9 @@ namespace BaoZouRiBao.Views
 
         void PositionElement()
         {
+            canvas.Width = rootGrid.Width;
+            canvas.Height = rootGrid.Height;
+
             PositionImage();
             PositionRing();
             PositionTextBlock();
@@ -137,6 +140,8 @@ namespace BaoZouRiBao.Views
                 //Lary.Apps.SDK.UniversalServices.Config.Initialize(GlobalValue.AccessKey);
                 //PushNotificationChannel pushNotificationChannel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
                 //await Lary.Apps.SDK.UniversalServices.PushNotificationService.UploadChannelAsync(pushNotificationChannel.Uri, pushNotificationChannel.ExpirationTime);
+                VoiceCommandHelper.InstallVCDFile();
+                BackgroundTaskRegisterHelper.RegisterAll();
             }
             catch (Exception e)
             {

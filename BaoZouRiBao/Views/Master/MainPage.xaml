@@ -486,7 +486,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <control:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{Binding Thumbnail}"
-                                             PlaceholderSource="{StaticResource PlaceHolderImageSmall}"/>
+                                             PlaceholderSource="{StaticResource PlaceHolderImageSmall}" PlaceholderStretch="UniformToFill"/>
 
                                     <StackPanel Grid.Column="1" Margin="12,0">
                                         <TextBlock Text="{x:Bind Title}" FontWeight="Bold" FontSize="16"  TextWrapping="Wrap"/>
@@ -530,18 +530,22 @@
                             <DataTemplate x:DataType="m:Video">
                                 <Grid Height="Auto">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="3*"/>
+                                        <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
 
                                     <!--<MediaElement x:Name="mediaElement"  Height="250" Width="Auto" AutoPlay="False" 
                                                           Source="{Binding FileUrl}" Grid.Row="0" />-->
 
-                                    <Image Grid.Row="0" Stretch="Fill" Height="250" Width="Auto">
+                                    <control:ImageEx Grid.Row="0" Source="{Binding Image}" PlaceholderSource="{ThemeResource VideoPlaceHolderImage}"
+                                                     Stretch="UniformToFill"
+                                                     PlaceholderStretch="UniformToFill" Height="250" Width="Auto"/>
+                                    
+                                    <!--<Image Grid.Row="0" Stretch="Fill" Height="250" Width="Auto">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding Image}"/>
                                         </Image.Source>
-                                    </Image>
+                                    </Image>-->
 
                                     <Grid Grid.Row="1">
                                         <Grid.RowDefinitions>

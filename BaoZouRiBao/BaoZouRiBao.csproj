@@ -125,6 +125,7 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Controls\CommentControl.cs" />
     <Compile Include="Controls\GifControlWithTimer.cs" />
     <Compile Include="Controls\ImageEx\ImageEx.cs" />
     <Compile Include="Controls\ImageEx\ImageEx.Members.cs" />

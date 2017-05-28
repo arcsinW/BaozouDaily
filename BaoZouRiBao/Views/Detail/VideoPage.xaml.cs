@@ -35,7 +35,10 @@ namespace BaoZouRiBao.Views
 
         private void Comment_Click(object sender, RoutedEventArgs e)
         {
-            NavigationHelper.DetailFrameNavigate(typeof(CommentPage), ViewModel.Video.DocumentId);
+            if (ViewModel.Video != null)
+            {
+                NavigationHelper.DetailFrameNavigate(typeof(CommentPage), ViewModel.Video.DocumentId);
+            }
         }
     }
 }

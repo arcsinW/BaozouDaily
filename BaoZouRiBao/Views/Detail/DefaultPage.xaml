@@ -21,7 +21,7 @@
                                          Unloaded="canvas_Unloaded"
                                         />-->
             <!--<control:GifControlWithTimer x:Name="gifControl" Height="200" Width="200" Fps="14"
-                                         Tapped="gifControl_Tapped"/>-->
+                                         Tapped="gifControl_Tapped" IsActive="True"/>-->
             <!--<control:GifAnimControl HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Height="200" Width="200"/>-->
         </Grid>

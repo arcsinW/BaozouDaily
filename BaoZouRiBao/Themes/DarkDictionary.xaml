@@ -44,5 +44,8 @@
     <!--评论框边框颜色-->
     <SolidColorBrush x:Key="CommentPaneBorderBrush">#FFFFFF</SolidColorBrush>
 
-    <SolidColorBrush x:Key="MenuFlyoutPresenterBackgroundBrush">#FFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="MenuFlyoutPresenterBackgroundBrush">#2B2B2B</SolidColorBrush>
+
+    <!--视频PlaceHolder-->
+    <BitmapImage x:Key="VideoPlaceHolderImage" UriSource="ms-appx:///Assets/Images/image_night_preview_video.png"/>
 </ResourceDictionary>

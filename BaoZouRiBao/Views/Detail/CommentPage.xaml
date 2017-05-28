@@ -148,16 +148,16 @@
                               FlyoutBase.AttachedFlyout="{StaticResource CommentMenuFlyout}"
                               IsHoldingEnabled="True" IsRightTapEnabled="True"
                               >
-                        <ListView.ItemTemplate>
+                        <!--<ListView.ItemTemplate>
                             <DataTemplate>
                                 <uc:CommentItem/>
                             </DataTemplate>
-                        </ListView.ItemTemplate>
+                        </ListView.ItemTemplate>-->
                         <!--IsHoldingEnabled="True"
                               IsRightTapEnabled="True"
                               Holding="latestListView_Holding"
                               RightTapped="latestListView_RightTapped"-->
-                        <!--<ListView.ItemTemplate>
+                        <ListView.ItemTemplate>
                             <DataTemplate x:DataType="m:Document">
                                 <Grid>
                                     <FlyoutBase.AttachedFlyout>
@@ -178,12 +178,12 @@
                                             <action:OpenMenuFlyoutAction/>
                                         </core:EventTriggerBehavior>
                                     </i:Interaction.Behaviors>
-                                    
+
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-
+ 
                                     <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
                                         <Ellipse.Fill>
                                             <ImageBrush ImageSource="{Binding User.RealAvatarUrl,FallbackValue={StaticResource PlaceHolderAvatar}}"/>
@@ -203,7 +203,7 @@
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                                     <Button x:Name="replyBtn" Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0"
                                                         Click="replyBtn_Click">
-                                                        --><!--Command="{Binding DataContext.CommentCommand,ElementName=latestListView}" CommandParameter="{Binding Id}">--><!--
+                                                        <!--Command="{Binding DataContext.CommentCommand,ElementName=latestListView}" CommandParameter="{Binding Id}">-->
                                                         <StackPanel Orientation="Horizontal">
                                                             <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>
                                                             <TextBlock Text="回复" Style="{ThemeResource DescTextBlockStyle}"/>
@@ -223,7 +223,7 @@
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
-                        </ListView.ItemTemplate>-->
+                        </ListView.ItemTemplate>
                     </ListView>
 
                     <TextBlock Text="暂无数据" 

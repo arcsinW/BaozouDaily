@@ -47,4 +47,7 @@
     <SolidColorBrush x:Key="CommentPaneBorderBrush">#FF7F7F7F</SolidColorBrush>
 
     <SolidColorBrush x:Key="MenuFlyoutPresenterBackgroundBrush">#FFFFFF</SolidColorBrush>
+
+    <!--视频PlaceHolder-->
+    <BitmapImage x:Key="VideoPlaceHolderImage" UriSource="ms-appx:///Assets/Images/image_preview_video.png"/>
 </ResourceDictionary>

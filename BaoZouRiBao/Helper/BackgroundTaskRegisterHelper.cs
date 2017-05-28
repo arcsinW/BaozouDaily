@@ -14,15 +14,15 @@ namespace BaoZouRiBao.Helper
     public class BackgroundTaskRegisterHelper
     {
         private const string ToastTaskName = "ToastTask";
-        private readonly string TOASTTASK_ENTRY_POINT = typeof(ToastBackgroundTask).FullName; //"BaoZouRiBao.Background.ToastBackgroundTask";
+        private static readonly string TOASTTASK_ENTRY_POINT = typeof(ToastBackgroundTask).FullName; //"BaoZouRiBao.Background.ToastBackgroundTask";
 
         private const string TileTaskName = "TileTask";
-        private readonly string TILETASK_ENTRY_POINT = typeof(TileBackgroundTask).FullName; // "BaoZouRiBao.Background.TileBackgroundTask";
+        private static readonly string TILETASK_ENTRY_POINT = typeof(TileBackgroundTask).FullName; // "BaoZouRiBao.Background.TileBackgroundTask";
 
         /// <summary>
         /// 注册所有的后台任务
         /// </summary>
-        public async void RegisterAll()
+        public static async void RegisterAll()
         {
             BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
             if (status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||

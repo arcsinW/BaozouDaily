@@ -9,7 +9,8 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
-    Loaded="UserControl_Loaded">
+    Loaded="UserControl_Loaded"
+    >
 
     <UserControl.Resources>
         <converter:BoolToLikeBitmapConverter x:Key="BoolToLikeBitmapConverter"/>
@@ -51,7 +52,7 @@
                     <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button x:Name="replyBtn" Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0"
-                                                        Click="replyBtn_Click">
+                                    Click="replyBtn_Click">
                             <!--Command="{Binding DataContext.CommentCommand,ElementName=latestListView}" CommandParameter="{Binding Id}">-->
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>

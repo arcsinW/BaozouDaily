@@ -90,9 +90,9 @@ namespace BaoZouRiBao
         /// </summary>
         private void PrepareExtraFunction()
         {
-            VoiceCommandHelper.InstallVCDFile();
+            //VoiceCommandHelper.InstallVCDFile();
             MobileCenter.Start(GlobalValue.MobileCenterKey, typeof(Analytics));
-            new BackgroundTaskRegisterHelper().RegisterAll();
+            //BackgroundTaskRegisterHelper.RegisterAll();
         }
 
         /// <summary>
