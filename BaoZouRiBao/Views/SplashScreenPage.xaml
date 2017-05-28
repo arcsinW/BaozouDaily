@@ -7,7 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Image Source="ms-appx:///Assets/Images/splash.jpg"/>
+    <Grid Background="#FB3D4F">
+        <Canvas x:Name="canvas">
+            <Image x:Name="extendedSplashImage"  Source="ms-appx:///Assets/SplashScreen.png"/>
+        </Canvas>
+
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,100">
+            <ProgressRing Name="splashProgressRing" Height="48" Margin="0,0,0,24" Foreground="White" IsActive="True"  HorizontalAlignment="Center"/>
+            <TextBlock x:Name="tipTextBlock" Text="正在召唤Lary" Foreground="White"  HorizontalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Page>

@@ -6,21 +6,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:control="using:BaoZouRiBao.Controls"
-    xmlns:win2d="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource PaneBackground}">
-        <!--<Image x:Name="img" Source="ms-appx:///Assets/Images/loadinganim0.png" 
-               Height="200" Width="200" Tapped="img_Tapped"/>-->
+        <Image x:Name="img" Source="ms-appx:///Assets/Images/loadinganim0.png" 
+               Height="200" Width="200" />
 
         <Grid Height="200" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <win2d:CanvasAnimatedControl x:Name="canvas"
+            <!--<win2d:CanvasAnimatedControl x:Name="canvas" 
                                          Draw="CanvasAnimatedControl_Draw"
                                          Update="CanvasAnimatedControl_Update" 
                                          CreateResources="CanvasAnimatedControl_CreateResources"
                                          Tapped="img_Tapped"
-                                        />
-
+                                         Unloaded="canvas_Unloaded"
+                                        />-->
+            <!--<control:GifControlWithTimer x:Name="gifControl" Height="200" Width="200" Fps="14"
+                                         Tapped="gifControl_Tapped"/>-->
             <!--<control:GifAnimControl HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Height="200" Width="200"/>-->
         </Grid>

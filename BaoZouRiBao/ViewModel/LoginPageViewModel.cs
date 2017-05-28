@@ -27,7 +27,7 @@ namespace BaoZouRiBao.ViewModel
             User user = await ApiService.Instance.SinaWeiboLoginAsync();
             if (user != null)
             {
-                GlobalValue.Current.UpdateUser(user);
+                DataShareManager.Current.UpdateUser(user);
                 ToastService.SendToast("登录成功");
             }
             else

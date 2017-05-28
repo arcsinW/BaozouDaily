@@ -13,7 +13,7 @@ namespace BaoZouRiBao.Model.ResultModel
     public class VoteOperationResult
     {
         [JsonProperty(PropertyName = "alertDesc")]
-        public string alertDesc { get; set; }
+        public string AlertDesc { get; set; }
         
         [JsonProperty(PropertyName = "desc")]
         public string Description { get; set; }

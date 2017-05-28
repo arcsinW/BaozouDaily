@@ -1,7 +1,9 @@
 ﻿using BaoZouRiBao.Controls;
+using BaoZouRiBao.Helper;
 using BaoZouRiBao.Http;
 using BaoZouRiBao.IncrementalCollection;
 using BaoZouRiBao.Model;
+using BaoZouRiBao.Model.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,43 +29,50 @@ namespace BaoZouRiBao.ViewModel
 
         private void LoadDesignData()
         {
+            string commentJson = "{\"comment_messages\":[{\"id\":3984488,\"content\":\"\",\"created_at\":1494394824,\"sended_at\":\"2017-05-10 13:40\",\"sender\":{\"name\":\"X_arcsinw\",\"avatar\":\"http://tva2.sinaimg.cn/crop.0.0.480.480.1024/e5b9045djw8ea3nvwosj3j20dc0dcaam.jpg\",\"id\":727538,\"type\":\"User\"},\"receiver\":{\"name\":\"arcsinw\",\"avatar\":\"http://wanzao2.b0.upaiyun.com/baozouribao/59d06920034601356a05525400063398.png\",\"id\":720554,\"type\":\"User\"},\"sender_comment\":{\"id\":3486414,\"content\":\"哎\",\"created_at\":\"2017-05-10 13:40\",\"voted\":false,\"voted_count\":0,\"article\":{\"document_id\":6954788,\"title\":\"警察叔叔我捡到五块钱\",\"display_type\":1,\"image\":\"http://wx4.sinaimg.cn/large/006HyqNRly1ffcz79py00j303c03c3yj.jpg\",\"visiable\":true},\"user\":{\"id\":727538,\"name\":\"X_arcsinw\",\"avatar\":\"http://tva2.sinaimg.cn/crop.0.0.480.480.1024/e5b9045djw8ea3nvwosj3j20dc0dcaam.jpg\"}},\"receiver_comment\":{\"id\":3484647,\"content\":\"哎\",\"voted\":false,\"voted_count\":2,\"created_at\":\"2017-05-08 15:52\",\"article\":{\"document_id\":46251,\"title\":\"警察叔叔我捡到五块钱\",\"display_type\":1,\"image\":\"http://wx4.sinaimg.cn/large/006HyqNRly1ffcz79py00j303c03c3yj.jpg\",\"visiable\":true},\"parent\":{\"id\":3484188,\"content\":\"可能是最近周末吧\",\"created_at\":\"2017-05-07 23:43\",\"voted\":true,\"voted_count\":1,\"article\":{\"document_id\":46251,\"title\":\"警察叔叔我捡到五块钱\",\"display_type\":1,\"image\":\"http://wx4.sinaimg.cn/large/006HyqNRly1ffcz79py00j303c03c3yj.jpg\",\"visiable\":true}}}},{\"id\":3984487,\"content\":\"\",\"created_at\":1494394824,\"sended_at\":\"2017-05-10 13:40\",\"sender\":{\"name\":\"X_arcsinw\",\"avatar\":\"http://tva2.sinaimg.cn/crop.0.0.480.480.1024/e5b9045djw8ea3nvwosj3j20dc0dcaam.jpg\",\"id\":727538,\"type\":\"User\"},\"receiver\":{\"name\":\"arcsinw\",\"avatar\":\"http://wanzao2.b0.upaiyun.com/baozouribao/59d06920034601356a05525400063398.png\",\"id\":720554,\"type\":\"User\"},\"sender_comment\":{\"id\":3486413,\"content\":\"哎\",\"created_at\":\"2017-05-10 13:40\",\"voted\":false,\"voted_count\":1,\"article\":{\"document_id\":6954788,\"title\":\"警察叔叔我捡到五块钱\",\"display_type\":1,\"image\":\"http://wx4.sinaimg.cn/large/006HyqNRly1ffcz79py00j303c03c3yj.jpg\",\"visiable\":true},\"user\":{\"id\":727538,\"name\":\"X_arcsinw\",\"avatar\":\"http://tva2.sinaimg.cn/crop.0.0.480.480.1024/e5b9045djw8ea3nvwosj3j20dc0dcaam.jpg\"}},\"receiver_comment\":{\"id\":3484647,\"content\":\"哎\",\"voted\":false,\"voted_count\":2,\"created_at\":\"2017-05-08 15:52\",\"article\":{\"document_id\":46251,\"title\":\"警察叔叔我捡到五块钱\",\"display_type\":1,\"image\":\"http://wx4.sinaimg.cn/large/006HyqNRly1ffcz79py00j303c03c3yj.jpg\",\"visiable\":true},\"parent\":{\"id\":3484188,\"content\":\"可能是最近周末吧\",\"created_at\":\"2017-05-07 23:43\",\"voted\":true,\"voted_count\":1,\"article\":{\"document_id\":46251,\"title\":\"警察叔叔我捡到五块钱\",\"display_type\":1,\"image\":\"http://wx4.sinaimg.cn/large/006HyqNRly1ffcz79py00j303c03c3yj.jpg\",\"visiable\":true}}}},{\"id\":3982130,\"content\":\"\",\"created_at\":1494229930,\"sended_at\":\"2017-05-08 15:52\",\"sender\":{\"name\":\"arcsinw\",\"avatar\":\"http://wanzao2.b0.upaiyun.com/baozouribao/59d06920034601356a05525400063398.png\",\"id\":720554,\"type\":\"User\"},\"receiver\":{\"name\":\"arcsinw\",\"avatar\":\"http://wanzao2.b0.upaiyun.com/baozouribao/59d06920034601356a05525400063398.png\",\"id\":720554,\"type\":\"User\"},\"sender_comment\":{\"id\":3484647,\"content\":\"哎\",\"created_at\":\"2017-05-08 15:52\",\"voted\":false,\"voted_count\":2,\"article\":{\"document_id\":6954788,\"title\":\"警察叔叔我捡到五块钱\",\"display_type\":1,\"image\":\"http://wx4.sinaimg.cn/large/006HyqNRly1ffcz79py00j303c03c3yj.jpg\",\"visiable\":true},\"user\":{\"id\":720554,\"name\":\"arcsinw\",\"avatar\":\"http://wanzao2.b0.upaiyun.com/baozouribao/59d06920034601356a05525400063398.png\"}},\"receiver_comment\":{\"id\":3484188,\"content\":\"可能是最近周末吧\",\"voted\":true,\"voted_count\":1,\"created_at\":\"2017-05-07 23:43\",\"article\":{\"document_id\":46251,\"title\":\"警察叔叔我捡到五块钱\",\"display_type\":1,\"image\":\"http://wx4.sinaimg.cn/large/006HyqNRly1ffcz79py00j303c03c3yj.jpg\",\"visiable\":true}}},{\"id\":3981901,\"content\":\"\",\"created_at\":1494216980,\"sended_at\":\"2017-05-08 12:16\",\"sender\":{\"name\":\"arcsinw\",\"avatar\":\"http://wanzao2.b0.upaiyun.com/baozouribao/59d06920034601356a05525400063398.png\",\"id\":720554,\"type\":\"User\"},\"receiver\":{\"name\":\"arcsinw\",\"avatar\":\"http://wanzao2.b0.upaiyun.com/baozouribao/59d06920034601356a05525400063398.png\",\"id\":720554,\"type\":\"User\"},\"sender_comment\":{\"id\":3484525,\"content\":\"x\",\"created_at\":\"2017-05-08 12:16\",\"voted\":false,\"voted_count\":0,\"article\":{\"document_id\":6954791,\"title\":\"你为什么对我还有隐瞒\",\"display_type\":1,\"image\":\"http://wx1.sinaimg.cn/large/0066bNNyly1ffdq2zfrlfj303c03cq3f.jpg\",\"visiable\":true},\"user\":{\"id\":720554,\"name\":\"arcsinw\",\"avatar\":\"http://wanzao2.b0.upaiyun.com/baozouribao/59d06920034601356a05525400063398.png\"}},\"receiver_comment\":{\"id\":3484432,\"content\":\"第一\",\"voted\":false,\"voted_count\":1,\"created_at\":\"2017-05-08 10:00\",\"article\":{\"document_id\":46258,\"title\":\"你为什么对我还有隐瞒\",\"display_type\":1,\"image\":\"http://wx1.sinaimg.cn/large/0066bNNyly1ffdq2zfrlfj303c03cq3f.jpg\",\"visiable\":true}}}],\"unread_count\":0,\"timestamp\":1494216980}";
 
+            var result = JsonHelper.Deserlialize<CommentMessageResult>(commentJson);
+            foreach (var item in result.CommentMessages)
+            {
+                CommentMessages.Add(item);
+            }
         }
 
         #region Load data methods
         private StringBuilder commentMessageStringBuilder = new StringBuilder("0");
 
+        /// <summary>
+        /// 获取评论消息
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="timeStamp"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Message>> LoadCommentMessages(uint count, string timeStamp)
-        {
-            List<Message> messages = new List<Message>();
-            
-            Debug.WriteLine($"Current timestamp {timeStamp}");
-
+        { 
             if (timeStamp.Equals(commentMessageStringBuilder.ToString()))
             {
                 CommentMessages.NoMore();
-                return messages;
+                return null;
             }
+
+            List<Message> messages = new List<Message>();
 
             var result = await ApiService.Instance.GetCommentMessages(timeStamp);
             if (result != null && result.CommentMessages != null)
             {
-                CommentMessages.TimeStamp = result.TimeStamp;
-
-                Debug.WriteLine($"Next timestamp {CommentMessages.TimeStamp}");
-
+                CommentMessages.TimeStamp = result.TimeStamp; 
                 commentMessageStringBuilder.Clear();
-                commentMessageStringBuilder.Append(result.TimeStamp);
+                commentMessageStringBuilder.Append(timeStamp);
 
-                foreach (var item in result.CommentMessages)
-                {
-                    messages.Add(item);
-                }
+                result.CommentMessages?.ForEach(x => messages.Add(x));
+
+                return messages; 
             }
             else
             {
                 CommentMessages.NoMore();
             }
+
 
             if (messages.Count == 0 && CommentMessages.Count == 0)
             {
@@ -73,12 +82,17 @@ namespace BaoZouRiBao.ViewModel
             {
                 IsCommentMessageEmpty = false;
             }
-
-            return messages;
+            return null;
         }
 
         private StringBuilder voteMessageTimeStamp = new StringBuilder("0");
 
+        /// <summary>
+        /// 获取点赞消息
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="timeStamp"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Message>> LoadVoteMessage(uint count, string timeStamp)
         {
             List<Message> messages = new List<Message>();
@@ -117,6 +131,12 @@ namespace BaoZouRiBao.ViewModel
 
         private StringBuilder adminMessageTimeStamp = new StringBuilder("0");
 
+        /// <summary>
+        /// 获取系统消息
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="timeStamp"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Message>> LoadAdminMessage(uint count, string timeStamp)
         {
             List<Message> messages = new List<Message>();
@@ -158,7 +178,7 @@ namespace BaoZouRiBao.ViewModel
         /// <summary>
         /// 刷新评论消息
         /// </summary>
-        public async void RefreshCommentMessages()
+        public async Task RefreshCommentMessagesAsync()
         {
             IsActive = true;
             commentMessageStringBuilder.Clear();
@@ -170,7 +190,7 @@ namespace BaoZouRiBao.ViewModel
         /// <summary>
         /// 刷新赞消息
         /// </summary>
-        public async void RefreshVoteMessages()
+        public async Task RefreshVoteMessagesAsync()
         {
             IsActive = true;
             voteMessageTimeStamp.Clear();
@@ -182,7 +202,7 @@ namespace BaoZouRiBao.ViewModel
         /// <summary>
         /// 刷新系统消息
         /// </summary>
-        public async void RefreshAdminMessages()
+        public async Task RefreshAdminMessagesAsync()
         {
             IsActive = true;
             adminMessageTimeStamp.Clear();

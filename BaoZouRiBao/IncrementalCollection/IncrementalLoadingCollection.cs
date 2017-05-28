@@ -48,8 +48,8 @@ namespace BaoZouRiBao.IncrementalCollection
         /// </summary>
         protected int CurrentPageIndex { get; set; }
 
-        private readonly Action _onStartLoading;
-        private readonly Action _onEndLoading;
+        private readonly System.Action _onStartLoading;
+        private readonly System.Action _onEndLoading;
         private readonly Action<Exception> _onError;
 
         private bool _isLoading;
@@ -125,16 +125,16 @@ namespace BaoZouRiBao.IncrementalCollection
         /// The number of items to retrieve for each call. Default is 20.
         /// </param>
         /// <param name="onStartLoading">
-        /// An <see cref="Action"/> that is called when a retrieval operation begins.
+        /// An <see cref="System.Action"/> that is called when a retrieval operation begins.
         /// </param>
         /// <param name="onEndLoading">
-        /// An <see cref="Action"/> that is called when a retrieval operation ends.
+        /// An <see cref="System.Action"/> that is called when a retrieval operation ends.
         /// </param>
         /// <param name="onError">
-        /// An <see cref="Action"/> that is called if an error occours during data retrieval.
+        /// An <see cref="System.Action"/> that is called if an error occours during data retrieval.
         /// </param>
         /// <seealso cref="IIncrementalSource{TSource}"/>
-        public IncrementalLoadingCollection(int itemsPerPage = 20, Action onStartLoading = null, Action onEndLoading = null, Action<Exception> onError = null)
+        public IncrementalLoadingCollection(int itemsPerPage = 20, System.Action onStartLoading = null, System.Action onEndLoading = null, Action<Exception> onError = null)
             : this(new TSource(), itemsPerPage, onStartLoading, onEndLoading, onError)
         {
         }
@@ -149,16 +149,16 @@ namespace BaoZouRiBao.IncrementalCollection
         /// The number of items to retrieve for each call. Default is 20.
         /// </param>
         /// <param name="onStartLoading">
-        /// An <see cref="Action"/> that is called when a retrieval operation begins.
+        /// An <see cref="System.Action"/> that is called when a retrieval operation begins.
         /// </param>
         /// <param name="onEndLoading">
-        /// An <see cref="Action"/> that is called when a retrieval operation ends.
+        /// An <see cref="System.Action"/> that is called when a retrieval operation ends.
         /// </param>
         /// <param name="onError">
-        /// An <see cref="Action"/> that is called if an error occours during data retrieval.
+        /// An <see cref="System.Action"/> that is called if an error occours during data retrieval.
         /// </param>
         /// <seealso cref="IIncrementalSource{TSource}"/>
-        public IncrementalLoadingCollection(TSource source, int itemsPerPage = 20, Action onStartLoading = null, Action onEndLoading = null, Action<Exception> onError = null)
+        public IncrementalLoadingCollection(TSource source, int itemsPerPage = 20, System.Action onStartLoading = null, System.Action onEndLoading = null, Action<Exception> onError = null)
         {
             Source = source;
 

@@ -31,7 +31,7 @@ namespace BaoZouRiBao.Http
                     return null;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 LogHelper.WriteLine(e);
                 return null;
@@ -190,7 +190,7 @@ namespace BaoZouRiBao.Http
             }
         }
 
-        protected async Task UploadImage()
+        protected void UploadImage()
         {
 
         }

@@ -17,6 +17,11 @@
     </Page.DataContext>
     
     <Page.Resources>
+        <Style TargetType="BitmapIcon">
+            <Setter Property="Width" Value="{StaticResource BitmapIconWidth}"/>
+            <Setter Property="Height" Value="{StaticResource BitmapIconHeight}"/>
+        </Style>
+
         <converter:BoolToUriConverter x:Key="BoolToUriConverter"/>
         <converter:SecondsToDateTimeConverter x:Key="SecondsToDateTimeConverter"/>
         <converter:BoolToPathIconConverter x:Key="BoolToPathIconConverter"/>
@@ -47,21 +52,22 @@
 
             <Grid Grid.Column="2">
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto">
+                    <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto" Click="{x:Bind ViewModel.Vote}">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>
                             <TextBlock Text="{Binding VoteCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto" Click="Comment_Click">
+                    <Button x:Name="commentBtn" Style="{ThemeResource ImageTextButtonStyle}" Width="Auto"
+                        Click="Comment_Click">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <BitmapIcon UriSource="/Assets/Images/actionbar_comment_nor.png"/>
                             <TextBlock Text="{Binding CommentCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.FavoriteBtnClick}">
+                    <Button Style="{ThemeResource ImageTextButtonStyle}" Padding="4,10" Click="{x:Bind ViewModel.Favorite}">
                         <PathIcon Data="{x:Bind ViewModel.IsFavorite,Mode=OneWay,Converter={StaticResource BoolToPathIconConverter}}"/>
                     </Button>
 

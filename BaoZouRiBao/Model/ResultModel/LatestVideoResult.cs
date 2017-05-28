@@ -10,7 +10,7 @@ namespace BaoZouRiBao.Model
     public class LatestVideoResult
     {
         [JsonProperty(PropertyName = "data")]
-        public Video[] Videos { get; set; }
+        public List<Video> Videos { get; set; }
 
         [JsonProperty(PropertyName = "timestamp")]
         public string TimeStamp { get; set; }

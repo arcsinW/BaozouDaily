@@ -27,15 +27,20 @@ namespace BaoZouRiBao.ViewModel
             }
             else
             {
-                LoadTaskInfo();
+                LoadData();
             }
-            User = GlobalValue.Current.User;
-            GlobalValue.Current.DataChanged += Current_DataChanged; 
+            User = DataShareManager.Current.User;
+            DataShareManager.Current.DataChanged += Current_DataChanged; 
+        }
+
+        ~UserInfoViewModel()
+        {
+            DataShareManager.Current.DataChanged -= Current_DataChanged;
         }
 
         private void Current_DataChanged()
         {
-            User = GlobalValue.Current.User;
+            User = DataShareManager.Current.User;
         }
 
         #region Properties
@@ -141,13 +146,18 @@ namespace BaoZouRiBao.ViewModel
             TaskInfo = taskInfo;
         }
 
+        private async void LoadData()
+        {
+            await LoadTaskInfo();
+        }
+
         private static async Task UploadFile(string url, StorageFile file)
         {
             try
             {
                 using (var client = new HttpClient())
                 {
-                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + GlobalValue.Current.User.AccessToken);
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + DataShareManager.Current.User.AccessToken);
                     using (var content = new MultipartFormDataContent("TLq-mXb4y62pbCa_bPiNZXitxUS3RV29c8"))
                     {
                         var imageContent = new StreamContent(await file.OpenStreamForReadAsync());
@@ -165,7 +175,7 @@ namespace BaoZouRiBao.ViewModel
             }
             catch(Exception e)
             {
-
+                LogHelper.WriteLine(e);
             }
         }
 

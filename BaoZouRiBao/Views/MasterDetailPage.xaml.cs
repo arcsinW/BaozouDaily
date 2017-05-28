@@ -1,7 +1,9 @@
-﻿using BaoZouRiBao.Model.ResultModel;
+﻿using BaoZouRiBao.Helper;
+using BaoZouRiBao.Model.ResultModel;
 using BaoZouRiBao.UserControls;
 using System;
 using Windows.ApplicationModel;
+using Windows.Networking.PushNotifications;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -13,10 +15,9 @@ namespace BaoZouRiBao.Views
     {
         public MasterDetailPage()
         {
-            this.InitializeComponent();
-
+            this.InitializeComponent(); 
             Current = this; 
-        }
+        } 
 
         public static MasterDetailPage Current;
          

@@ -10,7 +10,7 @@ namespace BaoZouRiBao.Model
     public class LatestDocumentResult
     {
         [JsonProperty(PropertyName = "timestamp")]
-        public double TimeStamp;
+        public string TimeStamp;
 
         [JsonProperty(PropertyName = "data")]
         public List<Document> Data { get; set; }

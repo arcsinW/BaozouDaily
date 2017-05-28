@@ -28,7 +28,7 @@ namespace BaoZouRiBao.Model.ResultModel
         public int Dislikes { get; set; }
         
         [JsonProperty(PropertyName = "time")]
-        public string time { get; set; }
+        public long time { get; set; }
         
         [JsonProperty(PropertyName = "score")]
         public int Score { get; set; }

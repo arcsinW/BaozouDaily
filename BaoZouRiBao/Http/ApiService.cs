@@ -17,9 +17,14 @@ namespace BaoZouRiBao.Http
     public class ApiService : ApiBaseService
     {
         #region Singleton
+
         private ApiService()
         {
-
+            // 尝试从本地加载Authorization Header
+            if (DataShareManager.Current.User != null && !string.IsNullOrEmpty(DataShareManager.Current.User.AccessToken))
+            {
+                HttpBaseService.SetHeader("Authorization", "Bearer " + DataShareManager.Current.User.AccessToken);
+            }
         }
 
         private static ApiService _apiService = new ApiService();
@@ -112,7 +117,7 @@ namespace BaoZouRiBao.Http
             if (user != null)
             {
                 HttpBaseService.SetHeader("Authorization", "Bearer " + user.AccessToken);
-                GlobalValue.Current.UpdateUser(user);
+                DataShareManager.Current.UpdateUser(user);
                 return true;
             }
             return false;
@@ -164,7 +169,7 @@ namespace BaoZouRiBao.Http
 
             if (result.Result.Equals("success"))
             {
-                GlobalValue.Current.UpdateUser(null);
+                DataShareManager.Current.UpdateUser(null);
                 return true;
             }
 
@@ -172,7 +177,7 @@ namespace BaoZouRiBao.Http
         }
         #endregion
         
-        #region Should authentication before call
+        #region Need authentication before call
         /// <summary>
         /// 获取每日任务信息
         /// </summary>
@@ -408,9 +413,10 @@ namespace BaoZouRiBao.Http
         /// 举报评论
         /// </summary>
         /// <param name="commentId">评论的Id</param>
-        public void ReportComment(string commentId)
+        public async Task<ReportCommentResult> ReportCommentAsync(string commentId)
         {
-            var result = GetJson<ReportCommentResult>(string.Format(ServiceUri.ReportComment, commentId));
+            var result = await GetJson<ReportCommentResult>(string.Format(ServiceUri.ReportComment, commentId));
+            return result;
         }
 
         /// <summary>

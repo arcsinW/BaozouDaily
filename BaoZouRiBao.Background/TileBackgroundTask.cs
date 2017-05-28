@@ -11,7 +11,9 @@ namespace BaoZouRiBao.Background
     {
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            
+            var def = taskInstance.GetDeferral();
+
+            def.Complete();
         }
     }
 }

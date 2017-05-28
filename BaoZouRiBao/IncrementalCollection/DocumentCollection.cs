@@ -43,6 +43,8 @@ namespace BaoZouRiBao.IncrementalCollection
             LoadMoreItemsResult result = new LoadMoreItemsResult();
             var stories = await ApiService.Instance.GetLatestDocumentAsync(timeStamp.ToString());
 
+            Debug.WriteLine("DocumentCollection LoadMoreItemsAsyncCore");
+
             if (stories != null)
             {
                 timeStamp.Clear();

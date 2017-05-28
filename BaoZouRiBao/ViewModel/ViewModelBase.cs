@@ -58,7 +58,7 @@ namespace BaoZouRiBao.ViewModel
         /// </summary>
         public void SwitchElementTheme()
         {
-            GlobalValue.Current.SwitchElementTheme();
+            DataShareManager.Current.SwitchElementTheme();
         }
 
         /// <summary>

@@ -8,6 +8,7 @@ using BaoZouRiBao.Helper;
 using BaoZouRiBao.Http;
 using BaoZouRiBao.IncrementalCollection;
 using BaoZouRiBao.Model;
+using BaoZouRiBao.Controls;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -15,10 +16,10 @@ namespace BaoZouRiBao.ViewModel
     {
         public ChannelViewModel()
         {
-            Channels = new IncrementalLoadingList<Channel>(GetChannel);
+            Channels = new IncrementalLoadingList<Channel>(GetChannel, ()=> { IsActive = false; },()=> { isActive = true; },(e)=> { ToastService.SendToast(e.Message); IsActive = false; });
         }
 
-        private bool isActive;
+        private bool isActive = false;
 
         public bool IsActive
         {
@@ -51,6 +52,14 @@ namespace BaoZouRiBao.ViewModel
 
             IsActive = false;
             return channels;
+        }
+
+        /// <summary>
+        /// 刷新频道
+        /// </summary>
+        public override async void Refresh()
+        {
+            await Channels.ClearAndReloadAsync();
         }
     }
 }

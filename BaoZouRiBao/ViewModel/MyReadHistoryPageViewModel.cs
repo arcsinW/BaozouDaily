@@ -114,7 +114,7 @@ namespace BaoZouRiBao.ViewModel
             var result = await ApiService.Instance.ClearReadHistoryAsync();
             if (result != null && result.Status.Equals("1000"))
             {
-                ToastService.SendToast(result.alertDesc);
+                ToastService.SendToast(result.AlertDesc);
                 ReadHistories.Clear();
             }
         }

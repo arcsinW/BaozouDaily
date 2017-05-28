@@ -41,12 +41,12 @@ namespace BaoZouRiBao.ViewModel
             if (user != null)
             {
                 HttpBaseService.SetHeader("Authorization", "Bearer " + user.AccessToken);
-                GlobalValue.Current.UpdateUser(user);
+                DataShareManager.Current.UpdateUser(user);
                 ToastService.SendToast("登录成功");
             }
             else
             {
-                ToastService.SendToast("登录失败");
+                ToastService.SendToast($"登录失败");
             }
         }
     }

@@ -10,7 +10,7 @@ namespace BaoZouRiBao.Model.ResultModel
     public class LatestOrHotComment
     {
         [JsonProperty(PropertyName = "data")]
-        public Comment[] Comments { get; set; }
+        public List<Comment> Comments { get; set; }
 
         [JsonProperty(PropertyName = "timestamp")]
         public string TimeStamp { get; set; }

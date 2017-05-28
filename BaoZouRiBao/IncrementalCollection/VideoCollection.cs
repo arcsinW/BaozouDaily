@@ -39,7 +39,7 @@ namespace BaoZouRiBao.IncrementalCollection
             {
                 timeStamp.Clear();
                 timeStamp.Append(videos.TimeStamp);
-                result.Count = (uint)videos.Videos.Length;
+                result.Count = (uint)videos.Videos.Count;
                 foreach (var item in videos.Videos)
                 {
                     Add(item);

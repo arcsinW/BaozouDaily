@@ -5,7 +5,7 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:local="using:BaoZouRiBao.Themes"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:controls="using:BaoZouRiBao.Controls"
     xmlns:m="using:BaoZouRiBao.Model">
 
     <x:Double x:Key="PageTitleFontSize">18</x:Double>
@@ -86,8 +86,9 @@
                 <!--<Image Source="/Assets/Images/image_small_default.jpg"/>
                                         <Image Source="{Binding Thumbnail,TargetNullValue={StaticResource PlaceHolderAvatar}}" 
                                                     Stretch="UniformToFill"/>-->
-                <toolkit:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{Binding Thumbnail}"
-                                             PlaceholderSource="{StaticResource PlaceHolderImageSmall}"/>
+                <controls:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{Binding Thumbnail}"
+                                  PlaceholderSource="{StaticResource PlaceHolderImageSmall}"
+                                  PlaceholderStretch="UniformToFill"/>
 
                 <Image Source="{Binding OriginalTag}" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Grid>
@@ -248,6 +249,59 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Padding" Value="4,10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ContentPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>-->
+                                        <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
+                                    </ObjectAnimationUsingKeyFrames>-->
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledTransparentBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!--既有图片又有文字的Button -->
@@ -441,7 +495,42 @@
     <!--#endregion -->
 
     <!--#region ListView's Style-->
-    <Style TargetType="ScrollBar">
+    <Style x:Key="LightThumbStyle" TargetType="Thumb">
+        <Setter Property="Background" Value="{ThemeResource ThumbBackgroundThemeBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource ThumbBorderThemeBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BackgroundPointerOver"/>
+                                        <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Background"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BackgroundPressed"/>
+                                        <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Background"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="Background" CornerRadius="4" BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}" Background="Black" Opacity="0.2"/>
+                        <Border x:Name="BackgroundPointerOver" CornerRadius="4" BorderThickness="0" BorderBrush="{ThemeResource ThumbPressedBorderThemeBrush}" Background="{ThemeResource ThumbPressedBackgroundThemeBrush}" Opacity="0"/>
+                        <Border x:Name="BackgroundPressed" CornerRadius="4" BorderThickness="0" BorderBrush="{ThemeResource ThumbPressedBorderThemeBrush}" Background="{ThemeResource ThumbPressedBackgroundThemeBrush}" Opacity="0"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="LightScrollBarStyle" TargetType="ScrollBar">
         <Setter Property="MinWidth" Value="12"/>
         <Setter Property="MinHeight" Value="12"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -769,7 +858,7 @@
                             <Rectangle x:Name="HorizontalTrackRect" Grid.ColumnSpan="5" Fill="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Margin="0" Stroke="{ThemeResource SystemControlForegroundTransparentBrush}" StrokeThickness="{ThemeResource ScrollBarTrackBorderThemeThickness}"/>
                             <RepeatButton x:Name="HorizontalSmallDecrease" Grid.Column="0" IsTabStop="False" Interval="50" Margin="0" MinHeight="12" Template="{StaticResource HorizontalDecrementTemplate}" VerticalAlignment="Center" Width="12"/>
                             <RepeatButton x:Name="HorizontalLargeDecrease" Grid.Column="1" HorizontalAlignment="Stretch" IsTabStop="False" Interval="50" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch" Width="0"/>
-                            <Thumb x:Name="HorizontalThumb" AutomationProperties.AccessibilityView="Raw" Background="{ThemeResource SystemControlForegroundChromeHighBrush}" Grid.Column="2" Height="12" MinWidth="12" Template="{StaticResource HorizontalThumbTemplate}"/>
+                            <Thumb x:Name="HorizontalThumb" Style="{StaticResource LightThumbStyle}" AutomationProperties.AccessibilityView="Raw" Background="{ThemeResource SystemControlForegroundChromeHighBrush}" Grid.Column="2" Height="12" MinWidth="12" Template="{StaticResource HorizontalThumbTemplate}"/>
                             <RepeatButton x:Name="HorizontalLargeIncrease" Grid.Column="3" HorizontalAlignment="Stretch" IsTabStop="False" Interval="50" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
                             <RepeatButton x:Name="HorizontalSmallIncrease" Grid.Column="4" IsTabStop="False" Interval="50" Margin="0" MinHeight="12" Template="{StaticResource HorizontalIncrementTemplate}" VerticalAlignment="Center" Width="12"/>
                         </Grid>
@@ -787,12 +876,12 @@
                             <Rectangle x:Name="VerticalTrackRect" Fill="Transparent" Margin="0" Grid.RowSpan="5" Stroke="{ThemeResource SystemControlForegroundTransparentBrush}" StrokeThickness="{ThemeResource ScrollBarTrackBorderThemeThickness}"/>
                             <RepeatButton x:Name="VerticalSmallDecrease" Visibility="Collapsed" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="0" Template="{StaticResource VerticalDecrementTemplate}"/>
                             <RepeatButton x:Name="VerticalLargeDecrease"   HorizontalAlignment="Stretch" Height="0" IsTabStop="False" Interval="50" Grid.Row="1" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
-                            <Thumb  x:Name="VerticalThumb" AutomationProperties.AccessibilityView="Raw" Background="{ThemeResource SystemControlForegroundChromeHighBrush}" MinHeight="48" Grid.Row="2" HorizontalAlignment="Right" Template="{StaticResource VerticalThumbTemplate}" Width="8"/>
+                            <Thumb  x:Name="VerticalThumb" Style="{StaticResource LightThumbStyle}" AutomationProperties.AccessibilityView="Raw" Background="{ThemeResource SystemControlForegroundChromeHighBrush}" MinHeight="48" Grid.Row="2" HorizontalAlignment="Right" Template="{StaticResource VerticalThumbTemplate}" Width="8"/>
                             <RepeatButton  x:Name="VerticalLargeIncrease"   HorizontalAlignment="Stretch" IsTabStop="False" Interval="50" Grid.Row="3" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
                             <RepeatButton  x:Name="VerticalSmallIncrease" Visibility="Collapsed" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="4" Template="{StaticResource VerticalIncrementTemplate}"/>
                         </Grid>
                         <Grid x:Name="VerticalPanningRoot" >
-                            <Border CornerRadius="8" x:Name="VerticalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}" HorizontalAlignment="Right" Margin="2,0,2,0" MinHeight="32" VerticalAlignment="Top" Width="2"/>
+                            <Border x:Name="VerticalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}" HorizontalAlignment="Right" Margin="2,0,2,0" MinHeight="32" VerticalAlignment="Top" Width="2"/>
                         </Grid>
                     </Grid>
                 </ControlTemplate>
@@ -914,8 +1003,8 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <ScrollContentPresenter x:Name="ScrollContentPresenter" Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" Grid.RowSpan="2"/>
-                            <ScrollBar x:Name="VerticalScrollBar" Grid.Column="1" HorizontalAlignment="Right" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}"/>
-                            <ScrollBar x:Name="HorizontalScrollBar" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Orientation="Horizontal" Grid.Row="1" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}"/>
+                            <ScrollBar x:Name="VerticalScrollBar" Style="{StaticResource LightScrollBarStyle}" Grid.Column="1" HorizontalAlignment="Right" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}"/>
+                            <ScrollBar x:Name="HorizontalScrollBar" Style="{StaticResource LightScrollBarStyle}" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Orientation="Horizontal" Grid.Row="1" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}"/>
                             <Border x:Name="ScrollBarSeparator" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Grid.Column="1" Grid.Row="1"/>
                         </Grid>
                     </Border>
@@ -923,6 +1012,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <Style TargetType="ListView">
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="TabNavigation" Value="Once"/>
@@ -2648,6 +2738,7 @@
 
     <Style TargetType="MenuFlyoutPresenter">
         <Setter Property="BorderBrush" Value="{ThemeResource ThemeColorBrush}"/>
+        <Setter Property="Background" Value="{ThemeResource MenuFlyoutPresenterBackgroundBrush}"/>
         <Setter Property="MinHeight" Value="40"/>
         <Setter Property="Padding" Value="0"/>
     </Style>

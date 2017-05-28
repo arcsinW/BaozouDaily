@@ -14,8 +14,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
-
 namespace BaoZouRiBao.Views
 {
     /// <summary>
@@ -34,7 +32,7 @@ namespace BaoZouRiBao.Views
             if(channel !=null)
             {
                 titleTextBlock.Text = channel.Name;
-                ViewModel.Initial(channel.Id);
+                ViewModel.ChannelId = channel.Id;
             }
         }
 
@@ -46,7 +44,6 @@ namespace BaoZouRiBao.Views
                 WebViewParameter parameter = new WebViewParameter() { Title = contribute.SourceName, DocumentId = contribute.DocumentId, DisplayType = contribute.DisplayType,WebViewUri = contribute.Url };
                 MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
             }
-        }
-         
+        }    
     }
 }

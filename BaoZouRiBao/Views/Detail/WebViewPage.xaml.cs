@@ -27,15 +27,15 @@ namespace BaoZouRiBao.Views
         {
             this.InitializeComponent();
 
-            appTheme = GlobalValue.Current.AppTheme;
-            GlobalValue.Current.DataChanged += Current_DataChanged;
+            appTheme = DataShareManager.Current.AppTheme;
+            DataShareManager.Current.DataChanged += Current_DataChanged;
         }
 
         private ElementTheme appTheme;
 
         private void Current_DataChanged()
         {
-            appTheme = GlobalValue.Current.AppTheme;
+            appTheme = DataShareManager.Current.AppTheme;
             if (appTheme == ElementTheme.Dark)
             {
                 Dark();
@@ -104,10 +104,10 @@ namespace BaoZouRiBao.Views
             var parameter = e.Parameter as WebViewParameter;
             if (parameter != null)
             {
-                if (!string.IsNullOrEmpty(parameter.Title))
-                {
-                    titleTextBlock.Text = parameter.Title;
-                }
+                //if (!string.IsNullOrEmpty(parameter.Title))
+                //{
+                //    titleTextBlock.Text = parameter.Title;
+                //}
 
                 switch (parameter.DisplayType)
                 {
@@ -119,12 +119,14 @@ namespace BaoZouRiBao.Views
                         {
                             webView.Navigate(new Uri(parameter.WebViewUri));
                         }
+
                         break;
                     case "3":
                         if (!string.IsNullOrEmpty(parameter.WebViewUri))
                         {
                             webView.Navigate(new Uri(parameter.WebViewUri));
                         }
+
                         stackPanel.Visibility = Visibility.Collapsed;
                         return;
                 }
@@ -133,8 +135,7 @@ namespace BaoZouRiBao.Views
                 if (!string.IsNullOrEmpty(documentId))
                 {
                     ViewModel.LoadDocument(documentId, parameter.DisplayType);
-
-
+                    
                     documentExtra = await ApiService.Instance.GetDocumentExtraAsync(documentId);
                     if (documentExtra != null && documentExtra.HackJs != null)
                     {
@@ -154,6 +155,11 @@ namespace BaoZouRiBao.Views
                     }
                 }
             }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            DataShareManager.Current.DataChanged -= Current_DataChanged;
         }
     }
 }

@@ -21,11 +21,21 @@ namespace BaoZouRiBao.Helper
 
         public static void DetailFrameNavigate(Type sourcePage)
         {
+            while (MasterDetailPage.Current.DetailFrame.BackStackDepth > 1)
+            {
+                MasterDetailPage.Current.DetailFrame.BackStack.RemoveAt(1);
+            }
+
             MasterDetailPage.Current.DetailFrame.Navigate(sourcePage);
         }
 
         public static void DetailFrameNavigate(Type sourcePage,object parameter)
         {
+            while (MasterDetailPage.Current.DetailFrame.BackStackDepth > 1)
+            {
+                MasterDetailPage.Current.DetailFrame.BackStack.RemoveAt(1);
+            }
+
             MasterDetailPage.Current.DetailFrame.Navigate(sourcePage,parameter);
         }
 
@@ -41,6 +51,10 @@ namespace BaoZouRiBao.Helper
             else if (MasterDetailPage.Current.MasterFrame.CanGoBack)
             {
                 MasterDetailPage.Current.MasterFrame.GoBack();
+            }
+            else
+            {
+                App.Current.Exit();
             }
         }
     }

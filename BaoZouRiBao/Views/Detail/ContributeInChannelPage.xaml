@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:m="using:BaoZouRiBao.Model"
+    xmlns:controls="using:BaoZouRiBao.Controls"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -32,7 +33,7 @@
                 <Button.Flyout>
                     <MenuFlyout>
                         <MenuFlyout.Items>
-                            <MenuFlyoutItem Text="刷新"/>
+                            <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.Refresh}"/>
                             <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                             <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
                         </MenuFlyout.Items>
@@ -47,9 +48,6 @@
                       IsItemClickEnabled="True"
                       ItemClick="contributeListView_ItemClick"
                       ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}" >
-                <ListView.Resources>
-                    <BitmapImage x:Key="DefaultAvatar" UriSource="ms-appx:///Assets/Images/image_small_default.jpg"/>
-                </ListView.Resources>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="m:Contribute">
                         <Grid>
@@ -59,8 +57,9 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0" MaxHeight="80" MaxWidth="80">
-                                <Image Source="{Binding Thumbnail,TargetNullValue={StaticResource DefaultAvatar}}" 
-                                       Stretch="UniformToFill"/>
+                                <controls:ImageEx Source="{Binding Thumbnail}" 
+                                                  PlaceholderSource="{StaticResource PlaceHolderImageSmall}"
+                                                  PlaceholderStretch="UniformToFill"/>
                                 <Image Source="{Binding OriginalTag}" Height="32" 
                                        HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             </Grid>
@@ -73,6 +72,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate> 
             </ListView>
+
+            <TextBlock Text="暂无数据" 
+                               Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{ThemeResource LoadErrorTextBlockStyle}"/>
         </Grid>
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>

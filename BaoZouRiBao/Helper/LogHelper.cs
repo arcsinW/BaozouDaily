@@ -36,7 +36,7 @@ namespace BaoZouRiBao.Helper
         private static async void Initial()
         {
             string filename = DateTime.Now.ToString("yyyy-MM-dd");
-            logFile = await localFolder.CreateFileAsync($"{filename}.log", CreationCollisionOption.OpenIfExists);
+            logFile = await localFolder.CreateFileAsync($"BZ{filename}.log", CreationCollisionOption.OpenIfExists);
         }
 
         private static async void Timer_Tick(object sender, object e)

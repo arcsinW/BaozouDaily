@@ -9,7 +9,7 @@
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:controls="using:BaoZouRiBao.Controls"
     NavigationCacheMode="Required"
     mc:Ignorable="d">
 
@@ -60,7 +60,7 @@
                                 <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
 
-                            <toolkit:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{x:Bind Thumbnail}"
+                            <controls:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{x:Bind Thumbnail}"
                                              PlaceholderSource="{StaticResource PlaceHolderImageSmall}"/>
 
                             <!--<Image Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" Source="{x:Bind Thumbnail}"/>-->

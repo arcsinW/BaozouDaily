@@ -16,12 +16,22 @@ namespace BaoZouRiBao.Model
     public class Comment : ModelBase
     {
         #region Properties
+        
+        /// <summary>
+        /// 评论的文章
+        /// </summary>
         [JsonProperty(PropertyName = "article")]
         public Article Article { get; set; }
 
         [JsonProperty(PropertyName = "content")]
         public string Content { get; set; }
 
+        /// <summary>
+        /// 正常显示的时间
+        /// </summary>
+        [JsonProperty(PropertyName = "created_at")]
+        public string CreatedAt { get; set; }
+         
         [JsonProperty(PropertyName = "dislike")]
         public bool Dislike { get; set; }
 
@@ -76,6 +86,12 @@ namespace BaoZouRiBao.Model
             }
         }
 
+        [JsonProperty(PropertyName = "voted")]
+        public bool Voted { get; set; }
+        
+        [JsonProperty(PropertyName = "voted_count")]
+        public string VotedCount { get; set; }
+        
         [JsonProperty(PropertyName = "own")]
         public string Own { get; set; }
 
@@ -95,6 +111,7 @@ namespace BaoZouRiBao.Model
         public CommentUser User { get; set; }
         #endregion
 
+        #region Commands
         /// <summary>
         /// 评论 此评论
         /// </summary>
@@ -103,8 +120,8 @@ namespace BaoZouRiBao.Model
         {
             await ApiService.Instance.CommentAsync(Id, content);
         }
-        
-        public RelayCommand VoteCommand { get; set; } 
+
+        public RelayCommand VoteCommand { get; set; }
 
         public Comment()
         {
@@ -124,8 +141,9 @@ namespace BaoZouRiBao.Model
                     Like = true;
                     Likes++;
                 }
-                ToastService.SendToast(result.alertDesc);
+                ToastService.SendToast(result.AlertDesc);
             }
-        }
+        } 
+        #endregion
     }
 }

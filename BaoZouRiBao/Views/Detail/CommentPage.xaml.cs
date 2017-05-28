@@ -27,12 +27,11 @@ namespace BaoZouRiBao.Views
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
+        { 
             string documentId = (string)e.Parameter;
             if(!string.IsNullOrEmpty(documentId))
             {
-                ViewModel.SetDocumentId(documentId);               
+                ViewModel.DocumentId = documentId;
             }
         }
          
@@ -73,20 +72,14 @@ namespace BaoZouRiBao.Views
             }
         }
 
-        protected override async void OnKeyDown(KeyRoutedEventArgs e)
+        protected override void OnKeyDown(KeyRoutedEventArgs e)
         {
+            e.Handled = true;
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
                 if (!string.IsNullOrEmpty(ViewModel.Content))
                 {
-                    if (isReplyComment)
-                    {
-                        await ViewModel.ReplyCommentAsync(currentParentId);
-                    }
-                    else
-                    {
-                        await ViewModel.CommentAsync();
-                    }
+                    Comment();
                 }
             }
         }
@@ -105,7 +98,10 @@ namespace BaoZouRiBao.Views
             }
         }
 
-        private async void Comment(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 评论
+        /// </summary>
+        private async void Comment()
         {
             if (isReplyComment)
             {
@@ -118,8 +114,9 @@ namespace BaoZouRiBao.Views
             }
             else
             {
-                var result = await ViewModel.CommentAsync();
-                if (result != null && !string.IsNullOrEmpty(result.Id))
+                bool result = await ViewModel.CommentAsync();
+
+                if (result)
                 {
                     ToastService.SendToast("评论成功");
                 }
@@ -137,6 +134,35 @@ namespace BaoZouRiBao.Views
         {
             commentTextBox.PlaceholderText = "忍不住吐个槽";
             isReplyComment = false;
+        }
+
+        private void latestListView_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            CommentMenuFlyout.ShowAt((FrameworkElement)sender, e.GetPosition(sender as UIElement));
+        }
+
+        private void latestListView_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            CommentMenuFlyout.ShowAt((FrameworkElement)sender, e.GetPosition(sender as UIElement));
+        }
+
+        /// <summary>
+        /// 回复评论
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void replyFlyout_Click(object sender, RoutedEventArgs e)
+        {
+            Comment comment = ((MenuFlyoutItem)sender).DataContext as Comment;
+            if (comment != null)
+            {
+                commentTextBox.PlaceholderText = $"@{comment.User.Name}";
+                commentTextBox.Focus(FocusState.Programmatic);
+
+                currentParentId = comment.Id;
+
+                isReplyComment = true;
+            }
         }
     }
 }

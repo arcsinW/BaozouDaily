@@ -22,21 +22,51 @@ namespace BaoZouRiBao.ViewModel
         {
             if (IsDesignMode)
             {
-                SetDocumentId("44791");
-                GetLatestComments();
-                GetHotComments();
+                DocumentId = "44791";
             }
 
-            CommentCommand = new RelayCommand( async (str) => { await ReplyCommentAsync((string)str, Content); },()=> { return !string.IsNullOrEmpty(Content); });
-            VoteCommand = new RelayCommand((str) => { VoteAsync((string)str); });
+            CommentCommand = new RelayCommand
+            (
+                async (commentId) =>
+                {
+                    await ReplyCommentAsync((string)commentId, Content);
+                }, 
+                () =>
+                {
+                    return !string.IsNullOrEmpty(Content);
+                }
+            );
+
+            VoteCommand = new RelayCommand
+            (
+                (commentId) =>
+                {
+                    VoteAsync((string)commentId);
+                }
+            );
+
+            ReportCommand = new RelayCommand
+            (
+                (commentId) =>
+                {
+                    ReportAsync((string)commentId);
+                }
+            );
         }
 
+        
         #region Properties
-        public CommentCollection LatestComments { get; set; }
+        /// <summary>
+        /// 最新评论
+        /// </summary>
+        public IncrementalLoadingList<Comment> LatestComments { get; set; }
 
-        public CommentCollection HotComments { get; set; }
-       
-        private bool isActive;
+        /// <summary>
+        /// 最热门评论
+        /// </summary>
+        public IncrementalLoadingList<Comment> HotComments { get; set; }
+
+        private bool isActive = false;
         public bool IsActive
         {
             get
@@ -61,6 +91,40 @@ namespace BaoZouRiBao.ViewModel
         }
 
         /// <summary>
+        /// 日报Id
+        /// </summary>
+        public string DocumentId { get; set; }
+
+        /// <summary>
+        /// 当前PivotIndex
+        /// </summary>
+        public int CurrentIndex { get; set; }
+
+        private bool isHotCommentsEmpty = false;
+        /// <summary>
+        /// 热门评论是否为空
+        /// </summary>
+        public bool IsHotCommentsEmpty
+        {
+            get { return isHotCommentsEmpty; }
+            set { isHotCommentsEmpty = value; OnPropertyChanged(); }
+        }
+
+        private bool isLatestCommentsEmpty = false;
+        /// <summary>
+        /// 最新评论是否为空
+        /// </summary>
+        public bool IsLatestCommentsEmpty
+        {
+            get { return isLatestCommentsEmpty; }
+            set { isLatestCommentsEmpty = value; OnPropertyChanged(); }
+        }
+         
+        #endregion
+
+        #region Commands
+
+        /// <summary>
         /// 评论 Command
         /// </summary>
         public RelayCommand CommentCommand { get; set; }
@@ -69,51 +133,144 @@ namespace BaoZouRiBao.ViewModel
         /// 点赞 Command
         /// </summary>
         public RelayCommand VoteCommand { get; set; }
+
+        /// <summary>
+        /// 举报 Command
+        /// </summary>
+        public RelayCommand ReportCommand { get; set; }
         #endregion
 
-        #region Fields
-        private string documentId;
-        #endregion
+        #region Load data methods
+        public StringBuilder latestCommentsStringBuilder = new StringBuilder("0");
 
-        public void SetDocumentId(string documentId)
+        /// <summary>
+        /// 加载最新评论
+        /// </summary>
+        /// <param name="cancel"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        private async Task<IEnumerable<Comment>> LoadLatestComments(uint count, string timeStamp)
         {
-            this.documentId = documentId;
+            if (timeStamp.Equals(latestCommentsStringBuilder.ToString()) || timeStamp.Equals("0"))
+            {
+                LatestComments.NoMore();
+                return null;
+            }
+
+            var result = await ApiService.Instance.GetLatestOrHotCommentsAsync(DocumentId, CommentTypeEnum.latest, timeStamp);
+            if (result != null && result.Comments != null)
+            {
+                List<Comment> comments = new List<Comment>();
+
+                if (!string.IsNullOrEmpty(timeStamp))
+                {
+                    latestCommentsStringBuilder.Clear();
+                    latestCommentsStringBuilder.Append(timeStamp);
+                }
+
+                LatestComments.TimeStamp = result.TimeStamp;
+
+                result.Comments.ForEach(x => comments.Add(x));
+                return comments;
+            }
+            else
+            {
+                LatestComments.NoMore();
+
+                if (LatestComments.Count == 0)
+                {
+                    IsLatestCommentsEmpty = true;
+                }
+                else
+                {
+                    IsLatestCommentsEmpty = false;
+                }
+            }
+
+            return null;
         }
+
+
+        public StringBuilder hotCommentsStringBuilder = new StringBuilder("0");
+
+        /// <summary>
+        /// 加载热门评论
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="timeStamp"></param>
+        /// <returns></returns>
+        private async Task<IEnumerable<Comment>> LoadHotComments(uint count, string timeStamp)
+        {
+            if (timeStamp.Equals(hotCommentsStringBuilder.ToString()) || timeStamp.Equals("0"))
+            {
+                HotComments.NoMore();
+                return null;
+            }
+            
+            var result = await ApiService.Instance.GetLatestOrHotCommentsAsync(DocumentId, CommentTypeEnum.hot, timeStamp);
+            if (result != null && result.Comments != null)
+            {
+                if (!string.IsNullOrEmpty(timeStamp))
+                {
+                    hotCommentsStringBuilder.Clear();
+                    hotCommentsStringBuilder.Append(timeStamp);
+                }
+                 
+                HotComments.TimeStamp = result.TimeStamp;
+
+                if (result.Comments.Count ==0 && HotComments.Count == 0)
+                {
+                    IsHotCommentsEmpty = true;
+                }
+                 
+                return result.Comments;
+            }
+            else
+            {
+                HotComments.NoMore();
+
+                if (HotComments.Count == 0)
+                {
+                    IsHotCommentsEmpty = true;
+                }
+                else
+                {
+                    IsHotCommentsEmpty = false;
+                }
+            }
+
+            return null;
+        }
+        #endregion
          
-        private void OnDataLoadingEvent()
+        #region Refresh methods
+        /// <summary>
+        /// 刷新最新评论
+        /// </summary>
+        public async void RefreshLatestComments()
         {
-            IsActive = true;
+            await LatestComments.ClearAndReloadAsync();
         }
 
-        private void OnDataLoadedEvent()
+        /// <summary>
+        /// 刷新热门评论
+        /// </summary>
+        public async void RefreshHotComments()
         {
-            IsActive = false;
-        }
+            await HotComments.ClearAndReloadAsync();
+        } 
+        #endregion
+
+        #region Public methods
 
         public void GetLatestComments()
         {
-            LatestComments = new CommentCollection(CommentTypeEnum.latest, documentId);
-            LatestComments.OnDataLoadedEvent += OnDataLoadedEvent;
-            LatestComments.OnDataLoadingEvent += OnDataLoadingEvent;
+            LatestComments = new IncrementalLoadingList<Comment>(LoadLatestComments, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(e.Message); IsActive = false; });
         }
 
         public void GetHotComments()
         {
-            HotComments = new CommentCollection(CommentTypeEnum.hot, documentId);
-            HotComments.OnDataLoadingEvent += OnDataLoadingEvent;
-            HotComments.OnDataLoadedEvent += OnDataLoadedEvent;
-        }
-
-        public void RefreshLatestComments()
-        {
-            CommentCollection c = new CommentCollection(CommentTypeEnum.latest,documentId);
-            LatestComments = c;
-        }
-
-        public void RefreshHotComments()
-        {
-            CommentCollection c = new CommentCollection(CommentTypeEnum.hot,documentId);
-            HotComments = c;
+            HotComments = new IncrementalLoadingList<Comment>(LoadHotComments, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(e.Message); IsActive = false; });
         }
 
         /// <summary>
@@ -123,12 +280,27 @@ namespace BaoZouRiBao.ViewModel
         public async void VoteAsync(string commentId)
         {
             var result = await ApiService.Instance.VoteCommentAsync(commentId);
-
             if (result != null)
             {
                 if (result.Status == "1000")
                 {
-                    ToastService.SendToast(result.alertDesc);
+                    ToastService.SendToast(result.AlertDesc);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 举报评论
+        /// </summary>
+        /// <param name="commentId"></param>
+        public async void ReportAsync(string commentId)
+        {
+            var result = await ApiService.Instance.ReportCommentAsync(commentId);
+            if (result != null)
+            {
+                if (result.Status == "1000")
+                {
+                    ToastService.SendToast(result.AlertDesc);
                 }
             }
         }
@@ -139,7 +311,7 @@ namespace BaoZouRiBao.ViewModel
         /// <param name="parentId">评论Id</param>
         public async Task<CommentOperationResult> ReplyCommentAsync(string parentId)
         {
-            var result = await ApiService.Instance.ReplyCommentAsync(documentId, parentId, Content);
+            var result = await ApiService.Instance.ReplyCommentAsync(DocumentId, parentId, Content);
             return result;
         }
 
@@ -149,26 +321,29 @@ namespace BaoZouRiBao.ViewModel
         /// <param name="parentId">评论Id</param>
         public async Task<CommentOperationResult> ReplyCommentAsync(string parentId, string content)
         {
-            var result = await ApiService.Instance.ReplyCommentAsync(documentId, parentId, content);
+            var result = await ApiService.Instance.ReplyCommentAsync(DocumentId, parentId, content);
             return result;
         }
 
         /// <summary>
         /// 评论文章
         /// </summary>
-        /// <param name="commentId"></param>
         /// <returns></returns>
-        public async Task<CommentOperationResult> CommentAsync()
+        public async Task<bool> CommentAsync()
         {
-            var result = await ApiService.Instance.CommentAsync(documentId, Content);
-            return result;
+            var result = await ApiService.Instance.CommentAsync(DocumentId, Content);
+            if (result != null && !string.IsNullOrEmpty(result.Id))
+            {
+                Comment comment = new Comment() { Content = result.Content, Time = result.time, Likes = result.Likes, Dislikes = result.Dislikes, User = result.user };
+                LatestComments.Insert(0, comment);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        
-        public void replyBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Comment dataContext = (Comment)((Button)e.OriginalSource).DataContext;
-            ReplyCommentAsync(dataContext.Id, Content);
-        }
-         
+        #endregion
     }
 }

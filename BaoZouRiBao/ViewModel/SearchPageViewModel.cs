@@ -1,4 +1,5 @@
-﻿using BaoZouRiBao.Http;
+﻿using BaoZouRiBao.Controls;
+using BaoZouRiBao.Http;
 using BaoZouRiBao.IncrementalCollection;
 using BaoZouRiBao.Model;
 using BaoZouRiBao.Views;
@@ -15,8 +16,18 @@ namespace BaoZouRiBao.ViewModel
 {
     public class SearchPageViewModel : ViewModelBase
     {
+        public SearchPageViewModel()
+        {
+            SearchResults = new IncrementalLoadingList<Document>(SearchAsync, () => { IsActive = false; }, () => { IsActive = true; }, (Exception e) => { IsActive = false; ToastService.SendToast(e.Message); });
+
+            if (DesignMode.DesignModeEnabled)
+            {
+                Keyword = "标准";
+                Search();
+            }
+        }
+
         #region Properties
-        public SearchResultCollection ResultCollection { get; set; } = new SearchResultCollection();
 
         public IncrementalLoadingList<Document> SearchResults { get; set; } 
 
@@ -45,23 +56,14 @@ namespace BaoZouRiBao.ViewModel
         }
 
         #endregion
-
-
-        public SearchPageViewModel()
-        {
-            SearchResults = new IncrementalLoadingList<Document>(Search);
-
-            ResultCollection.OnDataLoadingEvent += ResultCollection_OnDataLoadingEvent;
-            ResultCollection.OnDataLoadedEvent += ResultCollection_OnDataLoadedEvent;
-
-            if(DesignMode.DesignModeEnabled)
-            {
-                Keyword = "标准";
-                Search();
-            }
-        }
-
-        private async Task<IEnumerable<Document>> Search(uint count, int pageIndex)
+        
+        /// <summary>
+        /// 搜索
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
+        private async Task<IEnumerable<Document>> SearchAsync(uint count, int pageIndex)
         {
             List<Document> documents = new List<Document>();
             if (string.IsNullOrWhiteSpace(Keyword))
@@ -103,18 +105,7 @@ namespace BaoZouRiBao.ViewModel
 
         public async void Search()
         {
-            //ResultCollection.SetKeyword(Keyword); 
             await SearchResults.ClearAndReloadAsync();
-        }
-
-        private void ResultCollection_OnDataLoadingEvent()
-        {
-            IsActive = true;
-        }
-
-        private void ResultCollection_OnDataLoadedEvent()
-        {
-            IsActive = false;
-        }
+        } 
     }
 }

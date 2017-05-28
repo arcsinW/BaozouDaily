@@ -10,7 +10,7 @@
     xmlns:converter="using:BaoZouRiBao.Converters"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:action="using:BaoZouRiBao.BaoZouAction"
+    xmlns:action="using:BaoZouRiBao.Actions"
     mc:Ignorable="d">
 
     <Page.DataContext>

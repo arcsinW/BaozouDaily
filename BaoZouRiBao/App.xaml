@@ -25,7 +25,7 @@
 
             <x:String x:Key="RecommendString">推荐</x:String>
 
-            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converter:BoolToObjectConverter x:Key="BoolToVisibilityConverter"  TrueValue="Visible" FalseValue="Collapsed"/>
             <converter:TimeStampToDateTimeConverter x:Key="TimeStampToDateTimeConverter"/>
             <BitmapImage x:Key="PlaceHolderImageSmall" UriSource="/Assets/Images/image_small_default.jpg"/>
             <BitmapImage x:Key="PlaceHolderImageLarge" UriSource="/Assets/Images/section_image_preview_column.jpg"/>

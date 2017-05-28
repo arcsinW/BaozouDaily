@@ -8,11 +8,10 @@
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:m="using:BaoZouRiBao.Model"
     xmlns:control="using:BaoZouRiBao.Controls"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
-    xmlns:action="using:BaoZouRiBao.BaoZouAction"
+    xmlns:action="using:BaoZouRiBao.Actions"
     xmlns:convert="using:BaoZouRiBao.Converters"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
@@ -361,7 +360,7 @@
                         <MenuFlyout> 
                             <MenuFlyoutItem Text="刷新" Click="{x:Bind Refresh}"/>
                             <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
-                            <MenuFlyoutItem Text="设置" Click="{x:Bind SettingPage}"/>
+                            <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
                         </MenuFlyout>
                     </Button.Flyout>
                 </Button>
@@ -420,12 +419,12 @@
                     
                         <ListView.Header>
                             <Grid Height="240">
-                                <FlipView x:Name="headerFlipView" ItemsSource="{Binding Documents.TopStories}" 
+                                <FlipView x:Name="headerFlipView" ItemsSource="{Binding TopDocuments}" 
                                              Tapped="headerFlipView_Tapped" SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
                                     <FlipView.ItemTemplate>
                                         <DataTemplate x:DataType="m:Document">
                                             <Grid>
-                                                <toolkit:ImageEx Source="{Binding Image}" PlaceholderSource="{StaticResource PlaceHolderImageLarge}" VerticalAlignment="Center" Stretch="UniformToFill"/>
+                                                <control:ImageEx Source="{Binding Image}" PlaceholderSource="{StaticResource PlaceHolderImageLarge}" VerticalAlignment="Center" Stretch="UniformToFill"/>
                                                 <Border>
                                                     <Border.Background>
                                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.2">
@@ -443,7 +442,7 @@
 
                                 <GridView VerticalAlignment="Bottom" HorizontalAlignment="Center" 
                                                      SelectedIndex="{Binding ElementName=headerFlipView,Path=SelectedIndex}"
-                                                        ItemsSource="{Binding Documents.TopStories}" 
+                                                        ItemsSource="{Binding TopDocuments}" 
                                                         ItemContainerStyle="{StaticResource LegendItemContainerStyle}" />
                             </Grid>
                         </ListView.Header>
@@ -486,7 +485,7 @@
                                         <ColumnDefinition Width="4*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <toolkit:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{Binding Thumbnail}"
+                                    <control:ImageEx Grid.Column="0" Stretch="UniformToFill" MaxHeight="80" MaxWidth="80" Source="{Binding Thumbnail}"
                                              PlaceholderSource="{StaticResource PlaceHolderImageSmall}"/>
 
                                     <StackPanel Grid.Column="1" Margin="12,0">
@@ -594,6 +593,6 @@
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
 
-        <control:GifAnimControl HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <!--<control:GifAnimControl HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
     </Grid>
 </Page>

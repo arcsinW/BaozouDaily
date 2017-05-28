@@ -8,7 +8,7 @@
     xmlns:control="using:BaoZouRiBao.Controls"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core" 
-    xmlns:action="using:BaoZouRiBao.BaoZouAction"
+    xmlns:action="using:BaoZouRiBao.Actions"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     RequestedTheme="{Binding AppTheme}"

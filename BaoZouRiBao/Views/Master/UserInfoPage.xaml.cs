@@ -28,7 +28,7 @@ namespace BaoZouRiBao.Views
 
         public void CoinRank()
         {
-            string uri = string.Format(Http.ServiceUri.MyCoins, GlobalValue.Current.User.AccessToken);
+            string uri = string.Format(Http.ServiceUri.MyCoins, DataShareManager.Current.User.AccessToken);
             WebViewParameter paramter = new WebViewParameter() { Title = "我的金币", WebViewUri = uri, DisplayType = "3" };
             NavigationHelper.DetailFrameNavigate(typeof(WebViewPage), paramter);
         }

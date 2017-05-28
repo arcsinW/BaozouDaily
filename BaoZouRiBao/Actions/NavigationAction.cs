@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 
-namespace BaoZouRiBao.BaoZouAction
+namespace BaoZouRiBao.Actions
 { 
     public class NavigationAction : DependencyObject, IAction
     {

@@ -1,4 +1,5 @@
 ﻿using BaoZouRiBao.Common;
+using BaoZouRiBao.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,11 +24,6 @@ namespace BaoZouRiBao.UserControls
         public CommentItem()
         {
             this.InitializeComponent();
-        }
-        
-        private void StyleParent()
-        {
-            parentTextBlock.Inlines.Add(new Run());
         }
 
         #region Properties
@@ -90,5 +86,54 @@ namespace BaoZouRiBao.UserControls
 
         #endregion
 
+        private void replyBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void replyFlyout_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var comment = (sender as CommentItem).DataContext as Comment;
+
+            if (comment != null)
+            {
+                if (comment.Parent != null)
+                {
+                    parentTextBlock.Inlines.Add(new Run() { Text = "回复" });
+
+                    Run link = new Run() { Text = $"@{comment.Parent.UserName}", Foreground = App.Current.Resources["ThemeColorBrush"] as SolidColorBrush };
+                    parentTextBlock.Inlines.Add(link);
+
+                    parentTextBlock.Inlines.Add(new Run() { Text = $": {comment.Content}" });
+                }
+                else
+                {
+                    parentTextBlock.Inlines.Add(new Run() { Text = comment.Content });
+                }
+            }
+        }
+
+        private void Grid_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            FrameworkElement element = sender as FrameworkElement;
+            //FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(element);
+            //FlyoutBase.ShowAttachedFlyout(element);
+
+            menuFlyout.ShowAt(element, e.GetPosition(element));
+        }
+
+        private void Grid_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            FrameworkElement element = sender as FrameworkElement;
+            //FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(element);
+            //FlyoutBase.ShowAttachedFlyout(element);
+
+            menuFlyout.ShowAt(element, e.GetPosition(element));
+        }
     }
 }

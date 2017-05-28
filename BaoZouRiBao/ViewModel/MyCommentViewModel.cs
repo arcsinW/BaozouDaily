@@ -83,7 +83,7 @@ namespace BaoZouRiBao.ViewModel
             return comments;
         }
 
-        public async void RefreshComments()
+        public async Task RefreshComments()
         {
             await Comments.ClearAndReloadAsync();
         }

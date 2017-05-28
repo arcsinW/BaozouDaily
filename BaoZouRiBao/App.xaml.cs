@@ -1,14 +1,24 @@
-﻿using BaoZouRiBao.Helper;
+﻿using BaoZouRiBao.Utils;
+using BaoZouRiBao.Model;
 using BaoZouRiBao.Views;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.QueryStringDotNET;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Data.Json;
 using Windows.Media.SpeechRecognition;
+using Windows.Networking.PushNotifications;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using BaoZouRiBao.Helper;
 
 namespace BaoZouRiBao
 {
@@ -25,6 +35,7 @@ namespace BaoZouRiBao
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            
             //HockeyClient.Current.Configure("ea627d35afcc4f81b8eb033f9b2e79df");
         }
 
@@ -34,15 +45,7 @@ namespace BaoZouRiBao
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
-        { 
-            switch(e.Kind)
-            {
-                case ActivationKind.ToastNotification:
-                    break;
-                case ActivationKind.VoiceCommand:
-                    break;
-            }
-
+        {
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -53,15 +56,19 @@ namespace BaoZouRiBao
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
-
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                  
+                if (e.PreviousExecutionState != ApplicationExecutionState.Running)
                 {
                     //TODO: Load state from previously suspended application
-                }
-
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
+                    bool loadState = (e.PreviousExecutionState == ApplicationExecutionState.Terminated);
+                    SplashScreenPage extendedSplash = new SplashScreenPage(e.SplashScreen, loadState);
+                    rootFrame.Content = extendedSplash;
+                    Window.Current.Content = rootFrame;
+                } 
             }
+
+            // 通过Toast通知从前台打开
+            HandleNotification(e);
 
             if (rootFrame.Content == null)
             {
@@ -74,14 +81,18 @@ namespace BaoZouRiBao
             // Ensure the current window is active
             Window.Current.Activate();
 
+            PrepareExtraFunction();
+        }
+        
+
+        /// <summary>
+        /// 为应用增加额外功能
+        /// </summary>
+        private void PrepareExtraFunction()
+        {
             VoiceCommandHelper.InstallVCDFile();
-
-#if DEBUG
-            Lary.Apps.SDK.UniversalServices.Config.Initialize(GlobalValue.AccessKey);
-#elif RELEASE
-            Lary.Apps.SDK.UniversalServices.Config.Initialize(GlobalValue.AccessKey);
-#endif
-
+            MobileCenter.Start(GlobalValue.MobileCenterKey, typeof(Analytics));
+            new BackgroundTaskRegisterHelper().RegisterAll();
         }
 
         /// <summary>
@@ -91,6 +102,7 @@ namespace BaoZouRiBao
         /// <param name="e">Details about the navigation failure</param>
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
+            LogHelper.WriteLine(e.Exception);
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
@@ -111,10 +123,82 @@ namespace BaoZouRiBao
         protected override void OnActivated(IActivatedEventArgs args)
         {
             base.OnActivated(args);
+ 
+            // Repeat the same basic initialization as OnLaunched() above, taking into account whether
+            // or not the app is already active.
+            Frame rootFrame = Window.Current.Content as Frame;
 
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active.
+            if (rootFrame == null)
+            {
+                // Create a frame to act as the navigation context and navigate to the first page.
+                rootFrame = new Frame();
+
+                rootFrame.NavigationFailed += OnNavigationFailed;
+
+                // Place the frame in the current window.
+                Window.Current.Content = rootFrame;
+            }
+
+            // Since we're expecting to always show a details page, navigate even if 
+            // a content frame is in place (unlike OnLaunched).
+            // Navigate to either the main trip list page, or if a valid voice command
+            // was provided, to the details page for that trip.
+            //rootFrame.Navigate(navigationToPageType, navigationCommand);
+            HandleNotification(args);
+
+            // Ensure the current window is active
+            Window.Current.Activate();
+        }
+
+        /// <summary>
+        /// 处理通知
+        /// </summary>
+        /// <param name="args"></param>
+        private void HandleNotification(IActivatedEventArgs args)
+        {
+            // 通过Toast通知从后台打开
+            if (args is ToastNotificationActivatedEventArgs)
+            {
+                var toastActivationArgs = args as ToastNotificationActivatedEventArgs;
+          
+                QueryString queryString = QueryString.Parse(toastActivationArgs.Argument);
+
+                LogHelper.WriteLine(toastActivationArgs.Argument);
+
+                string type = string.Empty;
+                if (!queryString.TryGetValue("type", out type))
+                {
+                    return;
+                }
+
+                switch (type)
+                {
+                    // 首页
+                    case "mainpage":
+                    // 投稿
+                    case "contribute":
+                        WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = queryString["uri"], DocumentId = queryString["documentId"], DisplayType = queryString["displayType"] };
+                        NavigationHelper.DetailFrameNavigate(typeof(WebViewPage), parameter);
+                        break;
+                    // 视频
+                    case "video":
+                        NavigationHelper.DetailFrameNavigate(typeof(VideoPage), queryString["documentId"]);
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 处理语音命令
+        /// </summary>
+        /// <param name="args"></param>
+        private void HandleVoiceCommand(IActivatedEventArgs args)
+        {
             Type navigationToPageType;
 
-            if(args.Kind == ActivationKind.VoiceCommand)
+            if (args.Kind == ActivationKind.VoiceCommand)
             {
                 var cmdArgs = args as VoiceCommandActivatedEventArgs;
 
@@ -126,7 +210,7 @@ namespace BaoZouRiBao
                 //speech or text
                 string commandMode = this.SemanticInterpretation("commandMode", speechRecognitionResult);
 
-                switch(voiceCommandName)
+                switch (voiceCommandName)
                 {
                     case "search":
                         string keyword = this.SemanticInterpretation("keyword", speechRecognitionResult);
@@ -144,43 +228,14 @@ namespace BaoZouRiBao
                 var commandArgs = args as ProtocolActivatedEventArgs;
                 Windows.Foundation.WwwFormUrlDecoder decoder = new Windows.Foundation.WwwFormUrlDecoder(commandArgs.Uri.Query);
                 var destination = decoder.GetFirstValueByName("LaunchContext");
-                 
             }
             else
             {
                 // If we were launched via any other mechanism, fall back to the main page view.
                 // Otherwise, we'll hang at a splash screen.
-                
+
             }
-
-            // Repeat the same basic initialization as OnLaunched() above, taking into account whether
-            // or not the app is already active.
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active.
-            if (rootFrame == null)
-            {
-                // Create a frame to act as the navigation context and navigate to the first page.
-                rootFrame = new Frame();
-                
-
-                rootFrame.NavigationFailed += OnNavigationFailed;
-
-                // Place the frame in the current window.
-                Window.Current.Content = rootFrame;
-            }
-
-            // Since we're expecting to always show a details page, navigate even if 
-            // a content frame is in place (unlike OnLaunched).
-            // Navigate to either the main trip list page, or if a valid voice command
-            // was provided, to the details page for that trip.
-            //rootFrame.Navigate(navigationToPageType, navigationCommand);
-
-            // Ensure the current window is active
-            Window.Current.Activate();
         }
-
 
         /// <summary>
         /// Returns the semantic interpretation of a speech result. 

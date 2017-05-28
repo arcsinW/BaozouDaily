@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BaoZouRiBao.Helper;
+using BaoZouRiBao.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,14 +29,36 @@ namespace BaoZouRiBao.Views
             switch (pivot.SelectedIndex)
             {
                 case 0:
-                    ViewModel.RefreshCommentMessages();
+                    ViewModel.RefreshCommentMessagesAsync();
                     break;
                 case 1:
-                    ViewModel.RefreshVoteMessages();
+                    ViewModel.RefreshVoteMessagesAsync();
                     break;
                 case 2:
-                    ViewModel.RefreshAdminMessages();
+                    ViewModel.RefreshAdminMessagesAsync();
                     break;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Message message = ((Button)sender)?.DataContext as Message;
+
+            if (message != null && message.ReceiverComment != null)
+            {
+                var article = message.ReceiverComment.Article;
+                if (article != null)
+                {
+                    if (!article.DisplayType.Equals("3"))
+                    {
+                        WebViewParameter parameter = new WebViewParameter() { Title = article.Title, DocumentId = article.DocumentId, DisplayType = "1" };
+                        MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
+                    }
+                    else
+                    {
+                        NavigationHelper.DetailFrameNavigate(typeof(VideoPage), article.DocumentId);
+                    }
+                }
             }
         }
     }

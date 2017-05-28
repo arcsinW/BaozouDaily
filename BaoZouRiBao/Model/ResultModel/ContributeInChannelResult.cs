@@ -10,7 +10,7 @@ namespace BaoZouRiBao.Model.ResultModel
     public class ContributeInChannelResult
     {
         [JsonProperty(PropertyName = "data")]
-        public Contribute[] Contributes { get; set; }
+        public List<Contribute> Contributes { get; set; }
 
         [JsonProperty(PropertyName = "image")]
         public string Image { get; set; }

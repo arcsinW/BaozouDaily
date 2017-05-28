@@ -24,7 +24,7 @@
     <SccProvider>SAK</SccProvider>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-    <AppxBundle>Always</AppxBundle>
+    <AppxBundle>Never</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>6B380A8E3CC7DD25A315E4A0271602BDB5BA218E</PackageCertificateThumbprint>
     <HockeyAppResourceId>ea627d35afcc4f81b8eb033f9b2e79df</HockeyAppResourceId>
@@ -39,7 +39,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
-    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <OutputPath>bin\ARM\Release\</OutputPath>
@@ -63,6 +63,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -111,15 +112,26 @@
     <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\OpenMenuFlyoutAction.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BaoZouAction\NavigationAction.cs" />
-    <Compile Include="BaoZouAction\StoryAction.cs" />
+    <Compile Include="Actions\NavigationAction.cs" />
+    <Compile Include="Cache\CacheBase.cs" />
+    <Compile Include="Cache\FileCache.cs" />
+    <Compile Include="Cache\ImageCache.cs" />
+    <Compile Include="Cache\InMemoryStorage.cs" />
+    <Compile Include="Cache\InMemoryStorageItem.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Controls\GifAnimControl.cs" />
+    <Compile Include="Controls\GifControlWithTimer.cs" />
+    <Compile Include="Controls\ImageEx\ImageEx.cs" />
+    <Compile Include="Controls\ImageEx\ImageEx.Members.cs" />
+    <Compile Include="Controls\ImageEx\ImageEx.Placeholder.cs" />
+    <Compile Include="Controls\ImageEx\ImageEx.Source.cs" />
+    <Compile Include="Controls\ImageEx\ImageExFailedEventArgs.cs" />
+    <Compile Include="Controls\ImageEx\ImageExOpenedEventArgs.cs" />
     <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\BoolToLikeBitmapConverter.cs" />
     <Compile Include="Converters\BoolToObjectConverter.cs" />
@@ -139,43 +151,46 @@
     <Compile Include="Enums\CommentTypeEnum.cs" />
     <Compile Include="Enums\RankTimeEnum.cs" />
     <Compile Include="Enums\RankTypeEnum.cs" />
+    <Compile Include="Enums\ToastActionEnum.cs" />
     <Compile Include="EventHandlers\UnauthorizedEventHandler.cs" />
     <Compile Include="Events\UnauthorizedEvent.cs" />
     <Compile Include="Extension\WebViewExtension.cs" />
     <Compile Include="Helper\AuthenticationHelper.cs" />
     <Compile Include="Helper\BackgroundDownloadHelper.cs" />
+    <Compile Include="Helper\BackgroundTaskRegisterHelper.cs" />
     <Compile Include="Helper\BaoZouTaskManager.cs" />
+    <Compile Include="Helper\ConnectionHelper.cs" />
+    <Compile Include="Helper\ConnectionType.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\InformationHelper.cs" />
     <Compile Include="Helper\ExceptionHandlingSynchronizationContext.cs" />
-    <Compile Include="Helper\GlobalValue.cs" />
+    <Compile Include="Helper\DataShareManager.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\LogHelper.cs" />
     <Compile Include="Helper\MD5Helper.cs" />
     <Compile Include="Helper\NavigationHelper.cs" />
     <Compile Include="Helper\StatusBarHelper.cs" />
     <Compile Include="Helper\StorageFileHelper.cs" />
+    <Compile Include="Helper\StreamHelper.cs" />
     <Compile Include="Helper\VerifiableBase.cs" />
     <Compile Include="Helper\VerifiableObjectErrors.cs" />
     <Compile Include="Helper\VoiceCommandHelper.cs" />
     <Compile Include="Helper\WeChatHelper.cs" />
+    <Compile Include="HttpHelper\HttpHelper.cs" />
+    <Compile Include="HttpHelper\HttpHelperRequest.cs" />
+    <Compile Include="HttpHelper\HttpHelperResponse.cs" />
     <Compile Include="Http\ApiBaseService.cs" />
     <Compile Include="Http\ApiService.cs" />
     <Compile Include="Http\HttpBaseService.cs" />
     <Compile Include="Http\ServiceUri.cs" />
     <Compile Include="IncrementalCollection\ChannelCollection.cs" />
-    <Compile Include="IncrementalCollection\CommentCollection.cs" />
-    <Compile Include="IncrementalCollection\ContributeCollection.cs" />
-    <Compile Include="IncrementalCollection\ContributeInChannelCollection.cs" />
     <Compile Include="IncrementalCollection\DataSource\RankDataSource.cs" />
-    <Compile Include="IncrementalCollection\DocumentCollection.cs" />
     <Compile Include="IncrementalCollection\IIncrementalSource.cs" />
     <Compile Include="IncrementalCollection\IncrementalLoadingBase.cs" />
     <Compile Include="IncrementalCollection\IncrementalLoadingCollection.cs" />
     <Compile Include="IncrementalCollection\IncrementalLoadingList.cs" />
     <Compile Include="IncrementalCollection\LatestCommentSource.cs" />
     <Compile Include="IncrementalCollection\SearchResultCollection.cs" />
-    <Compile Include="IncrementalCollection\VideoCollection.cs" />
     <Compile Include="Interfaces\IProvider.cs" />
     <Compile Include="Interfaces\IStorage.cs" />
     <Compile Include="Model\Article.cs" />
@@ -235,9 +250,6 @@
     <Compile Include="Controls\IndicatorPivot.cs" />
     <Compile Include="Controls\AndroidPopup.cs" />
     <Compile Include="Controls\DialogService.cs" />
-    <Compile Include="Controls\GifControl.xaml.cs">
-      <DependentUpon>GifControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\BaozouMediaTransportControls.cs" />
     <Compile Include="Controls\BaoZouTaskPopup.cs" />
     <Compile Include="Controls\Drawer.cs" />
@@ -253,6 +265,7 @@
     <Compile Include="UserControls\TaskDialog.xaml.cs">
       <DependentUpon>TaskDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\GlobalValue.cs" />
     <Compile Include="ViewModel\BaozouLoginViewModel.cs" />
     <Compile Include="ViewModel\ChannelViewModel.cs" />
     <Compile Include="ViewModel\CommentPageViewModel.cs" />
@@ -359,6 +372,8 @@
     <Content Include="Assets\BadgeLogo.scale-125.png" />
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
+    <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\Data\Text.txt" />
     <Content Include="Assets\Images\avatar_m.png" />
     <Content Include="Assets\Images\back.png" />
     <Content Include="Assets\Images\actionbar_comment_nor.png" />
@@ -462,6 +477,7 @@
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
     <Content Include="Assets\Square150x150Logo.scale-125.png" />
     <Content Include="Assets\Square150x150Logo.scale-150.png" />
@@ -471,11 +487,19 @@
     <Content Include="Assets\Square310x310Logo.scale-150.png" />
     <Content Include="Assets\Square310x310Logo.scale-200.png" />
     <Content Include="Assets\Square310x310Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
     <Content Include="Assets\Square44x44Logo.scale-100.png" />
     <Content Include="Assets\Square44x44Logo.scale-125.png" />
     <Content Include="Assets\Square44x44Logo.scale-150.png" />
     <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
     <Content Include="Assets\Square71x71Logo.scale-100.png" />
     <Content Include="Assets\Square71x71Logo.scale-125.png" />
     <Content Include="Assets\Square71x71Logo.scale-150.png" />
@@ -487,6 +511,9 @@
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <Content Include="Assets\StoreLogo.scale-400.png" />
     <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="BaozouVoiceCommand.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -519,10 +546,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Themes\ThemeDictionary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\GifControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

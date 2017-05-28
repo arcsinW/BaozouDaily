@@ -14,6 +14,16 @@ namespace BaoZouRiBao.ViewModel
 {
     public class MasterDetailPageViewModel : ViewModelBase
     {
+        public MasterDetailPageViewModel()
+        {
+            AppTheme = DataShareManager.Current.AppTheme;
+            User = DataShareManager.Current.User;
+
+            DataShareManager.Current.DataChanged += Current_DataChanged;
+            //StatusBarHelper.ShowStatusBar(AppTheme == ElementTheme.Dark);
+            SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
+        }
+
         #region Properties
         private User user;
 
@@ -47,21 +57,11 @@ namespace BaoZouRiBao.ViewModel
             }
         }
         #endregion
-
-        public MasterDetailPageViewModel()
-        {
-            AppTheme = GlobalValue.Current.AppTheme;
-            User = GlobalValue.Current.User;
-
-            GlobalValue.Current.DataChanged += Current_DataChanged;
-            StatusBarHelper.ShowStatusBar(appTheme == ElementTheme.Dark);
-            SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
-        }
-
+        
         private void Current_DataChanged()
         {
-            AppTheme = GlobalValue.Current.AppTheme;
-            User = GlobalValue.Current.User;
+            AppTheme = DataShareManager.Current.AppTheme;
+            User = DataShareManager.Current.User;
         }
 
         private void MasterDetailPage_BackRequested(object sender, BackRequestedEventArgs e)
@@ -73,7 +73,7 @@ namespace BaoZouRiBao.ViewModel
         #region Pane Method
         public void LoginPage()
         {
-            if (GlobalValue.Current.User != null && !string.IsNullOrEmpty(GlobalValue.Current.User.AccessToken))
+            if (DataShareManager.Current.User != null && !string.IsNullOrEmpty(DataShareManager.Current.User.AccessToken))
             {
                 NavigationHelper.MasterFrameNavigate(typeof(UserInfoPage));
             }
@@ -83,16 +83,20 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
+
+        /// <summary>
+        /// 切换日夜间模式
+        /// </summary>
         public void DayNightMode()
         {
             if (AppTheme == ElementTheme.Dark)
             {
-                GlobalValue.Current.UpdateAppTheme(ElementTheme.Light);
+                DataShareManager.Current.UpdateAppTheme(ElementTheme.Light);
                 StatusBarHelper.ShowStatusBar(false);
             }
             else
             {
-                GlobalValue.Current.UpdateAppTheme(ElementTheme.Dark);
+                DataShareManager.Current.UpdateAppTheme(ElementTheme.Dark);
                 StatusBarHelper.ShowStatusBar(true);
             }
         }

@@ -22,11 +22,19 @@ namespace BaoZouRiBao.ViewModel
             Clipboard.ContentChanged += Clipboard_ContentChanged;
         }
 
+        ~MyRecommendViewModel()
+        {
+            Clipboard.ContentChanged -= Clipboard_ContentChanged;
+        }
+
         private void Clipboard_ContentChanged(object sender, object e)
         {
             LoadShareUri();
         }
 
+        /// <summary>
+        /// 获取分享Uri
+        /// </summary>
         public async void LoadShareUri()
         {
             DataPackageView dataPackage = Clipboard.GetContent();
@@ -62,6 +70,10 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
+        /// <summary>
+        /// 通过Uri获取Title
+        /// </summary>
+        /// <returns></returns>
         private async Task GetTitleByUri()
         {
             try

@@ -1,17 +1,17 @@
 ﻿<Page
     x:Class="BaoZouRiBao.Views.CommentPage"
+    x:Name="commentPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     xmlns:m="using:BaoZouRiBao.Model"
     xmlns:controls="using:BaoZouRiBao.Controls"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:converter="using:BaoZouRiBao.Converters"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:action="using:BaoZouRiBao.Actions"
     xmlns:uc="using:BaoZouRiBao.UserControls"
     mc:Ignorable="d">
 
@@ -23,6 +23,14 @@
         <converter:IsNullOrEmptyToBoolConverter x:Key="IsNullOrEmptyToBoolConverter"/>
         <converter:ParentToTextBlockConverter x:Key="ParentToTextBlockConverter"/>
         <converter:BoolToLikeBitmapConverter x:Key="BoolToLikeBitmapConverter"/>
+
+        <MenuFlyout x:Name="CommentMenuFlyout"> 
+            <MenuFlyout.Items>
+                <MenuFlyoutItem Text="点赞" Command="{x:Bind ViewModel.VoteCommand}" CommandParameter="{Binding Id}"/>
+                <MenuFlyoutItem Text="评论" Click="replyFlyout_Click"/>
+                <MenuFlyoutItem Text="举报" Command="{x:Bind ViewModel.ReportCommand}" CommandParameter="{Binding Id}"/>
+            </MenuFlyout.Items>
+        </MenuFlyout>
 
         <Style x:Key="SendButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -118,9 +126,9 @@
                 </Button.Content>
                 <Button.Flyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="刷新" x:Name="refresh" Click="refresh_Click" MinHeight="48"/>
-                        <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}" MinHeight="48"/>
-                        <MenuFlyoutItem Text="设置" MinHeight="48"/>
+                        <MenuFlyoutItem Text="刷新" x:Name="refresh" Click="refresh_Click" />
+                        <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}" />
+                        <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
                     </MenuFlyout>
                 </Button.Flyout>
             </Button>
@@ -133,119 +141,163 @@
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             <PivotItem Header="最新">
-                <ListView x:Name="latestListView" ItemsSource="{Binding LatestComments}"
-                          ItemContainerStyle="{ThemeResource CommentItemContainerStyle}"
-                          Margin="0,0,0,48">
-                    <ListView.ItemTemplate> 
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                <Grid>
+                    <ListView x:Name="latestListView" ItemsSource="{Binding LatestComments}"
+                              ItemContainerStyle="{ThemeResource CommentItemContainerStyle}"
+                              Margin="0,0,0,48"
+                              FlyoutBase.AttachedFlyout="{StaticResource CommentMenuFlyout}"
+                              IsHoldingEnabled="True" IsRightTapEnabled="True"
+                              >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <uc:CommentItem/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <!--IsHoldingEnabled="True"
+                              IsRightTapEnabled="True"
+                              Holding="latestListView_Holding"
+                              RightTapped="latestListView_RightTapped"-->
+                        <!--<ListView.ItemTemplate>
+                            <DataTemplate x:DataType="m:Document">
+                                <Grid>
+                                    <FlyoutBase.AttachedFlyout>
+                                        <MenuFlyout>
+                                            <MenuFlyout.Items>
+                                                <MenuFlyoutItem Text="点赞" Command="{Binding DataContext.VoteCommand, ElementName=commentPage}" CommandParameter="{Binding Id}"/>
+                                                <MenuFlyoutItem Text="评论" Click="replyFlyout_Click"/>
+                                                <MenuFlyoutItem Text="举报" Command="{Binding DataContext.ReportCommand, ElementName=commentPage}" CommandParameter="{Binding Id}"/>
+                                            </MenuFlyout.Items>
+                                        </MenuFlyout>
+                                    </FlyoutBase.AttachedFlyout>
 
-                                <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="{Binding User.RealAvatarUrl,FallbackValue={StaticResource PlaceHolderAvatar}}"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
+                                    <i:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Holding">
+                                            <action:OpenMenuFlyoutAction/>
+                                        </core:EventTriggerBehavior>
+                                        <core:EventTriggerBehavior EventName="RightTap">
+                                            <action:OpenMenuFlyoutAction/>
+                                        </core:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                    
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Grid Grid.Column="1" Margin="8,0">
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding User.Name,Mode=OneWay}"/>
+                                    <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding User.RealAvatarUrl,FallbackValue={StaticResource PlaceHolderAvatar}}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
 
-                                        <TextBlock x:Name="parent" TextWrapping="Wrap" Margin="0,16">
+                                    <Grid Grid.Column="1" Margin="8,0">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding User.Name,Mode=OneWay}"/>
+
+                                            <TextBlock x:Name="parent" TextWrapping="Wrap" Margin="0,16">
                                             <Run Text="{Binding Content}" />
-                                        </TextBlock>
-                                        
-                                        <Grid>
-                                            <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0"/>
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                <Button x:Name="replyBtn" Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0"
-                                                        Click="replyBtn_Click">
-                                                    <!--Command="{Binding DataContext.CommentCommand,ElementName=latestListView}" CommandParameter="{Binding Id}">-->
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>
-                                                        <TextBlock Text="回复" Style="{ThemeResource DescTextBlockStyle}"/>
-                                                    </StackPanel>
-                                                </Button>
+                                            </TextBlock>
 
-                                                <Button x:Name="likeBtn" Height="24" Width="48" HorizontalAlignment="Right" Style="{ThemeResource ImageButtonStyle}"
+                                            <Grid>
+                                                <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0"/>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <Button x:Name="replyBtn" Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0"
+                                                        Click="replyBtn_Click">
+                                                        --><!--Command="{Binding DataContext.CommentCommand,ElementName=latestListView}" CommandParameter="{Binding Id}">--><!--
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>
+                                                            <TextBlock Text="回复" Style="{ThemeResource DescTextBlockStyle}"/>
+                                                        </StackPanel>
+                                                    </Button>
+
+                                                    <Button x:Name="likeBtn" Height="24" Width="48" HorizontalAlignment="Right" Style="{ThemeResource ImageButtonStyle}"
                                                         Command="{Binding VoteCommand}" CommandParameter="{Binding Id}">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <Image Source="{Binding Like,Converter={StaticResource BoolToLikeBitmapConverter}}" VerticalAlignment="Center"/>
-                                                        <TextBlock Text="{Binding Likes}"   Style="{ThemeResource DescTextBlockStyle}"/>
-                                                    </StackPanel>
-                                                </Button>
-                                            </StackPanel>
-                                        </Grid>
-                                    </StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Source="{Binding Like,Converter={StaticResource BoolToLikeBitmapConverter}}" VerticalAlignment="Center"/>
+                                                            <TextBlock Text="{Binding Likes}"   Style="{ThemeResource DescTextBlockStyle}"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>-->
+                    </ListView>
+
+                    <TextBlock Text="暂无数据" 
+                               Visibility="{Binding IsLatestCommentsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{ThemeResource LoadErrorTextBlockStyle}"/>
+                </Grid>
             </PivotItem>
             <PivotItem Header="热门">
-                <ListView x:Name="hottestListView" ItemsSource="{Binding HotComments}"
+                <Grid>
+                    <ListView x:Name="hottestListView" ItemsSource="{Binding HotComments}"
                           ItemContainerStyle="{ThemeResource CommentItemContainerStyle}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="{Binding User.RealAvatarUrl,FallbackValue={StaticResource PlaceHolderAvatar}}"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
+                                    <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding User.RealAvatarUrl,FallbackValue={StaticResource PlaceHolderAvatar}}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
 
-                                <Grid Grid.Column="1" Margin="8,0">
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding User.Name,Mode=OneWay}"/>
-                                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="0,16"/>
+                                    <Grid Grid.Column="1" Margin="8,0">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding User.Name,Mode=OneWay}"/>
+                                            <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="0,16"/>
 
-                                        <Grid>
-                                            <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0,0,12,0"/>
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                <Button x:Name="replyBtn" Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0"
+                                            <Grid>
+                                                <TextBlock Text="{Binding Time,Converter={StaticResource TimeStampToDateTimeConverter}}" Margin="0,0,12,0"/>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <Button x:Name="replyBtn" Height="24" Width="Auto" Style="{ThemeResource ImageButtonStyle}" Margin="0,0,8,0"
                                                         Command="{Binding DataContext.CommentCommand,ElementName=hottestListView}" CommandParameter="{Binding Id}">
-                                                    <!--<i:Interaction.Behaviors>
+                                                        <!--<i:Interaction.Behaviors>
                                                         <core:EventTriggerBehavior EventName="Click">
                                                             <core:EventTriggerBehavior.Actions>
                                                                 <core:InvokeCommandAction Command="{Binding DataContext.replyBtn_Click,ElementName=hottestListView}" CommandParameter="{Binding Id}"/>
                                                             </core:EventTriggerBehavior.Actions>
                                                         </core:EventTriggerBehavior>
                                                     </i:Interaction.Behaviors>-->
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>
-                                                        <TextBlock Text="回复" Style="{ThemeResource DescTextBlockStyle}"/>
-                                                    </StackPanel>
-                                                </Button>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Source="ms-appx:///Assets/Images/btn_video_reply_nor.png"/>
+                                                            <TextBlock Text="回复" Style="{ThemeResource DescTextBlockStyle}"/>
+                                                        </StackPanel>
+                                                    </Button>
 
-                                                <Button x:Name="likeBtn" Height="24" Width="48" Style="{ThemeResource ImageButtonStyle}"
+                                                    <Button x:Name="likeBtn" Height="24" Width="48" Style="{ThemeResource ImageButtonStyle}"
                                                          Command="{Binding DataContext.VoteCommand, ElementName=hottestListView}" CommandParameter="{Binding Id}">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <Image Source="ms-appx:///Assets/Images/btn_video_like_nor.png" VerticalAlignment="Center"/>
-                                                        <TextBlock Text="{Binding Likes}"   Style="{ThemeResource DescTextBlockStyle}"/>
-                                                    </StackPanel>
-                                                </Button>
-                                            </StackPanel>
-                                        </Grid>
-                                    </StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Source="ms-appx:///Assets/Images/btn_video_like_nor.png" VerticalAlignment="Center"/>
+                                                            <TextBlock Text="{Binding Likes}"   Style="{ThemeResource DescTextBlockStyle}"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <TextBlock Text="暂无数据" 
+                               Visibility="{Binding IsHotCommentsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{ThemeResource LoadErrorTextBlockStyle}"/>
+                </Grid>
             </PivotItem>
         </controls:IndicatorPivot>
 
         <ProgressRing IsActive="{Binding IsActive}" Grid.RowSpan="2" Style="{ThemeResource LightProgressRingStyle}"/>
 
+        <!--下方评论栏-->
         <Grid Background="{ThemeResource PaneBackground}" MinHeight="48" Grid.Row="1" 
               VerticalAlignment="Bottom" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource ThemeColorBrush}">
             <Grid.ColumnDefinitions>

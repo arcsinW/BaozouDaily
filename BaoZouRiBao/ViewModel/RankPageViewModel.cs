@@ -19,6 +19,28 @@ namespace BaoZouRiBao.ViewModel
 {
     public class RankPageViewModel : ViewModelBase
     {
+        public RankPageViewModel()
+        {
+            RefreshReadCollectionCommand = new RelayCommand(async () =>
+            {
+                await RefreshReadCollectionAsync(RankTimeIndex);
+            });
+
+            RefreshVoteCollectionCommand = new RelayCommand(async () =>
+            {
+                await RefreshVoteCollectionAsync(RankTimeIndex);
+            });
+
+            RefreshCommentCollectionCommand = new RelayCommand(async () =>
+            {
+                await RefreshCommentCollectionAsync(RankTimeIndex);
+            });
+
+            if (IsDesignMode)
+            {
+                LoadDesignData();
+            }
+        }
 
         #region Properties
         public ObservableCollection<Document> ReadCollection { get; set; } = new ObservableCollection<Document>();
@@ -55,30 +77,7 @@ namespace BaoZouRiBao.ViewModel
         public RelayCommand RefreshCommentCollectionCommand { get; set; }
 
         #endregion
-
-        public RankPageViewModel()
-        {
-            RefreshReadCollectionCommand = new RelayCommand(async() =>
-            {
-                await RefreshReadCollectionAsync(RankTimeIndex);
-            });
-
-            RefreshVoteCollectionCommand = new RelayCommand(async() =>
-            {
-                await RefreshVoteCollectionAsync(RankTimeIndex);
-            });
-
-            RefreshCommentCollectionCommand = new RelayCommand(async() =>
-            {
-                await RefreshCommentCollectionAsync(RankTimeIndex);
-            });
-
-            if (IsDesignMode)
-            {
-                LoadDesignData();
-            }
-        }
-
+         
         /// <summary>
         /// 刷新阅读排行榜
         /// </summary>

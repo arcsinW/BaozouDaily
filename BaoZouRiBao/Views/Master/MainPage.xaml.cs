@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using System;
+using Windows.UI.Xaml.Navigation;
 
 namespace BaoZouRiBao.Views
 {
@@ -12,11 +13,7 @@ namespace BaoZouRiBao.Views
     {
         public MainPage()
         {
-            this.InitializeComponent();
-
-             
-
-            MasterDetailPage.Current.AdaptiveVisualStateChanged += Current_AdaptiveVisualStateChanged;
+            this.InitializeComponent(); 
         }
 
         private void Current_AdaptiveVisualStateChanged(object sender, VisualStateChangedEventArgs e)
@@ -32,6 +29,16 @@ namespace BaoZouRiBao.Views
                     pageTitleTextBlock.Margin = (Thickness)(Application.Current.Resources["WidePageTitleMargin"]);
                     break;
             }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            MasterDetailPage.Current.AdaptiveVisualStateChanged -= Current_AdaptiveVisualStateChanged;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            MasterDetailPage.Current.AdaptiveVisualStateChanged += Current_AdaptiveVisualStateChanged;
         }
 
         #region SplitView' Pane Method
@@ -53,7 +60,7 @@ namespace BaoZouRiBao.Views
 
         public void LoginPage()
         {
-            if (GlobalValue.Current.User != null)
+            if (DataShareManager.Current.User != null)
             {
                 NavigationHelper.MasterFrameNavigate(typeof(UserInfoPage));
             }
@@ -97,11 +104,11 @@ namespace BaoZouRiBao.Views
         {
             if (this.RequestedTheme == ElementTheme.Dark)
             {
-                GlobalValue.Current.UpdateAppTheme(ElementTheme.Light);
+                DataShareManager.Current.UpdateAppTheme(ElementTheme.Light);
             }
             else
             {
-                GlobalValue.Current.UpdateAppTheme(ElementTheme.Dark);
+                DataShareManager.Current.UpdateAppTheme(ElementTheme.Dark);
             }
         }
         #endregion
@@ -117,18 +124,18 @@ namespace BaoZouRiBao.Views
             }
         }
 
-        public void Refresh()
+        public async void Refresh()
         {
-            switch(pivot.SelectedIndex)
+            switch (pivot.SelectedIndex)
             {
                 case 0:
-                    ViewModel.RefreshDocument();
+                    await ViewModel.RefreshDocument();
                     break;
                 case 1:
-                    ViewModel.RefreshContribute();
+                    await ViewModel.RefreshContribute();
                     break;
                 case 2:
-                    ViewModel.RefreshVideo();
+                    await ViewModel.RefreshVideo();
                     break;
             }
         }
@@ -156,6 +163,5 @@ namespace BaoZouRiBao.Views
                 }
             }
         }
-
     }
 }

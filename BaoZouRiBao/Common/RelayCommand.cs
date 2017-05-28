@@ -18,7 +18,7 @@ namespace BaoZouRiBao.Common
     {
         private readonly Action<object> _executeWithPara;
         private readonly Func<bool> _canExecute;
-        private readonly Action _execute;
+        private readonly System.Action _execute;
         /// <summary>
         /// 调用 RaiseCanExecuteChanged 时引发。
         /// </summary>
@@ -37,7 +37,7 @@ namespace BaoZouRiBao.Common
         /// 创建可始终执行的新命令。
         /// </summary>
         /// <param name="execute">执行逻辑。</param>
-        public RelayCommand(Action execute)
+        public RelayCommand(System.Action execute)
             : this(execute, null)
         {
         }
@@ -60,7 +60,7 @@ namespace BaoZouRiBao.Common
         /// </summary>
         /// <param name="execute">执行逻辑。</param>
         /// <param name="canExecute">执行状态逻辑。</param>
-        public RelayCommand(Action execute, Func<bool> canExecute)
+        public RelayCommand(System.Action execute, Func<bool> canExecute)
         {
             if (execute == null)
                 throw new ArgumentNullException("execute");

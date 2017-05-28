@@ -12,6 +12,7 @@ using BaoZouRiBao.Helper;
 using BaoZouRiBao.Views;
 using Windows.System;
 using BaoZouRiBao.Controls;
+using Windows.Storage;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -136,7 +137,7 @@ namespace BaoZouRiBao.ViewModel
             IsActive = true;
         }
 
-        public void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args) 
+        public void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
             IsActive = false;
         }
@@ -164,26 +165,26 @@ namespace BaoZouRiBao.ViewModel
 
                     break;
             }
-            IsFavorite = Document.Favorited;
+
+            if (Document != null)
+            {
+                IsFavorite = Document.Favorited;
+            }
+
             IsActive = false;
         }
-
-        private async Task<VoteOperationResult> Favorite(string documentId)
-        {
-            var res = await ApiService.Instance.FavoriteAsync(documentId);
-            return res;
-        }
+        
 
         /// <summary>
         /// 收藏
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public async void FavoriteBtnClick(object sender, RoutedEventArgs e)
+        public async void Favorite(object sender, RoutedEventArgs e)
         {
             if (DocumentExtra != null)
             {
-                var res = await Favorite(DocumentExtra.DocumentId.ToString());
+                var res = await ApiService.Instance.FavoriteAsync(DocumentExtra.DocumentId);
                 if (res != null)
                 {
                     if (res.Status.Equals("2006"))
@@ -194,28 +195,28 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-    /// <summary>
-    /// 点赞文章
-    /// </summary>
-    /// <param name="documentId"></param>
-    /// <returns></returns>
-    public async Task Vote()
-    {
-        if (Document != null)
+        /// <summary>
+        /// 点赞文章
+        /// </summary>
+        /// <param name="documentId"></param>
+        /// <returns></returns>
+        public async Task Vote()
         {
-            var result = await ApiService.Instance.VoteAsync(Document.DocumentId);
-            if (result != null)
+            if (Document != null)
             {
-                if (result.Status.Equals("1000")) //点赞成功
+                var result = await ApiService.Instance.VoteAsync(Document.DocumentId);
+                if (result != null)
                 {
-                    DocumentExtra.VoteCount = result.Data.Count;
+                    if (result.Status.Equals("1000")) //点赞成功
+                    {
+                        DocumentExtra.VoteCount = result.Data.Count;
+                    }
+                    ToastService.SendToast(result.AlertDesc);
                 }
-                ToastService.SendToast(result.alertDesc);
             }
-        }
 
-        VoteTask();
-    }
+            VoteTask();
+        }
 
         /// <summary>
         /// 完成点赞文章的任务
@@ -243,10 +244,21 @@ namespace BaoZouRiBao.ViewModel
         /// </summary>
         public async void LaunchByBrower()
         {
-            if(Document != null)
+            if (Document != null)
             {
                 await Launcher.LaunchUriAsync(new Uri(Document.ShareUrl));
             }
+        }
+
+        public async void Share()
+        {
+            if (!IsMobile)
+            {
+                ToastService.SendToast("PC上不支持微信分享");
+                return;
+            } 
+
+            await WeChatHelper.ShareWebAsync(Document.Title, "", Document.ShareUrl);
         }
     }
 }

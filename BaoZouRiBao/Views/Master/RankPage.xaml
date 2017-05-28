@@ -253,24 +253,24 @@
                 </controls:RefreshableListView>
             </PivotItem>
             <PivotItem Header="赞">
-                <toolkit:PullToRefreshListView 
+                <controls:RefreshableListView
                               ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                               ItemsSource="{Binding VoteCollection}"
                               ItemTemplate="{StaticResource DocumentDataTemplate}"
-                              IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
+                              IsItemClickEnabled="True"
                               ItemClick="{x:Bind ViewModel.ListView_ItemClick}"
                               RefreshCommand="{Binding RefreshVoteCollectionCommand}">
-                </toolkit:PullToRefreshListView>
+                </controls:RefreshableListView>
             </PivotItem>
             <PivotItem Header="评论">
-                <toolkit:PullToRefreshListView 
+                <controls:RefreshableListView
                               ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                               ItemsSource="{Binding CommentCollection}"
                               ItemTemplate="{StaticResource DocumentDataTemplate}"
-                              IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
+                              IsItemClickEnabled="True"
                               ItemClick="{x:Bind ViewModel.ListView_ItemClick}"
                               RefreshCommand="{Binding RefreshCommentCollectionCommand}">
-                </toolkit:PullToRefreshListView>
+                </controls:RefreshableListView>
             </PivotItem>
         </controls:IndicatorPivot>
 

@@ -108,6 +108,9 @@ namespace BaoZouRiBao.ViewModel
             return documents;
         }
 
+        /// <summary>
+        /// 刷新
+        /// </summary>
         public override async void Refresh()
         {
             IsActive = true;

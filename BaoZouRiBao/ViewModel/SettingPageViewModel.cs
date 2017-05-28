@@ -19,17 +19,22 @@ namespace BaoZouRiBao.ViewModel
         {
             LoadSettings();
 
-            GlobalValue.Current.DataChanged += Current_DataChanged;
+            DataShareManager.Current.DataChanged += Current_DataChanged;
 
-            if (GlobalValue.Current.User != null && !string.IsNullOrEmpty(GlobalValue.Current.User.AccessToken))
+            if (DataShareManager.Current.User != null && !string.IsNullOrEmpty(DataShareManager.Current.User.AccessToken))
             {
                 IsLogoutEnable = true;
             }
         }
 
+        ~SettingPageViewModel()
+        {
+            DataShareManager.Current.DataChanged -= Current_DataChanged;
+        }
+
         private void Current_DataChanged()
         {
-            if (GlobalValue.Current.User != null && !string.IsNullOrEmpty(GlobalValue.Current.User.AccessToken))
+            if (DataShareManager.Current.User != null && !string.IsNullOrEmpty(DataShareManager.Current.User.AccessToken))
             {
                 IsLogoutEnable = true;
             }

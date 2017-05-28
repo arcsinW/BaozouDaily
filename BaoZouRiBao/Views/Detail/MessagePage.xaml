@@ -70,7 +70,10 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <controls:IndicatorPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" IndicatorLineStokeThickness="2" >
+            <controls:IndicatorPivot x:Name="pivot" Grid.Row="1" 
+                                     IndicatorLineStroke="{ThemeResource ThemeColorBrush}" 
+                                     IndicatorLineStokeThickness="2" 
+                                     Margin="0" Padding="0">
                 <Pivot.HeaderTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding }" Style="{ThemeResource PivotHeaderTextBlockStyle}" Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
@@ -79,8 +82,86 @@
                 <PivotItem Header="评论">
                     <Grid>
                         <ListView ItemsSource="{Binding CommentMessages}"
-                              ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
-                              ItemTemplate="{StaticResource MessageDataTemplate}">
+                              ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="m:Message">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="64"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!--#region Sender-->
+                                        <Grid Grid.Row="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+ 
+                                            <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
+                                                <Ellipse.Fill>
+                                                    <ImageBrush ImageSource="{Binding Sender.Avatar,FallbackValue={StaticResource DefaultAvatar}}"/>
+                                                </Ellipse.Fill>
+                                            </Ellipse>
+
+                                            <Grid Grid.Column="1" Margin="12,0">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Sender.Name}"/>
+                                                    <TextBlock Text="{Binding SenderComment.Content}" TextWrapping="Wrap" Margin="0,16"/>
+                                                    <TextBlock Text="{Binding SenderComment.CreatedAt}" Margin="0,0,12,0"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Grid>
+                                        <!--#endregion-->
+                                        
+                                        <Grid Grid.Row="1" Padding="12,8" Background="#F6F6F6">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Ellipse Grid.Column="0" Width="40" Height="40" VerticalAlignment="Top">
+                                                <Ellipse.Fill>
+                                                    <ImageBrush ImageSource="{Binding Receiver.Avatar,FallbackValue={StaticResource DefaultAvatar}}"/>
+                                                </Ellipse.Fill>
+                                            </Ellipse>
+
+                                            <Grid Grid.Column="1" Margin="12">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                
+                                                <StackPanel Grid.Row="0">
+                                                    <TextBlock Text="{Binding Receiver.Name}"/>
+                                                    <TextBlock Text="{Binding ReceiverComment.Content}" TextWrapping="Wrap" Margin="0,16"/>
+                                                    <TextBlock Text="{Binding ReceiverComment.CreatedAt}" Margin="0,0,12,0"/>
+                                                </StackPanel> 
+                                            </Grid>
+                                        </Grid>
+
+                                        <!--#region 文章标题和图片-->
+                                        <Button Grid.Row="2" Height="64" 
+                                                    Style="{ThemeResource ImageButtonStyle}"
+                                                    HorizontalAlignment="Stretch" BorderThickness="0,0,0,1"
+                                                    Background="{ThemeResource InnerDocumentBackgroundThemeBrush}"
+                                                    Click="Button_Click"
+                                                    HorizontalContentAlignment="Stretch">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="64"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Column="0" Stretch="UniformToFill" Source="{Binding ReceiverComment.Article.Image}"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding ReceiverComment.Article.Title}" Margin="12,0"
+                                                            TextWrapping="Wrap" VerticalAlignment="Center" Foreground="{ThemeResource PhoneForegroundColorBrush}"/>
+                                            </Grid>
+                                        </Button>
+                                        <!--#endregion-->
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
                         </ListView>
 
                         <TextBlock Text="暂无数据" 

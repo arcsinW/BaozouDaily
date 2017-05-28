@@ -44,9 +44,16 @@
             </Button>
 
             <Grid Grid.Column="1">
-                <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
-                            Style="{ThemeResource PageTitleTextBlockStyle}" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                            HorizontalAlignment="Left" ScrollViewer.HorizontalScrollMode="Enabled"/>
+                <ScrollViewer ScrollViewer.HorizontalScrollMode="Auto"
+                      ScrollViewer.IsHorizontalRailEnabled="True"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ScrollViewer.Content>
+                        <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
+                            Style="{ThemeResource PageTitleTextBlockStyle}" 
+                            HorizontalAlignment="Left" />
+                    </ScrollViewer.Content>
+                </ScrollViewer> 
             </Grid>
             
             <StackPanel x:Name="stackPanel" Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal">
@@ -65,11 +72,11 @@
                     </StackPanel>
                 </Button>
 
-                <Button Style="{ThemeResource BackButtonStyle}" Padding="4,10" Click="{x:Bind ViewModel.FavoriteBtnClick}">
+                <Button Style="{ThemeResource ImageTextButtonStyle}" Padding="4,10" Click="{x:Bind ViewModel.Favorite}">
                     <PathIcon Data="{x:Bind ViewModel.IsFavorite,Mode=OneWay,Converter={StaticResource BoolToPathIconConverter}}"/>
                 </Button>
 
-                <Button Style="{ThemeResource BackButtonStyle}">
+                <Button Style="{ThemeResource BackButtonStyle}" Padding="4,10">
                     <BitmapIcon UriSource="/Assets/Images/home_more.png"/>
                     <Button.Flyout>
                         <MenuFlyout>
@@ -89,8 +96,7 @@
         <WebView x:Name="webView"  Grid.Row="1" ex:WebViewExtension.HtmlString="{Binding HtmlString}"
                  NavigationStarting="{x:Bind ViewModel.WebView_NavigationStarting}"
                  NavigationCompleted="{x:Bind ViewModel.WebView_NavigationCompleted}"/>
- 
-        
+
         <Popup Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom"
                Height="48" x:Name="topPop" IsOpen="True" Width="48" Margin="16,32" >
             <Popup.ChildTransitions>
@@ -99,7 +105,7 @@
                 </TransitionCollection>
             </Popup.ChildTransitions>
             <Popup.Child> 
-                <Button Width="48" Height="48" Style="{ThemeResource ImageButtonStyle}">
+                <Button Width="48" Height="48" Style="{ThemeResource ImageButtonStyle}" Click="{x:Bind ViewModel.Share}">
                     <Image Source="ms-appx:///Assets/Images/article_share.png"/>
                 </Button>
             </Popup.Child>
