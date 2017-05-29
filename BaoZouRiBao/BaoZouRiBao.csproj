@@ -24,7 +24,7 @@
     <SccProvider>SAK</SccProvider>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-    <AppxBundle>Never</AppxBundle>
+    <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>6B380A8E3CC7DD25A315E4A0271602BDB5BA218E</PackageCertificateThumbprint>
     <HockeyAppResourceId>ea627d35afcc4f81b8eb033f9b2e79df</HockeyAppResourceId>
@@ -369,11 +369,6 @@
     <None Include="BaoZouRiBao_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\BadgeLogo.scale-100.png" />
-    <Content Include="Assets\BadgeLogo.scale-125.png" />
-    <Content Include="Assets\BadgeLogo.scale-150.png" />
-    <Content Include="Assets\BadgeLogo.scale-200.png" />
-    <Content Include="Assets\BadgeLogo.scale-400.png" />
     <Content Include="Assets\Data\Text.txt" />
     <Content Include="Assets\Images\avatar_m.png" />
     <Content Include="Assets\Images\back.png" />

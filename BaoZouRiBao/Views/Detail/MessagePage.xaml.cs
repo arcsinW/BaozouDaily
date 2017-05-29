@@ -24,18 +24,18 @@ namespace BaoZouRiBao.Views
             this.InitializeComponent();
         }
 
-        public void Refresh()
+        public async void Refresh()
         {
             switch (pivot.SelectedIndex)
             {
                 case 0:
-                    ViewModel.RefreshCommentMessagesAsync();
+                    await ViewModel.RefreshCommentMessagesAsync();
                     break;
                 case 1:
-                    ViewModel.RefreshVoteMessagesAsync();
+                    await ViewModel.RefreshVoteMessagesAsync();
                     break;
                 case 2:
-                    ViewModel.RefreshAdminMessagesAsync();
+                    await ViewModel.RefreshAdminMessagesAsync();
                     break;
             }
         }

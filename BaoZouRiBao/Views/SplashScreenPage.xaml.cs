@@ -38,14 +38,12 @@ namespace BaoZouRiBao.Views
 
             AppTheme = DataShareManager.Current.AppTheme; 
              
-            //StatusBarHelper.ShowStatusBar(AppTheme == ElementTheme.Dark);
+            StatusBarHelper.ShowStatusBar(AppTheme == ElementTheme.Dark);
 
             // Listen for window resize events to reposition the extended splash screen image accordingly.
             // This ensures that the extended splash screen formats properly in response to window resizing.
             Window.Current.SizeChanged += new WindowSizeChangedEventHandler(ExtendedSplash_OnResize);
-
-            ScaleFactor = Windows.Graphics.Display.DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
-
+            
             splash = splashscreen;
             if (splash != null)
             {
@@ -54,6 +52,8 @@ namespace BaoZouRiBao.Views
 
                 // Retrieve the window coordinates of the splash screen image.
                 splashImageRect = splash.ImageLocation;
+
+                ScaleFactor = Windows.Graphics.Display.DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
 
                 PositionElement();
             }

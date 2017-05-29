@@ -18,9 +18,9 @@
             <Image x:Name="extendedSplashImage"  Source="/Assets/SplashScreen.png"/>
         </Canvas>
 
-        <StackPanel Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,72">
+        <StackPanel Grid.Row="1"  HorizontalAlignment="Center" >
             <ProgressRing Name="splashProgressRing" Height="48" Margin="0,0,0,24" Foreground="White" IsActive="True"  HorizontalAlignment="Center"/>
-            <TextBlock x:Name="tipTextBlock" Foreground="White"  HorizontalAlignment="Center"/>
+            <TextBlock x:Name="tipTextBlock" Foreground="White" TextWrapping="Wrap"  HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Page>

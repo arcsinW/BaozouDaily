@@ -91,7 +91,7 @@ namespace BaoZouRiBao.Helper
             }
             catch (Exception ex)
             {
-
+                LogHelper.WriteLine(ex);
             }
         }
 
