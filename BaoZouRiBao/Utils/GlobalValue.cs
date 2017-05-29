@@ -8,7 +8,6 @@ namespace BaoZouRiBao.Utils
 {
     public class GlobalValue
     {
-//#if DEBUG
         /// <summary>
         /// lary Dev
         /// </summary>
@@ -16,10 +15,14 @@ namespace BaoZouRiBao.Utils
 
         // lary
         // public const string AccessKey = "390bc68e3bd449f29d8750696a10bdd3";
-//#else
+
+#if DEBUG
+        // Debug 暴走日报 DEV yunfan
+        public const string AccessKey = "7d2baf7a41464aa59a9bcc036d64278f";
+#else
         // Release 暴走日报 yunfan 
         public const string AccessKey = "2aa5cf08574c4016b55065bc069bc587";
-//#endif
+#endif
 
         public const string MobileCenterKey = "075795b0-618b-454c-8813-4aecc6aa2cb1";
     }

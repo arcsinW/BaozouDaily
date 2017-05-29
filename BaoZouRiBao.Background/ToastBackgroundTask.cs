@@ -20,7 +20,7 @@ namespace BaoZouRiBao.Background
         {
             var details = taskInstance.TriggerDetails as ToastNotificationActionTriggerDetail;
 
-            if (details != null)
+            if (details != null && !string.IsNullOrEmpty(details.Argument))
             {
                 LocalSettings.Values["args"] = details.Argument;
                  

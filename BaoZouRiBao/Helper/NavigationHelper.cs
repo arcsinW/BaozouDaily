@@ -33,7 +33,7 @@ namespace BaoZouRiBao.Helper
         {
             while (MasterDetailPage.Current.DetailFrame.BackStackDepth > 1)
             {
-                MasterDetailPage.Current.DetailFrame.BackStack.RemoveAt(1);
+                MasterDetailPage.Current.DetailFrame.BackStack.RemoveAt(0);
             }
 
             MasterDetailPage.Current.DetailFrame.Navigate(sourcePage,parameter);

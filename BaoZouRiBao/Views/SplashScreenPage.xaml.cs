@@ -38,11 +38,13 @@ namespace BaoZouRiBao.Views
 
             AppTheme = DataShareManager.Current.AppTheme; 
              
-            StatusBarHelper.ShowStatusBar(AppTheme == ElementTheme.Dark);
+            //StatusBarHelper.ShowStatusBar(AppTheme == ElementTheme.Dark);
 
             // Listen for window resize events to reposition the extended splash screen image accordingly.
             // This ensures that the extended splash screen formats properly in response to window resizing.
             Window.Current.SizeChanged += new WindowSizeChangedEventHandler(ExtendedSplash_OnResize);
+
+            ScaleFactor = Windows.Graphics.Display.DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
 
             splash = splashscreen;
             if (splash != null)
@@ -64,15 +66,13 @@ namespace BaoZouRiBao.Views
         SplashScreen splash; // Variable to hold the splash screen object.
         internal bool dismissed = false; // Variable to track splash screen dismissal status.
         internal Frame rootFrame;
+        private double ScaleFactor;  ////Variable to hold the device scale factor (use to determine phone screen resolution)
         ElementTheme AppTheme { get; set; }
 
         #region 重定位控件
 
         void PositionElement()
         {
-            canvas.Width = rootGrid.Width;
-            canvas.Height = rootGrid.Height;
-
             PositionImage();
             PositionRing();
             PositionTextBlock();
@@ -82,8 +82,17 @@ namespace BaoZouRiBao.Views
         {
             extendedSplashImage.SetValue(Canvas.LeftProperty, splashImageRect.X);
             extendedSplashImage.SetValue(Canvas.TopProperty, splashImageRect.Y);
-            extendedSplashImage.Height = splashImageRect.Height;
-            extendedSplashImage.Width = splashImageRect.Width;
+
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            {
+                extendedSplashImage.Height = splashImageRect.Height / ScaleFactor;
+                extendedSplashImage.Width = splashImageRect.Width / ScaleFactor;
+            }
+            else
+            {
+                extendedSplashImage.Height = splashImageRect.Height;
+                extendedSplashImage.Width = splashImageRect.Width;
+            }
         }
 
         void PositionRing()
@@ -127,7 +136,7 @@ namespace BaoZouRiBao.Views
                 PositionElement();
             }
         }
-        
+
         /// <summary>
         /// 初始化SDK
         /// </summary>
@@ -136,10 +145,9 @@ namespace BaoZouRiBao.Views
         {
             try
             {
-                tipTextBlock.Text = await GetWordsAsync();
-                //Lary.Apps.SDK.UniversalServices.Config.Initialize(GlobalValue.AccessKey);
-                //PushNotificationChannel pushNotificationChannel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-                //await Lary.Apps.SDK.UniversalServices.PushNotificationService.UploadChannelAsync(pushNotificationChannel.Uri, pushNotificationChannel.ExpirationTime);
+                Lary.Apps.SDK.UniversalServices.Config.Initialize(GlobalValue.AccessKey);
+                PushNotificationChannel pushNotificationChannel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+                await Lary.Apps.SDK.UniversalServices.PushNotificationService.UploadChannelAsync(pushNotificationChannel.Uri, pushNotificationChannel.ExpirationTime);
                 VoiceCommandHelper.InstallVCDFile();
                 BackgroundTaskRegisterHelper.RegisterAll();
             }
@@ -156,6 +164,11 @@ namespace BaoZouRiBao.Views
             var lines = await FileIO.ReadLinesAsync(file);
             int index = new Random().Next(0, lines.Count);
             return lines[index];
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            tipTextBlock.Text = await GetWordsAsync();
         }
     }
 }

@@ -114,8 +114,8 @@
                                             </Grid>
                                         </Grid>
                                         <!--#endregion-->
-                                        
-                                        <Grid Grid.Row="1" Padding="12,8" Background="#F6F6F6">
+
+                                        <Grid Grid.Row="1" Padding="12,8" Margin="0,0,0,4" Background="{ThemeResource InnerDocumentBackgroundThemeBrush}">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>

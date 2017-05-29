@@ -17,7 +17,7 @@
     NavigationCacheMode="Required">
     
     <Page.Resources>
-        <Style x:Key="LightPivotStyle" TargetType="Pivot">
+        <Style TargetType="Pivot">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -240,6 +240,8 @@
         
         <convert:SelectedLegendItemToColorConverter x:Key="SelectedLegendItemToColorConverter" />
         <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+
+        
         <Style x:Key="LegendItemContainerStyle" TargetType="GridViewItem">
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
             <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
@@ -422,9 +424,10 @@
                                 <FlipView x:Name="headerFlipView" ItemsSource="{Binding TopDocuments}" 
                                              Tapped="headerFlipView_Tapped" SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
                                     <FlipView.ItemTemplate>
-                                        <DataTemplate x:DataType="m:Document">
+                                        <DataTemplate>
                                             <Grid>
-                                                <control:ImageEx Source="{Binding Image}" PlaceholderSource="{StaticResource PlaceHolderImageLarge}" VerticalAlignment="Center" Stretch="UniformToFill"/>
+                                                <control:ImageEx Source="{Binding Image}" PlaceholderSource="{StaticResource PlaceHolderImageLarge}" 
+                                                                 VerticalAlignment="Center" Stretch="Fill" PlaceholderStretch="Fill"/>
                                                 <Border>
                                                     <Border.Background>
                                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.2">
@@ -432,7 +435,7 @@
                                                             <GradientStop Offset="1" Color="#FF252526"/>
                                                         </LinearGradientBrush>
                                                     </Border.Background>
-                                                    <TextBlock Text="{x:Bind Title}" VerticalAlignment="Bottom" Foreground="White"
+                                                    <TextBlock Text="{Binding Title}" VerticalAlignment="Bottom" Foreground="White"
                                                                 FontSize="20" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="12,28"/>
                                                 </Border>
                                             </Grid>

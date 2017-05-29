@@ -20,7 +20,7 @@ namespace BaoZouRiBao.ViewModel
             User = DataShareManager.Current.User;
 
             DataShareManager.Current.DataChanged += Current_DataChanged;
-            //StatusBarHelper.ShowStatusBar(AppTheme == ElementTheme.Dark);
+            StatusBarHelper.ShowStatusBar(AppTheme == ElementTheme.Dark);
             SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
         }
 

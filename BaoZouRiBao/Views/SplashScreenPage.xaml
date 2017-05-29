@@ -5,14 +5,20 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
 
     <Grid x:Name="rootGrid" Background="#FB3D4F">
-        <Canvas x:Name="canvas">
-            <Image x:Name="extendedSplashImage"  Source="ms-appx:///Assets/SplashScreen.png"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="180"/>
+        </Grid.RowDefinitions>
+        
+        <Canvas Grid.Row="0" Grid.RowSpan="2" x:Name="canvas">
+            <Image x:Name="extendedSplashImage"  Source="/Assets/SplashScreen.png"/>
         </Canvas>
 
-        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,100">
+        <StackPanel Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,72">
             <ProgressRing Name="splashProgressRing" Height="48" Margin="0,0,0,24" Foreground="White" IsActive="True"  HorizontalAlignment="Center"/>
             <TextBlock x:Name="tipTextBlock" Foreground="White"  HorizontalAlignment="Center"/>
         </StackPanel>
