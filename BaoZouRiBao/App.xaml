@@ -10,8 +10,8 @@
     <Application.Resources>
         <ResourceDictionary> 
             <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Dark" Source="Themes/DarkDictionary"/>
-                <ResourceDictionary x:Key="Light" Source="Themes/LightDictionary"/>
+                <ResourceDictionary x:Key="Dark" Source="Themes/DarkDictionary.xaml"/>
+                <ResourceDictionary x:Key="Light" Source="Themes/LightDictionary.xaml"/>
             </ResourceDictionary.ThemeDictionaries>
             <ResourceDictionary.MergedDictionaries> 
                 <theme:ThemeDictionary/>
@@ -27,6 +27,8 @@
 
             <converter:BoolToObjectConverter x:Key="BoolToVisibilityConverter"  TrueValue="Visible" FalseValue="Collapsed"/>
             <converter:TimeStampToDateTimeConverter x:Key="TimeStampToDateTimeConverter"/>
+            <converter:BoolToLikeBitmapConverter x:Key="BoolToLikeBitmapConverter"/>
+            
             <BitmapImage x:Key="PlaceHolderImageSmall" UriSource="/Assets/Images/image_small_default.jpg"/>
             <BitmapImage x:Key="PlaceHolderImageLarge" UriSource="/Assets/Images/section_image_preview_column.jpg"/>
             <BitmapImage x:Key="PlaceHolderAvatar" UriSource="/Assets/Images/avatar_m.png"/>

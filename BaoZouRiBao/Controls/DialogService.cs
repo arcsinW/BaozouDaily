@@ -42,18 +42,19 @@ namespace BaoZouRiBao.Controls
                 InitializeDialog();
             }
         }
-
-
-
+         
         private async void MaskerBorder_Tapped(object sender, TappedRoutedEventArgs e)
         {
             await HideAsync();
         }
-
-
-
+         
         public void Show()
         {
+            if (_content == null)
+            {
+                InitializeDialog();
+            }
+
             _content.Visibility = Visibility.Visible;
             _maskerBorder.Visibility = Visibility.Visible;
             _showStory.Begin();

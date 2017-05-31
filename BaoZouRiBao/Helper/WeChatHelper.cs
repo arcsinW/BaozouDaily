@@ -1,18 +1,22 @@
-﻿using MicroMsg.sdk;
+﻿using BaoZouRiBao.Controls;
+using BaoZouRiBao.Http;
+using MicroMsg.sdk;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace BaoZouRiBao.Helper
 {
     public class WeChatHelper
     {
-        public const string APP_ID = "wx427ec9a62442b63f";
+        private const string APP_ID = "wx427ec9a62442b63f";
 
         #region Share to wechat's user
         /// <summary>
@@ -24,6 +28,12 @@ namespace BaoZouRiBao.Helper
         /// <param name="thumbnail"></param>
         public static async Task ShareTextAsync(string title, string text, string description, StorageFile thumbnail = null)
         {
+            if (!DeviceUtils.IsMobile)
+            {
+                ToastService.SendToast("PC上不支持微信分享");
+                return;
+            }
+
             try
             {
                 var scene = SendMessageToWX.Req.WXSceneChooseByUser;
@@ -69,6 +79,12 @@ namespace BaoZouRiBao.Helper
         /// <param name="thumbnail"></param>
         public static async Task ShareImageAsync(string title, string description, string imageUrl, StorageFile thumbnail = null)
         {
+            if (!DeviceUtils.IsMobile)
+            {
+                ToastService.SendToast("PC上不支持微信分享");
+                return;
+            }
+
             try
             {
                 var scene = SendMessageToWX.Req.WXSceneChooseByUser;
@@ -115,6 +131,12 @@ namespace BaoZouRiBao.Helper
         /// <returns></returns>
         public static async Task ShareWebAsync(string title, string description, string url, StorageFile thumbnail = null)
         {
+            if (!DeviceUtils.IsMobile)
+            {
+                ToastService.SendToast("PC上不支持微信分享");
+                return;
+            }
+
             try
             {
                 var scene = SendMessageToWX.Req.WXSceneChooseByUser;
@@ -150,6 +172,58 @@ namespace BaoZouRiBao.Helper
             }
         }
 
+        /// <summary>
+        /// 分享网页
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="url"></param>
+        /// <param name="thumbnailUri"></param>
+        /// <returns></returns>
+        public static async Task ShareWebAsync(string title, string description, string url, string thumbnailUri)
+        {
+            if (!DeviceUtils.IsMobile)
+            {
+                ToastService.SendToast("PC上不支持微信分享");
+                return;
+            }
+
+            try
+            {
+                var scene = SendMessageToWX.Req.WXSceneChooseByUser;
+
+                var message = new WXWebpageMessage
+                {
+                    WebpageUrl = url,
+                    Title = title,
+                    Description = description
+                };
+
+                if (!string.IsNullOrEmpty(thumbnailUri))
+                {
+                    IBuffer buffer = await HttpBaseService.SendGetRequestAsBytes(thumbnailUri);
+                    message.ThumbData = WindowsRuntimeBufferExtensions.ToArray(buffer);
+                }
+                else
+                {
+                    var thumbnail = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Images/ic_logo.png"));
+                    using (var stream = await thumbnail.OpenReadAsync())
+                    {
+                        byte[] pic = new byte[stream.Size];
+                        await stream.AsStream().ReadAsync(pic, 0, pic.Length);
+                        message.ThumbData = pic;
+                    }
+                }
+                
+                SendMessageToWX.Req req = new SendMessageToWX.Req(message, scene);
+                IWXAPI api = WXAPIFactory.CreateWXAPI(APP_ID);
+                await api.SendReq(req);
+            }
+            catch (WXException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
         #endregion
 
         /// <summary>
@@ -169,5 +243,10 @@ namespace BaoZouRiBao.Helper
             }
         }
         
+    }
+
+    public static class DeviceUtils
+    {
+        public static bool IsMobile => Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons") ? true : false; 
     }
 }

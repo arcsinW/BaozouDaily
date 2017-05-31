@@ -48,4 +48,7 @@
 
     <!--视频PlaceHolder-->
     <BitmapImage x:Key="VideoPlaceHolderImage" UriSource="ms-appx:///Assets/Images/image_night_preview_video.png"/>
+
+    <!--弹窗背景色-->
+    <SolidColorBrush x:Key="DialogBackgroundBrush" Color="#2B2B2B"></SolidColorBrush>
 </ResourceDictionary>

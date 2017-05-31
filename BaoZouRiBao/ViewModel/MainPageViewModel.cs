@@ -240,23 +240,41 @@ namespace BaoZouRiBao.ViewModel
         }
 
         #region Refresh's methods
+        /// <summary>
+        /// 刷新首页
+        /// </summary>
+        /// <returns></returns>
         public async Task RefreshDocument()
         {
             IsActive = true;
+            documentStringBuilder.Clear();
+            documentStringBuilder.Append("0");
             await Documents.ClearAndReloadAsync();
             IsActive = false;
         }
 
+        /// <summary>
+        /// 刷新投稿
+        /// </summary>
+        /// <returns></returns>
         public async Task RefreshContribute()
         {
             IsActive = true;
+            contributeStringBuilder.Clear();
+            contributeStringBuilder.Append("0");
             await Contributes.ClearAndReloadAsync();
             IsActive = false;
         }
 
+        /// <summary>
+        /// 刷新视频
+        /// </summary>
+        /// <returns></returns>
         public async Task RefreshVideo()
         {
             IsActive = true;
+            videoStringBuilder.Clear();
+            videoStringBuilder.Append("0");
             await Videos.ClearAndReloadAsync();
             IsActive = false;
         }
@@ -268,7 +286,7 @@ namespace BaoZouRiBao.ViewModel
             var story = e.ClickedItem as Document;
             if (story != null)
             {
-                WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
+                WebViewParameter parameter = new WebViewParameter() { Title = story.Title, WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
                 NavigationHelper.DetailFrameNavigate(typeof(WebViewPage), parameter);
             }
         }

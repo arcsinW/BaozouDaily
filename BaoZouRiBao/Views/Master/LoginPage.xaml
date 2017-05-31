@@ -33,9 +33,8 @@
             <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right">
                 <BitmapIcon UriSource="ms-appx:///Assets/Images/home_more.png"/>
                 <Button.Flyout>
-                    <MenuFlyout> 
+                    <MenuFlyout>
                         <MenuFlyout.Items>
-                            <MenuFlyoutItem Text="刷新"/>
                             <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                             <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
                         </MenuFlyout.Items>

@@ -20,7 +20,7 @@
 
         <StackPanel Grid.Row="1"  HorizontalAlignment="Center" >
             <ProgressRing Name="splashProgressRing" Height="48" Margin="0,0,0,24" Foreground="White" IsActive="True"  HorizontalAlignment="Center"/>
-            <TextBlock x:Name="tipTextBlock" Foreground="White" TextWrapping="Wrap"  HorizontalAlignment="Center"/>
+            <TextBlock x:Name="tipTextBlock" Margin="12,0" Foreground="White" TextWrapping="Wrap"  HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Page>

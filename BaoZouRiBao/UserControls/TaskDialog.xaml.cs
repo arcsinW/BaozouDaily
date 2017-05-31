@@ -33,6 +33,13 @@ namespace BaoZouRiBao.UserControls
             Title = result.AlertDesc;
             this.InitializeComponent();
         }
+
+        public void Show(DailyTaskDoneResult result)
+        {
+            BaoZouPopupType = result.Task.TaskType;
+            CoinCount = result.Task.Amount;
+            Title = result.AlertDesc;
+        }
          
         #region Dependency Properties
         public BaoZouTaskEnum BaoZouPopupType

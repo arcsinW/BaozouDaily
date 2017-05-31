@@ -61,9 +61,10 @@
                                 </StackPanel>
                             </Button>
 
-                            <Button Height="24" Width="48" Style="{ThemeResource ImageButtonStyle}">
+                            <Button Height="24" Width="48" Style="{ThemeResource ImageButtonStyle}"
+                                    Command="{Binding VoteCommand}" CommandParameter="{Binding Id}">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="ms-appx:///Assets/Images/btn_video_like_nor.png" VerticalAlignment="Center"/>
+                                    <Image Source="{Binding Like,Converter={StaticResource BoolToLikeBitmapConverter}}" VerticalAlignment="Center"/>
                                     <TextBlock Text="{x:Bind Likes,Mode=OneWay}"   Style="{ThemeResource DescTextBlockStyle}"/>
                                 </StackPanel>
                             </Button>
@@ -530,6 +531,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
     <Style x:Key="LightScrollBarStyle" TargetType="ScrollBar">
         <Setter Property="MinWidth" Value="12"/>
         <Setter Property="MinHeight" Value="12"/>

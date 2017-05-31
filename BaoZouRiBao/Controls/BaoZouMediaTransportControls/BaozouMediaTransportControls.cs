@@ -11,11 +11,11 @@ using Windows.UI.Xaml.Media;
 
 namespace BaoZouRiBao.Controls
 {
-    public sealed class BaozouMediaTransportControls : MediaTransportControls
+    public sealed class BaoZouMediaTransportControls : MediaTransportControls
     {
-        public BaozouMediaTransportControls()
+        public BaoZouMediaTransportControls()
         {
-            this.DefaultStyleKey = typeof(BaozouMediaTransportControls);
+            this.DefaultStyleKey = typeof(BaoZouMediaTransportControls);
         }
     }
 }

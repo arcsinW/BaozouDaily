@@ -243,34 +243,34 @@
             </Pivot.HeaderTemplate>
 
             <PivotItem Header="阅读">
-                <controls:RefreshableListView
+                <controls:PullToRefreshListView
                               ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                               ItemsSource="{Binding ReadCollection}"
                               ItemTemplate="{StaticResource DocumentDataTemplate}"
                               IsItemClickEnabled="True" SelectionMode="None"
                               ItemClick="{x:Bind ViewModel.ListView_ItemClick}"
                               RefreshCommand="{Binding RefreshReadCollectionCommand}">
-                </controls:RefreshableListView>
+                </controls:PullToRefreshListView>
             </PivotItem>
             <PivotItem Header="赞">
-                <controls:RefreshableListView
+                <controls:PullToRefreshListView
                               ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                               ItemsSource="{Binding VoteCollection}"
                               ItemTemplate="{StaticResource DocumentDataTemplate}"
                               IsItemClickEnabled="True"
                               ItemClick="{x:Bind ViewModel.ListView_ItemClick}"
                               RefreshCommand="{Binding RefreshVoteCollectionCommand}">
-                </controls:RefreshableListView>
+                </controls:PullToRefreshListView>
             </PivotItem>
             <PivotItem Header="评论">
-                <controls:RefreshableListView
+                <controls:PullToRefreshListView
                               ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                               ItemsSource="{Binding CommentCollection}"
                               ItemTemplate="{StaticResource DocumentDataTemplate}"
                               IsItemClickEnabled="True"
                               ItemClick="{x:Bind ViewModel.ListView_ItemClick}"
                               RefreshCommand="{Binding RefreshCommentCollectionCommand}">
-                </controls:RefreshableListView>
+                </controls:PullToRefreshListView>
             </PivotItem>
         </controls:IndicatorPivot>
 

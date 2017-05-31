@@ -139,29 +139,5 @@ namespace BaoZouRiBao.Views
                     break;
             }
         }
-
-        private void PullProgressChanged(object sender, RefreshProgressEventArgs e)
-        {
-            if (e.IsRefreshable)
-            {
-                if (e.PullProgress == 1)
-                {
-                    // Progress = 1.0 means that the refresh has been triggered.
-                    if (SpinnerStoryboard.GetCurrentState() == Windows.UI.Xaml.Media.Animation.ClockState.Stopped)
-                    {
-                        SpinnerStoryboard.Begin();
-                    }
-                }
-                else if (SpinnerStoryboard.GetCurrentState() != Windows.UI.Xaml.Media.Animation.ClockState.Stopped)
-                {
-                    SpinnerStoryboard.Stop();
-                }
-                else
-                {
-                    // Turn the indicator by an amount proportional to the pull progress.
-                    contributeSpinnerTransform.Angle = e.PullProgress * 360;
-                }
-            }
-        }
     }
 }

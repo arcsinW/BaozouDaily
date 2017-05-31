@@ -11,7 +11,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid x:Name="BackgroundGrid">
+    <Grid x:Name="BackgroundGrid" Background="{ThemeResource DialogBackgroundBrush}">
         <Grid.Transitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>

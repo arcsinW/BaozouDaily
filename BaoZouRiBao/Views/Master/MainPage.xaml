@@ -394,7 +394,7 @@
             </Pivot.Resources>
             <Pivot.Items>
                 <PivotItem Header="首页">
-                    <control:RefreshableListView x:Name="documentListView" ItemsSource="{Binding Documents}"
+                    <control:PullToRefreshListView x:Name="documentListView" ItemsSource="{Binding Documents}"
                                   SelectionMode="None"
                                   IsItemClickEnabled="True"
                                   ItemClick="{x:Bind ViewModel.documentListView_ItemClick}"
@@ -402,8 +402,8 @@
                                   IncrementalLoadingTrigger="Edge"
                                   ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                                   RefreshRequested="{x:Bind ViewModel.RefreshDocument}"
-                                  PullProgressChanged="PullProgressChanged">
-                        <control:RefreshableListView.RefreshIndicatorContent>
+                                  >
+                        <control:PullToRefreshListView.RefreshIndicatorContent>
                             <Grid Height="100" Background="Transparent">
                                 <FontIcon Margin="0,0,0,30"
                                                 HorizontalAlignment="Center"
@@ -417,7 +417,7 @@
                                     </FontIcon.RenderTransform>
                                 </FontIcon>
                             </Grid>
-                        </control:RefreshableListView.RefreshIndicatorContent>
+                        </control:PullToRefreshListView.RefreshIndicatorContent>
                     
                         <ListView.Header>
                             <Grid Height="240">
@@ -450,11 +450,11 @@
                             </Grid>
                         </ListView.Header>
                           
-                    </control:RefreshableListView>
+                    </control:PullToRefreshListView>
                 </PivotItem>
 
                 <PivotItem Header="用户投稿">
-                    <control:RefreshableListView x:Name="contributeListView" 
+                    <control:PullToRefreshListView x:Name="contributeListView" 
                                       ItemsSource="{Binding Contributes}"
                                       IncrementalLoadingTrigger="Edge"
                                       IsItemClickEnabled="True"
@@ -462,9 +462,8 @@
                                       ItemClick="{x:Bind ViewModel.contributeListView_ItemClick}"
                                       ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                                       RefreshRequested="{x:Bind ViewModel.RefreshContribute}"
-                                      PullProgressChanged="PullProgressChanged"
                                       >
-                        <control:RefreshableListView.RefreshIndicatorContent>
+                        <control:PullToRefreshListView.RefreshIndicatorContent>
                             <Grid Height="100" Background="Transparent">
                                 <FontIcon
                                                 Margin="0,0,0,30"
@@ -479,7 +478,7 @@
                                     </FontIcon.RenderTransform>
                                 </FontIcon>
                             </Grid>
-                        </control:RefreshableListView.RefreshIndicatorContent>
+                        </control:PullToRefreshListView.RefreshIndicatorContent>
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="m:Contribute">
                                 <Grid>
@@ -500,20 +499,19 @@
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                    </control:RefreshableListView>
+                    </control:PullToRefreshListView>
                 </PivotItem>
 
                 <PivotItem Header="视频">
-                    <control:RefreshableListView x:Name="videoListView" ItemsSource="{Binding Videos}"
+                    <control:PullToRefreshListView x:Name="videoListView" ItemsSource="{Binding Videos}"
                                       IncrementalLoadingTrigger="Edge"
                                       SelectionMode="None"
                                       ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
                                       IsItemClickEnabled="True"
                                       ItemClick="{x:Bind ViewModel.videoListView_ItemClick}"
                                       RefreshRequested="{x:Bind ViewModel.RefreshVideo}"
-                                      PullProgressChanged="PullProgressChanged"
                                       >
-                        <control:RefreshableListView.RefreshIndicatorContent>
+                        <control:PullToRefreshListView.RefreshIndicatorContent>
                             <Grid Height="100" Background="Transparent">
                                 <FontIcon
                                                 Margin="0,0,0,30"
@@ -528,7 +526,7 @@
                                     </FontIcon.RenderTransform>
                                 </FontIcon>
                             </Grid>
-                        </control:RefreshableListView.RefreshIndicatorContent>
+                        </control:PullToRefreshListView.RefreshIndicatorContent>
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="m:Video">
                                 <Grid Height="Auto">
@@ -559,26 +557,29 @@
                                         <TextBlock Text="{Binding Title}" Grid.Row="0" FontSize="16" TextTrimming="WordEllipsis" Style="{ThemeResource TitleTextBlockStyle}"/>
 
                                         <Grid Margin="0,4" Grid.Row="1" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding PlayCount}" Margin="0"  HorizontalAlignment="Left" Style="{ThemeResource DescTextBlockStyle}">
-                                                <Run Text="播放"/>
-                                            </TextBlock>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Margin="0" Text="{Binding PlayCount}" HorizontalAlignment="Left" 
+                                                           Style="{ThemeResource DescTextBlockStyle}"/>
+                                                <TextBlock Text="播放" Style="{ThemeResource DescTextBlockStyle}"/>
+                                            </StackPanel>
 
                                             <StackPanel  HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
-                                                <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto">
+                                                <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto" Command="{Binding VoteCommand}" CommandParameter="{Binding DocumentId}">
                                                     <StackPanel Orientation="Horizontal">
-                                                        <Image Source="/Assets/Images/btn_article_like_nor.png"/>
-                                                        <TextBlock Text="{x:Bind VoteCount}" Style="{ThemeResource DescTextBlockStyle}" HorizontalAlignment="Right"/>
+                                                        <Image Source="{Binding Voted,Converter={StaticResource BoolToLikeBitmapConverter}}" VerticalAlignment="Center"/>
+                                                        <!--<Image Source="/Assets/Images/btn_article_like_nor.png"/>-->
+                                                        <TextBlock Text="{Binding VoteCount}" Style="{ThemeResource DescTextBlockStyle}" HorizontalAlignment="Right"/>
                                                     </StackPanel>
                                                 </Button>
 
                                                 <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto">
                                                     <StackPanel Orientation="Horizontal">
                                                         <Image Source="/Assets/Images/article_reply_nor.png"/>
-                                                        <TextBlock Text="{x:Bind CommentCount}" Style="{ThemeResource DescTextBlockStyle}" HorizontalAlignment="Right"/>
+                                                        <TextBlock Text="{Binding CommentCount}" Style="{ThemeResource DescTextBlockStyle}" HorizontalAlignment="Right"/>
                                                     </StackPanel>
                                                 </Button>
 
-                                                <Button Style="{ThemeResource ImageButtonStyle}">
+                                                <Button Style="{ThemeResource ImageButtonStyle}" Command="{Binding ShareCommand}">
                                                     <Image Source="/Assets/Images/article_share.png" Height="40" Width="40"/>
                                                 </Button>
                                             </StackPanel>
@@ -593,7 +594,7 @@
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                    </control:RefreshableListView>
+                    </control:PullToRefreshListView>
                 </PivotItem>
             </Pivot.Items> 
         </control:IndicatorPivot>

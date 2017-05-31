@@ -69,8 +69,13 @@ namespace BaoZouRiBao.Views
         {
             if (taskDoneResult != null && taskDoneResult.Task != null)
             {
-                new TaskDialog(taskDoneResult).Show();
+                taskDialog.Show(taskDoneResult);
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.DailySign();
         }
     }
 }

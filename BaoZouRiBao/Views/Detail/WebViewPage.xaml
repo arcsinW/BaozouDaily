@@ -9,6 +9,7 @@
     xmlns:ex="using:BaoZouRiBao.Extension"
     xmlns:converter="using:BaoZouRiBao.Converters"
     xmlns:controls="using:BaoZouRiBao.Controls"
+    xmlns:uc="using:BaoZouRiBao.UserControls"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -105,12 +106,18 @@
                 </TransitionCollection>
             </Popup.ChildTransitions>
             <Popup.Child> 
-                <Button Width="48" Height="48" Style="{ThemeResource ImageButtonStyle}" Click="{x:Bind ViewModel.Share}">
+                <Button Width="48" Height="48" x:Name="shareBtn" Style="{ThemeResource ImageButtonStyle}" Click="shareBtn_Click">
                     <Image Source="ms-appx:///Assets/Images/article_share.png"/>
                 </Button>
             </Popup.Child>
         </Popup>
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
+
+        <uc:ShareDialog x:Name="shareDialog" Grid.RowSpan="2" 
+                        WechatClick="shareDialog_WechatClick"
+                        WeiboClick="shareDialog_WeiboClick"
+                        LinkClick="shareDialog_LinkClick"
+                        MoreClick="shareDialog_MoreClick"/>
     </Grid>
 </Page>

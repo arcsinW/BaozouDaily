@@ -14,15 +14,15 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace BaoZouRiBao.Controls
 {
-    public sealed class GifControlWithTimer : Control
+    public sealed class GifControl : Control
     {
         #region Constructor
-        public GifControlWithTimer()
+        public GifControl()
         {
-            this.DefaultStyleKey = typeof(GifControlWithTimer);
+            this.DefaultStyleKey = typeof(GifControl);
         }
 
-        ~GifControlWithTimer()
+        ~GifControl()
         {
             Items = null;
             timer.Tick -= Timer_Tick;
@@ -38,7 +38,7 @@ namespace BaoZouRiBao.Controls
 
         // Using a DependencyProperty as the backing store for Source.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register("Source", typeof(ImageSource), typeof(GifControlWithTimer), new PropertyMetadata(new BitmapImage(new Uri("ms-appx:///Assets/Images/loadinganim0.png"))));
+            DependencyProperty.Register("Source", typeof(ImageSource), typeof(GifControl), new PropertyMetadata(new BitmapImage(new Uri("ms-appx:///Assets/Images/loadinganim0.png"))));
         
 
         public List<BitmapImage> Items { get; set; } = new List<BitmapImage>();
@@ -52,11 +52,11 @@ namespace BaoZouRiBao.Controls
 
         // Using a DependencyProperty as the backing store for IsActive.  This enables animation, styling, binding, etc...
         public readonly DependencyProperty IsActiveProperty =
-            DependencyProperty.Register("IsActive", typeof(bool), typeof(GifControlWithTimer), new PropertyMetadata(true, propertyChangedCallback));
+            DependencyProperty.Register("IsActive", typeof(bool), typeof(GifControl), new PropertyMetadata(true, propertyChangedCallback));
 
         private static void propertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = d as GifControlWithTimer;
+            var control = d as GifControl;
             if ((bool)e.NewValue)
             {
                 control.Show();
@@ -85,7 +85,7 @@ namespace BaoZouRiBao.Controls
 
         // Using a DependencyProperty as the backing store for Fps.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FpsProperty =
-            DependencyProperty.Register("Fps", typeof(int), typeof(GifControlWithTimer), new PropertyMetadata(6));
+            DependencyProperty.Register("Fps", typeof(int), typeof(GifControl), new PropertyMetadata(6));
 
         
         #endregion

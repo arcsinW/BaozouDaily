@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using BaoZouRiBao.Http;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace BaoZouRiBao.Views
 {
@@ -30,8 +31,6 @@ namespace BaoZouRiBao.Views
             appTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.DataChanged += Current_DataChanged;
         }
-
-        private ElementTheme appTheme;
 
         private void Current_DataChanged()
         {
@@ -46,8 +45,15 @@ namespace BaoZouRiBao.Views
             }
         }
 
+        #region Fields
         private DocumentExtra documentExtra;
+
+        private ElementTheme appTheme;
+
+        private WebViewParameter parameter;
+        #endregion
         
+        #region Js Bridge
         public async void Light()
         {
             if (documentExtra != null && documentExtra.HackJs != null && !string.IsNullOrEmpty(documentExtra.HackJs.SetDayMode))
@@ -98,17 +104,15 @@ namespace BaoZouRiBao.Views
                 return string.Empty;
             }
         }
+        #endregion
 
+        #region Navigation mehods
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            var parameter = e.Parameter as WebViewParameter;
+            DataTransferManager.GetForCurrentView().DataRequested += WebViewPage_DataRequested;
+            parameter = e.Parameter as WebViewParameter;
             if (parameter != null)
             {
-                //if (!string.IsNullOrEmpty(parameter.Title))
-                //{
-                //    titleTextBlock.Text = parameter.Title;
-                //}
-
                 switch (parameter.DisplayType)
                 {
                     case "1":
@@ -135,7 +139,7 @@ namespace BaoZouRiBao.Views
                 if (!string.IsNullOrEmpty(documentId))
                 {
                     ViewModel.LoadDocument(documentId, parameter.DisplayType);
-                    
+
                     documentExtra = await ApiService.Instance.GetDocumentExtraAsync(documentId);
                     if (documentExtra != null && documentExtra.HackJs != null)
                     {
@@ -156,10 +160,72 @@ namespace BaoZouRiBao.Views
                 }
             }
         }
-
+        
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            DataTransferManager.GetForCurrentView().DataRequested -= WebViewPage_DataRequested;
             DataShareManager.Current.DataChanged -= Current_DataChanged;
+        } 
+        #endregion
+
+        #region Share
+        private void shareBtn_Click(object sender, RoutedEventArgs e)
+        {
+            shareDialog.Show(); 
         }
+
+        private void WebViewPage_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            var deferral = args.Request.GetDeferral();
+
+            args.Request.Data.Properties.Title = parameter.Title;
+            if (ViewModel.Document != null)
+            {
+                args.Request.Data.SetWebLink(new Uri(ViewModel.Document.ShareUrl));
+            }
+
+            deferral.Complete();
+        }
+
+        /// <summary>
+        /// 微信分享
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void shareDialog_WechatClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.WeChatShare();
+        }
+
+        /// <summary>
+        /// 微博分享
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void shareDialog_WeiboClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        /// <summary>
+        /// 复制链接
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void shareDialog_LinkClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.CopyLink();
+        }
+
+        /// <summary>
+        /// 系统分享
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void shareDialog_MoreClick(object sender, RoutedEventArgs e)
+        {
+            DataTransferManager.ShowShareUI();
+        } 
+        #endregion
     }
 }

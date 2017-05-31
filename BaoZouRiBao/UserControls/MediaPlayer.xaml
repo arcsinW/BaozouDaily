@@ -18,7 +18,7 @@
                       Stretch="UniformToFill"
                       AreTransportControlsEnabled="True">
             <MediaElement.TransportControls>
-                <controls:BaozouMediaTransportControls x:Name="transportControls"/>
+                <controls:BaoZouMediaTransportControls x:Name="transportControls"/>
             </MediaElement.TransportControls>
         </MediaElement>
     </Grid>

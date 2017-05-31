@@ -13,6 +13,8 @@ using BaoZouRiBao.Views;
 using Windows.System;
 using BaoZouRiBao.Controls;
 using Windows.Storage;
+using BaoZouRiBao.UserControls;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -250,15 +252,24 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-        public async void Share()
-        {
-            if (!IsMobile)
-            {
-                ToastService.SendToast("PC上不支持微信分享");
-                return;
-            } 
-
+        /// <summary>
+        /// 微信分享
+        /// </summary>
+        public async void WeChatShare()
+        {  
             await WeChatHelper.ShareWebAsync(Document.Title, "", Document.ShareUrl);
+        }
+
+        /// <summary>
+        /// 复制链接
+        /// </summary>
+        public void CopyLink()
+        {
+            DataPackage dataPackage = new DataPackage();
+            dataPackage.SetText(Document.ShareUrl);
+            Clipboard.SetContent(dataPackage);
+
+            ToastService.SendToast("链接已复制到剪切板");
         }
     }
 }

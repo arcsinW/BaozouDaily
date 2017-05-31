@@ -1,0 +1,87 @@
+﻿<controls:DialogService
+    x:Class="BaoZouRiBao.UserControls.ShareDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BaoZouRiBao.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:BaoZouRiBao.Controls"
+    mc:Ignorable="d"
+    Background="#CC000000">
+
+    <Border Background="{ThemeResource DialogBackgroundBrush}" CornerRadius="5"
+            Height="Auto" Width="300"
+            Padding="8"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <!--<ColumnDefinition Width="*"/>-->
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="MinHeight" Value="48"/>
+                    <Setter Property="MinWidth" Value="48"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="14"/>
+                </Style>
+            </Grid.Resources>
+
+            <Button x:Name="weiboBtn"  Grid.Column="0" HorizontalAlignment="Center" 
+                    Style="{ThemeResource ImageButtonStyle}" Click="weiboBtn_Click" Visibility="Collapsed">
+                <StackPanel Orientation="Vertical">
+                    <Ellipse Height="48" Width="48">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="ms-appx:///Assets/Images/Share/sharesinaweibo_selector.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock Text="微博" Foreground="Black" HorizontalAlignment="Center" Margin="4"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="weChatBtn" Grid.Column="0" HorizontalAlignment="Center" 
+                    Style="{ThemeResource ImageButtonStyle}"  Click="weChatBtn_Click">
+                <StackPanel>
+                    <Ellipse Height="48" Width="48">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="ms-appx:///Assets/Images/Share/shareweixin_selector.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock Text="微信" Foreground="Black" HorizontalAlignment="Center" Margin="4"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="linkBtn" Grid.Column="1" HorizontalAlignment="Center" 
+                    Style="{ThemeResource ImageButtonStyle}" Click="linkBtn_Click">
+                <StackPanel>
+                    <Ellipse Height="48" Width="48">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="ms-appx:///Assets/Images/Share/shareslink_selector.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock Text="链接" Foreground="Black" HorizontalAlignment="Center" Margin="4"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="moreBtn" Grid.Column="2" HorizontalAlignment="Center" 
+                    Style="{ThemeResource ImageButtonStyle}" Click="moreBtn_Click">
+                <StackPanel>
+                    <Ellipse Height="48" Width="48">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="ms-appx:///Assets/Images/Share/sharemore_selector.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock Text="更多" Foreground="Black" HorizontalAlignment="Center" Margin="4"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Border>
+</controls:DialogService>

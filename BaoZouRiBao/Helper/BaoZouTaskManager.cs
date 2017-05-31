@@ -156,6 +156,15 @@ namespace BaoZouRiBao.Helper
             }
             set
             {
+                if (IsNewDay())
+                {
+                    IsSigned = false;
+                    IsDocumentVoted = false;
+                    IsCommentVoted = false;
+                    IsRead = false;
+                    IsCommented = false;
+                    IsShared = false;
+                }
                 previousDate = (DateTime)GetValue(localSettings, DateTime.MinValue, PreviousDate_Key);
             }
         }
@@ -200,7 +209,8 @@ namespace BaoZouRiBao.Helper
         /// <returns></returns>
         private static bool IsNewDay()
         {
-            if (!DateTime.Parse((string)localSettings.Values[PreviousDate_Key]).Equals(DateTime.Now.Date.ToString()))
+            if (!localSettings.Containers.ContainsKey(PreviousDate_Key) ||
+                !DateTime.Parse((string)localSettings.Values[PreviousDate_Key]).Equals(DateTime.Now.Date.ToString()))
             {
                 return true;
             }
@@ -208,6 +218,15 @@ namespace BaoZouRiBao.Helper
             {
                 return false;
             }
+
+            //if (!DateTime.Parse((string)localSettings.Values[PreviousDate_Key]).Equals(DateTime.Now.Date.ToString()))
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
         }
 
         /// <summary>
@@ -240,7 +259,7 @@ namespace BaoZouRiBao.Helper
                     MasterDetailPage.Current.ShowTaskDialog(result);
 
                     // 更新上次签到日期
-                    
+                    PreviousDate = DateTime.Now.Date;
                 }
             }
         }

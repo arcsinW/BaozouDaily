@@ -11,7 +11,7 @@ namespace BaoZouRiBao.Converters
     /// <summary>
     /// Static class used to provide internal tools
     /// </summary>
-    internal static class ConverterTools
+    public static class ConverterTools
     {
         /// <summary>
         /// Helper method to safely cast an object to a boolean

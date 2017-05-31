@@ -49,7 +49,6 @@ namespace BaoZouRiBao.Controls
         public ImageEx()
         {
             DefaultStyleKey = typeof(ImageEx);
-            PlaceholderStretch = Windows.UI.Xaml.Media.Stretch.Fill;
             _lockObj = new object();
         }
 

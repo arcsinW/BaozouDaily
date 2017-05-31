@@ -5,14 +5,15 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:control="using:BaoZouRiBao.Controls"
+    xmlns:controls="using:BaoZouRiBao.Controls"
+    xmlns:uc="using:BaoZouRiBao.UserControls"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core" 
     xmlns:action="using:BaoZouRiBao.Actions"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     RequestedTheme="{Binding AppTheme}"
     NavigationCacheMode="Required"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -321,12 +322,12 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         
-        <control:Drawer x:Name="drawer" Grid.Column="1" 
+        <controls:Drawer x:Name="drawer" Grid.Column="1" 
                         DrawerOpenLength="250"  x:FieldModifier="Public">
-            <control:Drawer.DrawerMaskerBrush>
+            <controls:Drawer.DrawerMaskerBrush>
                 <SolidColorBrush Color="Black" Opacity="0.7"/>
-            </control:Drawer.DrawerMaskerBrush>
-            <control:Drawer.DrawerContent>
+            </controls:Drawer.DrawerMaskerBrush>
+            <controls:Drawer.DrawerContent>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="180"/>
@@ -515,8 +516,8 @@
                         </ListViewItem>
                     </ListView>
                 </Grid>
-            </control:Drawer.DrawerContent>
-            <control:Drawer.Content>
+            </controls:Drawer.DrawerContent>
+            <controls:Drawer.Content>
                 <Frame x:Name="MasterFrame" x:FieldModifier="Public" Navigated="MasterFrame_Navigated">
                     <Frame.ContentTransitions>
                         <TransitionCollection>
@@ -528,8 +529,8 @@
                         </TransitionCollection>
                     </Frame.ContentTransitions>
                 </Frame>
-            </control:Drawer.Content>
-        </control:Drawer>
+            </controls:Drawer.Content>
+        </controls:Drawer>
 
         <!--#region Pane-->
         <Grid Grid.Column="0" BorderBrush="{ThemeResource SplitLineColorBrush}" BorderThickness="0,0,1,0">
@@ -680,8 +681,10 @@
         </control:AndroidPopup>-->
  
         <!--#region 任务Popup-->
-        <control:BaoZouTaskPopup x:Name="taskPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666" 
+        <controls:BaoZouTaskPopup x:Name="taskPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666" 
                                  BaoZouPopupType="DailySign"  CoinCount="4" Title="获取奖励" Visibility="Collapsed"/>
-        <!--#endregion--> 
+        <!--#endregion-->
+
+        <uc:TaskDialog x:Name="taskDialog" Grid.ColumnSpan="3"/>
     </Grid>
 </Page>
