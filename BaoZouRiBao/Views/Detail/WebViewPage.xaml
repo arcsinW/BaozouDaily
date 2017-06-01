@@ -16,8 +16,10 @@
         <vm:WebViewPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Page.Resources>
+    <Page.Resources>  
         <converter:BoolToPathIconConverter x:Key="BoolToPathIconConverter"/>
+
+        <converter:BoolToVoteBitmapConverter x:Key="BoolToVoteBitmapConverter"/>
 
         <Style TargetType="BitmapIcon">
             <Setter Property="Width" Value="{StaticResource BitmapIconWidth}"/>
@@ -32,7 +34,7 @@
         </Grid.RowDefinitions>
 
         <!--#region Page title-->
-        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}" DataContext="{Binding DocumentExtra}">
+        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -59,9 +61,11 @@
             
             <StackPanel x:Name="stackPanel" Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto" Click="{x:Bind ViewModel.Vote}">
+                    
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>
-                        <TextBlock Text="{Binding VoteCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
+                        <Image Height="20" Width="20" Source="{Binding DocumentExtra.Voted, Converter={StaticResource BoolToVoteBitmapConverter}}"/>
+                        <!--<BitmapIcon UriSource="{Binding DocumentExtra.Voted, Converter={StaticResource BoolToLikeBitmapConverter}}"/>-->
+                        <TextBlock Text="{Binding DocumentExtra.VoteCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
                     </StackPanel>
                 </Button>
 
@@ -69,7 +73,7 @@
                         Click="{x:Bind ViewModel.CommentBtnClick}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <BitmapIcon UriSource="/Assets/Images/actionbar_comment_nor.png"/>
-                        <TextBlock Text="{Binding CommentCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
+                        <TextBlock Text="{Binding Document.CommentCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
                     </StackPanel>
                 </Button>
 

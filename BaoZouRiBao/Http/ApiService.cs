@@ -162,8 +162,10 @@ namespace BaoZouRiBao.Http
         public async Task<bool> LogoutAsync()
         {
             var result = await Post<LogoutResult>(ServiceUri.LogOut, "");
+            // 无网络时直接清空本地登录数据
             if(result == null || string.IsNullOrEmpty(result.Result))
             {
+                DataShareManager.Current.UpdateUser(null);
                 return false;
             }
 
@@ -599,6 +601,7 @@ namespace BaoZouRiBao.Http
         public async Task OfflineDownloadAsync()
         {
             var result = await GetJson<string>(ServiceUri.DocumentOfflineDownload);
+            Debug.WriteLine(result);
         }
     }
 }

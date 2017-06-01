@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="46918Xsetups.47705177A073C" Publisher="CN=6C0637F1-510E-45BC-90C0-3F7555214A61" Version="1.1.13.0" />
-  <mp:PhoneIdentity PhoneProductId="1c75ef2c-c648-415e-a51a-a89bf1b47a50" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="46918Xsetups.47705177A073C" Publisher="CN=6C0637F1-510E-45BC-90C0-3F7555214A61" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="5a2e0b1d-9460-4435-98be-dde7945f7408" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>暴走日报.X</DisplayName>
     <PublisherDisplayName>Xsetups</PublisherDisplayName>

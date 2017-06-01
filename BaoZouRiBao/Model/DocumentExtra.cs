@@ -24,8 +24,33 @@ namespace BaoZouRiBao.Model
         [JsonProperty(PropertyName = "document_id")]
         public string DocumentId { get; set; }
 
+        private bool favorited = false;
         [JsonProperty(PropertyName = "favorited")]
-        public string Favorited { get; set; }
+        public bool Favorited
+        {
+            get
+            {
+                return favorited;
+            }
+            set
+            {
+                favorited = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool voted = false;
+
+        /// <summary>
+        /// 是否已点赞
+        /// </summary>
+        [JsonProperty(PropertyName = "voted")]
+        public bool Voted
+        {
+            get { return voted;  }
+            set { voted = value; OnPropertyChanged(); }
+        }
+
 
         private string voteCount = "0";
         [JsonProperty(PropertyName = "vote_count")]

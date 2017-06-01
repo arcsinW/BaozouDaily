@@ -684,7 +684,7 @@
         <controls:BaoZouTaskPopup x:Name="taskPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666" 
                                  BaoZouPopupType="DailySign"  CoinCount="4" Title="获取奖励" Visibility="Collapsed"/>
         <!--#endregion-->
-
+ 
         <uc:TaskDialog x:Name="taskDialog" Grid.ColumnSpan="3"/>
     </Grid>
 </Page>

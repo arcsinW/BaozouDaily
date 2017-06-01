@@ -62,7 +62,7 @@ namespace BaoZouRiBao.Views
         #endregion
 
         /// <summary>
-        /// 显示任务Popup
+        /// 显示任务Dialog
         /// </summary>
         /// <param name="taskDoneResult"></param>
         public void ShowTaskDialog(DailyTaskDoneResult taskDoneResult)
@@ -72,6 +72,7 @@ namespace BaoZouRiBao.Views
                 taskDialog.Show(taskDoneResult);
             }
         }
+         
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

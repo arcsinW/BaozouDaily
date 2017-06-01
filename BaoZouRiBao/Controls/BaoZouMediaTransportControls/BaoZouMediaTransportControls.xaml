@@ -652,10 +652,10 @@
                                                 Style='{StaticResource WhiteAppBarButton}'
                                                 MediaTransportControlsHelper.DropoutOrder='10'>
                                                 <AppBarButton.Flyout>
-                                                    <Flyout x:Name='VolumeFlyout' FlyoutPresenterStyle="{StaticResource FlyoutStyle}">
-                                                        <StackPanel Orientation="Horizontal" >
+                                                    <Flyout x:Name="VolumeFlyout" FlyoutPresenterStyle="{StaticResource FlyoutStyle}" >
+                                                        <StackPanel Orientation="Horizontal" Background="#242424">
                                                             <AppBarButton x:Name='AudioMuteButton'
-                                                                    Style='{StaticResource AppBarButtonStyle}'
+                                                                    Style='{StaticResource WhiteAppBarButton}'
                                                                     VerticalAlignment='Center'
                                                                     HorizontalAlignment='Center'
                                                                     Margin='12'>
@@ -672,7 +672,7 @@
                                                               Margin='0'/>
                                                             <TextBlock x:Name='VolumeValue'
                                                             Style='{StaticResource MediaTextBlockStyle}'
-                                                                       Foreground="Black"
+                                                                       Foreground="White"
                                                             Text="{Binding ElementName=VolumeSlider,Path=Value}"
                                                             HorizontalAlignment='Center'
                                                             VerticalAlignment='Center'

@@ -41,12 +41,10 @@ namespace BaoZouRiBao.Model
         /// </summary>
         [JsonProperty(PropertyName = "receiver")]
         public Recommender Receiver { get; set; }
-
-        [JsonIgnore]
+         
         [JsonProperty(PropertyName = "vote")]
         public Vote Vote { get; set; }
-
-        [JsonIgnore]
+         
         [JsonProperty(PropertyName = "voted_comment")]
         public Comment VotedComment { get; set; }
 

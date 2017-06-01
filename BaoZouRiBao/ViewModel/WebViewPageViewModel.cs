@@ -189,9 +189,10 @@ namespace BaoZouRiBao.ViewModel
                 var res = await ApiService.Instance.FavoriteAsync(DocumentExtra.DocumentId);
                 if (res != null)
                 {
-                    if (res.Status.Equals("2006"))
+                    if (res.Status.Equals("1000"))
                     {
                         IsFavorite = true;
+                        ToastService.SendToast("收藏成功");
                     }
                 }
             }
@@ -211,7 +212,9 @@ namespace BaoZouRiBao.ViewModel
                 {
                     if (result.Status.Equals("1000")) //点赞成功
                     {
+                        DocumentExtra.Voted = true;
                         DocumentExtra.VoteCount = result.Data.Count;
+                        OnPropertyChanged("DocumentExtra");
                     }
                     ToastService.SendToast(result.AlertDesc);
                 }

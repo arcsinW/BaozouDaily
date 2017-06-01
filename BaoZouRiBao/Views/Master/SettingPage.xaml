@@ -137,7 +137,7 @@
 
                             <StackPanel Grid.Column="1">
                                 <TextBlock Text="清除缓存" Style="{ThemeResource TitleTextBlockStyle}"/>
-                                <TextBlock Text="在WI-FI下打开暴走日报，自动下载最新内容" Style="{ThemeResource DescTextBlockStyle}"/>
+                                <!--<TextBlock Text="在WI-FI下打开暴走日报，自动下载最新内容" Style="{ThemeResource DescTextBlockStyle}"/>-->
                             </StackPanel>
                         </Grid>
                     </ListViewItem>

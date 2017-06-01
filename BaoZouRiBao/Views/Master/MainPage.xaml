@@ -241,7 +241,6 @@
         <convert:SelectedLegendItemToColorConverter x:Key="SelectedLegendItemToColorConverter" />
         <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 
-        
         <Style x:Key="LegendItemContainerStyle" TargetType="GridViewItem">
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
             <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
@@ -341,7 +340,7 @@
                     </Button.Flyout>
                 </Button>
 
-                <Button x:Name="btn" Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right">
+                <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right">
                     <i:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
                             <core:EventTriggerBehavior.Actions>
@@ -427,7 +426,7 @@
                                         <DataTemplate>
                                             <Grid>
                                                 <control:ImageEx Source="{Binding Image}" PlaceholderSource="{StaticResource PlaceHolderImageLarge}" 
-                                                                 VerticalAlignment="Center" Stretch="Fill" PlaceholderStretch="Fill"/>
+                                                                 VerticalAlignment="Center" Stretch="UniformToFill"/>
                                                 <Border>
                                                     <Border.Background>
                                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.2">
@@ -539,8 +538,7 @@
                                                           Source="{Binding FileUrl}" Grid.Row="0" />-->
 
                                     <control:ImageEx Grid.Row="0" Source="{Binding Image}" PlaceholderSource="{ThemeResource VideoPlaceHolderImage}"
-                                                     Stretch="UniformToFill"
-                                                     PlaceholderStretch="UniformToFill" Height="250" Width="Auto"/>
+                                                     Stretch="Fill" PlaceholderStretch="UniformToFill" Height="250" Width="Auto"/>
                                     
                                     <!--<Image Grid.Row="0" Stretch="Fill" Height="250" Width="Auto">
                                         <Image.Source>

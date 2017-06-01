@@ -113,11 +113,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\OpenMenuFlyoutAction.cs" />
+    <Compile Include="Animations\AnimationSet.cs" />
+    <Compile Include="Animations\AnimationSetCompletedEventArgs.cs" />
+    <Compile Include="Animations\AnimationSetState.cs" />
+    <Compile Include="Animations\AnimationTask.cs" />
+    <Compile Include="Animations\AnimationTools.cs" />
+    <Compile Include="Animations\EasingType.cs" />
+    <Compile Include="Animations\EffectAnimationDefinition.cs" />
+    <Compile Include="Animations\EffectDirectPropertyChangeDefinition.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Actions\NavigationAction.cs" />
     <Compile Include="Cache\CacheBase.cs" />
+    <Compile Include="Cache\DataCache.cs" />
     <Compile Include="Cache\FileCache.cs" />
     <Compile Include="Cache\ImageCache.cs" />
     <Compile Include="Cache\InMemoryStorage.cs" />
@@ -135,12 +144,16 @@
     <Compile Include="Controls\ImageEx\ImageExOpenedEventArgs.cs" />
     <Compile Include="Controls\PullToRefreshListView\PullToRefreshListView.cs" />
     <Compile Include="Controls\PullToRefreshListView\RefreshProgressEventArgs.cs" />
+    <Compile Include="Controls\SlidableListItem\SlidableListItem.cs" />
+    <Compile Include="Controls\SlidableListItem\SwipeStatus.cs" />
+    <Compile Include="Controls\SlidableListItem\SwipeStatusChangedEventArgs.cs" />
     <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\BoolToLikeBitmapConverter.cs" />
     <Compile Include="Converters\BoolToObjectConverter.cs" />
     <Compile Include="Converters\BoolToPathIconConverter.cs" />
     <Compile Include="Converters\BoolToUriConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolToVoteBitmapConverter.cs" />
     <Compile Include="Converters\ConverterTools.cs" />
     <Compile Include="Converters\DoneToStringConverter.cs" />
     <Compile Include="Converters\IsNullOrEmptyToBoolConverter.cs" />
@@ -157,6 +170,8 @@
     <Compile Include="Enums\ToastActionEnum.cs" />
     <Compile Include="EventHandlers\UnauthorizedEventHandler.cs" />
     <Compile Include="Events\UnauthorizedEvent.cs" />
+    <Compile Include="Extension\AnimationExtensions.cs" />
+    <Compile Include="Extension\AnimationExtensions.Offset.cs" />
     <Compile Include="Extension\VisualTreeExtension.cs" />
     <Compile Include="Extension\WebViewExtension.cs" />
     <Compile Include="Helper\AuthenticationHelper.cs" />
@@ -568,6 +583,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Controls\SlidableListItem\SlidableListItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\DarkDictionary.xaml">
       <SubType>Designer</SubType>

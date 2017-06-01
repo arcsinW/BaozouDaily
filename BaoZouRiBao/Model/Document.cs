@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using BaoZouRiBao.Common;
+using BaoZouRiBao.Controls;
+using BaoZouRiBao.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +13,7 @@ namespace BaoZouRiBao.Model
     /// <summary>
     /// 首页
     /// </summary>
-    public class Document
+    public class Document : ModelBase
     {
         [JsonProperty(PropertyName = "author_avatar")]
         public string AuthorAvatar { get; set; }
@@ -121,9 +124,48 @@ namespace BaoZouRiBao.Model
         public string VideoImageUrl { get; set; }
 
         [JsonProperty(PropertyName = "vote_count")]
-        public string VoteCount { get; set; }
+        public int VoteCount { get; set; }
 
+        private bool voted = false;
         [JsonProperty(PropertyName = "voted")]
-        public string Voted { get; set; }
+        public bool Voted
+        {
+            get
+            {
+                return voted;
+            }
+            set
+            {
+                voted = true;
+                OnPropertyChanged();
+            }
+        }
+
+        #region Commands 
+
+        public RelayCommand VoteCommand { get; set; }
+
+        public Document()
+        {
+            VoteCommand = new RelayCommand(() => { Vote(); });
+        }
+
+        /// <summary>
+        /// 点赞此评论
+        /// </summary>
+        public async void Vote()
+        {
+            var result = await ApiService.Instance.VoteAsync(DocumentId);
+            if (result != null)
+            {
+                if (result.Status == "1000")
+                {
+                    Voted = true;
+                    VoteCount++;
+                }
+                ToastService.SendToast(result.AlertDesc);
+            }
+        }
+        #endregion
     }
 }

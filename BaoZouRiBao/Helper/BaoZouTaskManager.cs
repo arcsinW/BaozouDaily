@@ -11,7 +11,8 @@ namespace BaoZouRiBao.Helper
     /// </summary>
     public class BaoZouTaskManager
     {
-        public BaoZouTaskManager()
+        #region Singleton
+        private BaoZouTaskManager()
         {
             if (IsNewDay())
             {
@@ -30,6 +31,16 @@ namespace BaoZouRiBao.Helper
             }
         }
 
+        private BaoZouTaskManager instance = new BaoZouTaskManager();
+        public BaoZouTaskManager Instance
+        {
+            get
+            {
+                return instance;
+            }
+        } 
+        #endregion
+
         private static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
         #region Keys
@@ -46,7 +57,7 @@ namespace BaoZouRiBao.Helper
         private const string PreviousDate_Key = "PreviousDate";
         #endregion
 
-        #region Fields
+        #region Properties
         private bool isSigned = false;
         /// <summary>
         /// 是否签到
@@ -155,16 +166,7 @@ namespace BaoZouRiBao.Helper
                 return previousDate;
             }
             set
-            {
-                if (IsNewDay())
-                {
-                    IsSigned = false;
-                    IsDocumentVoted = false;
-                    IsCommentVoted = false;
-                    IsRead = false;
-                    IsCommented = false;
-                    IsShared = false;
-                }
+            { 
                 previousDate = (DateTime)GetValue(localSettings, DateTime.MinValue, PreviousDate_Key);
             }
         }
@@ -217,16 +219,7 @@ namespace BaoZouRiBao.Helper
             else
             {
                 return false;
-            }
-
-            //if (!DateTime.Parse((string)localSettings.Values[PreviousDate_Key]).Equals(DateTime.Now.Date.ToString()))
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
+            } 
         }
 
         /// <summary>
@@ -254,7 +247,7 @@ namespace BaoZouRiBao.Helper
             if (IsLogin() && IsNewDay())
             {
                 var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.DailySign);
-                if (result != null && result.Status.Equals("success"))
+                if (result != null && result.Status.Equals("1000"))
                 {
                     MasterDetailPage.Current.ShowTaskDialog(result);
 
@@ -269,10 +262,16 @@ namespace BaoZouRiBao.Helper
         /// </summary>
         public static async void ReadDocument()
         {
-            var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.ReadDocument);
-            if (result != null)
+            if (IsLogin() && IsNewDay())
             {
-                MasterDetailPage.Current.ShowTaskDialog(result);
+                var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.ReadDocument);
+                if (result != null && result.Status.Equals("1000"))
+                {
+                    MasterDetailPage.Current.ShowTaskDialog(result);
+
+                    // 更新上次签到日期
+                    PreviousDate = DateTime.Now.Date;
+                }
             }
         }
 
@@ -281,10 +280,16 @@ namespace BaoZouRiBao.Helper
         /// </summary>
         public static async void CommentDocument()
         {
-            var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.CommentDocument);
-            if (result != null)
+            if (IsLogin() && IsNewDay())
             {
-                MasterDetailPage.Current.ShowTaskDialog(result);
+                var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.CommentDocument);
+                if (result != null && result.Status.Equals("1000"))
+                {
+                    MasterDetailPage.Current.ShowTaskDialog(result);
+
+                    // 更新上次签到日期
+                    PreviousDate = DateTime.Now.Date;
+                }
             }
         }
 
@@ -293,10 +298,16 @@ namespace BaoZouRiBao.Helper
         /// </summary>
         public static async void VoteDocument()
         {
-            var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.VoteDocument);
-            if (result != null)
+            if (IsLogin() && IsNewDay())
             {
-                MasterDetailPage.Current.ShowTaskDialog(result);
+                var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.VoteDocument);
+                if (result != null && result.Status.Equals("1000"))
+                {
+                    MasterDetailPage.Current.ShowTaskDialog(result);
+
+                    // 更新上次签到日期
+                    PreviousDate = DateTime.Now.Date;
+                }
             }
         }
 
@@ -305,10 +316,16 @@ namespace BaoZouRiBao.Helper
         /// </summary>
         public static async void VoteComment()
         {
-            var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.VoteComment);
-            if (result != null)
+            if (IsLogin() && IsNewDay())
             {
-                MasterDetailPage.Current.ShowTaskDialog(result);
+                var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.VoteComment);
+                if (result != null && result.Status.Equals("1000"))
+                {
+                    MasterDetailPage.Current.ShowTaskDialog(result);
+
+                    // 更新上次签到日期
+                    PreviousDate = DateTime.Now.Date;
+                }
             }
         }
 
@@ -317,10 +334,16 @@ namespace BaoZouRiBao.Helper
         /// </summary>
         public static async void ShareDocument()
         {
-            var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.ShareDocument);
-            if (result != null)
+            if (IsLogin() && IsNewDay())
             {
-                MasterDetailPage.Current.ShowTaskDialog(result);
+                var result = await ApiService.Instance.TaskDoneAsync(BaoZouTaskEnum.ShareDocument);
+                if (result != null && result.Status.Equals("1000"))
+                {
+                    MasterDetailPage.Current.ShowTaskDialog(result);
+
+                    // 更新上次签到日期
+                    PreviousDate = DateTime.Now.Date;
+                }
             }
         }
     }
