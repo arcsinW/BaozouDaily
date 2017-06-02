@@ -39,7 +39,7 @@ namespace BaoZouRiBao.Helper
 
             CryptographicHash objHash = provider.CreateHash();
 
-            IBuffer buff = CryptographicBuffer.ConvertStringToBinary(data, BinaryStringEncoding.Utf16LE);
+            IBuffer buff = CryptographicBuffer.ConvertStringToBinary(data, BinaryStringEncoding.Utf16BE);
 
             objHash.Append(buff);
 
@@ -99,17 +99,19 @@ namespace BaoZouRiBao.Helper
         public static Dictionary<string,string> GetDictionaryForLogin(string userName,string passWord)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic.Add("timestamp", DateTimeHelper.GetUnixTimeStamp());
+            //dic.Add("timestamp", DateTimeHelper.GetUnixTimeStamp());
             dic.Add("client_id", "10230158");
-            dic.Add("password", passWord);
-            //dic.Add("timestamp", "1464930310788");
-            dic.Add("username", userName);
-           
+            //dic.Add("password", passWord);
+            dic.Add("timestamp", "1496390652837");
+            //dic.Add("username", userName);
+            dic.Add("Authorization", "Bearer ZDY0NzU1MDAtMjk5Ny0wMT");
+
             List<string> list = new List<string>();
             list.Add("timestamp");
-            list.Add("password");
+            //list.Add("password");
             list.Add("client_id");
-            list.Add("username");
+            //list.Add("username");
+            list.Add("Authorization");
 
             dic.Add("sign", Get32MD5(GetMD5Sign(dic,list)));
 

@@ -159,6 +159,9 @@ namespace BaoZouRiBao.Views
             {
                 tipTextBlock.Text = "穿山甲拒绝了本次采访";
                 LogHelper.WriteLine(e);
+
+                var rootFrame = (Window.Current.Content as Frame) as Frame;
+                rootFrame?.Navigate(typeof(MasterDetailPage));
             }
         }
 

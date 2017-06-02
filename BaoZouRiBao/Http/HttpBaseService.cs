@@ -32,7 +32,7 @@ namespace BaoZouRiBao.Http
             // header["X-APP-VERSION_CODE"] = "7";
             // header["X-APP-VERSION"] = "3.1.0";
             // header["ZA"] = "OS=Android 5.0&Platform=4.5 Lollipop (5.0) XHDPI Phone";
-            // header["Timestamp"] = Functions.GetUnixTimeStamp();
+            header["Timestamp"] = DateTimeHelper.GetUnixTimeStamp();
             
             header.Connection.TryParseAdd("Keep-Alive");
             header["Host"] = "dailyapi.ibaozou.com";

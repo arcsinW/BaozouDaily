@@ -41,7 +41,7 @@ namespace BaoZouRiBao.Model.ResultModel
         public string Balance { get; set; }
 
         [JsonProperty(PropertyName = "increase")]
-        public string Increase { get; set; }
+        public bool Increase { get; set; }
 
         [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }

@@ -124,9 +124,9 @@
                                 </Button>-->
                             </Grid>
                             <StackPanel Background="{ThemeResource ListViewHeaderBrush}" 
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                                 <Image Source="ms-appx:///Assets/Images/icon_article_newcomment.png"
-                               Height="20" Width="20" Margin="8"/>
+                                    Height="20" Width="20" Margin="8"/>
                                 <TextBlock Text="最新评论" VerticalAlignment="Center"/>
                             </StackPanel>
                         </StackPanel>

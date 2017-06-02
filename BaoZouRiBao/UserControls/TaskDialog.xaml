@@ -9,33 +9,37 @@
     mc:Ignorable="d"
     DataContext="{Binding }"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    Background="#CC000000">
+    
+    <Grid x:Name="BackgroundGrid" Background="{ThemeResource DialogBackgroundBrush}" CornerRadius="18">
+            <Grid.Transitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                </TransitionCollection>
+            </Grid.Transitions>
+            <Border  Background="{ThemeResource AdjustColorBrush}" Height="270" Width="250" CornerRadius="18">
+            <Grid CornerRadius="18">
+                <Ellipse Fill="White" Height="150" Width="150" VerticalAlignment="Top" Margin="-40"/>
+                <StackPanel>
+                    <Image x:Name="image" HorizontalAlignment="Center" VerticalAlignment="Center" Height="150" Width="150" Margin="0,-40,0,8">
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding UriSource}"/>
+                        </Image.Source>
+                    </Image>
 
-    <Grid x:Name="BackgroundGrid" Background="{ThemeResource DialogBackgroundBrush}">
-        <Grid.Transitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.Transitions>
-        <Grid  Background="{ThemeResource AdjustColorBrush}" Height="270" Width="250" CornerRadius="18">
-            <Ellipse Fill="White" Height="150" Width="150" VerticalAlignment="Top" Margin="-40"/>
-            <StackPanel>
-                <Image x:Name="image" HorizontalAlignment="Center" VerticalAlignment="Center" Height="150" Width="150" Margin="0,-40,0,8">
-                    <Image.Source>
-                        <BitmapImage UriSource="{Binding UriSource}"/>
-                    </Image.Source>
-                </Image>
+                    <TextBlock Text="{Binding Title}" HorizontalAlignment="Center" Foreground="#FFFC7C88"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,8" HorizontalAlignment="Center">
+                        <Image Height="36" Width="36" Source="ms-appx:///Assets/Images/img_coin_mini.png"/>
 
-                <TextBlock Text="{Binding Title}" HorizontalAlignment="Center" Foreground="#FFFC7C88"/>
-                <StackPanel Orientation="Horizontal" Margin="0,8" HorizontalAlignment="Center">
-                    <Image Height="36" Width="36" Source="ms-appx:///Assets/Images/img_coin_mini.png"/>
+                        <TextBlock Foreground="#FFFEC64F" Text="+" Margin="4,0" VerticalAlignment="Center"/>
 
-                    <TextBlock Foreground="#FFFEC64F" Text="+" Margin="4,0" VerticalAlignment="Center"/>
-
-                    <TextBlock Foreground="#FFFEC64F"  VerticalAlignment="Center" Text="{Binding CoinCount}"/>
+                        <TextBlock Foreground="#FFFEC64F"  VerticalAlignment="Center" Text="{Binding CoinCount}"/>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-            <Button Content="OK" Height="48" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Style="{StaticResource AndroidPopupButtonStyle}"/>
+                <Button Content="OK" Height="48" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Style="{StaticResource AndroidPopupButtonStyle}"/>
+            </Grid>
+        </Border>
         </Grid>
-    </Grid>
+    
 </controls:DialogService>

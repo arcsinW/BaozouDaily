@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,12 @@ namespace BaoZouRiBao.Helper
         /// <returns></returns>
         public static string GetUnixTimeStamp()
         {
-            return ((DateTime.UtcNow.Ticks - 621355968000000000) / 100000).ToString();
+            //Debug.WriteLine( ((DateTime.UtcNow.Ticks - 621355968000000000) / 100000).ToString());
+            //return ((DateTime.UtcNow.Ticks - 621355968000000000) / 100000).ToString();
+
+            string timeStamp = ((DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000).ToString() + "000";
+            Debug.WriteLine(timeStamp);
+            return timeStamp;
         }
 
         /// <summary>

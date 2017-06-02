@@ -13,7 +13,6 @@
     xmlns:vm="using:BaoZouRiBao.ViewModel"
     RequestedTheme="{Binding AppTheme}"
     NavigationCacheMode="Required"
-    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -602,7 +601,7 @@
                         <BitmapIcon ToolTipService.ToolTip="搜索" UriSource="/Assets/Images/icon_sidebar_search.png"/>
                     </ListViewItem>
 
-                    <ListViewItem>
+                    <ListViewItem Visibility="Collapsed">
                         <i:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
                                 <core:EventTriggerBehavior.Actions>
@@ -681,10 +680,10 @@
         </control:AndroidPopup>-->
  
         <!--#region 任务Popup-->
-        <controls:BaoZouTaskPopup x:Name="taskPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666" 
-                                 BaoZouPopupType="DailySign"  CoinCount="4" Title="获取奖励" Visibility="Collapsed"/>
+        <!--<controls:BaoZouTaskPopup x:Name="taskPopup" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF666666" 
+                                 BaoZouPopupType="DailySign"  CoinCount="4" Title="获取奖励" Visibility="Collapsed"/>-->
         <!--#endregion-->
  
-        <uc:TaskDialog x:Name="taskDialog" Grid.ColumnSpan="3"/>
+        <uc:TaskDialog x:Name="taskDialog" Visibility="Collapsed" HorizontalAlignment="Stretch" Grid.ColumnSpan="3"/>
     </Grid>
 </Page>

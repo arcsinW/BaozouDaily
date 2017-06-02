@@ -54,6 +54,8 @@ namespace BaoZouRiBao.Http
             //dic.Add("client_id", "10230202?");
             dic.Add("client_id", InformationHelper.DeviceId);
 
+            //MD5Helper.GetDictionaryForLogin(userName, password);
+
             var result = await PostDicForLogin(ServiceUri.OAuth2, dic);
             return result;
         }
@@ -204,7 +206,11 @@ namespace BaoZouRiBao.Http
         public async Task<DailyTaskDoneResult> TaskDoneAsync(BaoZouTaskEnum taskId)
         {
             string post = "{\"task_id\": \"" + 2 + "\"}";
-            var result = await Post<DailyTaskDoneResult>(ServiceUri.TaskDone, post);
+            //var result = await Post<DailyTaskDoneResult>(ServiceUri.TaskDone, post);
+
+#if DEBUG
+            var result = new DailyTaskDoneResult() { AlertDesc = "", Status = "1000", Desc = "Success", Task = new TaskDone() { Amount = "5", Balance = "500", Increase = true } };
+#endif
             return result;
         }
 

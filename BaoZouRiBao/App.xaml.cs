@@ -90,7 +90,7 @@ namespace BaoZouRiBao
             // 通过Toast通知从前台打开
             HandleNotification(e);
 
-            PrepareExtraFunction();
+            //PrepareExtraFunction();
         }
         
 
@@ -100,7 +100,14 @@ namespace BaoZouRiBao
         private void PrepareExtraFunction()
         {
             //VoiceCommandHelper.InstallVCDFile();
-            MobileCenter.Start(GlobalValue.MobileCenterKey, typeof(Analytics));
+            try
+            {
+                MobileCenter.Start(GlobalValue.MobileCenterKey, typeof(Analytics));
+            }
+            catch(Exception e)
+            {
+                LogHelper.WriteLine(e);
+            }
             //BackgroundTaskRegisterHelper.RegisterAll();
         }
 

@@ -71,12 +71,6 @@ namespace BaoZouRiBao.Views
             {
                 taskDialog.Show(taskDoneResult);
             }
-        }
-         
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            ViewModel.DailySign();
-        }
+        } 
     }
 }
