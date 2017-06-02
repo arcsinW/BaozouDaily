@@ -114,8 +114,7 @@ namespace BaoZouRiBao.Views
         #endregion
          
         private void headerFlipView_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            
+        { 
             var story = headerFlipView.SelectedItem as Document;
             if (story != null)
             {
@@ -137,6 +136,16 @@ namespace BaoZouRiBao.Views
                 case 2:
                     await ViewModel.RefreshVideo();
                     break;
+            }
+        }
+
+        private void headerFlipView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var story = headerFlipView.SelectedItem as Document;
+            if (story != null)
+            {
+                WebViewParameter parameter = new WebViewParameter() { Title = "", WebViewUri = story.Url, DocumentId = story.DocumentId, DisplayType = story.DisplayType };
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
             }
         }
     }

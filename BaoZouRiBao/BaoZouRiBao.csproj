@@ -202,14 +202,12 @@
     <Compile Include="Http\ApiService.cs" />
     <Compile Include="Http\HttpBaseService.cs" />
     <Compile Include="Http\ServiceUri.cs" />
-    <Compile Include="IncrementalCollection\ChannelCollection.cs" />
     <Compile Include="IncrementalCollection\DataSource\RankDataSource.cs" />
     <Compile Include="IncrementalCollection\IIncrementalSource.cs" />
     <Compile Include="IncrementalCollection\IncrementalLoadingBase.cs" />
     <Compile Include="IncrementalCollection\IncrementalLoadingCollection.cs" />
     <Compile Include="IncrementalCollection\IncrementalLoadingList.cs" />
     <Compile Include="IncrementalCollection\LatestCommentSource.cs" />
-    <Compile Include="IncrementalCollection\SearchResultCollection.cs" />
     <Compile Include="Interfaces\IProvider.cs" />
     <Compile Include="Interfaces\IStorage.cs" />
     <Compile Include="Model\Article.cs" />
@@ -287,6 +285,7 @@
     <Compile Include="UserControls\TaskDialog.xaml.cs">
       <DependentUpon>TaskDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\AnimatedPage.cs" />
     <Compile Include="Utils\GlobalValue.cs" />
     <Compile Include="ViewModel\BaozouLoginViewModel.cs" />
     <Compile Include="ViewModel\ChannelViewModel.cs" />
@@ -370,8 +369,8 @@
     <Compile Include="Views\Master\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SplashScreenPage.xaml.cs">
-      <DependentUpon>SplashScreenPage.xaml</DependentUpon>
+    <Compile Include="Views\ExtendedSplash.xaml.cs">
+      <DependentUpon>ExtendedSplash.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Master\UserInfoPage.xaml.cs">
       <DependentUpon>UserInfoPage.xaml</DependentUpon>
@@ -478,6 +477,7 @@
     <Content Include="Assets\Images\image_small_default.jpg" />
     <Content Include="Assets\Images\night_image_preview_column.jpg" />
     <Content Include="Assets\Images\section_image_preview_column.jpg" />
+    <Content Include="Assets\Images\Share.png" />
     <Content Include="Assets\Images\Share\sharemore_selector.png" />
     <Content Include="Assets\Images\Share\shareqq_selector.png" />
     <Content Include="Assets\Images\Share\shareqzone_selector.png" />
@@ -703,7 +703,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SplashScreenPage.xaml">
+    <Page Include="Views\ExtendedSplash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

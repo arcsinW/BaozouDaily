@@ -52,7 +52,7 @@
                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <ScrollViewer.Content>
-                        <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
+                        <TextBlock Margin="0" Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
                             Style="{ThemeResource PageTitleTextBlockStyle}" 
                             HorizontalAlignment="Left" />
                     </ScrollViewer.Content>
@@ -109,9 +109,13 @@
                     <AddDeleteThemeTransition />
                 </TransitionCollection>
             </Popup.ChildTransitions>
-            <Popup.Child> 
-                <Button Width="48" Height="48" x:Name="shareBtn" Style="{ThemeResource ImageButtonStyle}" Click="shareBtn_Click">
-                    <Image Source="ms-appx:///Assets/Images/article_share.png"/>
+            <Popup.Child>
+                <Button Style="{ThemeResource ImageButtonStyle}" x:Name="shareBtn" Click="shareBtn_Click" >
+                    <!--Style="{ThemeResource ImageButtonStyle}"-->
+                    <!--<Image Source="ms-appx:///Assets/Images/article_share.png"/>-->
+                    <Border Width="48" Height="48"  CornerRadius="24" Background="{ThemeResource ThemeColorBrush}">
+                        <BitmapIcon UriSource="ms-appx:///Assets/Images/Share.png"/>
+                    </Border>
                 </Button>
             </Popup.Child>
         </Popup>

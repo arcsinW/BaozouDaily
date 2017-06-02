@@ -46,7 +46,7 @@
                                 <Grid>
                                     <ContentPresenter x:Name="PullAndReleaseIndicatorContent"
                                                       HorizontalAlignment="Center"
-                                                      FontSize="20" />
+                                                      FontSize="16" />
                                     <ContentPresenter Content="{TemplateBinding RefreshIndicatorContent}" />
                                 </Grid>
                                 <Border.RenderTransform>

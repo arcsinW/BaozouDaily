@@ -49,6 +49,12 @@ namespace BaoZouRiBao.ViewModel
         /// <returns></returns>
         private async Task<IEnumerable<Document>> LoadDocuments(uint count, string timeStamp)
         {
+            string fileName = "latest_document.json";
+            if (!ConnectionHelper.IsInternetAvailable)
+            {
+
+            }
+
             if (timeStamp.Equals(documentStringBuilder.ToString()))
             {
                 Documents.NoMore();
@@ -63,11 +69,9 @@ namespace BaoZouRiBao.ViewModel
 
                 documentStringBuilder.Clear();
                 documentStringBuilder.Append(timeStamp);
-
                 Documents.TimeStamp = stories.TimeStamp;
 
                 stories.Data?.ForEach(x => documents.Add(x));
-
                 if (stories.TopStories != null)
                 {
                     TopDocuments.Clear();
@@ -79,7 +83,6 @@ namespace BaoZouRiBao.ViewModel
             else
             {
                 Documents.NoMore();
-
                 if (Documents.Count == 0)
                 {
                     IsDocumentsEmpty = true;
@@ -116,7 +119,6 @@ namespace BaoZouRiBao.ViewModel
             else
             {
                 Videos.NoMore();
-
                 if (Videos.Count == 0)
                 {
                     IsVideosEmpty = true;
@@ -153,7 +155,6 @@ namespace BaoZouRiBao.ViewModel
             else
             {
                 Contributes.NoMore();
-
                 if (Contributes.Count == 0)
                 {
                     IsContributesEmpty = true;

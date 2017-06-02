@@ -25,20 +25,22 @@ using Windows.Storage;
 
 namespace BaoZouRiBao.Views
 {
-    public sealed partial class SplashScreenPage : Page
-    {
-        public SplashScreenPage()
-        {
-            this.InitializeComponent();
-        }
-
-        public SplashScreenPage(SplashScreen splashscreen, bool loadState)
+    partial class ExtendedSplash
+    { 
+        public ExtendedSplash(SplashScreen splashscreen, bool loadState)
         {
             InitializeComponent();
+            
+            AppTheme = DataShareManager.Current.AppTheme;
 
-            AppTheme = DataShareManager.Current.AppTheme; 
-             
-            StatusBarHelper.ShowStatusBar(AppTheme == ElementTheme.Dark);
+            if (InformationHelper.IsMobile)
+            {
+                //StatusBarHelper.ShowStatusBar(AppTheme == ElementTheme.Dark);
+            }
+            else
+            {
+                StatusBarHelper.ShowStatusBar(AppTheme == ElementTheme.Dark);
+            }
 
             // Listen for window resize events to reposition the extended splash screen image accordingly.
             // This ensures that the extended splash screen formats properly in response to window resizing.
@@ -60,6 +62,8 @@ namespace BaoZouRiBao.Views
 
             // Create a Frame to act as the navigation context
             rootFrame = new Frame();
+
+            PrepareSDK();
         }
 
         internal Rect splashImageRect; // Rect to store splash screen image coordinates.
@@ -114,17 +118,9 @@ namespace BaoZouRiBao.Views
         #endregion
 
         // Include code to be executed when the system has transitioned from the splash screen to the extended splash screen (application's first view).
-        private async void DismissedEventHandler(SplashScreen sender, object e)
+        private void DismissedEventHandler(SplashScreen sender, object e)
         {
-            dismissed = true;
-            
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-            {
-                await InitialSDKAsync();
-
-                var rootFrame = (Window.Current.Content as Frame) as Frame;
-                rootFrame?.Navigate(typeof(MasterDetailPage));
-            });
+            dismissed = true; 
         }
         
         void ExtendedSplash_OnResize(Object sender, WindowSizeChangedEventArgs e)
@@ -135,6 +131,11 @@ namespace BaoZouRiBao.Views
 
                 PositionElement();
             }
+        }
+
+        private async void PrepareSDK()
+        {
+            await InitialSDKAsync();
         }
 
         /// <summary>
@@ -150,6 +151,9 @@ namespace BaoZouRiBao.Views
                 await Lary.Apps.SDK.UniversalServices.PushNotificationService.UploadChannelAsync(pushNotificationChannel.Uri, pushNotificationChannel.ExpirationTime);
                 VoiceCommandHelper.InstallVCDFile();
                 BackgroundTaskRegisterHelper.RegisterAll();
+
+                var rootFrame = (Window.Current.Content as Frame) as Frame;
+                rootFrame?.Navigate(typeof(MasterDetailPage));
             }
             catch (Exception e)
             {
