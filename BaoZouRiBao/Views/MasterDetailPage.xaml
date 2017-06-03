@@ -601,7 +601,7 @@
                         <BitmapIcon ToolTipService.ToolTip="搜索" UriSource="/Assets/Images/icon_sidebar_search.png"/>
                     </ListViewItem>
 
-                    <ListViewItem Visibility="Collapsed">
+                    <ListViewItem>
                         <i:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
                                 <core:EventTriggerBehavior.Actions>

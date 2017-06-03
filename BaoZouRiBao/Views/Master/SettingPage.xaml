@@ -55,7 +55,7 @@
                     </TransitionCollection>
                 </ListView.Transitions>
                 <ListView.Items>
-                    <ListViewItem Visibility="Collapsed">
+                    <ListViewItem>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -74,7 +74,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem Visibility="Collapsed">
+                    <ListViewItem>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -90,7 +90,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem Visibility="Collapsed">
+                    <ListViewItem>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -108,7 +108,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem Visibility="Collapsed">
+                    <ListViewItem>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -126,7 +126,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem Visibility="Collapsed">
+                    <ListViewItem>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -142,7 +142,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem Visibility="Collapsed">
+                    <ListViewItem>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
