@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,332 +13,224 @@ namespace BaoZouRiBao.Model.ResultModel
     public class OfflineDownloadResult
     {
         /// <summary>
-        /// 
+        /// 新闻列表
         /// </summary>
-        public List<NewslistItem> newslist { get; set; }
+        [JsonProperty(PropertyName = "newslist")]
+        public List<News> News { get; set; }
+
         /// <summary>
-        /// 
+        /// Html header
         /// </summary>
-        public List<Head_replaceItem> head_replace { get; set; }
+        [JsonProperty(PropertyName = "head_replace")]
+        public List<HtmlHead> Heads{ get; set; }
 
     }
+
     public class ArticlesItem
     {
         /// <summary>
         /// 
         /// </summary>
-        public string image_source { get; set; }
+        [JsonProperty(PropertyName = "image_source")]
+        public string ImageSource { get; set; }
+
         /// <summary>
-        /// 兄弟你还是洗洗睡吧
+        /// 文章标题
         /// </summary>
-        public string title { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string image { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string video_file_url { get; set; }
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string thumbnail { get; set; }
-        /// <summary>
-        /// 努力的doge
-        /// </summary>
-        public string author_name { get; set; }
+        [JsonProperty(PropertyName = "image")]
+        public string Image { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string share_image { get; set; }
+        [JsonProperty(PropertyName = "video_file_url")]
+        public string VideoFileUrl { get; set; }
+
+        /// <summary>
+        /// 缩略图
+        /// </summary>
+        [JsonProperty(PropertyName = "thumbnail")]
+        public string Thumbnail { get; set; }
+
+        /// <summary>
+        /// 作者
+        /// </summary>
+        [JsonProperty(PropertyName = "author_name")]
+        public string AuthorName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty(PropertyName = "share_image")]
+        public string ShareImage { get; set; }
+
         /// <summary>
         /// 努力的doge 兄弟你还是洗洗睡吧 暴走天天看
         /// </summary>
-        public string key_words { get; set; }
+        [JsonProperty(PropertyName = "key_words")]
+        public string KeyWords { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string video_image_url { get; set; }
+        [JsonProperty(PropertyName = "video_image_url")]
+        public string VideoImageUrl { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string author_avatar { get; set; }
+        [JsonProperty(PropertyName = "author_avatar")]
+        public string AuthorAvatar { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public int document_id { get; set; }
+        [JsonProperty(PropertyName = "document_id")]
+        public int DocumentId { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public int display_type { get; set; }
+        [JsonProperty(PropertyName = "display_type")]
+        public int DisplayType { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public int section_id { get; set; }
+        [JsonProperty(PropertyName = "section_id")]
+        public int SectionId { get; set; }
+
         /// <summary>
         /// 2017 年 2 月
         /// </summary>
-        public string display_date { get; set; }
+        [JsonProperty(PropertyName = "display_date")]
+        public string DisplayDate { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string ga_prefix { get; set; }
+        [JsonProperty(PropertyName = "ga_prefix")]
+        public string GaPrefix { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public int vote_count { get; set; }
+        [JsonProperty(PropertyName = "vote_count")]
+        public int VoteCount { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string share_url { get; set; }
+        [JsonProperty(PropertyName = "share_url")]
+        public string ShareUrl { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string url { get; set; }
+        [JsonProperty(PropertyName = "url")]
+        public string Url { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public int hit_count { get; set; }
+        [JsonProperty(PropertyName = "hit_count")]
+        public int HitCount { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string hit_count_string { get; set; }
+        [JsonProperty(PropertyName = "hit_count_string")]
+        public string HitCountString { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string tag { get; set; }
+        [JsonProperty(PropertyName = "tag")]
+        public string Tag { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string tag_text { get; set; }
+        [JsonProperty(PropertyName = "tag_text")]
+        public string TagText { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string guide { get; set; }
+        [JsonProperty(PropertyName = "guide")]
+        public string Guide { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string guide_image { get; set; }
+        [JsonProperty(PropertyName = "guide_image")]
+        public string GuideImage { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public int timestamp { get; set; }
+        [JsonProperty(PropertyName = "timestamp")]
+        public string timestamp { get; set; }
+
         /// <summary>
         /// 一只还算努力的doge
         /// </summary>
-        public string author_summary { get; set; }
+        [JsonProperty(PropertyName = "author_summary")]
+        public string AuthorSummary { get; set; }
+
         /// <summary>
         /// 暴走天天看
         /// </summary>
+        [JsonProperty(PropertyName = "section_name")]
         public string section_name { get; set; }
+
         /// <summary>
         /// 暴走漫画网站每日精选！
         /// </summary>
-        public string section_description { get; set; }
+        [JsonProperty(PropertyName = "section_description")]
+        public string SectionDescription { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string section_image { get; set; }
+        [JsonProperty(PropertyName = "section_image")]
+        public string SectionImage { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string section_color { get; set; }
+        [JsonProperty(PropertyName = "section_color")]
+        public string SectionColor { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public List<string> js { get; set; }
+        [JsonProperty(PropertyName = "js")]
+        public List<string> Js { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public List<string> css { get; set; }
+        [JsonProperty(PropertyName = "css")]
+        public List<string> Css { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
+        [JsonProperty(PropertyName = "body")]
         public string body { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string head { get; set; }
-    }
 
-    public class Top_storiesItem
-    {
         /// <summary>
         /// 
         /// </summary>
-        public string image_source { get; set; }
-        /// <summary>
-        /// 《超级工薪族左江内氏》：哆啦A梦之父超人题材作品播出！
-        /// </summary>
-        public string title { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string image { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string video_file_url { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string thumbnail { get; set; }
-        /// <summary>
-        /// 萌姜女
-        /// </summary>
-        public string author_name { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string share_image { get; set; }
-        /// <summary>
-        /// 萌姜女 《超级工薪族左江内氏》：哆啦A梦之父超人题材作品播出！ 学霸追剧攻略
-        /// </summary>
-        public string key_words { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string video_image_url { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string author_avatar { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int document_id { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int display_type { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int section_id { get; set; }
-        /// <summary>
-        /// 2017 年 1 月
-        /// </summary>
-        public string display_date { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string ga_prefix { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int vote_count { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string share_url { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string url { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int hit_count { get; set; }
-        /// <summary>
-        /// 6千
-        /// </summary>
-        public string hit_count_string { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string tag { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string tag_text { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string guide { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string guide_image { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int timestamp { get; set; }
-        /// <summary>
-        /// 追剧狂魔，非国产剧狂热爱好者，欢迎同好交流(๑•̀ㅂ•́)و✧ 更多内容关注微博@萌姜女
-        /// </summary>
-        public string author_summary { get; set; }
-        /// <summary>
-        /// 学霸追剧攻略
-        /// </summary>
-        public string section_name { get; set; }
-        /// <summary>
-        /// 只看外剧，抵制资本主义的黄色糖衣炮弹
-        /// </summary>
-        public string section_description { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string section_image { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string section_color { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<string> js { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<string> css { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string body { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string head { get; set; }
+        [JsonProperty(PropertyName = "head")]
+        public string Head { get; set; }
     }
-
-    public class NewslistItem
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<ArticlesItem> articles { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string date { get; set; }
-        /// <summary>
-        /// 2017.2.1 星期三
-        /// </summary>
-        public string display_date { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int timestamp { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<Top_storiesItem> top_stories { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string is_today { get; set; }
-    }
-
-    public class Head_replaceItem
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        public string key { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string value { get; set; }
-    }
+     
 }

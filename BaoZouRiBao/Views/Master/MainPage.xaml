@@ -585,10 +585,10 @@
                                                 </Button>
 
                                                 <Button Style="{ThemeResource ImageButtonStyle}" Command="{Binding ShareCommand}">
-                                                    <Border Width="40" Height="40"  CornerRadius="20" Background="{ThemeResource ThemeColorBrush}">
+                                                    <!--<Border Width="40" Height="40"  CornerRadius="20" Background="{ThemeResource ThemeColorBrush}">
                                                         <BitmapIcon Height="16" Width="16" UriSource="ms-appx:///Assets/Images/Share.png"/>
-                                                    </Border>
-                                                    <!--<Image Source="/Assets/Images/article_share.png" Height="40" Width="40"/>-->
+                                                    </Border>-->
+                                                    <Image Source="/Assets/Images/article_share.png" Height="40" Width="40"/>
                                                 </Button>
                                             </StackPanel>
                                         </Grid>

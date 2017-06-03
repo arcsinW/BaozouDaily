@@ -206,11 +206,7 @@ namespace BaoZouRiBao.Http
         public async Task<DailyTaskDoneResult> TaskDoneAsync(BaoZouTaskEnum taskId)
         {
             string post = "{\"task_id\": \"" + 2 + "\"}";
-            //var result = await Post<DailyTaskDoneResult>(ServiceUri.TaskDone, post);
-
-#if DEBUG
-            var result = new DailyTaskDoneResult() { AlertDesc = "", Status = "1000", Desc = "Success", Task = new TaskDone() { Amount = "5", Balance = "500", Increase = true } };
-#endif
+            var result = await Post<DailyTaskDoneResult>(ServiceUri.TaskDone, post);
             return result;
         }
 
@@ -549,6 +545,18 @@ namespace BaoZouRiBao.Http
         }
 
         /// <summary>
+        /// 取消收藏指定文章
+        /// </summary>
+        /// <param name="documentId"></param>
+        /// <returns></returns>
+        public async Task<string> UnFavoriteAsync(string documentId)
+        {
+            string url = string.Format(ServiceUri.Favorite, documentId);
+            var result = await Delete<string>(url);
+            return result;
+        }
+
+        /// <summary>
         /// 获取频道中的投稿
         /// </summary>
         /// <param name="id"></param>
@@ -604,10 +612,10 @@ namespace BaoZouRiBao.Http
         /// <summary>
         /// 离线下载
         /// </summary>
-        public async Task OfflineDownloadAsync()
+        public async Task<OfflineDownloadResult> OfflineDownloadAsync()
         {
-            var result = await GetJson<string>(ServiceUri.DocumentOfflineDownload);
-            Debug.WriteLine(result);
+            var result = await GetJson<OfflineDownloadResult>(ServiceUri.DocumentOfflineDownload);
+            return result;
         }
     }
 }

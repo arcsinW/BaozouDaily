@@ -161,6 +161,7 @@ namespace BaoZouRiBao.ViewModel
                     using (var content = new MultipartFormDataContent("TLq-mXb4y62pbCa_bPiNZXitxUS3RV29c8"))
                     {
                         var imageContent = new StreamContent(await file.OpenStreamForReadAsync());
+                        string boundary = Guid.NewGuid().ToString();
                         content.Headers.Add("ContentType", "multipart/form-data; boundary=TLq-mXb4y62pbCa_bPiNZXitxUS3RV29c8");
                         //content.Headers.ContentDisposition = ContentDispositionHeaderValue.Parse("form-data; name='avatar'; filename='"+file.Name+"'");
                         content.Add(imageContent, "form-data", file.Name);

@@ -201,7 +201,7 @@ namespace BaoZouRiBao.Helper
 
                 if (!string.IsNullOrEmpty(thumbnailUri))
                 {
-                    IBuffer buffer = await HttpBaseService.SendGetRequestAsBytes(thumbnailUri);
+                    IBuffer buffer = await HttpBaseService.GetBytesAsync(thumbnailUri);
                     message.ThumbData = WindowsRuntimeBufferExtensions.ToArray(buffer);
                 }
                 else

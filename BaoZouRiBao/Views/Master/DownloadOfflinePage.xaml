@@ -27,8 +27,7 @@
                 <TextBlock Text="离线下载" x:Name="pageTitleTextBlock" Style="{ThemeResource PageTitleTextBlockStyle}"/>
             </StackPanel>
 
-            <Button HorizontalAlignment="Right" Style="{ThemeResource BackButtonStyle}" 
-                    Padding="0">
+            <Button HorizontalAlignment="Right" Style="{ThemeResource BackButtonStyle}" Padding="0" Click="{x:Bind ViewModel.Download}">
                 <BitmapIcon UriSource="/Assets/Images/btn_setting_offline.png"/>
             </Button>
         </Grid>

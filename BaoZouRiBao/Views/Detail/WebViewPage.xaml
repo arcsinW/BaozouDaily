@@ -110,12 +110,12 @@
                 </TransitionCollection>
             </Popup.ChildTransitions>
             <Popup.Child>
-                <Button Style="{ThemeResource ImageButtonStyle}" x:Name="shareBtn" Click="shareBtn_Click" >
+                <Button Style="{ThemeResource ImageButtonStyle}" Height="48" Width="48" x:Name="shareBtn" Click="shareBtn_Click" >
                     <!--Style="{ThemeResource ImageButtonStyle}"-->
-                    <!--<Image Source="ms-appx:///Assets/Images/article_share.png"/>-->
-                    <Border Width="48" Height="48"  CornerRadius="24" Background="{ThemeResource ThemeColorBrush}">
+                    <Image Source="ms-appx:///Assets/Images/article_share.png"/>
+                    <!--<Border Width="48" Height="48"  CornerRadius="24" Background="{ThemeResource ThemeColorBrush}">
                         <BitmapIcon UriSource="ms-appx:///Assets/Images/Share.png"/>
-                    </Border>
+                    </Border>-->
                 </Button>
             </Popup.Child>
         </Popup>

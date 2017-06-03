@@ -134,6 +134,7 @@ namespace BaoZouRiBao.ViewModel
 
         #endregion
 
+        #region WebView's events
         public void WebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
             IsActive = true;
@@ -142,7 +143,8 @@ namespace BaoZouRiBao.ViewModel
         public void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
             IsActive = false;
-        }
+        } 
+        #endregion
 
         public async void LoadDocument(string documentId, string displayType)
         {
@@ -194,6 +196,27 @@ namespace BaoZouRiBao.ViewModel
                         IsFavorite = true;
                         ToastService.SendToast("收藏成功");
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 取消收藏
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public async void UnFavorite(object sender, RoutedEventArgs e)
+        {
+            if (DocumentExtra != null)
+            {
+                var res = await ApiService.Instance.UnFavoriteAsync(DocumentExtra.DocumentId);
+                if (res != null)
+                {
+                    //if (res.Status.Equals("1000"))
+                    //{
+                    //    IsFavorite = true;
+                    //    ToastService.SendToast("收藏成功");
+                    //}
                 }
             }
         }

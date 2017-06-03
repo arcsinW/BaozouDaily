@@ -50,18 +50,12 @@ namespace BaoZouRiBao.Http
             NavigationHelper.DetailFrameNavigate(typeof(BaozouLoginPage));
         }
 
-        //if (!string.IsNullOrEmpty(GlobalValue.Current.User.AccessToken))
-        //{
-        //    var header = httpClient.DefaultRequestHeaders;
-        //    header["Authorization"] = "Bearer " + GlobalValue.Current.User.AccessToken;
-        //}
-
         /// <summary>
         /// 向服务器发送get请求  返回服务器回复数据(string)
         /// </summary>
         /// <param name="uri">API地址</param>
         /// <returns></returns>
-        public static async Task<string> SendGetRequest(string uri)
+        public static async Task<string> GetAsync(string uri)
         {
             try
             {   
@@ -76,7 +70,7 @@ namespace BaoZouRiBao.Http
             }
             catch (Exception e)
             {
-                LogHelper.WriteLine($"HttpBaseService.SendGetRequest : {e.Message}");
+                LogHelper.WriteLine(e);
                 return null;
             }
         }
@@ -87,7 +81,7 @@ namespace BaoZouRiBao.Http
         /// <param name="url"></param>
         /// <param name="body"></param>
         /// <returns></returns>
-        public static async Task<string> SendPostRequest(string uri, string body)
+        public static async Task<string> PostAsync(string uri, string body)
         {
             try
             {
@@ -105,7 +99,7 @@ namespace BaoZouRiBao.Http
             }
             catch (Exception e)
             {
-                Debug.Write($"HttpBaseService.SendPostRequest {e.Message}");
+                LogHelper.WriteLine(e);
                 return null;
             }
         }
@@ -115,7 +109,7 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public static async Task<IBuffer> SendGetRequestAsBytes(string uri)
+        public static async Task<IBuffer> GetBytesAsync(string uri)
         {
             try
             {
@@ -131,12 +125,18 @@ namespace BaoZouRiBao.Http
             }
             catch (Exception e)
             {
-                Debug.WriteLine($"HttpBaseService.SendGetRequestAsBytes {e.Message}");
+                LogHelper.WriteLine(e);
                 return null;
             }
         }
 
-        public static async Task<string> SendDicPostRequest(Dictionary<string, string> dic, string uri) 
+        /// <summary>
+        /// 向服务器发送Post请求，参数放在参数字典中
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        public static async Task<string> PostDicAsync(Dictionary<string, string> dic, string uri) 
         {
             try
             {
@@ -151,15 +151,35 @@ namespace BaoZouRiBao.Http
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsStringAsync();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Debug.WriteLine($"HttpBaseService.SendDicPostRequest : {ex.Message}");
+                LogHelper.WriteLine(e);
+                return null;
+            }
+        }
+
+        public static async Task<string> DeleteAsync(string uri)
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.DeleteAsync(new Uri(uri));
+                if (response.StatusCode == Windows.Web.Http.HttpStatusCode.Unauthorized)
+                {
+                    OnUnAuthorized?.Invoke();
+                }
+
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (Exception e)
+            {
+                LogHelper.WriteLine(e);
                 return null;
             }
         }
 
         /// <summary>
-        /// 修改Http Header
+        /// 新增或修改Http Header
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>

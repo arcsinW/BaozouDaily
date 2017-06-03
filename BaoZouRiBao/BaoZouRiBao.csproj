@@ -222,8 +222,10 @@
     <Compile Include="Model\DocumentExtra.cs" />
     <Compile Include="Model\DocumentRelated.cs" />
     <Compile Include="Model\HackJs.cs" />
+    <Compile Include="Model\HtmlHead.cs" />
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\News.cs" />
     <Compile Include="Model\PostModel\LoginPost.cs" />
     <Compile Include="Model\PostModel\SearchPost.cs" />
     <Compile Include="Model\Recommender.cs" />
@@ -287,6 +289,7 @@
     </Compile>
     <Compile Include="Utils\AnimatedPage.cs" />
     <Compile Include="Utils\GlobalValue.cs" />
+    <Compile Include="ViewModel\AboutPageViewModel.cs" />
     <Compile Include="ViewModel\BaozouLoginViewModel.cs" />
     <Compile Include="ViewModel\ChannelViewModel.cs" />
     <Compile Include="ViewModel\CommentPageViewModel.cs" />

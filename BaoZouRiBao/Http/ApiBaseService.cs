@@ -21,7 +21,7 @@ namespace BaoZouRiBao.Http
         {
             try
             {
-                string json = await HttpBaseService.SendGetRequest(url);
+                string json = await HttpBaseService.GetAsync(url);
                 if (json != null)
                 {
                     return JsonHelper.Deserlialize<T>(json);
@@ -42,7 +42,7 @@ namespace BaoZouRiBao.Http
         {
             try
             {
-                string json = await HttpBaseService.SendPostRequest(uri, body);
+                string json = await HttpBaseService.PostAsync(uri, body);
                 if(json!= null)
                 {
                     return JsonHelper.Deserlialize<T>(json);
@@ -68,7 +68,7 @@ namespace BaoZouRiBao.Http
             string body = JsonHelper.Serializer(t);
             try
             {
-                string json = await HttpBaseService.SendPostRequest(uri, body);
+                string json = await HttpBaseService.PostAsync(uri, body);
                 if (json != null)
                 {
                     return JsonObject.Parse(json);
@@ -82,12 +82,33 @@ namespace BaoZouRiBao.Http
             }
         }
          
+        protected async Task<T> Delete<T>(string uri) where T : class
+        {
+            try
+            {
+                string json = await HttpBaseService.DeleteAsync(uri);
+                if (json != null)
+                {
+                    return JsonHelper.Deserlialize<T>(json);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                LogHelper.WriteLine(e);
+                return null;
+            }
+        }
+
         protected async Task<ReturnT> Post<SendT,ReturnT>(string uri,SendT sendT) where ReturnT : class
         {
             string body = JsonHelper.Serializer(sendT);
             try
             {
-                string json = await HttpBaseService.SendPostRequest(uri, body);
+                string json = await HttpBaseService.PostAsync(uri, body);
                 if (json != null)
                 {
                     return JsonHelper.Deserlialize<ReturnT>(json);
@@ -105,7 +126,7 @@ namespace BaoZouRiBao.Http
         {
             try
             {
-                string result = await HttpBaseService.SendDicPostRequest(dic, uri);
+                string result = await HttpBaseService.PostDicAsync(dic, uri);
                 return JsonHelper.Deserlialize<ReturnT>(result);
             }
             catch(Exception e)
@@ -119,7 +140,7 @@ namespace BaoZouRiBao.Http
         {
             try
             {
-                string html = await HttpBaseService.SendGetRequest(url);
+                string html = await HttpBaseService.GetAsync(url);
                 //byte[] bytes = Encoding.UTF8.GetBytes(html);
                 //html = Encoding.GetEncoding("GBK").GetString(bytes);
                 return html;
@@ -134,7 +155,7 @@ namespace BaoZouRiBao.Http
         {
             try
             {
-                IBuffer buffer = await HttpBaseService.SendGetRequestAsBytes(url);
+                IBuffer buffer = await HttpBaseService.GetBytesAsync(url);
                 if (buffer != null)
                 {
                     BitmapImage bi = new BitmapImage();
