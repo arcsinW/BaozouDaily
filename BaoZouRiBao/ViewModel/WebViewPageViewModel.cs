@@ -122,16 +122,7 @@ namespace BaoZouRiBao.ViewModel
             get { return isBrowerEnable; }
             set { isBrowerEnable = value; OnPropertyChanged(); }
         }
-
-
-        private bool isFavorite;
-
-        public bool IsFavorite
-        {
-            get { return isFavorite; }
-            set { isFavorite = value; OnPropertyChanged(); }
-        }
-
+         
         #endregion
 
         #region WebView's events
@@ -168,12 +159,7 @@ namespace BaoZouRiBao.ViewModel
                 case "2": // pure html
 
                     break;
-            }
-
-            if (Document != null)
-            {
-                IsFavorite = Document.Favorited;
-            }
+            } 
 
             IsActive = false;
         }
@@ -188,13 +174,28 @@ namespace BaoZouRiBao.ViewModel
         {
             if (DocumentExtra != null)
             {
-                var res = await ApiService.Instance.FavoriteAsync(DocumentExtra.DocumentId);
-                if (res != null)
+                if (DocumentExtra.Favorited)
                 {
-                    if (res.Status.Equals("1000"))
+                    var res = await ApiService.Instance.UnFavoriteAsync(DocumentExtra.DocumentId);
+                    if (res != null)
                     {
-                        IsFavorite = true;
-                        ToastService.SendToast("收藏成功");
+                        if (!string.IsNullOrEmpty(res.Count))
+                        {
+                            DocumentExtra.Favorited = false;
+                            ToastService.SendToast("取消收藏成功");
+                        }
+                    }
+                }
+                else
+                {
+                    var res = await ApiService.Instance.FavoriteAsync(DocumentExtra.DocumentId);
+                    if (res != null)
+                    {
+                        if (res.Status.Equals("1000"))
+                        {
+                            DocumentExtra.Favorited = true;
+                            ToastService.SendToast("收藏成功");
+                        }
                     }
                 }
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
@@ -16,6 +17,6 @@ namespace BaoZouRiBao.Controls
         public BaoZouMediaTransportControls()
         {
             this.DefaultStyleKey = typeof(BaoZouMediaTransportControls);
-        }
+        } 
     }
 }

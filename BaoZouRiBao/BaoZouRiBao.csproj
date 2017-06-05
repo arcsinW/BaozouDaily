@@ -251,6 +251,7 @@
     <Compile Include="Model\ResultModel\SearchResult.cs" />
     <Compile Include="Model\ResultModel\TaskDoneResult.cs" />
     <Compile Include="Model\ResultModel\TokenInfoResult.cs" />
+    <Compile Include="Model\ResultModel\UnFavoriteResult.cs" />
     <Compile Include="Model\ResultModel\UserContributeResult.cs" />
     <Compile Include="Model\ResultModel\VoteOperationResult.cs" />
     <Compile Include="Model\Settings.cs" />

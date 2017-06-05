@@ -78,7 +78,7 @@
                 </Button>
 
                 <Button Style="{ThemeResource ImageTextButtonStyle}" Padding="4,10" Click="{x:Bind ViewModel.Favorite}">
-                    <PathIcon Data="{x:Bind ViewModel.IsFavorite,Mode=OneWay,Converter={StaticResource BoolToPathIconConverter}}"/>
+                    <PathIcon Data="{Binding DocumentExtra.Favorited,Mode=OneWay,Converter={StaticResource BoolToPathIconConverter}}"/>
                 </Button>
 
                 <Button Style="{ThemeResource BackButtonStyle}" Padding="4,10">

@@ -549,10 +549,10 @@ namespace BaoZouRiBao.Http
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
-        public async Task<string> UnFavoriteAsync(string documentId)
+        public async Task<UnFavoriteResult> UnFavoriteAsync(string documentId)
         {
             string url = string.Format(ServiceUri.Favorite, documentId);
-            var result = await Delete<string>(url);
+            var result = await Delete<UnFavoriteResult>(url);
             return result;
         }
 

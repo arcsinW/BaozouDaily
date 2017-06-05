@@ -61,5 +61,27 @@ namespace BaoZouRiBao.Views
                 }
             }
         }
+
+        private void voteArticleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Message message = ((Button)sender)?.DataContext as Message;
+
+            if (message != null && message.VotedComment != null)
+            {
+                var article = message.VotedComment.Article;
+                if (article != null)
+                {
+                    if (!article.DisplayType.Equals("3"))
+                    {
+                        WebViewParameter parameter = new WebViewParameter() { Title = article.Title, DocumentId = article.DocumentId, DisplayType = "1" };
+                        MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
+                    }
+                    else
+                    {
+                        NavigationHelper.DetailFrameNavigate(typeof(VideoPage), article.DocumentId);
+                    }
+                }
+            }
+        }
     }
 }

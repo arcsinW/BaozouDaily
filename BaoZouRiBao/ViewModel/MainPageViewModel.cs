@@ -21,12 +21,13 @@ namespace BaoZouRiBao.ViewModel
     public class MainPageViewModel : ViewModelBase
     {
         public MainPageViewModel()
-        {  
+        {
             Documents = new IncrementalLoadingList<Document>(LoadDocuments, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { IsActive = false; ToastService.SendToast(e.Message); });
             Videos = new IncrementalLoadingList<Video>(LoadVideos, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { IsActive = false; ToastService.SendToast(e.Message); });
             Contributes = new IncrementalLoadingList<Contribute>(LoadContributes, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { IsActive = false; ToastService.SendToast(e.Message); });
 
-            VoteVideoCommand = new RelayCommand(async (x)=>await VoteVideoAsync((string)x));
+            VoteVideoCommand = new RelayCommand(async (x) => await VoteVideoAsync((string)x));
+            CommentCommand = new RelayCommand(x => NavigateToComment((string)x));
 
             User = DataShareManager.Current.User;
             DataShareManager.Current.DataChanged += Current_DataChanged;
@@ -220,8 +221,16 @@ namespace BaoZouRiBao.ViewModel
         public Document SelectedItem { get; set; }
         #endregion
 
+        /// <summary>
+        /// 点赞Command
+        /// </summary>
         public RelayCommand VoteVideoCommand { get; set; }
-         
+
+        /// <summary>
+        /// 跳转到对应的评论页面
+        /// </summary>
+        public RelayCommand CommentCommand { get; set; }
+
         private void Current_DataChanged()
         {
             this.User = DataShareManager.Current.User;
@@ -237,6 +246,14 @@ namespace BaoZouRiBao.ViewModel
             if (result != null)
             {
                 ToastService.SendToast(result.Description);
+            }
+        }
+
+        public void NavigateToComment(string videoId)
+        {
+            if (!string.IsNullOrEmpty(videoId))
+            {
+                NavigationHelper.DetailFrameNavigate(typeof(CommentPage), videoId);
             }
         }
 

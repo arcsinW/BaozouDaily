@@ -40,23 +40,23 @@ namespace BaoZouRiBao.Views
 
         private void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch(pivot.SelectedIndex)
-            {
-                case 0:
-                    if(!isLatestLoaded)
-                    {
-                        ViewModel.GetLatestComments();
-                        isLatestLoaded = true;
-                    }
-                    break;
-                case 1:
-                    if(!isHotLoaded)
-                    {
-                        ViewModel.GetHotComments();
-                        isHotLoaded = true;
-                    }
-                    break;
-            }
+            //switch(pivot.SelectedIndex)
+            //{
+            //    case 0:
+            //        if(!isLatestLoaded)
+            //        {
+            //            ViewModel.GetLatestComments();
+            //            isLatestLoaded = true;
+            //        }
+            //        break;
+            //    case 1:
+            //        if(!isHotLoaded)
+            //        {
+            //            ViewModel.GetHotComments();
+            //            isHotLoaded = true;
+            //        }
+            //        break;
+            //}
         }
 
         private void refresh_Click(object sender, RoutedEventArgs e)

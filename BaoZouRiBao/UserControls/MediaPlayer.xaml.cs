@@ -24,6 +24,8 @@ namespace BaoZouRiBao.UserControls
 
         private void MediaElement_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            e.Handled = true;
+
             if (transportControls.Visibility == Visibility.Visible)
             {
                 transportControls.Visibility = Visibility.Collapsed;
@@ -32,6 +34,21 @@ namespace BaoZouRiBao.UserControls
             {
                 transportControls.Visibility = Visibility.Visible;
             }
+        }
+
+        private void transportControls_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            e.Handled = true; 
+
+            if (transportControls.Visibility == Visibility.Visible)
+            {
+                transportControls.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void transportControls_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

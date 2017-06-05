@@ -44,6 +44,8 @@
     <!--评论框边框颜色-->
     <SolidColorBrush x:Key="CommentPaneBorderBrush">#FFFFFF</SolidColorBrush>
 
+    <SolidColorBrush x:Key="InnerDocumentBackgroundBrush" Color="#2B2B2B"/>
+
     <SolidColorBrush x:Key="MenuFlyoutPresenterBackgroundBrush">#2B2B2B</SolidColorBrush>
 
     <!--视频PlaceHolder-->

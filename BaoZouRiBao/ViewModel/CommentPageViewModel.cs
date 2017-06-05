@@ -25,6 +25,9 @@ namespace BaoZouRiBao.ViewModel
                 DocumentId = "44791";
             }
 
+            LatestComments = new IncrementalLoadingList<Comment>(LoadLatestComments, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(e.Message); IsActive = false; });
+            HotComments = new IncrementalLoadingList<Comment>(LoadHotComments, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(e.Message); IsActive = false; });
+
             CommentCommand = new RelayCommand
             (
                 async (commentId) =>
@@ -159,9 +162,7 @@ namespace BaoZouRiBao.ViewModel
 
             var result = await ApiService.Instance.GetLatestOrHotCommentsAsync(DocumentId, CommentTypeEnum.latest, timeStamp);
             if (result != null && result.Comments != null)
-            {
-                List<Comment> comments = new List<Comment>();
-
+            { 
                 if (!string.IsNullOrEmpty(timeStamp))
                 {
                     latestCommentsStringBuilder.Clear();
@@ -169,9 +170,17 @@ namespace BaoZouRiBao.ViewModel
                 }
 
                 LatestComments.TimeStamp = result.TimeStamp;
+                
+                if (result.Comments.Count == 0 && LatestComments.Count == 0)
+                {
+                    IsLatestCommentsEmpty = true;
+                } 
+                else
+                {
+                    IsLatestCommentsEmpty = false;
+                }
 
-                result.Comments.ForEach(x => comments.Add(x));
-                return comments;
+                return result.Comments;
             }
             else
             {
@@ -265,12 +274,12 @@ namespace BaoZouRiBao.ViewModel
 
         public void GetLatestComments()
         {
-            LatestComments = new IncrementalLoadingList<Comment>(LoadLatestComments, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(e.Message); IsActive = false; });
+            
         }
 
         public void GetHotComments()
         {
-            HotComments = new IncrementalLoadingList<Comment>(LoadHotComments, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(e.Message); IsActive = false; });
+            
         }
 
         /// <summary>

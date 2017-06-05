@@ -18,7 +18,13 @@
                       Stretch="UniformToFill"
                       AreTransportControlsEnabled="True">
             <MediaElement.TransportControls>
-                <controls:BaoZouMediaTransportControls x:Name="transportControls"/>
+                <controls:BaoZouMediaTransportControls x:Name="transportControls" 
+                                                       PointerMoved="transportControls_PointerMoved"
+                                                       Tapped="transportControls_Tapped">
+                    <controls:BaoZouMediaTransportControls.Background>
+                        <SolidColorBrush Color="#242424" Opacity="0.8"/>
+                    </controls:BaoZouMediaTransportControls.Background>
+                </controls:BaoZouMediaTransportControls>
             </MediaElement.TransportControls>
         </MediaElement>
     </Grid>

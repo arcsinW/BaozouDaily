@@ -238,9 +238,6 @@
         <x:String x:Key="LoginString">登录</x:String>
         <x:String x:Key="RecommendString">推荐</x:String>
         
-        <convert:SelectedLegendItemToColorConverter x:Key="SelectedLegendItemToColorConverter" />
-        <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-
         <Style x:Key="LegendItemContainerStyle" TargetType="GridViewItem">
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
             <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
@@ -269,6 +266,10 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <convert:SelectedLegendItemToColorConverter x:Key="SelectedLegendItemToColorConverter" />
+        <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <convert:SecondsToDateTimeConverter x:Key="SecondsToDateTimeConverter"/>
     </Page.Resources>
 
     <Page.DataContext>
@@ -516,23 +517,7 @@
                                       ItemClick="{x:Bind ViewModel.videoListView_ItemClick}"
                                       RefreshRequested="{x:Bind ViewModel.RefreshVideo}"
                                       ShowsScrollingPlaceholders="True"                                       
-                                      >
-                        <!--<control:PullToRefreshListView.RefreshIndicatorContent>
-                            <Grid Height="100" Background="Transparent">
-                                <FontIcon
-                                                Margin="0,0,0,30"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Bottom"
-                                                FontFamily="Segoe MDL2 Assets"
-                                                FontSize="20"
-                                                Glyph="&#xE72C;"
-                                                RenderTransformOrigin="0.5,0.5">
-                                    <FontIcon.RenderTransform>
-                                        <RotateTransform x:Name="videoSpinnerTransform" Angle="0" />
-                                    </FontIcon.RenderTransform>
-                                </FontIcon>
-                            </Grid>
-                        </control:PullToRefreshListView.RefreshIndicatorContent>-->
+                                      > 
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="m:Video">
                                 <Grid Height="Auto">
@@ -544,8 +529,19 @@
                                     <!--<MediaElement x:Name="mediaElement"  Height="250" Width="Auto" AutoPlay="False" 
                                                           Source="{Binding FileUrl}" Grid.Row="0" />-->
 
-                                    <control:ImageEx Grid.Row="0" Source="{Binding Image}" PlaceholderSource="{ThemeResource VideoPlaceHolderImage}"
+                                    <Grid Grid.Row="0">
+                                        <control:ImageEx Source="{Binding Image}" PlaceholderSource="{ThemeResource VideoPlaceHolderImage}"
                                                      Stretch="Fill" PlaceholderStretch="UniformToFill" Height="250" Width="Auto"/>
+                                        <Button HorizontalAlignment="Center" Style="{ThemeResource ImageButtonStyle}"
+                                                    VerticalAlignment="Center" Foreground="White" 
+                                                    Width="48" Height="48">
+                                            <Image Source="/Assets/Images/btn_video_play.png"/>
+                                        </Button>
+
+                                        <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="4" Height="24" Width="Auto" Background="Black" Opacity="0.7">
+                                            <TextBlock Foreground="White" Text="{Binding PlayTime,Converter={StaticResource SecondsToDateTimeConverter}}"/>
+                                        </Border>
+                                    </Grid>
                                     
                                     <!--<Image Grid.Row="0" Stretch="Fill" Height="250" Width="Auto">
                                         <Image.Source>
@@ -577,7 +573,9 @@
                                                     </StackPanel>
                                                 </Button>
 
-                                                <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto">
+                                                <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto" 
+                                                        Command="{Binding Path=DataContext.CommentCommand,ElementName=videoListView}"
+                                                        CommandParameter="{Binding DocumentId}">
                                                     <StackPanel Orientation="Horizontal">
                                                         <Image Source="/Assets/Images/article_reply_nor.png"/>
                                                         <TextBlock Text="{Binding CommentCount}" Style="{ThemeResource DescTextBlockStyle}" HorizontalAlignment="Right"/>
@@ -594,11 +592,7 @@
                                         </Grid>
                                     </Grid>
 
-                                    <Button HorizontalAlignment="Center" Style="{ThemeResource ImageButtonStyle}"
-                                                    VerticalAlignment="Center" Foreground="White" 
-                                                    Grid.Row="0" Width="64" Height="64"> 
-                                        <Image Source="/Assets/Images/btn_video_play.png"/>
-                                    </Button>
+                                  
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
