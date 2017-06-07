@@ -41,7 +41,7 @@ namespace BaoZouRiBao.Views
             var contribute = e.ClickedItem as Contribute;
             if (contribute != null)
             {
-                WebViewParameter parameter = new WebViewParameter() { Title = contribute.SourceName, DocumentId = contribute.DocumentId, DisplayType = contribute.DisplayType,WebViewUri = contribute.Url };
+                WebViewParameter parameter = new WebViewParameter() { Title = contribute.Title, DocumentId = contribute.DocumentId, DisplayType = contribute.DisplayType,WebViewUri = contribute.Url };
                 MasterDetailPage.Current.DetailFrame.Navigate(typeof(WebViewPage), parameter);
             }
         }    

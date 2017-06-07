@@ -1,4 +1,6 @@
-﻿using BaoZouRiBao.Helper;
+﻿using BaoZouRiBao.Controls;
+using BaoZouRiBao.Helper;
+using BaoZouRiBao.Interfaces;
 using BaoZouRiBao.Model.ResultModel;
 using BaoZouRiBao.UserControls;
 using System;
@@ -11,12 +13,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace BaoZouRiBao.Views
 {
-    public sealed partial class MasterDetailPage : Page
+    public sealed partial class MasterDetailPage : Page, IBackKeyPressManager
     {
         public MasterDetailPage()
         {
             this.InitializeComponent(); 
-            Current = this; 
+            Current = this;
+
+            //GlobalDialog.InitializeDialog(rootGrid, this);
         } 
 
         public static MasterDetailPage Current;
@@ -71,6 +75,16 @@ namespace BaoZouRiBao.Views
             {
                 taskDialog.Show(taskDoneResult);
             }
-        } 
+        }
+
+        public void UnRegisterBackKeyPress()
+        {
+            
+        }
+
+        public void RegisterBackKeyPress()
+        {
+            
+        }
     }
 }

@@ -13,14 +13,11 @@
     <Grid x:Name='RootGrid' Background='Transparent'>
 
         <MediaElement Source="{Binding Video.FileUrl}" MinHeight="200"
-                      Tapped="MediaElement_Tapped"
                       VerticalAlignment="Top" HorizontalAlignment="Stretch"
                       Stretch="UniformToFill"
                       AreTransportControlsEnabled="True">
             <MediaElement.TransportControls>
-                <controls:BaoZouMediaTransportControls x:Name="transportControls" 
-                                                       PointerMoved="transportControls_PointerMoved"
-                                                       Tapped="transportControls_Tapped">
+                <controls:BaoZouMediaTransportControls x:Name="transportControls" >
                     <controls:BaoZouMediaTransportControls.Background>
                         <SolidColorBrush Color="#242424" Opacity="0.8"/>
                     </controls:BaoZouMediaTransportControls.Background>

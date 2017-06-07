@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using BaoZouRiBao.Helper;
+using BaoZouRiBao.Controls;
 
 namespace BaoZouRiBao
 {
@@ -86,11 +87,11 @@ namespace BaoZouRiBao
 
             // Ensure the current window is active
             Window.Current.Activate();
-
+            
             // 通过Toast通知从前台打开
             HandleNotification(e);
 
-            //PrepareExtraFunction();
+            PrepareExtraFunction();
         }
         
 
@@ -99,7 +100,6 @@ namespace BaoZouRiBao
         /// </summary>
         private void PrepareExtraFunction()
         {
-            //VoiceCommandHelper.InstallVCDFile();
             try
             {
                 MobileCenter.Start(GlobalValue.MobileCenterKey, typeof(Analytics));
@@ -108,7 +108,6 @@ namespace BaoZouRiBao
             {
                 LogHelper.WriteLine(e);
             }
-            //BackgroundTaskRegisterHelper.RegisterAll();
         }
 
         /// <summary>

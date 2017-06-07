@@ -329,6 +329,7 @@
         <ResourceDictionary Source="ms-appx:///Controls/IndicatorPivot/IndicatorPivot.xaml"/>
         <ResourceDictionary Source="ms-appx:///Controls/GifControl/GifControl.xaml"/>
         <ResourceDictionary Source="ms-appx:///Controls/SlidableListItem/SlidableListItem.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Controls/GlobalDialog/GlobalDialog.xaml"/>
     </ResourceDictionary.MergedDictionaries>
  
 </ResourceDictionary>

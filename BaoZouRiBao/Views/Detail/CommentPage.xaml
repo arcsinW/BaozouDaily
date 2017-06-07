@@ -134,7 +134,7 @@
             </Button>
         </Grid>
 
-        <controls:IndicatorPivot x:Name="pivot" Grid.Row="1" SelectionChanged="pivot_SelectionChanged">
+        <controls:IndicatorPivot x:Name="pivot" Grid.Row="1">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding }" Style="{ThemeResource PivotHeaderTextBlockStyle}" Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>

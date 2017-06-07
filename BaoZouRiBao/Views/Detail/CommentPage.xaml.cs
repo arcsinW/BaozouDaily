@@ -33,31 +33,7 @@ namespace BaoZouRiBao.Views
             {
                 ViewModel.DocumentId = documentId;
             }
-        }
-         
-        private bool isHotLoaded = false;
-        private bool isLatestLoaded = false;
-
-        private void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //switch(pivot.SelectedIndex)
-            //{
-            //    case 0:
-            //        if(!isLatestLoaded)
-            //        {
-            //            ViewModel.GetLatestComments();
-            //            isLatestLoaded = true;
-            //        }
-            //        break;
-            //    case 1:
-            //        if(!isHotLoaded)
-            //        {
-            //            ViewModel.GetHotComments();
-            //            isHotLoaded = true;
-            //        }
-            //        break;
-            //}
-        }
+        } 
 
         private void refresh_Click(object sender, RoutedEventArgs e)
         {

@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Navigation;
 using BaoZouRiBao.Http;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
+using BaoZouRiBao.UserControls;
 
 namespace BaoZouRiBao.Views
 {
@@ -171,7 +172,26 @@ namespace BaoZouRiBao.Views
         #region Share
         private void shareBtn_Click(object sender, RoutedEventArgs e)
         {
-            shareDialog.Show(); 
+            //ShareDialog dialog = new ShareDialog();
+            //dialog.WechatClick += Dialog_WechatClick;
+            //dialog.LinkClick += Dialog_LinkClick;
+            //dialog.MoreClick += Dialog_MoreClick;
+            //await dialog.ShowAsync(); 
+        }
+
+        private void Dialog_MoreClick(object sender, RoutedEventArgs e)
+        {
+            DataTransferManager.ShowShareUI();
+        }
+
+        private void Dialog_LinkClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.CopyLink();
+        }
+
+        private void Dialog_WechatClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.WeChatShare();
         }
 
         private void WebViewPage_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)

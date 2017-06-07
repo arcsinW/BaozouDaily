@@ -136,6 +136,7 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Controls\CommentControl.cs" />
     <Compile Include="Controls\GifControl\GifControl.cs" />
+    <Compile Include="Controls\GlobalDialog\GlobalDialog.cs" />
     <Compile Include="Controls\ImageEx\ImageEx.cs" />
     <Compile Include="Controls\ImageEx\ImageEx.Members.cs" />
     <Compile Include="Controls\ImageEx\ImageEx.Placeholder.cs" />
@@ -208,6 +209,8 @@
     <Compile Include="IncrementalCollection\IncrementalLoadingCollection.cs" />
     <Compile Include="IncrementalCollection\IncrementalLoadingList.cs" />
     <Compile Include="IncrementalCollection\LatestCommentSource.cs" />
+    <Compile Include="Interfaces\IBackKeyPress.cs" />
+    <Compile Include="Interfaces\ICustomTitleBar.cs" />
     <Compile Include="Interfaces\IProvider.cs" />
     <Compile Include="Interfaces\IStorage.cs" />
     <Compile Include="Model\Article.cs" />
@@ -572,6 +575,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Controls\GlobalDialog\GlobalDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ImageEx\ImageEx.xaml">
       <Generator>MSBuild:Compile</Generator>

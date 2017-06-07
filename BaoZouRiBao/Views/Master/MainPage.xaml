@@ -406,21 +406,6 @@
                                   RefreshRequested="{x:Bind ViewModel.RefreshDocument}"
                                   ShowsScrollingPlaceholders="True"                 
                                   >
-                        <!--<control:PullToRefreshListView.RefreshIndicatorContent>
-                            <Grid Height="100" Background="Transparent">
-                                <FontIcon Margin="0,0,0,30"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Bottom"
-                                                FontFamily="Segoe MDL2 Assets"
-                                                FontSize="20"
-                                                Glyph="&#xE72C;"
-                                                RenderTransformOrigin="0.5,0.5">
-                                    <FontIcon.RenderTransform>
-                                        <RotateTransform x:Name="documentSpinnerTransform" Angle="0" />
-                                    </FontIcon.RenderTransform>
-                                </FontIcon>
-                            </Grid>
-                        </control:PullToRefreshListView.RefreshIndicatorContent>-->
 
                         <ListView.Header>
                             <Grid Height="240">
