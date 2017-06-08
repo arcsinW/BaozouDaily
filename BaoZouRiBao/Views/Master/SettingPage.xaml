@@ -6,6 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:action="using:BaoZouRiBao.Actions"
     mc:Ignorable="d">
     
     <Page.DataContext>
@@ -155,11 +158,17 @@
                             <TextBlock Text="缓存目录" Grid.Column="1" Style="{ThemeResource TitleTextBlockStyle}"/>
 
                             <TextBlock Grid.Column="2" Text="手机存储" Width="auto"/>
-
                         </Grid>
                     </ListViewItem>
 
                     <ListViewItem>
+                        <i:Interaction.Behaviors>
+                            <i:BehaviorCollection>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <action:NavigationAction NavigationType="Detail" SourcePage="BaoZouRiBao.Views.AboutPage"/>
+                                </core:EventTriggerBehavior>
+                            </i:BehaviorCollection>
+                        </i:Interaction.Behaviors>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -170,7 +179,7 @@
                             <BitmapIcon UriSource="/Assets/Images/icon_setting_feedback.png"/>
 
                             <StackPanel Grid.Column="1">
-                                <TextBlock Text="反馈和帮助"/>
+                                <TextBlock Text="关于"/>
                             </StackPanel>
                         </Grid>
                     </ListViewItem>

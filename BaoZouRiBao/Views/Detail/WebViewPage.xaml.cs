@@ -1,20 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using BaoZouRiBao.Helper;
 using BaoZouRiBao.Model;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using BaoZouRiBao.Http;
 using System.Threading.Tasks;
@@ -176,7 +166,9 @@ namespace BaoZouRiBao.Views
             //dialog.WechatClick += Dialog_WechatClick;
             //dialog.LinkClick += Dialog_LinkClick;
             //dialog.MoreClick += Dialog_MoreClick;
-            //await dialog.ShowAsync(); 
+            //await dialog.ShowAsync();
+
+            shareDialog.Show();
         }
 
         private void Dialog_MoreClick(object sender, RoutedEventArgs e)

@@ -38,7 +38,12 @@ namespace BaoZouRiBao.Views
         }
 
         private void DetailFrame_Navigated(object sender, NavigationEventArgs e)
-        {
+        { 
+            while (DetailFrame.BackStack.Count > 1)
+            {
+                DetailFrame.BackStack.RemoveAt(1);
+            }
+
             UpdateBackKeyVisibility();
         }
 

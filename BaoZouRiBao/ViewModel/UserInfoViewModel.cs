@@ -1,4 +1,5 @@
-﻿using BaoZouRiBao.Helper;
+﻿using BaoZouRiBao.Controls;
+using BaoZouRiBao.Helper;
 using BaoZouRiBao.Http;
 using BaoZouRiBao.Model;
 using BaoZouRiBao.Model.ResultModel;
@@ -107,15 +108,11 @@ namespace BaoZouRiBao.ViewModel
             {
                 Balance = TaskInfo.Balance;
             }
-            //if (TaskInfo != null)
-            //{
-            //    RunCounterAnimations();
-            //}
         }
 
         public override async void Refresh()
         {
-            IsActive = true;
+            IsActive = true; 
             await LoadTaskInfo();
             IsActive = false;
         }
@@ -135,7 +132,12 @@ namespace BaoZouRiBao.ViewModel
 
             if (file != null)
             {
-                await UploadFile(ServiceUri.UploadAvatar, file);
+                ModifyAvatarResult result = await UploadImage(ServiceUri.UploadAvatar, file);
+                if (result != null)
+                {
+                    User.Avatar = result.Avatar;
+                    ToastService.SendToast("头像更新成功");
+                }
             }
         }
 
@@ -151,32 +153,57 @@ namespace BaoZouRiBao.ViewModel
             await LoadTaskInfo();
         }
 
-        private static async Task UploadFile(string url, StorageFile file)
+        /// <summary>
+        /// 上传图片
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        private async Task<ModifyAvatarResult> UploadImage(string url, StorageFile file)
         {
             try
             {
                 using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + DataShareManager.Current.User.AccessToken);
+                    client.DefaultRequestHeaders.Add("Connection", "Keep-Alive");
+                    client.DefaultRequestHeaders.Add("User-Agent", "(Linux; Android 5.0.2; vivo X5M Build/vivo/PD1401CL/PD1401CL/LRX22G/zh_CN)");
+
                     using (var content = new MultipartFormDataContent("TLq-mXb4y62pbCa_bPiNZXitxUS3RV29c8"))
                     {
                         var imageContent = new StreamContent(await file.OpenStreamForReadAsync());
+
                         string boundary = Guid.NewGuid().ToString();
+
                         content.Headers.Add("ContentType", "multipart/form-data; boundary=TLq-mXb4y62pbCa_bPiNZXitxUS3RV29c8");
-                        //content.Headers.ContentDisposition = ContentDispositionHeaderValue.Parse("form-data; name='avatar'; filename='"+file.Name+"'");
-                        content.Add(imageContent, "form-data", file.Name);
-                        content.Headers.Add("Content-Disposition", $"form-data; name='avatar'; filename='{file.Name}'");
+
+                        if (file.Name.EndsWith(".jpg"))
+                        {
+                            content.Add(imageContent, "avatar", "avatar.jpg");
+                            content.Headers.TryAddWithoutValidation("ContentType", "jpg:image/jpg");
+                        }
+                        else if (file.Name.EndsWith(".png"))
+                        {
+                            content.Add(imageContent, "avatar", "avatar.png");
+                            content.Headers.TryAddWithoutValidation("ContentType", "png:image/png");
+                        }
+
+                        content.Headers.ContentDisposition = ContentDispositionHeaderValue.Parse("form-data; name='avatar'; filename='" + file.Name + "'");
+
                         var result = await client.PostAsync(new Uri(url), content);
-
                         var resContent = await result.Content.ReadAsByteArrayAsync();
-
                         string json = Encoding.UTF8.GetString(resContent);
+                        ModifyAvatarResult avatarResult = JsonHelper.Deserlialize<ModifyAvatarResult>(json);
+                        return avatarResult;
                     }
                 }
+
+                return null;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 LogHelper.WriteLine(e);
+                return null;
             }
         }
 

@@ -21,11 +21,6 @@ namespace BaoZouRiBao.Helper
 
         public static void DetailFrameNavigate(Type sourcePage)
         {
-            while (MasterDetailPage.Current.DetailFrame.BackStackDepth > 1)
-            {
-                MasterDetailPage.Current.DetailFrame.BackStack.RemoveAt(1);
-            }
-
             MasterDetailPage.Current.DetailFrame.Navigate(sourcePage);
         }
 

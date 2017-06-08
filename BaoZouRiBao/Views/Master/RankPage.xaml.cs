@@ -72,24 +72,21 @@ namespace BaoZouRiBao.Views
             {
                 case 0:
                     if (!isReadLoaded || isRankTimeChanged)
-                    {
-                        Debug.WriteLine($"isReadLoade : {isReadLoaded} {comboBox.SelectedIndex}");
+                    { 
                         await ViewModel.RefreshReadCollectionAsync(comboBox.SelectedIndex);
                         isReadLoaded = true;
                     }
                     break;
                 case 1:
                     if(!isVoteLoaded || isRankTimeChanged)
-                    {
-                        Debug.WriteLine($"isVoteLoaded : {isVoteLoaded} {comboBox.SelectedIndex}");
+                    { 
                         await ViewModel.RefreshVoteCollectionAsync((comboBox.SelectedIndex));
                         isVoteLoaded = true;
                     }
                     break;
                 case 2:
                     if(!isCommentLoaded || isRankTimeChanged)
-                    {
-                        Debug.WriteLine($"isCommentLoaded : {isCommentLoaded} {comboBox.SelectedIndex}");
+                    { 
                         await ViewModel.RefreshCommentCollectionAsync((comboBox.SelectedIndex));
                         isCommentLoaded = true;
                     }

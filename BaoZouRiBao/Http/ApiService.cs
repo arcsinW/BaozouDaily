@@ -92,7 +92,7 @@ namespace BaoZouRiBao.Http
                         User = acccessToken.Uid,
                     };
 
-                    User user = await Post<LoginPost, User>(ServiceUri.Login, loginPost);
+                    User user = await GetUserInfo(loginPost);
                     if (user != null)
                     {
                         HttpBaseService.SetHeader("Authorization", "Bearer " + user.AccessToken);
@@ -146,7 +146,7 @@ namespace BaoZouRiBao.Http
                     User = result.UserId
                 };
 
-                User user = await Post<LoginPost, User>(ServiceUri.Login, loginPost);
+                User user = await GetUserInfo(loginPost);
                 if (user != null)
                 {
                     HttpBaseService.SetHeader("Authorization", "Bearer " + user.AccessToken);
@@ -155,6 +155,32 @@ namespace BaoZouRiBao.Http
             }
 
             return null;
+        }
+        
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="login">login为null时将使用现有的验证信息刷新用户信息</param>
+        /// <returns></returns>
+        public async Task<User> GetUserInfo(LoginPost login=null)
+        { 
+            if (login == null)
+            {
+                login = new LoginPost()
+                {
+                    AccessToken = DataShareManager.Current.User.AccessToken,
+                    Source = "baozou",
+                    User = DataShareManager.Current.User.UserId
+                };
+            }
+
+            User user = await Post<LoginPost, User>(ServiceUri.Login, login);
+            if (user != null)
+            {
+                HttpBaseService.SetHeader("Authorization", "Bearer " + user.AccessToken);
+            }
+
+            return user;
         }
 
         /// <summary>

@@ -52,7 +52,7 @@
                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <ScrollViewer.Content>
-                        <TextBlock Margin="0" Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
+                        <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
                             Style="{ThemeResource PageTitleTextBlockStyle}" 
                             HorizontalAlignment="Left" />
                     </ScrollViewer.Content>
@@ -122,12 +122,12 @@
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
 
-        <!--<uc:ShareDialog x:Name="shareDialog" Grid.RowSpan="2" 
+        <uc:ShareDialog x:Name="shareDialog" Grid.RowSpan="2" 
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         WechatClick="shareDialog_WechatClick"
                         WeiboClick="shareDialog_WeiboClick"
                         LinkClick="shareDialog_LinkClick"
-                        MoreClick="shareDialog_MoreClick"/>-->
+                        MoreClick="shareDialog_MoreClick"/>
     </Grid>
 </Page>

@@ -263,11 +263,12 @@
             <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
             <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto"/>
             <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto"/>
-            <Setter Property="Padding" Value="12,4"/>
+            <Setter Property="Padding" Value="0,4"/>
+            <Setter Property="Margin" Value="12,0"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
             <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
-            <Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}"/>
+            <!--<Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}"/>-->
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">

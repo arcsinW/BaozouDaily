@@ -1,4 +1,4 @@
-﻿<controls:GlobalDialog
+﻿<controls:DialogService
     x:Class="BaoZouRiBao.UserControls.ShareDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -84,4 +84,4 @@
             </Button>
         </Grid>
     </Border>
-</controls:GlobalDialog>
+</controls:DialogService>
