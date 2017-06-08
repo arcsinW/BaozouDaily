@@ -25,6 +25,7 @@
         <converter:SecondsToDateTimeConverter x:Key="SecondsToDateTimeConverter"/>
         <converter:BoolToPathIconConverter x:Key="BoolToPathIconConverter"/>
         <converter:BoolToLikeBitmapConverter x:Key="BoolToLikeBitmapConverter"/>
+        <converter:BoolToVoteBitmapConverter x:Key="BoolToVoteBitmapConverter"/>
     </Page.Resources>
 
     <Grid Background="{ThemeResource PageBackgroundBrush}">
@@ -34,7 +35,7 @@
         </Grid.RowDefinitions>
 
         <!--#region Page title-->
-        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}" DataContext="{Binding DocumentExtra}">
+        <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -61,8 +62,9 @@
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <Button Style="{ThemeResource ImageTextButtonStyle}" Width="Auto" Click="{x:Bind ViewModel.Vote}">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>
-                            <TextBlock Text="{Binding VoteCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
+                            <Image Height="20" Width="20" Source="{Binding DocumentExtra.Voted, Converter={StaticResource BoolToVoteBitmapConverter}}"/>
+                            <!--<BitmapIcon UriSource="/Assets/Images/actionbar_like_nor.png"/>-->
+                            <TextBlock Text="{Binding DocumentExtra.VoteCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
                         </StackPanel>
                     </Button>
 
@@ -70,13 +72,17 @@
                         Click="Comment_Click">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <BitmapIcon UriSource="/Assets/Images/actionbar_comment_nor.png"/>
-                            <TextBlock Text="{Binding CommentCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
+                            <TextBlock Text="{Binding DocumentExtra.CommentCount}" VerticalAlignment="Center" Margin="{StaticResource PageTitleImageTextMargin}"/>
                         </StackPanel>
                     </Button>
 
                     <Button Style="{ThemeResource ImageTextButtonStyle}" Padding="4,10" Click="{x:Bind ViewModel.Favorite}">
-                        <PathIcon Data="{x:Bind ViewModel.IsFavorite,Mode=OneWay,Converter={StaticResource BoolToPathIconConverter}}"/>
+                        <PathIcon Data="{Binding DocumentExtra.Favorited,Mode=OneWay,Converter={StaticResource BoolToPathIconConverter}}"/>
                     </Button>
+
+                    <!--<Button Style="{ThemeResource ImageTextButtonStyle}" Padding="4,10" Click="{x:Bind ViewModel.Favorite}">
+                        <PathIcon Data="{x:Bind ViewModel.IsFavorite,Mode=OneWay,Converter={StaticResource BoolToPathIconConverter}}"/>
+                    </Button>-->
 
                     <Button Style="{ThemeResource BackButtonStyle}">
                         <BitmapIcon UriSource="/Assets/Images/home_more.png"/>

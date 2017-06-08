@@ -21,6 +21,15 @@
 
         <converter:BoolToVoteBitmapConverter x:Key="BoolToVoteBitmapConverter"/>
 
+        <converter:BoolToObjectConverter x:Key="BoolToTitleTextBlockMarginConverter">
+            <converter:BoolToObjectConverter.TrueValue>
+                <Thickness>0,0</Thickness>
+            </converter:BoolToObjectConverter.TrueValue>
+            <converter:BoolToObjectConverter.FalseValue>
+                <Thickness>12,0</Thickness>
+            </converter:BoolToObjectConverter.FalseValue>
+        </converter:BoolToObjectConverter>
+        
         <Style TargetType="BitmapIcon">
             <Setter Property="Width" Value="{StaticResource BitmapIconWidth}"/>
             <Setter Property="Height" Value="{StaticResource BitmapIconHeight}"/>
@@ -41,7 +50,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" 
+            <Button x:Name="backBtn" Grid.Column="0" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" 
                             Visibility="{x:Bind ViewModel.IsMobile,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
                 <Image Source="{StaticResource BackImage}"/>
             </Button>
@@ -52,8 +61,9 @@
                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <ScrollViewer.Content>
-                        <TextBlock Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
+                        <TextBlock  Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
                             Style="{ThemeResource PageTitleTextBlockStyle}" 
+                                    Margin="{Binding ElementName=backBtn,Path=Visibility,Converter={StaticResource BoolToTitleTextBlockMarginConverter}}"
                             HorizontalAlignment="Left" />
                     </ScrollViewer.Content>
                 </ScrollViewer> 

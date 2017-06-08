@@ -397,7 +397,8 @@
     <None Include="BaoZouRiBao_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Data\Text.txt" />
+    <Content Include="Assets\Data\nosense.txt" />
+    <Content Include="Assets\Data\update_histories.txt" />
     <Content Include="Assets\Images\avatar_m.png" />
     <Content Include="Assets\Images\back.png" />
     <Content Include="Assets\Images\actionbar_comment_nor.png" />
@@ -506,6 +507,7 @@
     <Content Include="Assets\Images\self_sign.png" />
     <Content Include="Assets\Images\splash.jpg" />
     <Content Include="Assets\Images\login_wechat.png" />
+    <Content Include="Assets\Images\gamersky.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />

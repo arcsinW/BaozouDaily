@@ -26,8 +26,23 @@ namespace BaoZouRiBao.Model
         [JsonProperty(PropertyName = "document_id")]
         public string DocumentId { get; set; }
 
-        [JsonProperty(PropertyName = "favorited", DefaultValueHandling = DefaultValueHandling.Populate)]
-        public bool Favorited { get; set; }
+        private bool favorited = false;
+        /// <summary>
+        /// 是否已收藏
+        /// </summary>
+        [JsonProperty(PropertyName = "favorited")]
+        public bool Favorited
+        {
+            get
+            {
+                return favorited;
+            }
+            set
+            {
+                favorited = value;
+                OnPropertyChanged();
+            }
+        }
 
         [JsonProperty(PropertyName = "file_url")]
         public string FileUrl { get; set; }
@@ -69,6 +84,9 @@ namespace BaoZouRiBao.Model
         }
 
         private bool voted = false;
+        /// <summary>
+        /// 是否赞过
+        /// </summary>
         [JsonProperty(PropertyName = "voted")]
         public bool Voted
         {
@@ -83,8 +101,7 @@ namespace BaoZouRiBao.Model
             }
         }
         #endregion
-
-
+         
         #region Commands
         /// <summary>
         /// 评论 此评论

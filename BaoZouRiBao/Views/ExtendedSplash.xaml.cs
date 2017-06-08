@@ -167,7 +167,7 @@ namespace BaoZouRiBao.Views
 
         private async Task<string> GetWordsAsync()
         {
-            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Data/Text.txt"));
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Data/nosense.txt"));
             var lines = await FileIO.ReadLinesAsync(file);
             int index = new Random().Next(0, lines.Count);
             return lines[index];

@@ -5,10 +5,9 @@
     xmlns:local="using:BaoZouRiBao.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:control="using:BaoZouRiBao.Controls"
+    xmlns:controls="using:BaoZouRiBao.Controls"
     xmlns:m="using:BaoZouRiBao.Model"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -22,7 +21,8 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{ThemeResource PageTitleBackground}">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{ThemeResource BackButtonStyle}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind ViewModel.GoBack}">
+                <Button Style="{ThemeResource BackButtonStyle}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}" 
+                        Click="{x:Bind ViewModel.GoBack}">
                     <Image Source="{StaticResource BackImage}"/>
                 </Button>
                 <TextBlock Text="阅读记录" Style="{ThemeResource PageTitleTextBlockStyle}"/>
@@ -37,7 +37,7 @@
                     <Button.Flyout>
                         <MenuFlyout>
                             <MenuFlyout.Items>
-                                <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.GoBack}"/>
+                                <MenuFlyoutItem Text="刷新" Click="{x:Bind ViewModel.Refresh}"/>
                                 <MenuFlyoutItem Text="夜间模式" Click="{x:Bind ViewModel.SwitchElementTheme}"/>
                                 <MenuFlyoutItem Text="设置" Click="{x:Bind ViewModel.NavigateToSettingPage}"/>
                             </MenuFlyout.Items>
@@ -48,12 +48,12 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <ListView x:Name="documentListView" ItemsSource="{Binding ReadHistories}"
+            <controls:PullToRefreshListView x:Name="documentListView" ItemsSource="{Binding ReadHistories}"
                                   SelectionMode="None"
                                   IsItemClickEnabled="True"
                                   ItemClick="{x:Bind ViewModel.documentListView_ItemClick}"
-                                  ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}">
-                <!--RefreshRequested="{x:Bind ViewModel.RefreshReadHistories}">-->
+                                  ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}"
+                                  RefreshRequested="{x:Bind ViewModel.RefreshReadHistories}">
                 <!--<control:RefreshableListView.RefreshIndicatorContent>
                     <Grid Height="100" Background="Transparent">
                         <FontIcon
@@ -79,7 +79,7 @@
                                 <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
 
-                            <control:ImageEx Source="{Binding Thumbnail}" PlaceholderSource="{StaticResource PlaceHolderImageSmall}" 
+                            <controls:ImageEx Source="{Binding Thumbnail}" PlaceholderSource="{StaticResource PlaceHolderImageSmall}" 
                                              MaxHeight="80" MaxWidth="80"
                                              Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Stretch="UniformToFill"/>
 
@@ -102,7 +102,7 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </controls:PullToRefreshListView>
 
             <TextBlock Text="暂无数据" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
                        Foreground="{ThemeResource PhoneForegroundColorBrush}"

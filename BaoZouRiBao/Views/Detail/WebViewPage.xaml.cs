@@ -104,6 +104,11 @@ namespace BaoZouRiBao.Views
             parameter = e.Parameter as WebViewParameter;
             if (parameter != null)
             {
+                if (!string.IsNullOrEmpty(parameter.Title))
+                {
+                    titleTextBlock.Text = parameter.Title;
+                }
+
                 switch (parameter.DisplayType)
                 {
                     case "1":
