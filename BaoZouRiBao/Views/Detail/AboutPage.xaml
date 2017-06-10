@@ -13,8 +13,8 @@
     <Page.DataContext>
         <vm:AboutPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
-    
-    <Grid Background="{ThemeResource PaneBackground}">
+
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
