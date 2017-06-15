@@ -15,7 +15,8 @@
         <MediaElement Source="{Binding Video.FileUrl}" MinHeight="200"
                       VerticalAlignment="Top" HorizontalAlignment="Stretch"
                       Stretch="UniformToFill"
-                      AreTransportControlsEnabled="True">
+                      AreTransportControlsEnabled="True"
+                      PointerMoved="MediaElement_PointerMoved">
             <MediaElement.TransportControls>
                 <controls:BaoZouMediaTransportControls x:Name="transportControls" >
                     <controls:BaoZouMediaTransportControls.Background>

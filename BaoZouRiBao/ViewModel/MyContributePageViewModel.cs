@@ -63,9 +63,9 @@ namespace BaoZouRiBao.ViewModel
             if (timeStamp.Equals("0"))
             {
                 Contributes.NoMore();
-
                 return contributes;
             }
+
             var result = await ApiService.Instance.GetMyContributeAsync(timeStamp);
             if (result != null && result.Contributes != null)
             {
@@ -80,6 +80,10 @@ namespace BaoZouRiBao.ViewModel
             if (contributes.Count == 0 && Contributes.Count == 0)
             {
                 IsEmpty = true;
+            }
+            else
+            {
+                IsEmpty = false;
             }
 
             return contributes;

@@ -75,22 +75,7 @@ namespace BaoZouRiBao.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        private int balance;
-
-        public int Balance
-        {
-            get
-            {
-                return balance;
-            }
-            set
-            {
-                balance = value;
-                OnPropertyChanged();
-            }
-        }
-
+          
         private bool isActive;
 
         public bool IsActive
@@ -101,15 +86,18 @@ namespace BaoZouRiBao.ViewModel
 
         #endregion
 
+        /// <summary>
+        /// 加载任务信息
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadTaskInfo()
         {
             TaskInfo = await ApiService.Instance.GetTaskInfoAsync();
-            if (TaskInfo != null)
-            {
-                Balance = TaskInfo.Balance;
-            }
         }
 
+        /// <summary>
+        /// 刷新
+        /// </summary>
         public override async void Refresh()
         {
             IsActive = true; 
@@ -141,6 +129,9 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
+        /// <summary>
+        /// 加载设计时数据
+        /// </summary>
         private void LoadDesignData()
         {
             string json = "{'balance':0,'favorite_count':0,'comment_count':0,'article_read_count':0,'contribute_count':0,'daily_tasks':[{'task_id':1,'name':'每日签到','task_amount':null,'task_amount_min':5,'task_amount_max':15,'amount':13,'done':true,'increase':true},{'task_id':2,'name':'阅读文章','task_amount':5,'task_amount_min':null,'task_amount_max':null,'amount':0,'done':false,'increase':false},{'task_id':6,'name':'评论文章','task_amount':10,'task_amount_min':null,'task_amount_max':null,'amount':0,'done':false,'increase':false},{'task_id':4,'name':'点赞文章','task_amount':5,'task_amount_min':null,'task_amount_max':null,'amount':0,'done':false,'increase':false},{'task_id':5,'name':'点赞评论','task_amount':5,'task_amount_min':null,'task_amount_max':null,'amount':0,'done':false,'increase':false},{'task_id':3,'name':'分享文章','task_amount':10,'task_amount_min':null,'task_amount_max':null,'amount':0,'done':false,'increase':false}]}";
@@ -207,30 +198,30 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
-        private void RunCounterAnimations()
-        {
-            DoubleAnimation animation = new DoubleAnimation();
-            animation.From = 0;
-            animation.To = TaskInfo.Balance;
-            animation.Duration = new Duration(TimeSpan.FromMilliseconds(10));
+        //private void RunCounterAnimations()
+        //{
+        //    DoubleAnimation animation = new DoubleAnimation();
+        //    animation.From = 0;
+        //    animation.To = TaskInfo.Balance;
+        //    animation.Duration = new Duration(TimeSpan.FromMilliseconds(10));
 
-            var dispatcherTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(0.001) };
-            dispatcherTimer.Tick += (s, e) =>
-              {
-                  var needToProceed = false;
+        //    var dispatcherTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(0.001) };
+        //    dispatcherTimer.Tick += (s, e) =>
+        //      {
+        //          var needToProceed = false;
 
-                  if (Balance < TaskInfo.Balance)
-                  {
-                      Balance++;
-                      needToProceed = true;
-                  }
+        //          if (Balance < TaskInfo.Balance)
+        //          {
+        //              Balance++;
+        //              needToProceed = true;
+        //          }
 
-                  if (!needToProceed)
-                  {
-                      dispatcherTimer.Stop();
-                  }
-              };
-            dispatcherTimer.Start();
-        }
+        //          if (!needToProceed)
+        //          {
+        //              dispatcherTimer.Stop();
+        //          }
+        //      };
+        //    dispatcherTimer.Start();
+        //}
     }
 }

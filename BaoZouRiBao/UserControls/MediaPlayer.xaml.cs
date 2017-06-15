@@ -50,5 +50,10 @@ namespace BaoZouRiBao.UserControls
         {
             e.Handled = true;
         }
+
+        private void MediaElement_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

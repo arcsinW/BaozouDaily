@@ -6,13 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:BaoZouRiBao.ViewModel"
+    xmlns:controls="using:BaoZouRiBao.Controls"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:AboutPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
-    
-    <Grid Background="{ThemeResource PaneBackground}">
+
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
@@ -28,5 +30,39 @@
             </StackPanel>
         </Grid>
         <!--#endregion-->
+
+        <Grid Grid.Row="1">
+            <controls:IndicatorPivot x:Name="pivot" Grid.Row="1" IndicatorLineStroke="{ThemeResource ThemeColorBrush}" 
+                              IndicatorLineStokeThickness="2" 
+                              HeaderBackground="{ThemeResource PivotHeaderColorBrush}">
+                <Pivot.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding }" Style="{ThemeResource PivotHeaderTextBlockStyle}" Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
+                    </DataTemplate>
+                </Pivot.HeaderTemplate>
+                <controls:IndicatorPivot.Items>
+                    <PivotItem Header="暴走日报" Padding="12,4">
+                        <TextBlock Text="473967668" Tapped="TextBlock_Tapped"/>
+                    </PivotItem>
+
+                    <PivotItem Header="更新历史" Padding="12,4"> 
+                        <TextBlock x:Name="historiesTextBlock">
+                            <TextBlock.Transitions>
+                                <TransitionCollection>
+                                    <EntranceThemeTransition/>
+                                </TransitionCollection>
+                            </TextBlock.Transitions>
+                        </TextBlock>
+                    </PivotItem>
+
+                    <PivotItem Header="更多" Padding="12,4">
+                        <StackPanel Margin="0,12">
+                            <Image Height="88" Width="88" Source="ms-appx:///Assets/Images/gamersky.png"/>
+                            <HyperlinkButton Content="游民星空" NavigateUri="https://www.microsoft.com/store/apps/9nblggh5q5tj" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </PivotItem>
+                </controls:IndicatorPivot.Items>
+            </controls:IndicatorPivot>
+        </Grid>
     </Grid>
 </Page>

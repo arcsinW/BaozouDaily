@@ -40,12 +40,11 @@
         </Grid>
 
         <Grid Grid.Row="1"> 
-            <ListView ItemsSource="{Binding Contributes}"
-                      ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}">
+            <ListView ItemsSource="{Binding Contributes}" ItemContainerStyle="{ThemeResource BaoZouListViewItemStyle}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <StackPanel Padding="12,0">
+                            <StackPanel>
                                 <TextBlock Text="{Binding Title}" TextWrapping="Wrap"/>
                                 <TextBlock Text="{Binding PublishedAt}" Margin="0,8,0,0"/> 
                             </StackPanel>
@@ -56,8 +55,7 @@
              
             <TextBlock Text="暂无数据" Visibility="{Binding IsEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
                        Foreground="{ThemeResource PhoneForegroundColorBrush}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>

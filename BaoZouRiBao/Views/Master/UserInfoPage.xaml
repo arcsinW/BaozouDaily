@@ -154,7 +154,7 @@
                             </Image>
 
                             <TextBlock Foreground="#FFE49609" Margin="20,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Run x:Name="balanceText" Text="{x:Bind ViewModel.Balance,Mode=OneWay}" />
+                                <Run x:Name="balanceText" Text="{x:Bind ViewModel.TaskInfo.Balance,Mode=OneWay}" />
                                 <Run Text="金币" />
                             </TextBlock>
                         </Grid>

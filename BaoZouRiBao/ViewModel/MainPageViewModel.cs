@@ -109,7 +109,7 @@ namespace BaoZouRiBao.ViewModel
             if (result != null)
             {
                 List<Video> videos = new List<Video>();
-
+                
                 videoStringBuilder.Clear();
                 videoStringBuilder.Append(timeStamp);
                 Videos.TimeStamp = result.TimeStamp;

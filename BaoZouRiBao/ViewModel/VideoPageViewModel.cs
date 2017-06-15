@@ -66,15 +66,7 @@ namespace BaoZouRiBao.ViewModel
             set { isActive = value; OnPropertyChanged(); }
         }
 
-        private bool isFavorite;
-
-        public bool IsFavorite
-        {
-            get { return isFavorite; }
-            set { isFavorite = value; OnPropertyChanged(); }
-        }
-
-
+        public string DocumentId { get; set; }
         #endregion
 
         /// <summary>
@@ -104,13 +96,18 @@ namespace BaoZouRiBao.ViewModel
             Video = JsonHelper.Deserlialize<Video>(documentJson);
         }
 
+        /// <summary>
+        /// 加载数据
+        /// </summary>
+        /// <param name="documentId"></param>
         public async void LoadData(string documentId)
         {
+            this.DocumentId = DocumentId;
+
             Video = await ApiService.Instance.GetVideoAsync(documentId);
             if (Video != null)
             {
                 Video = video;
-                IsFavorite = Video.Favorited;
             }
 
             DocumentExtra = await ApiService.Instance.GetDocumentExtraAsync(documentId);
@@ -121,11 +118,13 @@ namespace BaoZouRiBao.ViewModel
             {
                 foreach (var item in comments.Hottest)
                 {
+                    HottestComments.Clear();
                     HottestComments.Add(item);
                 }
 
                 foreach (var item in comments.Latest)
                 {
+                    LatestComments.Clear();
                     LatestComments.Add(item);
                 }
             }
@@ -139,14 +138,40 @@ namespace BaoZouRiBao.ViewModel
         {
             if (DocumentExtra != null)
             {
-                var res = await ApiService.Instance.FavoriteAsync(DocumentExtra.DocumentId);
-                if (res != null && !string.IsNullOrEmpty(res.Status))
+                if (DocumentExtra.Favorited)
                 {
-                    if (res.Status.Equals("2006"))
+                    var res = await ApiService.Instance.UnFavoriteAsync(DocumentExtra.DocumentId);
+                    if (res != null)
                     {
-                        IsFavorite = true;
+                        if (!string.IsNullOrEmpty(res.Count))
+                        {
+                            DocumentExtra.Favorited = false;
+                            ToastService.SendToast("取消收藏成功");
+                        }
                     }
                 }
+                else
+                {
+                    var res = await ApiService.Instance.FavoriteAsync(DocumentExtra.DocumentId);
+                    if (res != null)
+                    {
+                        if (res.Status.Equals("1000"))
+                        {
+                            DocumentExtra.Favorited = true;
+                            ToastService.SendToast("收藏成功");
+                        }
+                    }
+                }
+
+                //var res = await ApiService.Instance.FavoriteAsync(DocumentExtra.DocumentId);
+                //if (res != null && !string.IsNullOrEmpty(res.Status))
+                //{
+                //    if (res.Status.Equals("2006"))
+                //    {
+                //        DocumentExtra.Favorited = true;
+                //        ToastService.SendToast("收藏成功");
+                //    }
+                //}
             }
         }
 
@@ -164,6 +189,7 @@ namespace BaoZouRiBao.ViewModel
                 {
                     if (result.Status.Equals("1000")) //点赞成功
                     {
+                        DocumentExtra.Voted = true;
                         DocumentExtra.VoteCount = result.Data.Count;
                     }
                     ToastService.SendToast(result.AlertDesc);
@@ -179,6 +205,17 @@ namespace BaoZouRiBao.ViewModel
         public void VoteTask()
         {
             BaoZouTaskManager.VoteDocument();
+        }
+
+        /// <summary>
+        /// 刷新
+        /// </summary>
+        public override void Refresh()
+        {
+            if (!string.IsNullOrEmpty(DocumentId))
+            {
+                LoadData(DocumentId);
+            }
         }
     }
 }
