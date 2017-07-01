@@ -15,6 +15,8 @@ using BaoZouRiBao.Views;
 using BaoZouRiBao.Common;
 using BaoZouRiBao.Http;
 using BaoZouRiBao.Controls;
+using BaoZouRiBao.UserControls;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -28,6 +30,7 @@ namespace BaoZouRiBao.ViewModel
 
             VoteVideoCommand = new RelayCommand(async (x) => await VoteVideoAsync((string)x));
             CommentCommand = new RelayCommand(x => NavigateToComment((string)x));
+            ShareCommand = new RelayCommand(x => Share((Video)x));
 
             User = DataShareManager.Current.User;
             DataShareManager.Current.DataChanged += Current_DataChanged;
@@ -221,6 +224,7 @@ namespace BaoZouRiBao.ViewModel
         public Document SelectedItem { get; set; }
         #endregion
 
+        #region Commands
         /// <summary>
         /// 点赞Command
         /// </summary>
@@ -231,11 +235,18 @@ namespace BaoZouRiBao.ViewModel
         /// </summary>
         public RelayCommand CommentCommand { get; set; }
 
+        /// <summary>
+        /// 分享
+        /// </summary>
+        public RelayCommand ShareCommand { get; set; }
+        #endregion
+
         private void Current_DataChanged()
         {
             this.User = DataShareManager.Current.User;
         }
 
+        #region Command's methods
         /// <summary>
         /// 点赞 视频
         /// </summary>
@@ -249,13 +260,44 @@ namespace BaoZouRiBao.ViewModel
             }
         }
 
+        /// <summary>
+        /// 跳转到评论页
+        /// </summary>
+        /// <param name="videoId"></param>
         public void NavigateToComment(string videoId)
         {
             if (!string.IsNullOrEmpty(videoId))
             {
                 NavigationHelper.DetailFrameNavigate(typeof(CommentPage), videoId);
             }
+        } 
+
+        /// <summary>
+        /// 分享
+        /// </summary>
+        /// <param name="video"></param>
+        public void Share(Video video)
+        {
+            ShareDialog dialog = new ShareDialog();
+            dialog.WechatClick += (s, a) =>
+            {
+                ShareHelper.WeChatShare(video.Title, video.ShareUrl);
+            };
+
+            dialog.LinkClick += (s, a) =>
+            {
+                ShareHelper.CopyLink(video.Title);
+            };
+
+            dialog.MoreClick += (s, a) =>
+            {
+                ShareHelper.SystemShare(video.Title, video.ShareUrl);
+                //DataTransferManager.ShowShareUI();
+            };
+
+            dialog.Show();
         }
+        #endregion
 
         #region Refresh's methods
         /// <summary>

@@ -58,13 +58,17 @@
             <Grid Grid.Column="1">
                 <ScrollViewer ScrollViewer.HorizontalScrollMode="Auto"
                       ScrollViewer.IsHorizontalRailEnabled="True"
+                      IsDeferredScrollingEnabled="True"
+                      IsHorizontalScrollChainingEnabled="True"
                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <ScrollViewer.Content>
-                        <TextBlock  Text="{x:Bind ViewModel.Document.Title, Mode=OneWay}" x:Name="titleTextBlock" 
-                            Style="{ThemeResource PageTitleTextBlockStyle}" 
+                        <TextBlock  Text="{Binding Document.Title}" x:Name="titleTextBlock" 
                                     Margin="{Binding ElementName=backBtn,Path=Visibility,Converter={StaticResource BoolToTitleTextBlockMarginConverter}}"
-                            HorizontalAlignment="Left" />
+                                    HorizontalAlignment="Left" 
+                                    Foreground="White"
+                                    FontSize="{StaticResource PageTitleFontSize}"
+                                    VerticalAlignment="Center"/>
                     </ScrollViewer.Content>
                 </ScrollViewer> 
             </Grid>
@@ -132,12 +136,12 @@
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
 
-        <uc:ShareDialog x:Name="shareDialog" Grid.RowSpan="2" 
+        <!--<uc:ShareDialog x:Name="shareDialog" Grid.RowSpan="2" 
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         WechatClick="shareDialog_WechatClick"
                         WeiboClick="shareDialog_WeiboClick"
                         LinkClick="shareDialog_LinkClick"
-                        MoreClick="shareDialog_MoreClick"/>
+                        MoreClick="shareDialog_MoreClick"/>-->
     </Grid>
 </Page>

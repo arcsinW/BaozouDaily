@@ -320,8 +320,7 @@
                 <ColumnDefinition x:Name="MasterColumn" MinWidth="300" Width="500"/>
                 <ColumnDefinition x:Name="DetailColumn" Width="*"/>
             </Grid.ColumnDefinitions>
-            
-
+             
             <controls:Drawer x:Name="drawer" Grid.Column="1" 
                         DrawerOpenLength="250"  x:FieldModifier="Public">
                 <controls:Drawer.DrawerMaskerBrush>
@@ -685,7 +684,7 @@
                                  BaoZouPopupType="DailySign"  CoinCount="4" Title="获取奖励" Visibility="Collapsed"/>-->
             <!--#endregion-->
 
-            <uc:TaskDialog x:Name="taskDialog" Visibility="Collapsed" HorizontalAlignment="Stretch" Grid.ColumnSpan="3"/>
+            <!--<uc:TaskDialog x:Name="taskDialog" Visibility="Collapsed" HorizontalAlignment="Stretch" Grid.ColumnSpan="3"/>-->
         </Grid>
     </Grid>
 </Page>

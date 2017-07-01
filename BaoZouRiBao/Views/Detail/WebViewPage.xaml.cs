@@ -167,30 +167,30 @@ namespace BaoZouRiBao.Views
         #region Share
         private void shareBtn_Click(object sender, RoutedEventArgs e)
         {
-            //ShareDialog dialog = new ShareDialog();
-            //dialog.WechatClick += Dialog_WechatClick;
-            //dialog.LinkClick += Dialog_LinkClick;
-            //dialog.MoreClick += Dialog_MoreClick;
-            //await dialog.ShowAsync();
+            ShareDialog dialog = new ShareDialog();
+            dialog.WechatClick += (s, a) =>
+            {
+                ViewModel.WeChatShare();
+            };
 
-            shareDialog.Show();
+            dialog.LinkClick += (s, a) =>
+            {
+                ViewModel.CopyLink();
+            };
+
+            dialog.MoreClick += (s, a) =>
+            {
+                DataTransferManager.ShowShareUI();
+            };
+
+            dialog.Show();
         }
 
         private void Dialog_MoreClick(object sender, RoutedEventArgs e)
         {
             DataTransferManager.ShowShareUI();
-        }
-
-        private void Dialog_LinkClick(object sender, RoutedEventArgs e)
-        {
-            ViewModel.CopyLink();
-        }
-
-        private void Dialog_WechatClick(object sender, RoutedEventArgs e)
-        {
-            ViewModel.WeChatShare();
-        }
-
+        } 
+         
         private void WebViewPage_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
             var deferral = args.Request.GetDeferral();

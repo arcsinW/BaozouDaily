@@ -17,14 +17,26 @@ namespace BaoZouRiBao.Views
     {
         public MasterDetailPage()
         {
-            this.InitializeComponent(); 
+            this.InitializeComponent();
             Current = this;
+            
+            SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
+            GlobalDialog.InitializeDialog(rootGrid, this);
+        }
 
-            //GlobalDialog.InitializeDialog(rootGrid, this);
-        } 
+        private void MasterDetailPage_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (isIgnore)
+            {
+                return;
+            }
+
+            e.Handled = true;
+            NavigationHelper.GoBack();
+        }
 
         public static MasterDetailPage Current;
-         
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             DetailFrame.Navigate(typeof(DefaultPage));
@@ -38,7 +50,7 @@ namespace BaoZouRiBao.Views
         }
 
         private void DetailFrame_Navigated(object sender, NavigationEventArgs e)
-        { 
+        {
             while (DetailFrame.BackStack.Count > 1)
             {
                 DetailFrame.BackStack.RemoveAt(1);
@@ -67,7 +79,7 @@ namespace BaoZouRiBao.Views
             AdaptiveVisualStateChanged?.Invoke(sender, e);
         }
 
-        public event EventHandler<VisualStateChangedEventArgs> AdaptiveVisualStateChanged; 
+        public event EventHandler<VisualStateChangedEventArgs> AdaptiveVisualStateChanged;
         #endregion
 
         /// <summary>
@@ -78,18 +90,15 @@ namespace BaoZouRiBao.Views
         {
             if (taskDoneResult != null && taskDoneResult.Task != null)
             {
-                taskDialog.Show(taskDoneResult);
+                //taskDialog.Show(taskDoneResult);
             }
         }
 
-        public void UnRegisterBackKeyPress()
-        {
-            
-        }
+        public bool isIgnore { get; set; }
 
-        public void RegisterBackKeyPress()
-        {
-            
-        }
+        public void UnRegisterBackKeyPress() => isIgnore = true;
+
+        public void RegisterBackKeyPress() => isIgnore = false;
+       
     }
 }

@@ -189,6 +189,7 @@
     <Compile Include="Helper\LogHelper.cs" />
     <Compile Include="Helper\MD5Helper.cs" />
     <Compile Include="Helper\NavigationHelper.cs" />
+    <Compile Include="Helper\ShareHelper.cs" />
     <Compile Include="Helper\StatusBarHelper.cs" />
     <Compile Include="Helper\StorageFileHelper.cs" />
     <Compile Include="Helper\StreamHelper.cs" />

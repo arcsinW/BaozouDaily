@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace BaoZouRiBao.UserControls
 {
-    public sealed partial class ShareDialog : DialogService
+    public sealed partial class ShareDialog : GlobalDialog
     {
         public ShareDialog()
         {

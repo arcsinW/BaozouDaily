@@ -59,10 +59,7 @@ namespace BaoZouRiBao.Views
 
                 PositionElement();
             }
-
-            // Create a Frame to act as the navigation context
-            rootFrame = new Frame();
-
+            
             PrepareSDK();
         }
 
@@ -133,9 +130,9 @@ namespace BaoZouRiBao.Views
             }
         }
 
-        private async void PrepareSDK()
+        private void PrepareSDK()
         {
-            await InitialSDKAsync();
+            InitialSDKAsync().FireAndForget();
         }
 
         /// <summary>
@@ -176,6 +173,14 @@ namespace BaoZouRiBao.Views
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             tipTextBlock.Text = await GetWordsAsync();
+        }
+    }
+
+
+    public static class TaskExtension
+    {
+        public static void FireAndForget(this Task task)
+        {
         }
     }
 }

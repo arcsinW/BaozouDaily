@@ -188,8 +188,6 @@ namespace BaoZouRiBao.ViewModel
                         return avatarResult;
                     }
                 }
-
-                return null;
             }
             catch (Exception e)
             {

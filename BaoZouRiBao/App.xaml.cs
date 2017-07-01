@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using BaoZouRiBao.Helper;
 using BaoZouRiBao.Controls;
+using Windows.System.UserProfile;
 
 namespace BaoZouRiBao
 {
@@ -54,8 +55,6 @@ namespace BaoZouRiBao
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            LogHelper.WriteLine("OnLaunched");
-
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -94,7 +93,6 @@ namespace BaoZouRiBao
             PrepareExtraFunction();
         }
         
-
         /// <summary>
         /// 为应用增加额外功能
         /// </summary>
@@ -103,8 +101,9 @@ namespace BaoZouRiBao
             try
             {
                 MobileCenter.Start(GlobalValue.MobileCenterKey, typeof(Analytics));
+                MobileCenter.SetCountryCode(GlobalizationPreferences.HomeGeographicRegion);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 LogHelper.WriteLine(e);
             }
@@ -137,9 +136,7 @@ namespace BaoZouRiBao
 
         protected override void OnActivated(IActivatedEventArgs args)
         {
-            LogHelper.WriteLine("OnActivated");
-
-            //base.OnActivated(args);
+            base.OnActivated(args);
 
             // Repeat the same basic initialization as OnLaunched() above, taking into account whether
             // or not the app is already active.
@@ -172,7 +169,7 @@ namespace BaoZouRiBao
         private ApplicationDataContainer LocalSettings = ApplicationData.Current.LocalSettings;
 
         /// <summary>
-        /// 处理通知
+        /// 处理Toast通知
         /// </summary>
         /// <param name="args"></param>
         private void HandleNotification(IActivatedEventArgs args)
@@ -231,7 +228,26 @@ namespace BaoZouRiBao
                         break;
                     // 视频
                     case "video":
-                        NavigationHelper.DetailFrameNavigate(typeof(VideoPage), queryString["documentId"]);
+                        try
+                        {
+                            if (MasterDetailPage.Current == null)
+                            {
+                                Frame rootFrame = Window.Current.Content as Frame;
+                                if (rootFrame.Content == null)
+                                {
+                                    // When the navigation stack isn't restored navigate to the first page,
+                                    // configuring the new page by passing required information as a navigation
+                                    // parameter
+                                    rootFrame.Navigate(typeof(MasterDetailPage), new SlideNavigationTransitionInfo());
+                                }
+                            }
+                            NavigationHelper.DetailFrameNavigate(typeof(VideoPage), queryString["documentId"]);
+                        }
+                        catch (Exception e)
+                        {
+                            LogHelper.WriteLine(e);
+                        }
+                        
                         break;
                 }
             }

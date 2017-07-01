@@ -19,9 +19,8 @@ namespace BaoZouRiBao.ViewModel
             AppTheme = DataShareManager.Current.AppTheme;
             User = DataShareManager.Current.User;
 
-            DataShareManager.Current.DataChanged += Current_DataChanged;
             StatusBarHelper.ShowStatusBar(AppTheme == ElementTheme.Dark);
-            SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
+            DataShareManager.Current.DataChanged += Current_DataChanged;
         }
 
         #region Properties
@@ -64,11 +63,7 @@ namespace BaoZouRiBao.ViewModel
             User = DataShareManager.Current.User;
         }
 
-        private void MasterDetailPage_BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            e.Handled = true;
-            NavigationHelper.GoBack();
-        }
+    
 
         #region Pane Method
         public void LoginPage()

@@ -45,14 +45,17 @@
                         <TextBlock Text="473967668" Tapped="TextBlock_Tapped"/>
                     </PivotItem>
 
-                    <PivotItem Header="更新历史" Padding="12,4"> 
-                        <TextBlock x:Name="historiesTextBlock">
-                            <TextBlock.Transitions>
-                                <TransitionCollection>
-                                    <EntranceThemeTransition/>
-                                </TransitionCollection>
-                            </TextBlock.Transitions>
-                        </TextBlock>
+                    <PivotItem Header="更新历史" Padding="12,4">
+                        <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled"
+                                      ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <TextBlock x:Name="historiesTextBlock">
+                                <TextBlock.Transitions>
+                                    <TransitionCollection>
+                                        <EntranceThemeTransition/>
+                                    </TransitionCollection>
+                                </TextBlock.Transitions>
+                            </TextBlock>
+                        </ScrollViewer>
                     </PivotItem>
 
                     <PivotItem Header="更多" Padding="12,4">

@@ -252,11 +252,8 @@ namespace BaoZouRiBao.Controls
 
             // 自定义TitleBar在平板模式下仍然需要这个事件
             SystemNavigationManager.GetForCurrentView().BackRequested -= View_BackRequested;
-            if (Listener != null)
-            {
-                Listener.RegisterBackKeyPress();
-            }
-
+            Listener?.RegisterBackKeyPress();
+            
             HideCompleted?.Invoke(this, null);
             _showTcs?.SetResult(0);
 
