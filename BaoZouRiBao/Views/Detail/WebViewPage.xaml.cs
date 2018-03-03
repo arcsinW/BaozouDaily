@@ -10,6 +10,7 @@ using BaoZouRiBao.Http;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using BaoZouRiBao.UserControls;
+using System.Collections.ObjectModel;
 
 namespace BaoZouRiBao.Views
 {
@@ -42,8 +43,10 @@ namespace BaoZouRiBao.Views
         private ElementTheme appTheme;
 
         private WebViewParameter parameter;
-        #endregion
+
         
+        #endregion
+
         #region Js Bridge
         public async void Light()
         {
@@ -243,6 +246,19 @@ namespace BaoZouRiBao.Views
         {
             DataTransferManager.ShowShareUI();
         } 
+
+        public void ShareImage()
+        {
+            ShareHelper.SystemShare(this.ViewModel.Document.Title);
+        }
         #endregion
+
+        private void imageFlipView_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+
+        }
+         
+
+        
     }
 }

@@ -18,7 +18,7 @@
 
     <Page.Resources>  
         <converter:BoolToPathIconConverter x:Key="BoolToPathIconConverter"/>
-
+        <converter:AddConverter x:Key="AddConverter"/>
         <converter:BoolToVoteBitmapConverter x:Key="BoolToVoteBitmapConverter"/>
 
         <converter:BoolToObjectConverter x:Key="BoolToTitleTextBlockMarginConverter">
@@ -114,7 +114,9 @@
 
         <WebView x:Name="webView"  Grid.Row="1" ex:WebViewExtension.HtmlString="{Binding HtmlString}"
                  NavigationStarting="{x:Bind ViewModel.WebView_NavigationStarting}"
-                 NavigationCompleted="{x:Bind ViewModel.WebView_NavigationCompleted}"/>
+                 NavigationCompleted="{x:Bind ViewModel.WebView_NavigationCompleted}"
+                 ScriptNotify="{x:Bind ViewModel.WebView_ScriptNotify}"
+                 />
 
         <Popup Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom"
                Height="48" x:Name="topPop" IsOpen="True" Width="48" Margin="16,32" >
@@ -136,6 +138,41 @@
 
         <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
 
+        <!--#region  显示图片-->
+        <FlipView x:Name="imageFlipView" Visibility="Collapsed" 
+                  ItemsSource="{x:Bind ViewModel.Images,Mode=OneWay}" >
+            <FlipView.Background>
+                <SolidColorBrush Color="Black" Opacity="0.8"/>
+            </FlipView.Background>
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <ScrollViewer x:Name="ImageScrollViewer" 
+                              ZoomMode="Enabled" 
+                              HorizontalContentAlignment="Center" 
+                              VerticalContentAlignment="Center"
+                              VerticalScrollBarVisibility="Hidden"
+                              HorizontalScrollBarVisibility="Hidden"
+                              MinZoomFactor="0.5"   
+                              MaxZoomFactor="4"
+                              >
+                            <Image Source="{Binding src}" 
+                                   Width="{Binding ElementName=ImageScrollViewer,Path=ViewportWidth}" 
+                                   Tapped="imageFlipView_Tapped"/>
+                        </ScrollViewer>
+                    </Grid>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
+
+        <TextBlock VerticalAlignment="Bottom" Margin="12,0,0,70" Foreground="White"
+                Visibility="{Binding ElementName=imageFlipView,Path=Visibility}">
+            <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex,Converter={StaticResource AddConverter}}" />
+            <Run Text="/"/>
+            <Run x:Name="countRun" Text="{x:Bind ViewModel.Images.Count,Mode=OneWay}"/>
+        </TextBlock>
+        <!--#endregion-->
+
         <!--<uc:ShareDialog x:Name="shareDialog" Grid.RowSpan="2" 
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
@@ -143,5 +180,14 @@
                         WeiboClick="shareDialog_WeiboClick"
                         LinkClick="shareDialog_LinkClick"
                         MoreClick="shareDialog_MoreClick"/>-->
+
+        <CommandBar Grid.RowSpan="2" VerticalContentAlignment="Bottom" 
+                    VerticalAlignment="Bottom" Visibility="Visible">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Save" Label="保存"/>
+                <AppBarButton Icon="ReShare" Label="分享" Click="{x:Bind ShareImage}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
     </Grid>
+
 </Page>

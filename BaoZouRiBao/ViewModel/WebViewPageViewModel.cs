@@ -15,6 +15,7 @@ using BaoZouRiBao.Controls;
 using Windows.Storage;
 using BaoZouRiBao.UserControls;
 using Windows.ApplicationModel.DataTransfer;
+using System.Collections.ObjectModel;
 
 namespace BaoZouRiBao.ViewModel
 {
@@ -122,7 +123,8 @@ namespace BaoZouRiBao.ViewModel
             get { return isBrowerEnable; }
             set { isBrowerEnable = value; OnPropertyChanged(); }
         }
-         
+
+        public ObservableCollection<JsImage> Images { get; set; } = new ObservableCollection<JsImage>();
         #endregion
 
         #region WebView's events
@@ -131,10 +133,39 @@ namespace BaoZouRiBao.ViewModel
             IsActive = true;
         }
 
-        public void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        public async void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
             IsActive = false;
-        } 
+
+            var js = @"
+                function yourFunc(obj)
+                {
+                    
+                }
+                var imgs = document.getElementsByTagName('img');
+                var images = new Array();
+                for (var i = 0; i < imgs.length; i++)
+                {
+                    var img = new Object();
+                    img.src = imgs[0].src;
+                    img.index = i+1;
+                    images.push(img);
+                    imgs[i].onclick = function (e){
+                        //var obj = {type: 'image', src : this.src};
+                        // window.external.notify(JSON.stringify(obj));
+                        
+                        window.external.notify(this.src);
+                    };
+                }
+                window.external.notify(JSON.stringify(images));";
+                   
+           string json = await sender.InvokeScriptAsync("eval", new[] { js });
+        }
+
+        public void WebView_ScriptNotify(object sender, NotifyEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(e.Value);
+        }
         #endregion
 
         public async void LoadDocument(string documentId, string displayType)

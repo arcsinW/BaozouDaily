@@ -148,6 +148,7 @@
     <Compile Include="Controls\SlidableListItem\SlidableListItem.cs" />
     <Compile Include="Controls\SlidableListItem\SwipeStatus.cs" />
     <Compile Include="Controls\SlidableListItem\SwipeStatusChangedEventArgs.cs" />
+    <Compile Include="Converters\AddConverter.cs" />
     <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\BoolToLikeBitmapConverter.cs" />
     <Compile Include="Converters\BoolToObjectConverter.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Model\DocumentRelated.cs" />
     <Compile Include="Model\HackJs.cs" />
     <Compile Include="Model\HtmlHead.cs" />
+    <Compile Include="Model\JsImage.cs" />
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\News.cs" />
@@ -509,6 +511,7 @@
     <Content Include="Assets\Images\splash.jpg" />
     <Content Include="Assets\Images\login_wechat.png" />
     <Content Include="Assets\Images\gamersky.png" />
+    <Content Include="Assets\Js\baozou.js" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />
