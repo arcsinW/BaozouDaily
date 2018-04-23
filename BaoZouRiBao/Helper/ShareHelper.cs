@@ -77,5 +77,29 @@ namespace BaoZouRiBao.Helper
 
             DataTransferManager.ShowShareUI();
         }
+
+        /// <summary>
+        /// 系统分享图片
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="shareUrl"></param>
+        public static void SystemShare(StorageFile thumbnail)
+        {
+            DataTransferManager.GetForCurrentView().DataRequested += (sender, args) =>
+            {
+                var deferral = args.Request.GetDeferral();
+                
+                List<IStorageItem> imgs = new List<IStorageItem>() { thumbnail };
+                args.Request.Data.SetStorageItems(imgs);
+
+                RandomAccessStreamReference imgRef = RandomAccessStreamReference.CreateFromFile(thumbnail);
+                args.Request.Data.Properties.Thumbnail = imgRef;
+                args.Request.Data.SetBitmap(imgRef);
+
+                deferral.Complete();
+            };
+
+            DataTransferManager.ShowShareUI();
+        }
     }
 }

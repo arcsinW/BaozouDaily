@@ -26,7 +26,7 @@ namespace BaoZouRiBao.Views
 
         private void MasterDetailPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            if (isIgnore)
+            if (IsIgnore)
             {
                 return;
             }
@@ -94,11 +94,11 @@ namespace BaoZouRiBao.Views
             }
         }
 
-        public bool isIgnore { get; set; }
+        public bool IsIgnore { get; set; }
 
-        public void UnRegisterBackKeyPress() => isIgnore = true;
+        public void UnRegisterBackKeyPress() => IsIgnore = true;
 
-        public void RegisterBackKeyPress() => isIgnore = false;
+        public void RegisterBackKeyPress() => IsIgnore = false;
        
     }
 }

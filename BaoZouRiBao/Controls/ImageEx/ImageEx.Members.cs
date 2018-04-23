@@ -129,9 +129,6 @@ namespace BaoZouRiBao.Controls
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets cache state
         /// </summary>
-        public bool IsCacheEnabled
-        {
-            get; set;
-        }
+        public bool IsCacheEnabled { get; set; } = true;
     }
 }

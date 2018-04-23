@@ -113,9 +113,9 @@
         <!--#endregion-->
 
         <WebView x:Name="webView"  Grid.Row="1" ex:WebViewExtension.HtmlString="{Binding HtmlString}"
-                 NavigationStarting="{x:Bind ViewModel.WebView_NavigationStarting}"
-                 NavigationCompleted="{x:Bind ViewModel.WebView_NavigationCompleted}"
-                 ScriptNotify="{x:Bind ViewModel.WebView_ScriptNotify}"
+                 NavigationStarting="WebView_NavigationStarting"
+                 NavigationCompleted="WebView_NavigationCompleted"
+                 ScriptNotify="WebView_ScriptNotify"
                  />
 
         <Popup Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom"
@@ -136,11 +136,11 @@
             </Popup.Child>
         </Popup>
 
-        <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
+        <ProgressRing x:Name="progressRing" Grid.RowSpan="2" IsActive="{Binding IsActive}" Style="{ThemeResource LightProgressRingStyle}"/>
 
         <!--#region  显示图片-->
-        <FlipView x:Name="imageFlipView" Visibility="Collapsed" 
-                  ItemsSource="{x:Bind ViewModel.Images,Mode=OneWay}" >
+        <FlipView x:Name="imageFlipView" Visibility="Collapsed" Grid.Row='0' Grid.RowSpan="2"
+                  ItemsSource="{x:Bind Images,Mode=OneWay}" >
             <FlipView.Background>
                 <SolidColorBrush Color="Black" Opacity="0.8"/>
             </FlipView.Background>
@@ -156,7 +156,7 @@
                               MinZoomFactor="0.5"   
                               MaxZoomFactor="4"
                               >
-                            <Image Source="{Binding src}" 
+                            <controls:ImageEx Source="{Binding Src}" 
                                    Width="{Binding ElementName=ImageScrollViewer,Path=ViewportWidth}" 
                                    Tapped="imageFlipView_Tapped"/>
                         </ScrollViewer>
@@ -165,11 +165,22 @@
             </FlipView.ItemTemplate>
         </FlipView>
 
-        <TextBlock VerticalAlignment="Bottom" Margin="12,0,0,70" Foreground="White"
-                Visibility="{Binding ElementName=imageFlipView,Path=Visibility}">
+        <!--<TextBlock VerticalAlignment="Center" Margin="12,0,0,70" Foreground="White" Visibility="Visible">
+                --><!--Visibility="{Binding ElementName=imageFlipView,Path=Visibility}">--><!--
             <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex,Converter={StaticResource AddConverter}}" />
             <Run Text="/"/>
-            <Run x:Name="countRun" Text="{x:Bind ViewModel.Images.Count,Mode=OneWay}"/>
+            <Run x:Name="countRun" Text="{x:Bind Images.Count,Mode=OneWay}"/>
+        </TextBlock>-->
+
+        <TextBlock Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="12,0,0,60"
+                   Foreground="White"
+                   Visibility="{Binding ElementName=imageFlipView,Path=Visibility}"
+                   FontSize="20">
+            <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex,Converter={StaticResource AddConverter}}" />
+            <Run Text="/"/>
+            <Run x:Name="countRun" Text="{x:Bind Images.Count,Mode=OneWay}"/>
         </TextBlock>
         <!--#endregion-->
 
@@ -181,10 +192,10 @@
                         LinkClick="shareDialog_LinkClick"
                         MoreClick="shareDialog_MoreClick"/>-->
 
-        <CommandBar Grid.RowSpan="2" VerticalContentAlignment="Bottom" 
-                    VerticalAlignment="Bottom" Visibility="Visible">
+        <CommandBar x:Name="commandBar" Grid.RowSpan="2" VerticalContentAlignment="Bottom" 
+                    VerticalAlignment="Bottom" Visibility="Collapsed">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="Save" Label="保存"/>
+                <AppBarButton Icon="Save" Label="保存" Click="{x:Bind SaveImage}"/>
                 <AppBarButton Icon="ReShare" Label="分享" Click="{x:Bind ShareImage}"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>

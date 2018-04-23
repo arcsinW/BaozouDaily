@@ -70,8 +70,8 @@ namespace BaoZouRiBao
                 {
                     //TODO: Load state from previously suspended application
                     bool loadState = (e.PreviousExecutionState == ApplicationExecutionState.Terminated);
-                    ExtendedSplash extendedSplash = new ExtendedSplash(e.SplashScreen, loadState);
-                    rootFrame.Content = extendedSplash;
+                    //ExtendedSplash extendedSplash = new ExtendedSplash(e.SplashScreen, loadState);
+                    //rootFrame.Content = extendedSplash;
                     Window.Current.Content = rootFrame;
                 } 
             }

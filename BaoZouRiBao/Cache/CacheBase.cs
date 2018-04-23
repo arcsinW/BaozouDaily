@@ -294,7 +294,7 @@ namespace BaoZouRiBao.Cache
 
         private static string GetCacheFileName(Uri uri)
         {
-            return CreateHash64(uri.ToString()).ToString();
+            return CreateHash64(uri.ToString()).ToString()+".jpg";
         }
 
         private static ulong CreateHash64(string str)
@@ -316,9 +316,8 @@ namespace BaoZouRiBao.Cache
 
             string fileName = GetCacheFileName(uri);
 
-            ConcurrentRequest request = null;
 
-            _concurrentTasks.TryGetValue(fileName, out request);
+            _concurrentTasks.TryGetValue(fileName, out ConcurrentRequest request);
 
             // if similar request exists check if it was preCacheOnly and validate that current request isn't preCacheOnly
             if (request != null && request.EnsureCachedCopy && !preCacheOnly)

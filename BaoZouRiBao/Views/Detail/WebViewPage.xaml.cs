@@ -11,6 +11,14 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using BaoZouRiBao.UserControls;
 using System.Collections.ObjectModel;
+using System.Linq;
+using Windows.Storage;
+using Windows.Storage.Provider;
+using Windows.Storage.Streams;
+using System.IO;
+using System.Runtime.InteropServices.WindowsRuntime;
+using BaoZouRiBao.Controls;
+using BaoZouRiBao.Cache;
 
 namespace BaoZouRiBao.Views
 {
@@ -37,6 +45,8 @@ namespace BaoZouRiBao.Views
             }
         }
 
+        public ObservableCollection<JsImage> Images { get; set; } = new ObservableCollection<JsImage>();
+
         #region Fields
         private DocumentExtra documentExtra;
 
@@ -44,7 +54,8 @@ namespace BaoZouRiBao.Views
 
         private WebViewParameter parameter;
 
-        
+        private DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
+
         #endregion
 
         #region Js Bridge
@@ -103,7 +114,6 @@ namespace BaoZouRiBao.Views
         #region Navigation mehods
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            DataTransferManager.GetForCurrentView().DataRequested += WebViewPage_DataRequested;
             parameter = e.Parameter as WebViewParameter;
             if (parameter != null)
             {
@@ -159,12 +169,11 @@ namespace BaoZouRiBao.Views
                 }
             }
         }
-        
+
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            DataTransferManager.GetForCurrentView().DataRequested -= WebViewPage_DataRequested;
             DataShareManager.Current.DataChanged -= Current_DataChanged;
-        } 
+        }
         #endregion
 
         #region Share
@@ -183,6 +192,7 @@ namespace BaoZouRiBao.Views
 
             dialog.MoreClick += (s, a) =>
             {
+                dataTransferManager.DataRequested += WebViewPage_DataRequested;
                 DataTransferManager.ShowShareUI();
             };
 
@@ -192,8 +202,8 @@ namespace BaoZouRiBao.Views
         private void Dialog_MoreClick(object sender, RoutedEventArgs e)
         {
             DataTransferManager.ShowShareUI();
-        } 
-         
+        }
+
         private void WebViewPage_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
             var deferral = args.Request.GetDeferral();
@@ -206,6 +216,7 @@ namespace BaoZouRiBao.Views
 
             deferral.Complete();
         }
+         
 
         /// <summary>
         /// 微信分享
@@ -224,7 +235,7 @@ namespace BaoZouRiBao.Views
         /// <param name="e"></param>
         private void shareDialog_WeiboClick(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         /// <summary>
@@ -244,21 +255,175 @@ namespace BaoZouRiBao.Views
         /// <param name="e"></param>
         private void shareDialog_MoreClick(object sender, RoutedEventArgs e)
         {
+            dataTransferManager.DataRequested += WebViewPage_DataRequested;
             DataTransferManager.ShowShareUI();
-        } 
+            //dataTransferManager.DataRequested -= WebViewPage_DataRequested;
+        }
 
-        public void ShareImage()
+
+        #endregion
+
+        #region WebView's events
+
+        public void WebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
-            ShareHelper.SystemShare(this.ViewModel.Document.Title);
+            progressRing.IsActive = true;
+        }
+
+        public async void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            progressRing.IsActive = false;
+
+            var js = @"
+               
+                var imgs = document.getElementsByTagName('img');
+                var images = new Array();
+                for (var i = 0; i < imgs.length; i++)
+                {
+                    var img = new Object();
+                    img.src = imgs[i].src;
+                    img.index = i+1;
+                    images.push(img);
+                    let indexTmp = i;
+                    imgs[i].onclick = function (e){
+                        window.external.notify('onclick:' + indexTmp ); //this.src                        
+
+                        //var obj = {type: 'image', src : this.src};
+                        // window.external.notify(JSON.stringify(obj));
+                        //var json = ""{'type':'onclick','src':"" + this.src + "",'index':""+ this.index + ""}"";
+                        //window.external.notify('type : onclick:' +  ); //this.src
+                        //window.external.notify(json); //this.src
+                    };
+                }
+                
+                window.external.notify(JSON.stringify(images));";
+
+            string json = await sender.InvokeScriptAsync("eval", new[] { js });
+        }
+
+        public void WebView_ScriptNotify(object sender, NotifyEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(e.Value);
+
+            if (!string.IsNullOrEmpty(e.Value))
+            {
+                if (e.Value.StartsWith("onclick:"))
+                {
+                    string url = e.Value.Replace("onclick:", string.Empty);
+                    int selectedIndex = Convert.ToInt32(url);
+                    imageFlipView.Visibility = Visibility.Visible;
+                    imageFlipView.SelectedIndex = selectedIndex;
+                    commandBar.Visibility = Visibility.Visible;
+                    topPop.IsOpen = false;
+                }
+                else
+                {
+                    var imgs = JsonHelper.Deserlialize<List<JsImage>>(e.Value);
+                    Images.Clear();
+                    imgs.ForEach(img => Images.Add(img));
+                }
+            }
         }
         #endregion
 
         private void imageFlipView_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
+            CloseImageFlipView();
+        }
+
+        public void CloseImageFlipView()
+        {
+            if (imageFlipView.Visibility == Visibility.Visible)
+            {
+                imageFlipView.Visibility = Visibility.Collapsed;
+                commandBar.Visibility = Visibility.Collapsed;
+                topPop.IsOpen = true;
+            }
+            else
+            {
+                if (Frame.CanGoBack)
+                {
+                    this.Frame.GoBack();
+                }
+            }
+        }
+
+        public async Task ShareImage()
+        {
+            if (imageFlipView.SelectedItem is JsImage img)
+            {
+                if (!string.IsNullOrEmpty(img.Src))
+                {
+                    try
+                    {
+                        var file = await ImageCache.Instance.GetFileFromCacheAsync(new Uri(img.Src));
+
+                        dataTransferManager.DataRequested -= WebViewPage_DataRequested;
+                        //dataTransferManager.DataRequested += WebViewPage_ImageDataRequested;
+
+                        dataTransferManager.DataRequested += (sender, args) =>
+                        {
+                            var deferral = args.Request.GetDeferral();
+
+                            List<IStorageItem> imgs = new List<IStorageItem>() { file };
+                            args.Request.Data.SetStorageItems(imgs);
+                            
+                            RandomAccessStreamReference imgRef = RandomAccessStreamReference.CreateFromFile(file);
+                            args.Request.Data.Properties.Thumbnail = imgRef;
+                            args.Request.Data.SetBitmap(imgRef);
+
+                            deferral.Complete();
+                        };
+
+                        DataTransferManager.ShowShareUI();
+                    }
+                    catch(Exception e)
+                    {
+                        ToastService.SendToast("分享失败" + e.Message);
+                    }
+                }
+            }
 
         }
-         
 
-        
+        public async Task SaveImage()
+        {
+            var folder = KnownFolders.SavedPictures; //.CreateFolderAsync("暴走日报", CreationCollisionOption.OpenIfExists);
+            var date = DateTime.Now;
+            StorageFile file = await folder.CreateFileAsync($"{date.Year}-{date.Month}-{date.Day}_{date.Hour}_{date.Minute}_{date.Second}.jpg");
+
+
+            if (file != null)
+            {
+                CachedFileManager.DeferUpdates(file);
+                try
+                {
+                    if (imageFlipView.SelectedItem is JsImage img)
+                    {
+                        if (!string.IsNullOrEmpty(img.Src))
+                        {
+                            using (Stream stream = await file.OpenStreamForWriteAsync())
+                            {
+                                IBuffer buffer = await HttpBaseService.GetBytesAsync(img.Src);
+                                stream.Write(buffer.ToArray(), 0, (int)buffer.Length);
+                                await stream.FlushAsync();
+                            }
+                            FileUpdateStatus updateStatus = await CachedFileManager.CompleteUpdatesAsync(file);
+                            if (updateStatus == FileUpdateStatus.Complete)
+                            {
+                                
+                                int index = folder.Path.LastIndexOf('\\');
+                                string path = folder.Path.Substring(0, index) + '\\' + folder.DisplayName;
+                                ToastService.SendToast("已保存到 " + path);
+                            }
+                        } 
+                    } 
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
     }
 }
