@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="46918Xsetups.47705177A073C" Publisher="CN=6C0637F1-510E-45BC-90C0-3F7555214A61" Version="1.1.20.0" />
-  <mp:PhoneIdentity PhoneProductId="675f1bb4-e24b-4605-9f3d-7061145060f4" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="46918Xsetups.DEV" Publisher="CN=6C0637F1-510E-45BC-90C0-3F7555214A61" Version="1.1.10.0" />
+  <mp:PhoneIdentity PhoneProductId="28bb2f7e-a408-4b6a-a0e9-8e374038a6b4" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>暴走日报</DisplayName>
+    <DisplayName>暴走日报 DEV</DisplayName>
     <PublisherDisplayName>Xsetups</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -15,27 +15,12 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BaoZouRiBao.App">
-      <uap:VisualElements DisplayName="暴走日报" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="BaoZouRiBao" BackgroundColor="#fb3d4f">
+      <uap:VisualElements DisplayName="暴走日报 DEV" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="BaoZouRiBao" BackgroundColor="#fb3d4f">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#fb3d4f" />
       </uap:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="BaoZouRiBao.Background.ToastBackgroundTask">
-          <BackgroundTasks>
-            <Task Type="general" />
-            <Task Type="pushNotification" />
-          </BackgroundTasks>
-        </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="BaoZouRiBao.Background.TileBackgroundTask">
-          <BackgroundTasks>
-            <Task Type="timer" />
-          </BackgroundTasks>
-        </Extension>
-        <uap:Extension Category="windows.personalAssistantLaunch" />
-        <uap:Extension Category="windows.appService" EntryPoint="BaoZouRiBao.Background.VoiceCommandBackgroundTask">
-          <uap:AppService Name="VoiceCommandBackgroundTask" />
-        </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
           <uap:FileTypeAssociation Name="wechat">
             <uap:SupportedFileTypes>
@@ -43,6 +28,21 @@
             </uap:SupportedFileTypes>
           </uap:FileTypeAssociation>
         </uap:Extension>
+        <uap:Extension Category="windows.appService" EntryPoint="BaoZouRiBao.Background.VoiceCommandBackgroundTask">
+          <uap:AppService Name="VoiceCommandBackgroundTask" />
+        </uap:Extension>
+        <uap:Extension Category="windows.personalAssistantLaunch" />
+        <Extension Category="windows.backgroundTasks" EntryPoint="BaoZouRiBao.Background.TileBackgroundTask">
+          <BackgroundTasks>
+            <Task Type="timer" />
+          </BackgroundTasks>
+        </Extension>
+        <Extension Category="windows.backgroundTasks" EntryPoint="BaoZouRiBao.Background.ToastBackgroundTask">
+          <BackgroundTasks>
+            <Task Type="general" />
+            <Task Type="pushNotification" />
+          </BackgroundTasks>
+        </Extension>
       </Extensions>
     </Application>
   </Applications>

@@ -1,5 +1,5 @@
 ﻿using BaoZouRiBao.Helper;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,20 +14,28 @@ namespace UnitTest
         [TestMethod]
         public void Sign()
         {
-            Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic.Add("timestamp", DateTimeHelper.GetUnixTimeStamp());
-            dic.Add("client_id", "10230158");
-            dic.Add("password", "qwertyx123");
-            dic.Add("timestamp", DateTimeHelper.GetUnixTimeStamp());
-            dic.Add("username", "arcsinw");
+            Dictionary<string, string> dic = new Dictionary<string, string>
+            {
+                { "timestamp", DateTimeHelper.GetUnixTimeStamp() },
+                { "client_id", "10230158" },
+                { "password", "qwertyx123" },
+                { "timestamp", DateTimeHelper.GetUnixTimeStamp() },
+                { "username", "arcsinw" }
+            };
 
-            List<string> list = new List<string>();
-            list.Add("timestamp");
-            list.Add("password");
-            list.Add("client_id");
-            list.Add("username");
+            List<string> list = new List<string>
+            {
+                "timestamp",
+                "password",
+                "client_id",
+                "username"
+            };
 
-            dic.Add("sign", MD5Helper.Get32MD5(MD5Helper.GetMD5Sign(dic, list)));
+            string actual = UrlSignHelper.GetMD5Sign(dic, list);
+            string expected = "34c08b123b17b298217988aeae6d97cf";
+            Assert.AreEqual(expected, actual);
+
+            //dic.Add("sign", MD5Helper.Get32MD5(MD5Helper.GetMD5Sign(dic, list)));
 
             //string expected = "34c08b123b17b298217988aeae6d97cf";
             //string actual = MD5Helper.Get32MD5("1496390654358");

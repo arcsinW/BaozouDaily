@@ -12,7 +12,7 @@
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -26,7 +26,7 @@
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>6B380A8E3CC7DD25A315E4A0271602BDB5BA218E</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>C5EE0F47576EBDB7E6939086571C3BE4B279068E</PackageCertificateThumbprint>
     <HockeyAppResourceId>ea627d35afcc4f81b8eb033f9b2e79df</HockeyAppResourceId>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
@@ -194,6 +194,7 @@
     <Compile Include="Helper\StatusBarHelper.cs" />
     <Compile Include="Helper\StorageFileHelper.cs" />
     <Compile Include="Helper\StreamHelper.cs" />
+    <Compile Include="Helper\UrlSignHelper.cs" />
     <Compile Include="Helper\VerifiableBase.cs" />
     <Compile Include="Helper\VerifiableObjectErrors.cs" />
     <Compile Include="Helper\VoiceCommandHelper.cs" />
@@ -548,7 +549,6 @@
     <Content Include="Assets\StoreLogo.scale-150.png" />
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <Content Include="Assets\StoreLogo.scale-400.png" />
-    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
@@ -556,6 +556,7 @@
     <Content Include="BaozouVoiceCommand.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Package.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
